@@ -1,0 +1,249 @@
+---
+name: Stephen Brown II
+meta:
+  format: FRESH@1.0.0-beta
+  version: 0.0.1
+info:
+  label: Python Developer
+  class: Developer
+  brief: A developer passionate about software engineering best practices with a
+    strong background in Python, and Linux Administration with experience building
+    pipelines for development and deployment in an increasingly efficient manner
+    while following the latest developments in technology.
+disposition:
+  travel: 25
+  authorization: citizen
+  commitment:
+  - permanent
+  - full-time
+  remote: true
+  relocation:
+    willing: true
+    destinations:
+    - Austin, TX
+    - San Antonio, TX
+    - Blacksburg, VA
+contact:
+  email: stephen.brownii@rackspace.com
+  other:
+  - label: Slack
+    category: IM
+    value: "@stephen"
+location:
+  city: San Antonio
+  region: TX
+  country: US
+employment:
+  history:
+  - employer: Rackspace US, Inc.
+    position: Automation Engineer I - Global Linux Automation Engineers
+    url: https://rackspace.com
+    start: '2018-09-11'
+    end: 
+    summary: ''
+    highlights:
+    - Fully 'remote' worker, as a US employee working with an otherwise fully UK team
+    - Helped maintain and develop Stepladder, a framework for employees to contribute
+      tools with a common UI and deployment system.
+    - 'Contributed to: Frontend in Javascript, HTML, and CSS; Backend webserver in
+      Python using Flask and MySQL; client library (Librack) to interact with numerous
+      other API backends'
+    - Implemented and configured deployment tools using Docker, Ansible, and Jenkins
+    - Designed and built Jenkins 2.0 Pipeline for testing development Pull Requests
+    - Influenced team to implement better checks and consistency to improve and maintain
+      code quality
+    location: San Antonio, TX
+    keywords:
+    - Remote
+    - Python
+    - Jenkins
+    - Ansible
+    - Docker
+    - Github
+  - employer: Rackspace US, Inc.
+    position: Automation Engineer I - Global SysAd Maintenance Team
+    url: https://rackspace.com
+    start: '2017-06-03'
+    end: '2018-09-10'
+    summary: ''
+    highlights:
+    - Automated massive migration of scheduled maintenances to consolidate calendars
+    - Developed reporting and categorization tools for whole team use
+    - Enabled new workflows not otherwise possible without custom tooling
+    - Inverted traditional scheduling process to improve customer experience
+    location: San Antonio, TX
+    keywords:
+    - Python
+    - Linux
+  - employer: Rackspace US, Inc.
+    position: Linux System Administrator I - Global SysAd Maintenance Team
+    url: https://rackspace.com
+    start: '2015-05-16'
+    end: '2017-06-03'
+    summary: ''
+    highlights:
+    - Quickly identified and proposed tools and training to make team process more
+      efficient
+    - Contributed multiple features to team's jinja2-based templating system (Automaint)
+    - Developed an auto-numbering tool for maintenance templates using React
+    - Developed a custom UI that accesses the maintenance calendar backend and presents
+      upcoming services in an easy to read format using the fullcalendar javascript
+      library
+    location: San Antonio, TX
+    keywords:
+    - Linux
+    - Bash
+    - Python
+    - React
+    - Flask
+  - employer: Rackspace US, Inc.
+    position: Linux System Administrator I - Global Technical Support
+    url: https://rackspace.com
+    start: '2014-01-06'
+    end: '2015-05-15'
+    summary: 2nd Shift Enterprise Linux SysAd
+    highlights:
+    - Installed, configured, updated and troubleshot services for customers such as
+      OS level concerns, web server, database server, applications server and mail;
+      including Apache, MySQL, PHP, FTP, SSH and DNS
+    - Contributed features and bug fixes to internal Python projects such as an
+      Intensive Password retrevial CLI tool ("intensify"), and general login
+      automation tools ("overtime/hammertime")
+    location: San Antonio, TX
+    keywords:
+    - Linux
+    - Bash
+    - Python
+  - employer: Johns Hopkins University, Bloomberg School Of Public Health, Center
+      For Communication Programs
+    position: Linux System Administrator
+    url: https://ccp.jhu.edu
+    start: '2011-04-01'
+    end: '2013-12-30'
+    summary: Linux SysAd on the Knowledge for Health project (https://www.k4health.org)
+      and related projects.
+    highlights:
+    - 'Maintained and automated maintenance of servers for Drupal websites and multisites
+      involving: Linux, Apache, MySQL, PHP infrastructure, Physical and virtual CentOS
+      6 and 5 servers, and Apache Solr search indexes'
+    - Proposed and taught dev team about git and multiple environment workflow concepts.
+    - Successfully led team to adoption of git and a development > staging > production
+      deployment workflow
+    - Designed Puppet configuration management to maintain and deploy to development
+      and production servers; Tested in local Vagrant environments
+    location: San Antonio, TX
+    keywords:
+    - Linux
+    - Git
+    - Puppet
+  - employer: MICROS Systems
+    position: Software Test Specialist - Tier 3 Escalations
+    url: https://micros.com
+    start: '2011-01-01'
+    end: '2011-04-01'
+    summary: ''
+    highlights:
+    - Analyzed and diagnosed most difficult customer reported issues
+    - Documented issues for developer and QA teams to remedy
+    location: Columbia, MD
+    keywords:
+    - Troubleshooting
+    - Debugging
+    - Testing
+  - employer: Solnet Network and Web Services, LLC.
+    position: Technical Support Specialist I
+    url: https://solnetweb.com
+    start: '2010-04-01'
+    end: '2010-10-01'
+    summary: Serviced Windows desktops and server and networking infrastructure as
+      on-site technical support
+    highlights: []
+    location: Baltimore, MD
+    keywords:
+    - Windows
+    - Desktop
+    - Support
+projects:
+- title: Emcee
+  category: side-project
+  description: A Python 3.6+ client for the internal Maintenance Calendar
+  summary: Learned client design best practices and version controlled releases
+  role: Creator
+  url: https://github.rackspace.com/emcee/emcee
+  repo: https://github.rackspace.com/emcee/emcee
+  start: '2018'
+  highlights: []
+  keywords:
+  - Python
+  - JSON
+  - API
+  - Types
+- title: Stepladder
+- title: Librack
+- title: Automaint
+- title: Intensify
+- title: overtime/hammertime
+skills: {}
+service: {}
+education:
+  summary: ''
+  level: degree
+  degree: BSc CIS
+  history:
+  - title: Computer Information Systems
+    institution: LeTourneau University
+    area: Science
+    studyType: Bachelor
+    start: '2005-08-01'
+    end: '2009-12-15'
+    grade: '2.4'
+    curriculum: []
+    url: https://letu.edu
+    summary: ''
+    keywords: []
+    highlights: []
+    location: Longview, TX
+social: []
+recognition: []
+writing: []
+reading: []
+speaking: []
+governance: []
+languages:
+- language: English
+  level: Native
+  years: 30
+samples: []
+references:
+- name: Duncan H. Murray
+  role: Manager
+  category: professional
+  private: false
+  contact:
+  - label: Email
+    category: email
+    value: duncan.h.murray@rackspace.co.uk
+- name: Ryan Mazurek
+  role: Former Manager
+  category: professional
+  private: false
+  contact:
+  - label: Email
+    category: email
+    value: ryan.mazurek@rackspace.com
+testimonials: []
+interests:
+- name: Tesla
+  summary: Electric cars are the future, and they're here
+  keywords:
+  - Electric
+  - Sustainable
+  - Energy
+  - Storage
+  - Transportation
+- name: Solar Power
+  summary: It powers the earth, why not your house also?
+- name: Personal Finance
+  summary: Budgeting rocks! How else am I going to meet my goals?
+extracurricular: []
+affiliation: {}

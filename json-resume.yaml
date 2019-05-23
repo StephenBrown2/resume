@@ -1,0 +1,138 @@
+---
+basics:
+  name: Stephen Brown II
+  label: Automation Engineer
+  picture: ""
+  email: stephen.brownii@rackspace.com
+  phone: "(443) 219-4559"
+  website: ""
+  summary:
+    A developer passionate about software engineering best practices with a
+    strong background in Python, and Linux Administration with experience
+    building pipelines for development and deployment in an increasingly
+    efficient manner while following the latest developments in technology.
+  location:
+    address: 7914 Ray Bon Dr, Apt 1309
+    postalCode: TX 78218
+    city: San Antonio
+    countryCode: US
+    region: Texas
+  profiles:
+    - network: "Internal Github"
+      username: "step7212"
+      url: "https://github.rackspace.com/step7212"
+work:
+  - company: Rackspace US, Inc.
+    position: Automation Engineer I - Global Linux Automation Engineers
+    website: https://rackspace.com
+    startDate: "2018-09-11"
+    summary: ""
+    highlights:
+      - Remote worker
+  - company: Rackspace US, Inc.
+    position: Automation Engineer I - Global SysAd Maintenance Team
+    website: https://rackspace.com
+    startDate: "2017-06-03"
+    endDate: "2018-09-10"
+    summary: ""
+    highlights:
+      - Maintenance Team
+  - company: Rackspace US, Inc.
+    position: Linux System Administrator I - Global SysAd Maintenance Team
+    website: https://rackspace.com
+    startDate: "2015-05-16"
+    endDate: "2017-06-03"
+    summary: Description...
+    highlights:
+      - Increasing Efficiency
+  - company: Rackspace US, Inc.
+    position: Linux System Administrator I - Global Technical Support
+    website: https://rackspace.com
+    startDate: "2014-01-06"
+    endDate: "2015-05-15"
+    summary: Description...
+    highlights:
+      - Enterprise Maintenance Prep 05/16/2015
+  - company: Johns Hopkins University, Bloomberg School Of Public Health, Center For Communication Programs
+    position: Linux System Administrator
+    website: https://ccp.jhu.edu
+    startDate: "2011-04-01"
+    endDate: "2013-12-30"
+    summary: Linux SysAd on the Knowledge for Health project (https://www.k4health.org) and related projects.
+    highlights:
+      - Maintained and automated maintenance of servers for Drupal websites and multisites involving
+        - Linux, Apache, MySQL, PHP infrastructure.
+        - Physical and virtual CentOS 6 and 5 servers.
+        - Apache Solr search indexes.
+      - Proposed and taught dev team about git and multiple environment workflow concepts.
+      - Successfully led team to adoption of git and a development > staging -> production deployment workflow.
+      - Designed Puppet configuration management to maintain and deploy to development and production servers.
+        - Tested in local Vagrant environments.
+  - company: MICROS Systems
+    position: Software Test Specialist - Tier 3 Escalations
+    website: https://micros.com
+    startDate: "2011-01-01"
+    endDate: "2011-04-01"
+    summary: Handled difficult
+    highlights:
+      - Analyzed and diagnosed most difficult customer reported issues
+      - Documented issue for developer and QA teams to remedy
+  - company: Solnet Network and Web Services, LLC.
+    position: Technical Support Specialist I
+    website: https://solnetweb.com
+    startDate: "2010-04-01"
+    endDate: "2010-10-01"
+    summary: Serviced Windows desktops and server and networking infrastructure as on-site technical support
+    highlights: []
+# volunteer:
+#   - organization: Organization
+#     position: Volunteer
+#     website: http://organization.com/
+#     startDate: "2012-01-01"
+#     endDate: "2013-01-01"
+#     summary: Description...
+#     highlights:
+#       - Awarded 'Volunteer of the Month'
+education:
+  - institution: LeTourneau University
+    area: Computer Information Systems
+    studyType: Bachelor
+    startDate: "2005-08-01"
+    endDate: "2009-12-15"
+    # gpa: "2.4"
+    # courses:
+    #   - DB1101 - Basic SQL
+# awards:
+#   - title: Award
+#     date: "2014-11-01"
+#     awarder: Company
+#     summary: There is no spoon.
+# publications:
+#   - name: Publication
+#     publisher: Company
+#     releaseDate: "2014-10-01"
+#     website: http://publication.com
+#     summary: Description...
+skills:
+  - name: API Development
+    level: ""
+    keywords:
+      - Python
+      - JSON
+      - Javascript
+languages:
+  - language: English
+    fluency: Native speaker
+  - language: Python
+    fluency: Primary development language
+interests:
+  - name: Tesla
+    keywords:
+      - Musk
+      - Electric
+      - Solar
+references:
+  - name: Duncan H. Murray
+    reference: duncan.h.murray@rackspace.co.uk
+  - name: Ryan Mazurek
+    reference: ryan.mazurek@rackspace.com
