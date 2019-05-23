@@ -43,12 +43,11 @@ employment:
     end: 
     summary: ''
     highlights:
-    - Fully 'remote' worker, as a US employee working with an otherwise fully UK team
+    - Fully "remote" worker, as a US employee working with an otherwise fully UK team
     - Helped maintain and develop Stepladder, a framework for employees to contribute
-      tools with a common UI and deployment system.
-    - Contributed to:<ul><li>Frontend in Javascript, HTML, and CSS</li><li>Backend
-      webserver in Python using Flask and MySQL</li><li>Client library (Librack) to
-      interact with numerous other API backends</li></ul>
+      tools with a common UI and deployment system. <ul><li>Frontend in Javascript,
+      HTML, and CSS</li><li>Backend webserver in Python using Flask and MySQL</li>
+      <li>Client library (Librack) to interact with numerous API backends</li></ul>
     - Implemented and configured deployment tools using Docker, Ansible, and Jenkins
     - Designed and built Jenkins 2.0 Pipeline for testing development Pull Requests
     - Influenced team to implement better checks and consistency to improve and maintain
@@ -121,12 +120,11 @@ employment:
     url: https://ccp.jhu.edu
     start: '2011-04-01'
     end: '2013-12-30'
-    summary: Linux SysAd on the Knowledge for Health project (https://www.k4health.org)
-      and related projects.
+    summary: ''
     highlights:
-    - 'Maintained and automated maintenance of servers for Drupal websites and multisites
-      involving: Linux, Apache, MySQL, PHP infrastructure, Physical and virtual CentOS
-      6 and 5 servers, and Apache Solr search indexes'
+    - Maintained and automated maintenance of servers for Drupal websites and multisites
+      involving:<ul><li>Linux, Apache, MySQL, PHP infrastructure</li><li>Physical
+      and virtual CentOS 5 and 6 servers, and</li><li>Apache Solr search indexes</li></ul>
     - Proposed and taught dev team about git and multiple environment workflow concepts.
     - Successfully led team to adoption of git and a development > staging > production
       deployment workflow
@@ -156,9 +154,10 @@ employment:
     url: https://solnetweb.com
     start: '2010-04-01'
     end: '2010-10-01'
-    summary: Serviced Windows desktops and server and networking infrastructure as
-      on-site technical support
-    highlights: []
+    summary: ''
+    highlights:
+    - Serviced Windows desktops and server and networking infrastructure as on-site
+      technical support
     location: Baltimore, MD
     keywords:
     - Windows
