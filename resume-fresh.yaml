@@ -25,7 +25,7 @@ disposition:
 contact:
   email: stephen.brownii@rackspace.com
   phone: "(443) 219-4559"
-  website: https://StephenBrown2.github.io/resume
+  website: https://stephenbrown2.github.io/resume
   other:
   - label: Slack
     category: IM
@@ -46,9 +46,9 @@ employment:
     - Fully 'remote' worker, as a US employee working with an otherwise fully UK team
     - Helped maintain and develop Stepladder, a framework for employees to contribute
       tools with a common UI and deployment system.
-    - 'Contributed to: Frontend in Javascript, HTML, and CSS; Backend webserver in
-      Python using Flask and MySQL; client library (Librack) to interact with numerous
-      other API backends'
+    - Contributed to:<ul><li>Frontend in Javascript, HTML, and CSS</li><li>Backend
+      webserver in Python using Flask and MySQL</li><li>Client library (Librack) to
+      interact with numerous other API backends</li></ul>
     - Implemented and configured deployment tools using Docker, Ansible, and Jenkins
     - Designed and built Jenkins 2.0 Pipeline for testing development Pull Requests
     - Influenced team to implement better checks and consistency to improve and maintain
@@ -181,8 +181,9 @@ projects:
   - Types
 - title: Stepladder
   category: open-source
-  description: A Flask-based web and API framework for Racker tools
-  summary: Learned collaboration and discussion skills while improving coding ability
+  description: A Flask-based web and API framework for internal tools
+  summary: Learned remote collaboration and discussion skills while improving coding
+    ability
   role: Contributor
   url: https://stepladder.rax.io/about
   repo: https://github.rackspace.com/GTSLAE/mono/tree/master/stepladder
@@ -198,10 +199,11 @@ projects:
   category: open-source
   description: A fully featured Python library with objects covering many Rackspace
     systems, meant to be a one stop shop for other python projects
-  summary: Learned to follow in the steps of an active project including deprecation
+  summary: Learned to follow in the steps of an active project including interface
+    guarantees and deprecation
   role: Maintainer
   url: https://stepladder.rax.io/librack_docs
-  repo: https://github.rackspace.com/GTSLAE/mono/tree/master/stepladder
+  repo: https://github.rackspace.com/GTSLAE/mono/tree/master/librack
   start: '2018-01-02'
   highlights: []
   keywords:
@@ -214,7 +216,8 @@ projects:
   role: Contributor
   url: https://stepladder.rax.io/automaint
   repo: https://github.rackspace.com/GTSLAE/mono/tree/master/stepladder/stepladder/modules/automaint
-  start: '2018-01-02'
+  start: '2016-09-06'
+  end: '2017-09-20'
   highlights: []
   keywords:
   - Python
@@ -225,7 +228,8 @@ projects:
   role: Bug reporter
   url: https://github.rackspace.com/SupportTools/intensify/blob/master/README.md
   repo: https://github.rackspace.com/SupportTools/intensify
-  start: '2018-01-02'
+  start: '2015-10-23'
+  end: '2016-10-06'
   highlights: []
   keywords:
   - Python
@@ -237,10 +241,24 @@ projects:
   role: Bug reporter
   url: https://github.rackspace.com/GTSLAE/mono/tree/master/hammertime
   repo: https://github.rackspace.com/SupportTools/intensify
-  start: '2018-01-02'
+  start: '2015-03-08'
   highlights: []
   keywords:
   - Python
+- title: Knowledge for Health
+  category: public
+  description: 
+  summary: Jr System Administrator managing entire project's CentOS linux servers
+    and Drupal websites
+  role: System Administrator
+  url: https://www.k4health.org
+  start: '2011-04-01'
+  end: '2013-12-30'
+  highlights: []
+  keywords:
+  - Linux
+  - Drupal
+  - LAMP
 skills: {}
 service: {}
 education:
