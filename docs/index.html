@@ -4,6 +4,8 @@
     <head>
         <meta charset="utf-8">
         <title>Stephen Brown II</title>
+        <link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,300,300italic,400italic,600,600italic,700,700italic'
+        rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic'
         rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -45,6 +47,7 @@
             }
             
             #container > header {
+              font-family: 'Fira Sans', 'Helvetica Neue', 'Helvetica', 'Segoe UI', 'Calibri', 'sans-serif';
               padding-top: 6em;
               padding-bottom: 1em;
             }
@@ -54,23 +57,18 @@
             }
             
             #main > #container > section {
-              margin-left: 150px;
+              margin-left: 5em;
               position: relative;
               display: block;
             }
             
-            section > div {
-              margin-bottom: 60px;
-            }
-            
             span.fa
             {
-              font-size: 56px;
               position: absolute;
-              top: 37px;
-              transform: translateY(-50%);
-              left: -100px;
-              color: #1a4367;
+              top: 4px;
+              left: -50px;
+              font-size: 30px;
+              color: #BFC1C3;
             }
             
             hr {
@@ -87,16 +85,13 @@
             h1 {
               margin: 0;
               font-size: 46px;
-              display: inline-block;
             }
             
             h2 {
-              font-size: 30px;
-              color: #4376a2;
+              font-size: 24px;
+              color: #BFC1C3;
               text-transform: uppercase;
               font-weight: normal;
-              padding-top: 20px;
-              margin-bottom: 60px;
             }
             
             h3 {
@@ -119,53 +114,20 @@
               font-weight: bold;
             }
             
-            #summary {
-              font-size: 150%;
-              margin-left: 0;
-              padding: 20px 0;
-            }
-            
             #summary > p > strong {
               font-size: 1.25em;
-            }
-            
-            #contact {
-              float: right;
-            }
-            
-            #summary > header > .fa-info {
-              font-size: 70px;
-              letter-spacing: 5px;
-              text-transform: uppercase;
-              font-weight: normal;
-              top: 50%;
-              left: -85px;
-              transform: translateY(-50%);
-            }
-            
-            #summary h2 {
-              display: none;
             }
             
             
             .label-keyword {
               display: inline-block;
-              background: #e8f4ff;
-              color: black;
+              background: #7eb0db;
+              color: white;
               font-size: 0.9em;
               padding: 5px;
               border: 1px solid #357ebd;
               border-radius: 5px;
               margin-top: 2px;
-              font-weight: bold;
-              text-align: center;
-            }
-            
-            .notes {
-              font-size: 10px;
-              display: block;
-              font-weight: normal;
-              text-transform: uppercase;
             }
             
             .card-skills {
@@ -222,12 +184,6 @@
                 margin-left: 20px;
               }
             }
-            .skill-info > strong {
-              font-weight: 400;
-              font-size: 24px;
-              color: #1d1d1d;
-              line-height: 24px;
-            }
             
             .list-unstyled {
               padding-left: 0;
@@ -239,7 +195,7 @@
             }
             
             .space-top {
-                margin-top: 5px;
+                margin-top: 10px;
             }
             
             #container {
@@ -266,13 +222,8 @@
             <div id="container">
                 <header>
                      <h1>Stephen Brown II</h1>
-                    <div id="contact">
-                        <div class="email"><a href="mailto:stephen.brownii@rackspace.com">stephen.brownii@rackspace.com</a>
-                        </div>
-                        <div class="phone">(443) 219-4559</div>
-                        <div class="website"><a href="https://stephenbrown2.github.io/resume">https://stephenbrown2.github.io/resume</a>
-                        </div>
-                    </div>
+
+                    <div id="contact"></div>
                 </header>
                 <hr>
                 <section id="summary">
@@ -290,21 +241,21 @@
                     </header>
                     <div>
                          <h3><em>Automation Engineer I - Global Linux Automation Engineers</em>,
-
     <a href="https://rackspace.com">Rackspace US, Inc.</a>
+    </h3>
+ <span class="tenure">2018-09 — Present</span>
+| <span class="keywords">Remote Python Jenkins Ansible Docker Github </span>
 
-    </h3> <span class="tenure">2018-09 — Present</span>| <span class="keywords">Remote Python Jenkins Ansible Docker Github </span>
                         <p></p>
                         <ul>
-                            <li>Fully &#39;remote&#39; worker, as a US employee working with an otherwise
+                            <li>Fully &quot;remote&quot; worker, as a US employee working with an otherwise
                                 fully UK team</li>
                             <li>Helped maintain and develop Stepladder, a framework for employees to contribute
-                                tools with a common UI and deployment system.</li>
-                            <li>Contributed to:
+                                tools with a common UI and deployment system.
                                 <ul>
                                     <li>Frontend in Javascript, HTML, and CSS</li>
                                     <li>Backend webserver in Python using Flask and MySQL</li>
-                                    <li>Client library (Librack) to interact with numerous other API backends</li>
+                                    <li>Client library (Librack) to interact with numerous API backends</li>
                                 </ul>
                             </li>
                             <li>Implemented and configured deployment tools using Docker, Ansible, and
@@ -316,10 +267,11 @@
                     </div>
                     <div>
                          <h3><em>Automation Engineer I - Global SysAd Maintenance Team</em>,
-
     <a href="https://rackspace.com">Rackspace US, Inc.</a>
+    </h3>
+ <span class="tenure">2017-06 — 2018-09</span>
+| <span class="keywords">Python Linux </span>
 
-    </h3> <span class="tenure">2017-06 — 2018-09</span>| <span class="keywords">Python Linux </span>
                         <p></p>
                         <ul>
                             <li>Automated massive migration of scheduled maintenances to consolidate calendars</li>
@@ -330,10 +282,11 @@
                     </div>
                     <div>
                          <h3><em>Linux System Administrator I - Global SysAd Maintenance Team</em>,
-
     <a href="https://rackspace.com">Rackspace US, Inc.</a>
+    </h3>
+ <span class="tenure">2015-05 — 2017-06</span>
+| <span class="keywords">Linux Bash Python React Flask </span>
 
-    </h3> <span class="tenure">2015-05 — 2017-06</span>| <span class="keywords">Linux Bash Python React Flask </span>
                         <p></p>
                         <ul>
                             <li>Quickly identified and proposed tools and training to make team process
@@ -348,10 +301,11 @@
                     </div>
                     <div>
                          <h3><em>Linux System Administrator I - Global Technical Support</em>,
-
     <a href="https://rackspace.com">Rackspace US, Inc.</a>
+    </h3>
+ <span class="tenure">2014-01 — 2015-05</span>
+| <span class="keywords">Linux Bash Python </span>
 
-    </h3> <span class="tenure">2014-01 — 2015-05</span>| <span class="keywords">Linux Bash Python </span>
                         <p>
                             <p>2nd Shift Enterprise Linux SysAd</p>
                         </p>
@@ -366,18 +320,21 @@
                     </div>
                     <div>
                          <h3><em>Linux System Administrator</em>,
-
     <a href="https://ccp.jhu.edu">Johns Hopkins University, Bloomberg School Of Public Health, Center For Communication Programs</a>
+    </h3>
+ <span class="tenure">2011-04 — 2013-12</span>
+| <span class="keywords">Linux Git Puppet </span>
 
-    </h3> <span class="tenure">2011-04 — 2013-12</span>| <span class="keywords">Linux Git Puppet </span>
-                        <p>
-                            <p>Linux SysAd on the Knowledge for Health project (<a href="https://www.k4health.org">https://www.k4health.org</a>)
-                                and related projects.</p>
-                        </p>
+                        <p></p>
                         <ul>
                             <li>Maintained and automated maintenance of servers for Drupal websites and
-                                multisites involving: Linux, Apache, MySQL, PHP infrastructure, Physical
-                                and virtual CentOS 6 and 5 servers, and Apache Solr search indexes</li>
+                                multisites involving:
+                                <ul>
+                                    <li>Linux, Apache, MySQL, PHP infrastructure</li>
+                                    <li>Physical and virtual CentOS 5 and 6 servers, and</li>
+                                    <li>Apache Solr search indexes</li>
+                                </ul>
+                            </li>
                             <li>Proposed and taught dev team about git and multiple environment workflow
                                 concepts.</li>
                             <li>Successfully led team to adoption of git and a development &gt; staging
@@ -388,10 +345,11 @@
                     </div>
                     <div>
                          <h3><em>Software Test Specialist - Tier 3 Escalations</em>,
-
     <a href="https://micros.com">MICROS Systems</a>
+    </h3>
+ <span class="tenure">2011-01 — 2011-04</span>
+| <span class="keywords">Troubleshooting Debugging Testing </span>
 
-    </h3> <span class="tenure">2011-01 — 2011-04</span>| <span class="keywords">Troubleshooting Debugging Testing </span>
                         <p></p>
                         <ul>
                             <li>Analyzed and diagnosed most difficult customer reported issues</li>
@@ -400,14 +358,16 @@
                     </div>
                     <div>
                          <h3><em>Technical Support Specialist I</em>,
-
     <a href="https://solnetweb.com">Solnet Network and Web Services, LLC.</a>
+    </h3>
+ <span class="tenure">2010-04 — 2010-10</span>
+| <span class="keywords">Windows Desktop Support </span>
 
-    </h3> <span class="tenure">2010-04 — 2010-10</span>| <span class="keywords">Windows Desktop Support </span>
-                        <p>
-                            <p>Serviced Windows desktops and server and networking infrastructure as
-                                on-site technical support</p>
-                        </p>
+                        <p></p>
+                        <ul>
+                            <li>Serviced Windows desktops and server and networking infrastructure as
+                                on-site technical support</li>
+                        </ul>
                     </div>
                 </section>
                 <hr>
@@ -419,63 +379,69 @@
                     <div>
                         
 <h3><em>Creator</em>,
-
 <a href="https://github.rackspace.com/emcee/emcee">Emcee</a>
-
 </h3>
-<span class="tenure">2018-01 — Present</span>| <span class="keywords">Python JSON API Types </span>
+
+<span class="tenure">2018-01 — Present</span>
+| <span class="keywords">Python JSON API Types </span>
+
                         <p>Learning client design best practices and version controlled releases</p>
                     </div>
                     <div>
                         
 <h3><em>Contributor</em>,
-
 <a href="https://stepladder.rax.io/about">Stepladder</a>
-
 </h3>
-<span class="tenure">2017-10 — Present</span>| <span class="keywords">Python Javascript HTML JSON API </span>
+
+<span class="tenure">2017-10 — Present</span>
+| <span class="keywords">Python Javascript HTML JSON API </span>
+
                         <p>Learned remote collaboration and discussion skills while improving coding
                             ability</p>
                     </div>
                     <div>
                         
 <h3><em>Maintainer</em>,
-
 <a href="https://stepladder.rax.io/librack_docs">Librack</a>
-
 </h3>
-<span class="tenure">2018-01 — Present</span>| <span class="keywords">Python </span>
+
+<span class="tenure">2018-01 — Present</span>
+| <span class="keywords">Python </span>
+
                         <p>Learned to follow in the steps of an active project including interface
                             guarantees and deprecation</p>
                     </div>
                     <div>
                         
 <h3><em>Contributor</em>,
-
 <a href="https://stepladder.rax.io/automaint">Automaint</a>
-
 </h3>
-<span class="tenure">2016-09 — 2017-09</span>| <span class="keywords">Python </span>
+
+<span class="tenure">2016-09 — 2017-09</span>
+| <span class="keywords">Python </span>
+
                         <p>Learned to follow in the steps of an active project including deprecation</p>
                     </div>
                     <div>
                         
 <h3><em>Bug reporter</em>,
-
 <a href="https://github.rackspace.com/SupportTools/intensify/blob/master/README.md">Intensify</a>
-
 </h3>
-<span class="tenure">2015-10 — 2016-10</span>| <span class="keywords">Python </span>
+
+<span class="tenure">2015-10 — 2016-10</span>
+| <span class="keywords">Python </span>
+
                         <p>Assisted in quality testing and bug reporting</p>
                     </div>
                     <div>
                         
 <h3><em>Bug reporter</em>,
-
 <a href="https://github.rackspace.com/GTSLAE/mono/tree/master/hammertime">Overtime/Hammertime</a>
-
 </h3>
-<span class="tenure">2015-03 — Present</span>| <span class="keywords">Python </span>
+
+<span class="tenure">2015-03 — Present</span>
+| <span class="keywords">Python </span>
+
                         <p>Added features and reported bugs to overtime, initially a fork integrating
                             cloud support from another tool, hammercloud, now merged back into upstream
                             hammertime</p>
@@ -483,11 +449,12 @@
                     <div>
                         
 <h3><em>System Administrator</em>,
-
 <a href="https://www.k4health.org">Knowledge for Health</a>
-
 </h3>
-<span class="tenure">2011-04 — 2013-12</span>| <span class="keywords">Linux Drupal LAMP </span>
+
+<span class="tenure">2011-04 — 2013-12</span>
+| <span class="keywords">Linux Drupal LAMP </span>
+
                         <p>Jr System Administrator managing entire project&#39;s CentOS linux servers
                             and Drupal websites</p>
                     </div>
@@ -501,11 +468,11 @@
                     <div>
                         
 <h3><em>Computer Information Systems</em>,
-
 <a href="https://letu.edu">LeTourneau University</a>
-
 </h3>
+
 <span class="tenure">2005-08 — 2009-12</span>
+
                     </div>
                 </section>
                 <hr>
