@@ -6,10 +6,9 @@ meta:
 info:
   label: Python Developer
   class: Developer
-  brief: A developer passionate about software engineering best practices with a strong
-    background in Python, and Linux Administration with experience building pipelines
-    for development and deployment in an increasingly efficient manner while following
-    the latest developments in technology.
+  brief: A developer passionate about current technology and quality software engineering
+    with experience building CI pipelines and a strong background in Python software
+    development and Linux system administration.
 disposition:
   travel: 25
   authorization: citizen
@@ -26,7 +25,7 @@ disposition:
 contact:
   email: stephen.brownii@rackspace.com
   phone: "(443) 219-4559"
-  website: https://step7212.github.io/fresh-resume
+  website: https://StephenBrown2.github.io/resume
   other:
   - label: Slack
     category: IM
@@ -169,7 +168,7 @@ projects:
 - title: Emcee
   category: side-project
   description: An (unreleased) Python 3.6+ client for the internal Maintenance Calendar
-  summary: Learned client design best practices and version controlled releases
+  summary: Learning client design best practices and version controlled releases
   role: Creator
   url: https://github.rackspace.com/emcee/emcee
   repo: https://github.rackspace.com/emcee/emcee
