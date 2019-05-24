@@ -6,10 +6,10 @@ meta:
 info:
   label: Python Developer
   class: Developer
-  brief: A developer passionate about software engineering best practices with a
-    strong background in Python, and Linux Administration with experience building
-    pipelines for development and deployment in an increasingly efficient manner
-    while following the latest developments in technology.
+  brief: A developer passionate about software engineering best practices with a strong
+    background in Python, and Linux Administration with experience building pipelines
+    for development and deployment in an increasingly efficient manner while following
+    the latest developments in technology.
 disposition:
   travel: 25
   authorization: citizen
@@ -25,6 +25,8 @@ disposition:
     - Blacksburg, VA
 contact:
   email: stephen.brownii@rackspace.com
+  phone: "(443) 219-4559"
+  website: https://step7212.github.io/fresh-resume
   other:
   - label: Slack
     category: IM
@@ -106,9 +108,9 @@ employment:
     - Installed, configured, updated and troubleshot services for customers such as
       OS level concerns, web server, database server, applications server and mail;
       including Apache, MySQL, PHP, FTP, SSH and DNS
-    - Contributed features and bug fixes to internal Python projects such as an
-      Intensive Password retrevial CLI tool ("intensify"), and general login
-      automation tools ("overtime/hammertime")
+    - Contributed features and bug fixes to internal Python projects such as an Intensive
+      Password retrevial CLI tool ("intensify"), and general login automation tools
+      ("overtime/hammertime")
     location: San Antonio, TX
     keywords:
     - Linux
@@ -166,12 +168,12 @@ employment:
 projects:
 - title: Emcee
   category: side-project
-  description: A Python 3.6+ client for the internal Maintenance Calendar
+  description: An (unreleased) Python 3.6+ client for the internal Maintenance Calendar
   summary: Learned client design best practices and version controlled releases
   role: Creator
   url: https://github.rackspace.com/emcee/emcee
   repo: https://github.rackspace.com/emcee/emcee
-  start: '2018'
+  start: '2018-01-31'
   highlights: []
   keywords:
   - Python
@@ -179,10 +181,67 @@ projects:
   - API
   - Types
 - title: Stepladder
+  category: open-source
+  description: A Flask-based web and API framework for Racker tools
+  summary: Learned collaboration and discussion skills while improving coding ability
+  role: Contributor
+  url: https://stepladder.rax.io/about
+  repo: https://github.rackspace.com/GTSLAE/mono/tree/master/stepladder
+  start: '2017-10-17'
+  highlights: []
+  keywords:
+  - Python
+  - Javascript
+  - HTML
+  - JSON
+  - API
 - title: Librack
+  category: open-source
+  description: A fully featured Python library with objects covering many Rackspace
+    systems, meant to be a one stop shop for other python projects
+  summary: Learned to follow in the steps of an active project including deprecation
+  role: Maintainer
+  url: https://stepladder.rax.io/librack_docs
+  repo: https://github.rackspace.com/GTSLAE/mono/tree/master/stepladder
+  start: '2018-01-02'
+  highlights: []
+  keywords:
+  - Python
 - title: Automaint
+  category: open-source
+  description: A Jinja2 and Flask application running an Angular based web UI to generate
+    and quality-check maintenance templates for execution
+  summary: Learned to follow in the steps of an active project including deprecation
+  role: Contributor
+  url: https://stepladder.rax.io/automaint
+  repo: https://github.rackspace.com/GTSLAE/mono/tree/master/stepladder/stepladder/modules/automaint
+  start: '2018-01-02'
+  highlights: []
+  keywords:
+  - Python
 - title: Intensify
-- title: overtime/hammertime
+  category: open-source
+  description: CLI tool/Python module for managing Intensive usernames and passwords
+  summary: Assisted in quality testing and bug reporting
+  role: Bug reporter
+  url: https://github.rackspace.com/SupportTools/intensify/blob/master/README.md
+  repo: https://github.rackspace.com/SupportTools/intensify
+  start: '2018-01-02'
+  highlights: []
+  keywords:
+  - Python
+- title: Overtime/Hammertime
+  category: open-source
+  description: CLI for interacting with Customer Servers
+  summary: Added features and reported bugs to overtime, initially a fork integrating
+    cloud support from another tool, hammercloud, now merged back into upstream hammertime
+  role: Bug reporter
+  url: https://github.rackspace.com/GTSLAE/mono/tree/master/hammertime
+  repo: https://github.rackspace.com/SupportTools/intensify
+  start: '2018-01-02'
+  highlights: []
+  keywords:
+  - Python
 skills: {}
 service: {}
 education:
@@ -203,7 +262,10 @@ education:
     keywords: []
     highlights: []
     location: Longview, TX
-social: []
+social:
+- network: Github Enterprise
+  user: step7212
+  url: https://github.rackspace.com/step7212
 recognition: []
 writing: []
 reading: []
@@ -231,6 +293,22 @@ references:
   - label: Email
     category: email
     value: ryan.mazurek@rackspace.com
+- name: Sam Sharpe
+  role: Teammate
+  category: professional
+  private: false
+  contact:
+  - label: Email
+    category: email
+    value: sam.sharpe@rackspace.co.uk
+- name: Micah Culpepper
+  role: Colleague
+  category: professional
+  private: false
+  contact:
+  - label: Email
+    category: email
+    value: micah.culpepper@rackspace.com
 testimonials: []
 interests:
 - name: Tesla
@@ -242,7 +320,7 @@ interests:
   - Storage
   - Transportation
 - name: Solar Power
-  summary: It powers the earth, why not your house also?
+  summary: It powers the earth, why not your house?
 - name: Personal Finance
   summary: Budgeting rocks! How else am I going to meet my goals?
 extracurricular: []
