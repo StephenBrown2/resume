@@ -15,16 +15,19 @@ Install [wkhtmltopdf](http://wkhtmltopdf.org/downloads.html),
 [hackmyresume](https://github.com/hacksalot/HackMyResume), and
 [yq](https://yq.readthedocs.io/en/latest/) which are required for generation.
 
-```
-yay -S wkhtmltopdf nodejs-hackmyresume yq
+```shell
+yay -S wkhtmltopdf nodejs-hackmyresume go-yq
+# or
+brew install wkhtmltopdf yq
+npm install -g resume-cli hackmyresume
 ```
 
 ## Résumé Generation
 
 Run the following command to output the résumé in all formats. The `out` directory is ignored by Git.
 
-```
-yq -M . resume-fresh.yaml > resume-fresh.json
+```shell
+yq -Mj eval resume-fresh.yaml > resume-fresh.json
 hackmyresume BUILD resume-fresh.json TO out/stephen-brown-ii.all -t modern
 hackmyresume BUILD resume-fresh.json TO out/stephen-brown-ii.all -t ../some-folder/my-custom-theme/
 hackmyresume BUILD resume-fresh.json TO out/stephen-brown-ii.all -t node_modules/jsonresume-theme-modern
@@ -34,17 +37,17 @@ Pre-defined FRESH themes are: `positive`, `modern`, `compact`, `basis` or `aweso
 
 ## Convert FRESH résumé to JRS format
 
-The FRESH format is the master file. The generated `stephen-brown-jrs.json` is ignored by Git.
+The FRESH format is the master file. The generated `resume.json` is ignored by Git.
 
-```
-hackmyresume CONVERT resume-fresh.json stephen-brown-jrs.json
+```shell
+hackmyresume CONVERT resume-fresh.json resume.json
 ```
 
 ## Résumé Analysis and Validation
 
 Analyze and report on the résumé data:
 
-```
+```shell
 hackmyresume ANALYZE resume-fresh.json
 hackmyresume VALIDATE resume-fresh.json
 ```

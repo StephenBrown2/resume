@@ -2,13 +2,15 @@
 name: Stephen Brown II
 meta:
   format: FRESH@1.0.0-beta
-  version: 0.0.1
+  version: 2021.4.10
 info:
-  label: Python Developer
+  label: Software Developer
   class: Developer
-  brief: A developer passionate about current technology and quality software engineering
-    with experience building CI pipelines and a strong background in Python software
-    development and Linux system administration.
+  brief: A Linux sysad turned developer, I excel at finding and applying best
+    practices to everything I do professionally, even if it takes a couple tries
+    to get it working, then get it right, and apply those lessons learned in the
+    future. With experience in multiple languages and systems, I am adept at
+    learning new methodologies and keeping the basics in mind.
 disposition:
   travel: 25
   authorization: citizen
@@ -17,42 +19,56 @@ disposition:
   - full-time
   remote: true
   relocation:
-    willing: true
-    destinations:
-    - Austin, TX
-    - San Antonio, TX
-    - Blacksburg, VA
+    willing: false
 contact:
-  email: stephen.brownii@rackspace.com
+  email: Stephen.Brown@gmail.com
   phone: "(443) 219-4559"
   website: https://stephenbrown2.github.io/resume
-  other:
-  - label: Slack
-    category: IM
-    value: "@stephen"
+  other: []
 location:
-  city: San Antonio
-  region: TX
+  city: Longmont
+  region: CO
   country: US
 employment:
   history:
-  - employer: Rackspace US, Inc.
-    position: Automation Engineer I - Global Linux Automation Engineers
-    url: https://rackspace.com
-    start: '2018-09-11'
-    end: 
+  - employer: ObjectRocket, a Rackspace Technology Company
+    position: Software Developer
+    url: https://objectrocket.com
+    start: '2019-10-01'
     summary: ''
     highlights:
-    - Fully "remote" worker, as a US employee working with an otherwise fully UK team
+    - Maintained legacy apps and in-house libraries in Python
+    - Began work in Golang developing new internal services using GoBuffalo framework
+    - Utilized local setup in Docker for all projects
+    - Worked in OpenShift and Kubernetes environments
+    - Developed Helm charts for deploying internal services in k8s
+    - Evaluated and documented use of AWS Fargate to deploy Prometheus metrics
+      exporters connected to peered customer VPCs
+    location: Remote
+    keywords:
+    - Remote
+    - Python
+    - Golang
+    - Kubernetes
+    - Docker
+    - AWS
+  - employer: Rackspace Technology
+    position: Automation Engineer - Global Linux Automation Engineers
+    url: https://rackspace.com
+    start: '2018-09-11'
+    end: '2019-10-01'
+    summary: ''
+    highlights:
+    - Worked with UK-based team as sole US member
     - Helped maintain and develop Stepladder, a framework for employees to contribute
       tools with a common UI and deployment system. <ul><li>Frontend in Javascript,
       HTML, and CSS</li><li>Backend webserver in Python using Flask and MySQL</li>
       <li>Client library (Librack) to interact with numerous API backends</li></ul>
     - Implemented and configured deployment tools using Docker, Ansible, and Jenkins
-    - Designed and built Jenkins 2.0 Pipeline for testing development Pull Requests
-    - Influenced team to implement better checks and consistency to improve and maintain
+    - Designed and built Jenkins 2.x Pipeline for testing development Pull Requests
+    - Led team to implement better checks and consistency to improve and maintain
       code quality
-    location: San Antonio, TX
+    location: Remote
     keywords:
     - Remote
     - Python
@@ -60,23 +76,24 @@ employment:
     - Ansible
     - Docker
     - Github
-  - employer: Rackspace US, Inc.
-    position: Automation Engineer I - Global SysAd Maintenance Team
+  - employer: Rackspace Hosting
+    position: Automation Engineer - Global SysAd Maintenance Team
     url: https://rackspace.com
     start: '2017-06-03'
     end: '2018-09-10'
     summary: ''
     highlights:
-    - Automated massive migration of scheduled maintenances to consolidate calendars
+    - Automated migration of scheduled maintenances to consolidate calendars,
+      saving weeks of manual work
     - Developed reporting and categorization tools for whole team use
-    - Enabled new workflows not otherwise possible without custom tooling
+    - Wrote tools which enabled more efficient team workflows not otherwise possible
     - Inverted traditional scheduling process to improve customer experience
     location: San Antonio, TX
     keywords:
     - Python
     - Linux
   - employer: Rackspace US, Inc.
-    position: Linux System Administrator I - Global SysAd Maintenance Team
+    position: Linux System Administrator - Global SysAd Maintenance Team
     url: https://rackspace.com
     start: '2015-05-16'
     end: '2017-06-03'
@@ -86,9 +103,8 @@ employment:
       efficient
     - Contributed multiple features to team's jinja2-based templating system (Automaint)
     - Developed an auto-numbering tool for maintenance templates using React
-    - Developed a custom UI that accesses the maintenance calendar backend and presents
-      upcoming services in an easy to read format using the fullcalendar javascript
-      library
+    - Developed a custom UI that accesses the maintenance calendar backend and
+      presented upcoming services using the fullcalendar javascript library
     location: San Antonio, TX
     keywords:
     - Linux
@@ -97,18 +113,18 @@ employment:
     - React
     - Flask
   - employer: Rackspace US, Inc.
-    position: Linux System Administrator I - Global Technical Support
+    position: Linux System Administrator - Global Technical Support
     url: https://rackspace.com
     start: '2014-01-06'
     end: '2015-05-15'
-    summary: 2nd Shift Enterprise Linux SysAd
+    summary: Enterprise-support Linux System Administrator (2nd shift)
     highlights:
     - Installed, configured, updated and troubleshot services for customers such as
       OS level concerns, web server, database server, applications server and mail;
       including Apache, MySQL, PHP, FTP, SSH and DNS
-    - Contributed features and bug fixes to internal Python projects such as an Intensive
-      Password retrevial CLI tool ("intensify"), and general login automation tools
-      ("overtime/hammertime")
+    - Contributed features and bug fixes to internal Python projects such as a
+      password retrevial CLI tool (intensify), and general login automation CLI tools
+      (overtime/hammertime)
     location: San Antonio, TX
     keywords:
     - Linux
@@ -124,12 +140,13 @@ employment:
     highlights:
     - Maintained and automated maintenance of servers for Drupal websites and multisites
       involving:<ul><li>Linux, Apache, MySQL, PHP infrastructure</li><li>Physical
-      and virtual CentOS 5 and 6 servers, and</li><li>Apache Solr search indexes</li></ul>
+      and virtual CentOS 5 and 6 servers</li><li>Apache Solr search indexes</li></ul>
     - Proposed and taught dev team about git and multiple environment workflow concepts.
     - Successfully led team to adoption of git and a development > staging > production
       deployment workflow
     - Designed Puppet configuration management to maintain and deploy to development
-      and production servers; Tested in local Vagrant environments
+      and production servers
+    - Tested in local Vagrant environments
     location: Baltimore, MD
     keywords:
     - Linux
@@ -142,13 +159,26 @@ employment:
     end: '2011-04-01'
     summary: ''
     highlights:
-    - Analyzed and diagnosed most difficult customer reported issues
-    - Documented issues for developer and QA teams to remedy
+    - Solved tough problems or delegated them to the right people
     location: Columbia, MD
     keywords:
     - Troubleshooting
     - Debugging
     - Testing
+  - employer: Geek Squad
+    position: Counter Operations Agent
+    url: https://geeksquad.com
+    start: '2010-10-01'
+    end: '2010-12-31'
+    summary: ''
+    highlights:
+    - As a seasonal job fresh out of college, checking customer's PCs for viruses
+      was the best I could do at the time
+    location: Baltimore, MD
+    keywords:
+    - Windows
+    - Service
+    - UpSales
   - employer: Solnet Network and Web Services, LLC.
     position: Technical Support Specialist I
     url: https://solnetweb.com
@@ -156,7 +186,7 @@ employment:
     end: '2010-10-01'
     summary: ''
     highlights:
-    - Serviced Windows desktops and server and networking infrastructure as on-site
+    - Serviced Windows desktops, servers, and networking infrastructure as on-site
       technical support
     location: Baltimore, MD
     keywords:
@@ -167,11 +197,12 @@ projects:
 - title: Emcee
   category: side-project
   description: An (unreleased) Python 3.6+ client for the internal Maintenance Calendar
-  summary: Learning client design best practices and version controlled releases
+  summary: Learned client design practices and version controlled releases
   role: Creator
   url: https://github.rackspace.com/emcee/emcee
   repo: https://github.rackspace.com/emcee/emcee
   start: '2018-01-31'
+  end: '2019-10-01'
   highlights: []
   keywords:
   - Python
@@ -179,7 +210,7 @@ projects:
   - API
   - Types
 - title: Stepladder
-  category: open-source
+  category: internal
   description: A Flask-based web and API framework for internal tools
   summary: Learned remote collaboration and discussion skills while improving coding
     ability
@@ -187,6 +218,7 @@ projects:
   url: https://stepladder.rax.io/about
   repo: https://github.rackspace.com/GTSLAE/mono/tree/master/stepladder
   start: '2017-10-17'
+  end: '2019-10-01'
   highlights: []
   keywords:
   - Python
@@ -194,8 +226,20 @@ projects:
   - HTML
   - JSON
   - API
+- title: Hammertime
+  category: internal
+  description: CLI for interacting with Customer Servers
+  summary: Added features and fixed bugs in the hammertime tool while maintaining
+  role: Maintainer
+  url: https://github.rackspace.com/GTSLAE/mono/tree/master/hammertime
+  repo: https://github.rackspace.com/SupportTools/overtime
+  start: '2018-09-11'
+  end: '2019-10-01'
+  highlights: []
+  keywords:
+  - Python
 - title: Librack
-  category: open-source
+  category: internal
   description: A fully featured Python library with objects covering many Rackspace
     systems, meant to be a one stop shop for other python projects
   summary: Learned to follow in the steps of an active project including interface
@@ -204,11 +248,12 @@ projects:
   url: https://stepladder.rax.io/librack_docs
   repo: https://github.rackspace.com/GTSLAE/mono/tree/master/librack
   start: '2018-01-02'
+  end: '2019-10-01'
   highlights: []
   keywords:
   - Python
 - title: Automaint
-  category: open-source
+  category: internal
   description: A Jinja2 and Flask application running an Angular based web UI to generate
     and quality-check maintenance templates for execution
   summary: Learned to follow in the steps of an active project including deprecation
@@ -221,7 +266,7 @@ projects:
   keywords:
   - Python
 - title: Intensify
-  category: open-source
+  category: internal
   description: CLI tool/Python module for managing Intensive usernames and passwords
   summary: Assisted in quality testing and bug reporting
   role: Bug reporter
@@ -233,20 +278,20 @@ projects:
   keywords:
   - Python
 - title: Overtime/Hammertime
-  category: open-source
+  category: internal
   description: CLI for interacting with Customer Servers
   summary: Added features and reported bugs to overtime, initially a fork integrating
     cloud support from another tool, hammercloud, now merged back into upstream hammertime
   role: Bug reporter
   url: https://github.rackspace.com/GTSLAE/mono/tree/master/hammertime
-  repo: https://github.rackspace.com/SupportTools/intensify
+  repo: https://github.rackspace.com/SupportTools/overtime
   start: '2015-03-08'
   highlights: []
   keywords:
   - Python
 - title: Knowledge for Health
   category: public
-  description: 
+  description: ''
   summary: Jr System Administrator managing entire project's CentOS linux servers
     and Drupal websites
   role: System Administrator
@@ -258,8 +303,86 @@ projects:
   - Linux
   - Drupal
   - LAMP
-skills: {}
+skills:
+  list:
+    - name: Bash/Shell scripting
+      level: Advanced
+      summary: Sometimes, you just gotta write ssh in a for loop
+      years: 15
+    - name: Python
+      level: Advanced
+      summary: Primary development language while at Rackspace, have used some async capabilities
+      years: 8
+    - name: Golang
+      level: Beginner
+      summary: Very interested in learning concurrent programming in a statically-typed language
+      years: 1
+    - name: Docker
+      level: Intermediate
+      summary: Docker has proven very useful for enabling portable development and deployment workflows
+      years: 3
+    - name: Linux
+      level: Advanced
+      summary: Primary motivation for employment and excitement since high school
+      years: 16
+    - name: Git
+      level: Intermediate
+      summary: https://xkcd.com/1597/ - but I actually know many incantations
+      years: 9
+    - name: Kubernetes
+      level: Beginner
+      summary: I'm able to read helm charts, but putting them together is a whole other ballgame
+      years: 2
+    - name: AWS
+      level: Beginner
+      summary: My team is using AWS to host our services in EC2, and I have just begun to learn it
+      years: 1
+    - name: Ansible
+      level: Intermediate
+      summary: Used ansible for managing infrastructure configuration for servers and work laptop
+      years: 3
+    - name: Terraform
+      level: Beginner
+      summary: Using terraform for managing infrastructure for API services
+      years: 1
 service: {}
+certificates:
+- name: Triplebyte certified Generalist Software Engineer
+  date: '2020-08-20'
+  url: https://triplebyte.com/tb/stephen-brown-ii-xjpelfb/certificate/track/generalist
+  issuer: Triplebyte
+- name: 'Red Hat Certified Engineer (ID: 140-027-434)'
+  date: '2014-03-12'
+  url: https://rhtapps.redhat.com/verify?certId=140-027-434
+  issuer: Red hat
+- name: 'Red Hat Certified System Administrator (ID: 140-027-434)'
+  date: '2014-02-19'
+  url: https://rhtapps.redhat.com/verify?certId=140-027-434
+  issuer: Red Hat
+- name: 'LPIC-1 (LPI ID: LPI000223384, Verification Code: ltd26ep79p)'
+  date: '2010-12-30'
+  url: https://cs.lpi.org/caf/Xamman/certification
+  issuer: Linux Professional Institute
+- name: Linux+ (Powered by LPI)
+  date: '2010-12-30'
+  url: https://www.certmetrics.com/comptia/public/verification.aspx?code=B8FPZJHDMH1QCCCL
+  issuer: CompTIA
+- name: Server+
+  date: '2010-12-30'
+  url: https://www.certmetrics.com/comptia/public/verification.aspx?code=VXPPY2FJMGB4SWHY
+  issuer: CompTIA
+- name: Security+
+  date: '2010-03-02'
+  url: https://www.certmetrics.com/comptia/public/verification.aspx?code=Q7D5J84BCL41KZ8G
+  issuer: CompTIA
+- name: Network+
+  date: '2010-02-08'
+  url: https://www.certmetrics.com/comptia/public/verification.aspx?code=R4LQNYQB2LRQKJV8
+  issuer: CompTIA
+- name: A+ (IT Technician)
+  date: '2010-01-21'
+  url: https://www.certmetrics.com/comptia/public/verification.aspx?code=CM1SNZCB2KEEYD90
+  issuer: CompTIA
 education:
   summary: ''
   level: degree
@@ -267,8 +390,8 @@ education:
   history:
   - title: Computer Information Systems
     institution: LeTourneau University
-    area: Science
     studyType: Bachelor
+    area: Science
     start: '2005-08-01'
     end: '2009-12-15'
     grade: '2.4'
@@ -279,9 +402,12 @@ education:
     highlights: []
     location: Longview, TX
 social:
-- network: Github Enterprise
-  user: step7212
-  url: https://github.rackspace.com/step7212
+- network: GitHub
+  user: StephenBrown2
+  url: https://github.com/StephenBrown2
+- network: GitLab
+  user: StephenBrown2
+  url: https://gitlab.com/StephenBrown2
 recognition: []
 writing: []
 reading: []
@@ -290,17 +416,57 @@ governance: []
 languages:
 - language: English
   level: Native
-  years: 30
+  years: 33
 samples: []
 references:
+- name: Eva Aldana
+  role: Former Manager
+  category: professional
+  private: false
+  contact:
+  - label: Email
+    category: email
+    value: eva.coche@rackspace.com
+- name: Jesse Wiles
+  role: Former Teammate
+  category: professional
+  private: false
+  contact:
+  - label: Email
+    category: email
+    value: Jesse.Wiles@rackspace.com
+- name: Freddy Esteban Perez
+  role: Former Teammate
+  category: professional
+  private: false
+  contact:
+  - label: Email
+    category: email
+    value: Freddy.Perez@rackspace.com
 - name: Duncan H. Murray
-  role: Manager
+  role: Former Manager
   category: professional
   private: false
   contact:
   - label: Email
     category: email
     value: duncan.h.murray@rackspace.co.uk
+- name: Dan Hand
+  role: Former Teammate
+  category: professional
+  private: false
+  contact:
+  - label: Email
+    category: email
+    value: email@danielhand.io
+- name: Sam Sharpe
+  role: Former Teammate
+  category: professional
+  private: false
+  contact:
+  - label: Email
+    category: email
+    value: sam.sharpe@rackspace.co.uk
 - name: Ryan Mazurek
   role: Former Manager
   category: professional
@@ -309,14 +475,6 @@ references:
   - label: Email
     category: email
     value: ryan.mazurek@rackspace.com
-- name: Sam Sharpe
-  role: Teammate
-  category: professional
-  private: false
-  contact:
-  - label: Email
-    category: email
-    value: sam.sharpe@rackspace.co.uk
 - name: Micah Culpepper
   role: Colleague
   category: professional
@@ -339,5 +497,7 @@ interests:
   summary: It powers the earth, why not your house?
 - name: Personal Finance
   summary: Budgeting rocks! How else am I going to meet my goals?
+- name: Home Automation
+  summary: Why doesn't the fireplace turn on by itself when it's cold outside?
 extracurricular: []
 affiliation: {}

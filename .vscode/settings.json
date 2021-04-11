@@ -1,0 +1,34 @@
+{
+	"json-yaml-schema-selector.additionalSchemas": [
+		{
+			"name": "fresh-resume",
+			"description": "FRESH resume 1.0.0-beta",
+			"url": "https://raw.githubusercontent.com/fresh-standard/fresh-resume-schema/master/schema/fresh-resume-schema_1.0.0-beta.json",
+			"fileMatch": [
+				"resume-fresh.yaml"
+			]
+		}
+	],
+	"yaml.schemas": {
+		"https://raw.githubusercontent.com/fresh-standard/fresh-resume-schema/master/schema/fresh-resume-schema_1.0.0-beta.json": [
+			"resume-fresh.yaml"
+		],
+		"https://json.schemastore.org/resume.json": [
+			"resume.yaml"
+		]
+	},
+	"json.schemas": [
+		{
+			"fileMatch": [
+				"resume.json"
+			],
+			"url": "https://json.schemastore.org/resume.json"
+		},
+		{
+			"fileMatch": [
+				"resume-fresh.json"
+			],
+			"url": "https://raw.githubusercontent.com/fresh-standard/fresh-resume-schema/master/schema/fresh-resume-schema_1.0.0-beta.json"
+		}
+	]
+}
