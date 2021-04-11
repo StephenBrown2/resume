@@ -1,4 +1,5 @@
 {
+	"JSONResume.theme": "positive",
 	"json-yaml-schema-selector.additionalSchemas": [
 		{
 			"name": "fresh-resume",

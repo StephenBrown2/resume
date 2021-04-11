@@ -35,6 +35,13 @@ hackmyresume BUILD resume-fresh.json TO out/stephen-brown-ii.all -t node_modules
 
 Pre-defined FRESH themes are: `positive`, `modern`, `compact`, `basis` or `awesome` (Only supports LATEX, JSON, and YML formats)
 
+### Github Pages generation
+
+```shell
+yq -Mj eval resume-fresh.yaml > resume-fresh.json
+hackmyresume BUILD resume-fresh.json TO docs/index.html -t positive
+```
+
 ## Convert FRESH résumé to JRS format
 
 The FRESH format is the master file. The generated `resume.json` is ignored by Git.
