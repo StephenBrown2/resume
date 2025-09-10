@@ -6,11 +6,12 @@ meta:
 info:
   label: Software Developer
   class: Developer
-  brief: A Linux sysad turned developer, I excel at finding and applying best
-    practices to everything I do professionally, even if it takes a couple tries
-    to get it working, then get it right, and apply those lessons learned in the
-    future. With experience in multiple languages and systems, I am adept at
-    learning new methodologies and keeping the basics in mind.
+  brief: Experienced software engineer who builds and maintains production
+    services at scale, prioritizing security, reliability, and developer
+    productivity. I take ownership of ambiguous problems from discovery through
+    delivery, write tested, reliable code, and collaborate to improve engineering
+    workflows. I learn new languages and stacks quickly, and bring a proven track
+    record modernizing CI/CD, hardening security, and mentoring teammates.
 disposition:
   travel: 25
   authorization: citizen
@@ -21,29 +22,97 @@ disposition:
   relocation:
     willing: false
 contact:
-  email: Stephen.Brown@gmail.com
+  email: hire@stephen.brownii.email
   phone: "(443) 219-4559"
   website: https://stephenbrown2.github.io/resume
   other: []
 location:
-  city: Longmont
-  region: CO
+  city: Delaware
+  region: OH
   country: US
 employment:
   history:
-  - employer: ObjectRocket, a Rackspace Technology Company
+  - employer: JumpCloud, Inc.
+    position: Senior Software Engineer
+    url: https://jumpcloud.com
+    start: '2022-10-03'
+    summary: ''
+    highlights:
+      - Work on a Linux-focused development team supporting on-device agents
+        used by thousands of customers; focus on reliability and secure
+        operation in the field.
+      - |
+        Lead CI/CD modernization efforts: migrate agent test tooling to the uv-based
+        toolset, reconfigure functional tests to run on self-hosted runners, and
+        enable decommissioning of legacy VPN-based infrastructure to improve
+        security and reduce developer wait time.
+      - Implement agent and customer security hardening measures, including
+        obfuscating TOTP seeds and rotating previously unencrypted connect
+        keys to remove plaintext fallbacks and reduce attack surface.
+      - Embed SQL migrations into the on-device agent to improve upgrade
+        resilience and reduce field incidents during rollouts.
+      - Drive improvements to Go CI tasks and linters to increase code quality
+        coverage and consistency across services.
+      - Streamline onboarding by improving internal developer tooling and
+        documentation; mentor engineers and provide design guidance that
+        shortens ramp-up time and reduces friction for cross-team work.
+      - Use AWS-hosted Kubernetes environments and container tooling for
+        backend development and local testing workflows.
+    location: Remote
+    keywords:
+    - Remote
+    - Golang
+    - Docker
+    - Github
+    - AWS
+    - PostgreSQL
+    - MongoDB
+  - employer: JumpCloud, Inc.
+    position: Software Engineer 3
+    url: https://jumpcloud.com
+    start: '2021-05-16'
+    end: '2022-10-03'
+    summary: ''
+    highlights:
+      - Founded and grew a Linux-focused development team within a rapidly
+        scaling product organization to support client devices across multiple
+        distributions.
+      - Expanded platform support to new major distributions (including Oracle
+        Linux 9 and Rocky 9) and maintained compatibility with evolving kernel
+        and distro changes.
+      - Improved multi-distro development workflows by introducing static
+        compilation techniques and build automation (Zig/static builds) to
+        reduce release complexity.
+      - Implemented and maintained the on-device agent written in Go with gRPC
+        and protobuf for backend communication; integrated with MongoDB and
+        PostgreSQL backends.
+      - Authored automated functional tests in Python for end-to-end validation
+        of agent behavior in CI, increasing confidence in releases.
+      - Rapidly ramped in Go and became a go-to reviewer for Go code quality and
+        best practices; regularly provided guidance that accelerated teammates'
+        progress.
+      - Used Docker Compose for local development and collaborated with teams
+        using Kubernetes for backend deployments.
+    location: Longmont, CO
+    keywords:
+    - Remote
+    - Golang
+    - Docker
+    - Linux
+    - Github
+    - AWS
+  - employer: ObjectRocket
     position: Software Developer
     url: https://objectrocket.com
     start: '2019-10-01'
+    end: '2021-05-01'
     summary: ''
     highlights:
-    - Maintained legacy apps and in-house libraries in Python
-    - Began work in Golang developing new internal services using GoBuffalo framework
-    - Utilized local setup in Docker for all projects
-    - Worked in OpenShift and Kubernetes environments
-    - Developed Helm charts for deploying internal services in k8s
-    - Evaluated and documented use of AWS Fargate to deploy Prometheus metrics
-      exporters connected to peered customer VPCs
+      - Maintained legacy apps and in-house libraries in Python
+      - Began work in Golang developing new internal services using GoBuffalo framework
+      - Utilized local setup in Docker for all projects
+      - Worked in OpenShift and Kubernetes environments
+      - Developed Helm charts for deploying internal services in k8s
     location: Remote
     keywords:
     - Remote
@@ -52,84 +121,34 @@ employment:
     - Kubernetes
     - Docker
     - AWS
-  - employer: Rackspace Technology
-    position: Automation Engineer - Global Linux Automation Engineers
+  - employer: Rackspace (US / Hosting / Technology)
+    position: Multiple roles — Linux System Administrator to Automation Engineer
     url: https://rackspace.com
-    start: '2018-09-11'
+    start: '2014-01-06'
     end: '2019-10-01'
     summary: ''
     highlights:
-    - Worked with UK-based team as sole US member
-    - Helped maintain and develop Stepladder, a framework for employees to contribute
-      tools with a common UI and deployment system. <ul><li>Frontend in Javascript,
-      HTML, and CSS</li><li>Backend webserver in Python using Flask and MySQL</li>
-      <li>Client library (Librack) to interact with numerous API backends</li></ul>
-    - Implemented and configured deployment tools using Docker, Ansible, and Jenkins
-    - Designed and built Jenkins 2.x Pipeline for testing development Pull Requests
-    - Led team to implement better checks and consistency to improve and maintain
-      code quality
-    location: Remote
+      - Held several technical roles across Rackspace as the company evolved,
+        focusing on automation, internal tooling, and operational reliability
+      - "Built and maintained internal web tools and APIs (frontend: JavaScript/HTML/CSS, React; backend: Python/Flask, MySQL)"
+      - Authored and maintained Python client libraries and in-house tooling
+      - Automated operational workflows including migration/consolidation of maintenance calendars — saved weeks of manual work
+      - Implemented CI/CD and deployment tooling (Jenkins pipelines, Docker, Ansible) and improved PR testing and release processes
+      - Contributed to internal scheduling systems and created UI components integrating FullCalendar
+      - Developed reporting, categorization and productivity tools that streamlined team processes
+      - Led cross-team efforts to improve code quality, onboarding, and developer workflows; worked closely with UK-based teams as the primary US representative
+    location: San Antonio, TX / Remote
     keywords:
-    - Remote
     - Python
-    - Jenkins
-    - Ansible
+    - Linux
     - Docker
-    - Github
-  - employer: Rackspace Hosting
-    position: Automation Engineer - Global SysAd Maintenance Team
-    url: https://rackspace.com
-    start: '2017-06-03'
-    end: '2018-09-10'
-    summary: ''
-    highlights:
-    - Automated migration of scheduled maintenances to consolidate calendars,
-      saving weeks of manual work
-    - Developed reporting and categorization tools for whole team use
-    - Wrote tools which enabled more efficient team workflows not otherwise possible
-    - Inverted traditional scheduling process to improve customer experience
-    location: San Antonio, TX
-    keywords:
-    - Python
-    - Linux
-  - employer: Rackspace US, Inc.
-    position: Linux System Administrator - Global SysAd Maintenance Team
-    url: https://rackspace.com
-    start: '2015-05-16'
-    end: '2017-06-03'
-    summary: ''
-    highlights:
-    - Quickly identified and proposed tools and training to make team process more
-      efficient
-    - Contributed multiple features to team's jinja2-based templating system (Automaint)
-    - Developed an auto-numbering tool for maintenance templates using React
-    - Developed a custom UI that accesses the maintenance calendar backend and
-      presented upcoming services using the fullcalendar javascript library
-    location: San Antonio, TX
-    keywords:
-    - Linux
-    - Bash
-    - Python
+    - Ansible
+    - Jenkins
     - React
     - Flask
-  - employer: Rackspace US, Inc.
-    position: Linux System Administrator - Global Technical Support
-    url: https://rackspace.com
-    start: '2014-01-06'
-    end: '2015-05-15'
-    summary: Enterprise-support Linux System Administrator (2nd shift)
-    highlights:
-    - Installed, configured, updated and troubleshot services for customers such as
-      OS level concerns, web server, database server, applications server and mail;
-      including Apache, MySQL, PHP, FTP, SSH and DNS
-    - Contributed features and bug fixes to internal Python projects such as a
-      password retrevial CLI tool (intensify), and general login automation CLI tools
-      (overtime/hammertime)
-    location: San Antonio, TX
-    keywords:
-    - Linux
-    - Bash
-    - Python
+    - Git
+    - JavaScript
+    - MySQL
   - employer: Johns Hopkins University, Bloomberg School Of Public Health, Center
       For Communication Programs
     position: Linux System Administrator
@@ -138,9 +157,8 @@ employment:
     end: '2013-12-30'
     summary: ''
     highlights:
-    - Maintained and automated maintenance of servers for Drupal websites and multisites
-      involving:<ul><li>Linux, Apache, MySQL, PHP infrastructure</li><li>Physical
-      and virtual CentOS 5 and 6 servers</li><li>Apache Solr search indexes</li></ul>
+    - Maintained and automated servers supporting Drupal multisite deployments with LAMP
+      stack on physical and virtual hosts, and Apache Solr search indexes.
     - Proposed and taught dev team about git and multiple environment workflow concepts.
     - Successfully led team to adoption of git and a development > staging > production
       deployment workflow
@@ -152,47 +170,30 @@ employment:
     - Linux
     - Git
     - Puppet
-  - employer: MICROS Systems
-    position: Software Test Specialist - Tier 3 Escalations
-    url: https://micros.com
-    start: '2011-01-01'
+    - Drupal
+    - Vagrant
+  - employer: Various early-career employers
+    position: Entry-level Technical Support & Testing
+    url: ''
+    start: '2010-04-01'
     end: '2011-04-01'
-    summary: ''
+    summary: 'Multiple entry-level roles after college providing in-store and on-site
+      technical support, desktop/server troubleshooting, and tier-3 test
+      escalations. Built foundational skills in debugging, testing, and
+      customer-facing support.'
     highlights:
-    - Solved tough problems or delegated them to the right people
-    location: Columbia, MD
+    - Performed diagnostics, repair, and support for Windows desktops and
+      servers in retail and on-site environments.
+    - Resolved and escalated complex software issues as a Tier-3 test
+      specialist; coordinated with engineering to close high-impact tickets.
+    - Delivered customer-facing support and communicated technical issues
+      clearly to non-technical audiences; contributed to process improvements.
+    location: Baltimore / Columbia, MD
     keywords:
     - Troubleshooting
     - Debugging
     - Testing
-  - employer: Geek Squad
-    position: Counter Operations Agent
-    url: https://geeksquad.com
-    start: '2010-10-01'
-    end: '2010-12-31'
-    summary: ''
-    highlights:
-    - As a seasonal job fresh out of college, checking customer's PCs for viruses
-      was the best I could do at the time
-    location: Baltimore, MD
-    keywords:
-    - Windows
-    - Service
-    - UpSales
-  - employer: Solnet Network and Web Services
-    position: Technical Support Specialist
-    url: https://solnetweb.com
-    start: '2010-04-01'
-    end: '2010-10-01'
-    summary: ''
-    highlights:
-    - Serviced Windows desktops, servers, and networking infrastructure as on-site
-      technical support
-    location: Baltimore, MD
-    keywords:
-    - Windows
-    - Desktop
-    - Support
+    - Customer Service
 projects:
 - title: Emcee
   category: side-project
@@ -307,43 +308,51 @@ skills:
   list:
     - name: Bash/Shell scripting
       level: Advanced
-      summary: Sometimes, you just gotta write ssh in a for loop
+      summary: Write reliable shell scripts for automation and operational tasks
       years: 15
     - name: Python
       level: Advanced
-      summary: Primary development language while at Rackspace, have used some async capabilities
+      summary: Use Python for backend services, automation, and test tooling; familiar with async patterns
       years: 8
     - name: Golang
-      level: Beginner
-      summary: Very interested in learning concurrent programming in a statically-typed language
-      years: 1
+      level: Intermediate
+      summary: Develop and maintain on-device agents and backend services in Go; comfortable with concurrency, gRPC, and code review
+      years: 4
     - name: Docker
       level: Intermediate
-      summary: Docker has proven very useful for enabling portable development and deployment workflows
+      summary: Use Docker to enable portable development and deployment workflows
       years: 3
     - name: Linux
       level: Advanced
-      summary: Primary motivation for employment and excitement since high school
+      summary: Work extensively with Linux systems for production and development
       years: 16
     - name: Git
       level: Intermediate
-      summary: https://xkcd.com/1597/ - but I actually know many incantations
+      summary: Use Git daily for source control, branching, and code collaboration
       years: 9
     - name: Kubernetes
       level: Beginner
-      summary: I'm able to read helm charts, but putting them together is a whole other ballgame
+      summary: Read and interpret Helm charts and Kubernetes manifests; familiar with deployment concepts
       years: 2
     - name: AWS
       level: Beginner
-      summary: My team is using AWS to host our services in EC2, and I have just begun to learn it
+      summary: Use AWS services (EC2) for hosting services and testing environments
       years: 1
+    - name: PostgreSQL
+      level: Intermediate
+      summary: Design and integrate Postgres-backed services, including schema migrations
+      years: 3
+    - name: Web Security Fundamentals
+      level: Intermediate
+      summary: Apply security hardening techniques for agents and backend services; reduce plaintext secrets
+      years: 3
     - name: Ansible
       level: Intermediate
-      summary: Used ansible for managing infrastructure configuration for servers and work laptop
+      summary: Manage infrastructure configuration with Ansible
       years: 3
     - name: Terraform
       level: Beginner
-      summary: Using terraform for managing infrastructure for API services
+      summary: Use Terraform for infrastructure as code to manage deployments
       years: 1
 service: {}
 certificates:

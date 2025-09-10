@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Resume - Stephen Brown II</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Inter:500,400,300,300italic,400italic,600,600italic,700,700italic"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic"
+        rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        html,
+        body,
+        main,
+        section,
+        header,
+        ul,
+        p,
+        h1,
+        h2,
+        h3 {
+            font-family: "Inter", "Open Sans", "sans-serif";
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+
+        body {
+            font-weight: 200;
+        }
+
+        ::selection {
+            color: #fff;
+            background: #e48a8a;
+            /* WebKit/Blink Browsers */
+        }
+
+        ::-moz-selection {
+            color: #fff;
+            background: #e48a8a;
+            /* Gecko Browsers */
+        }
+
+        p::selection {
+            color: #fff;
+        }
+
+        a {
+            color: #002b49;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: #C5A063;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            font-size: 3em;
+            font-weight: 500;
+        }
+
+        h2 {
+            text-transform: uppercase;
+            color: #898989;
+            font-size: 2em;
+            position: relative;
+            font-weight: 400;
+        }
+
+        h3,
+        .tenure {
+            font-size: 1.5em;
+            font-weight: 400;
+        }
+
+        h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            /*width: 85%;*/
+            float: left;
+            break-after: avoid;
+        }
+
+        table {
+            width: 100%;
+            text-transform: uppercase;
+        }
+
+        td:first-child {
+            letter-spacing: 2px;
+            color: #bd5b5b;
+            font-size: 20px;
+        }
+
+        td:last-child {
+            text-align: justify;
+            /* HTML justification sucks, but in this case... */
+        }
+
+        hr {
+            display: none;
+        }
+
+        main {
+            padding: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-top: 1em;
+        }
+
+        section>div {
+            margin-top: 1em;
+            overflow: hidden;
+            /* Clear floated children */
+            break-inside: avoid;
+            break-before: avoid;
+        }
+
+        section>div p {
+            clear: both;
+        }
+
+        section>header {
+            position: relative;
+            /* display: none; */
+        }
+
+        p+ul {
+            margin: 1em;
+        }
+
+        ul {
+            clear: both;
+        }
+
+        li {
+            margin-left: 2em;
+        }
+
+        p,
+        li {
+            text-align: justify;
+        }
+
+        .tenure {
+            background-color: #f5f5f5;
+            border-radius: 6px;
+            color: #6f6f6f;
+            float: right;
+            font-size: 85%;
+            font-weight: 600;
+            margin-top: 3px;
+            padding: 4px 6px;
+        }
+
+        .location {
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: #e2aaaa dashed 1px;
+            color: #717171;
+            float: right;
+            font-size: 85%;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-top: 3px;
+            padding: 3px 6px;
+        }
+
+        span.keywords {
+            font-size: 12px;
+            color: #b16666;
+        }
+
+        thead {
+            display: none;
+        }
+
+        main>header {
+            width: 100%;
+            float: left;
+            margin-bottom: 1em;
+        }
+
+        h1 {
+            float: left;
+        }
+
+        h1,
+        h2,
+        .label {
+            font-size: 1.75em;
+            text-transform: uppercase;
+            font-weight: 300;
+            font-family: "Inter", "Open Sans", "Helvetica Neue", "Helvetica", "Lato",
+                "sans-serif";
+        }
+
+        #contact {
+            clear: both;
+            float: right;
+            margin-top: 2px;
+        }
+
+        #contact span+span {
+            margin-left: 10px;
+        }
+
+        .website {
+            display: none;
+        }
+
+        header>span.fa {
+            text-align: center;
+            margin-right: 3px;
+            position: absolute;
+            width: 40px;
+            top: 8px;
+            font-size: 24px;
+            /*transform: translateX(-110%); PDF no likey */
+            margin-left: -10px;
+            color: #dadada;
+        }
+
+        header>h2 {
+            margin-left: 30px;
+        }
+
+        .label {
+            float: right;
+            /* color: #dadada; */
+            color: #898989;
+        }
+
+        #summary {
+            color: #717171;
+            font-size: 1.25em;
+            margin-top: 5em;
+        }
+
+        #skills td {
+            padding-top: 7px;
+            padding-bottom: 7px;
+        }
+
+        #references>p,
+        #references>p>a {
+            color: #961e1e;
+            text-align: center;
+            margin: 30px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        #projects {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>{{ (.basics.name | split " ")._0 }} <span
+                    style="color: #C5A063;">{{ (.basics.name | splitn " " 2 )._1 }}</span></h1>
+            <span class="label">{{ default "" .basics.label | title }}</span>
+            <p id="contact">
+                {{ with .basics.email }}<span class="email"><a href="mailto:{{ . }}">{{ . }}</a></span>{{ end }}
+                {{ with .basics.phone }}<span class="phone">{{ . }}</span>{{ end }}
+                {{ with .basics.url }}<span class="website"><a href="{{ . }}">{{ . }}</a></span>{{ end }}
+            </p>
+        </header>
+
+        <section id="summary">{{ .basics.summary }}</section>
+
+        <hr>
+        <section id="employment">
+            <header> <span class="fa fa-lg fa-building"></span>
+                <h2>employment</h2>
+            </header>
+
+            {{ range .work }}
+            <div>
+                <h3><em>{{ .position }}</em>,
+                    {{ if .url }}<a href="{{ .url }}">{{ .company }}</a>{{ else }}{{ .company }}{{ end }}
+                </h3>
+
+                <span class="tenure">{{ if .enddate }}{{ .startdate | toDate "2006-01-02" | date "Jan 2006" }} —
+                    {{ .enddate | toDate "2006-01-02" | date "Jan 2006" }}{{ else }}{{ .startdate | toDate "2006-01-02" | date "Jan 2006" }}
+                    — Present{{ end }}</span>
+                {{ with .location }}<span class="location">{{ . }}</span>{{ end }}
+                <p>{{ with .summary }}{{ . }}{{ end }}</p>
+                {{ if .highlights }}
+                <ul>
+                    {{ range .highlights }}
+                    <li>{{ . }}</li>
+                    {{ end }}
+                </ul>
+                {{ end }}
+                {{ with .keywords }}<span class="keywords">{{ . | join " " }}</span>{{ end }}
+            </div>
+            {{ end }}
+        </section>
+
+        <hr>
+        <section id="projects">
+            <header> <span class="fa fa-lg fa-star"></span>
+                <h2>projects</h2>
+            </header>
+            {{ if .projects }}
+            {{ range .projects }}
+            <div>
+                <h3><em>{{ .role }}</em>,
+                    {{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}
+                </h3>
+                <span
+                    class="tenure">{{ $start := or (index . "startDate") (index . "StartDate") }}{{ $end := or (index . "endDate") (index . "EndDate") }}{{ if $end }}{{ default "" $start }}
+                    — {{ default "" $end }}{{ else }}{{ default "" $start }} — Present{{ end }}</span>
+                <p>{{ .description }}</p>
+            </div>
+            {{ end }}
+            {{ else }}
+            <!-- no projects defined in resume.json -->
+            {{ end }}
+        </section>
+
+        <hr>
+        <section id="education">
+            <header> <span class="fa fa-lg fa-mortar-board"></span>
+                <h2>education</h2>
+            </header>
+            {{ range .education }}
+            <div>
+                <h3><em>{{ .description }}</em>, {{ .institution }}</h3>
+                <span class="tenure">{{ if .enddate }}{{ .startdate | toDate "2006-01-02" | date "Jan 2006" }} —
+                    {{ .enddate | toDate "2006-01-02" | date "Jan 2006" }}{{ else }}{{ .startdate | toDate "2006-01-02" | date "Jan 2006" }}
+                    — Present{{ end }}</span>
+                {{ with .location }}<span class="location">{{ . }}</span>{{ end }}
+            </div>
+            {{ end }}
+        </section>
+
+        <section id="references">
+            <p><a href="mailto:{{ .basics.email }}">References available on request</a></p>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -14,7 +14,7 @@
 		"https://raw.githubusercontent.com/fresh-standard/fresh-resume-schema/master/schema/fresh-resume-schema_1.0.0-beta.json": [
 			"resume-fresh.yaml"
 		],
-		"https://json.schemastore.org/resume.json": [
+		"https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json": [
 			"resume.yaml"
 		]
 	},
@@ -23,7 +23,7 @@
 			"fileMatch": [
 				"resume.json"
 			],
-			"url": "https://json.schemastore.org/resume.json"
+			"url": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json"
 		},
 		{
 			"fileMatch": [
