@@ -1,7 +1,7 @@
 $schema: https://raw.githubusercontent.com/jsonresume/resume-schema/refs/heads/master/schema.json
 basics:
   name: Stephen Brown II
-  label: Software Developer
+  label: Senior Software Engineer
   email: hire@stephen.brownii.email
   phone: (443) 219-4559
   url: https://stephenbrown2.github.io/resume
@@ -24,7 +24,7 @@ work:
     startDate: "2022-10-03"
     summary: ""
     highlights:
-      - Prioritized reliability and security, moved to an internal developer acceleration team.
+      - Moved to an internal developer acceleration team that prioritized reliability and security.
       - 'Led CI/CD modernization: migrated tests to a faster runner, moved functional tests to self-hosted runners, and removed legacy VPN infrastructure to cut wait time and improve security.'
       - Hardened security by adding obfuscation and encryption, removing plaintext fallbacks for sensitive data.
       - Embedded SQL migrations in agents to improve upgrade resilience and reduce field incidents.
@@ -49,9 +49,10 @@ work:
       - Founded and grew a Linux-focused team to support client devices across multiple distributions.
       - Added support for various Linux distributions; maintained compatibility with distro updates.
       - Introduced static compilation (Zig/static builds) and build automation to simplify releases.
-      - Implemented and maintained the Go on-device agent using gRPC and protobuf; integrated MongoDB and PostgreSQL.
+      - Implemented and maintained the Go on-device agent using gRPC and protobuf to communicate to backend.
+      - Implemented and maintained backend services in Go and NodeJS, storing data in MongoDB and PostgreSQL.
       - Wrote Python functional tests to validate agent behavior and increase release confidence.
-      - Rapidly ramped in Go and became a primary reviewer for Go code quality and best practices.
+      - Rapidly learned Go and became a primary reviewer for Go code quality and best practices.
       - Used Docker Compose for local development and collaborated on Kubernetes backend deployments.
     location: Longmont, CO
     keywords:

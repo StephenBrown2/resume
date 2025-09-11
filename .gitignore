@@ -1,5 +1,6 @@
 out/
 *.json
+*.pdf
 !.vscode/
 !.vscode/settings.json
 node_modules/

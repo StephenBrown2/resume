@@ -5,56 +5,47 @@ after being converted to JSON, is used as the data source for a variety of outpu
 
 ## Info
 
-* [HackMyResume](https://github.com/hacksalot/HackMyResume)
-* [FRESH resume schema](https://github.com/fresh-standard/fresh-resume-schema)
 * [JSON resume](http://jsonresume.org/getting-started/)
 
 ## Setup
 
-Install [wkhtmltopdf](http://wkhtmltopdf.org/downloads.html),
-[hackmyresume](https://github.com/hacksalot/HackMyResume), and
+Install [goresume](https://github.com/nikaro/goresume) and
 [yq](https://yq.readthedocs.io/en/latest/) which are required for generation.
 
+A Justfile is also included, if you have the [just](https://just.systems/) command runner installed.
+
 ```shell
-yay -S wkhtmltopdf nodejs-hackmyresume go-yq
-# or
-brew install wkhtmltopdf yq
-npm install -g resume-cli hackmyresume
+# with Go
+go install github.com/nikaro/goresume@latest
+go install github.com/mikefarah/yq/v4@latest
+
+# with Homebrew
+brew install nikaro/tap/goresume yq just
+
+# on ArchLinux
+yay -S goresume-bin go-yq just
 ```
 
 ## Résumé Generation
 
-Run the following command to output the résumé in all formats. The `out` directory is ignored by Git.
+Run the following command to export the resume.yaml to `docs/index.html` and serve it on port 8000.
 
 ```shell
-yq -Mj eval resume-fresh.yaml > resume-fresh.json
-hackmyresume BUILD resume-fresh.json TO out/stephen-brown-ii.all -t modern
-hackmyresume BUILD resume-fresh.json TO out/stephen-brown-ii.all -t ../some-folder/my-custom-theme/
-hackmyresume BUILD resume-fresh.json TO out/stephen-brown-ii.all -t node_modules/jsonresume-theme-modern
+just go
 ```
 
-Pre-defined FRESH themes are: `positive`, `modern`, `compact`, `basis` or `awesome` (Only supports LATEX, JSON, and YML formats)
+A custom theme (ported from FRESH Resume themes) is in `themes/positive.html`.
 
-### Github Pages generation
+### Github Pages
 
-```shell
-yq -Mj eval resume-fresh.yaml > resume-fresh.json
-hackmyresume BUILD resume-fresh.json TO docs/index.html -t positive
-```
+The generated page is already in the correct folder for Github Pages to pick it up and serve it at
+<https://stephenbrown2.github.io/resume/>.
 
-## Convert FRESH résumé to JRS format
-
-The FRESH format is the master file. The generated `resume.json` is ignored by Git.
-
-```shell
-hackmyresume CONVERT resume-fresh.json resume.json
-```
 
 ## Résumé Analysis and Validation
 
-Analyze and report on the résumé data:
+Validate the résumé data:
 
 ```shell
-hackmyresume ANALYZE resume-fresh.json
-hackmyresume VALIDATE resume-fresh.json
+just validate
 ```
