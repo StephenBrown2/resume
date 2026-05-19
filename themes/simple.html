@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang='{{ .meta.lang | default "en" }}'>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="{{ .basics.name }}">
+	<meta name="description" content="{{ .basics.name }} - {{ .basics.label }}">
+	<title>{{ .basics.name }}</title>
+	<link rel="icon" href="data:,">
+	<link rel="stylesheet" href="https://unpkg.com/simpledotcss@2.1.2/simple.min.css"
+		integrity="sha384-1UEnuv5+lFKWztSFy4XSI06e6RidDHdOm71nks2+uabm/oiddNpcJARfsJxJW3TO" crossorigin="anonymous">
+	<style>
+		aside {
+			font-size: 70%;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>{{ .basics.name }}</h1>
+		{{- if .basics.image }}
+		<img src="{{ .basics.image }}" alt="profile picture" width="160">
+		{{- end }}
+		<h2>{{ .basics.label }}</h2>
+		<div>
+			{{- $location := printf "%s, %s, %s" .basics.location.city .basics.location.region .basics.location.countrycode }}
+			<a href="https://maps.apple.com/?q={{ $location | urlencode }}" title="Map"><button>{{ $location }}</button></a>
+			<a href="mailto:{{ .basics.email }}" title="Email"><button>{{ .basics.email }}</button></a>
+			<a href="tel:{{ .basics.phone }}" title="Phone"><button>{{ .basics.phone }}</button></a>
+		</div>
+		<div>
+			<a href="{{ .basics.url }}"><button>{{ tr "website" }}</button></a>
+			{{- range .basics.profiles }}
+			{{- if eq (.network | lower) "pdf" }}
+			<a href="{{ .url }}" download="{{ .username }}.pdf" title="Download PDF"><button>{{ .network }}</button></a>
+			{{- else }}
+			<a href="{{ .url }}" title="{{ .network }}: {{ .username }}"><button>{{ .network }}</button></a>
+			{{- end }}
+			{{- end }}
+		</div>
+	</header>
+	<main>
+		{{- if .basics.summary }}
+		{{ .basics.summary | md }}
+		{{- end }}
+		{{- if .work }}
+		<section>
+			<h3>{{ tr "work" }}</h3>
+			{{- range .work }}
+			<article>
+				<h5>{{ .position }} @ <a href="{{ .url }}" title="{{ .description }}">{{ .name }}</a> • {{ .location }}</h5>
+				<aside> {{ .startdate }} • {{ .enddate | default (tr "today" ) }}</aside>
+				{{- if .summary }}
+				{{ .summary | md }}
+				{{- end }}
+				{{- if .highlights }}
+				<h6>{{ tr "highlights" }}</h6>
+				<p>{{ .highlights | join " • "}}</p>
+				{{- end }}
+			</article>
+			{{- end }}
+		</section>
+		{{- end }}
+		{{- if .education }}
+		<section>
+			<h3>{{ tr "education" }}</h3>
+			{{- range .education }}
+			<article>
+				<h5>{{ .studytype }}, {{ .area }} @ <a href="{{ .url }}" title="{{ .institution }}">{{ .institution }}</a></h5>
+				<aside>{{ .startdate }} • {{ .enddate | default (tr "today") }}</aside>
+				{{- if .score }}
+				<p>{{ tr "score" }}: {{ .score }}</p>
+				{{- end }}
+				{{- if .courses }}
+				<h6>{{ tr "courses" }}</h6>
+				<p>{{ .courses | join " • "}}</p>
+				{{- end }}
+			</article>
+			{{- end }}
+		</section>
+		{{- end }}
+		{{- if .projects }}
+		<section>
+			<h3>{{ tr "projects" }}</h3>
+			{{- range .projects }}
+			<article>
+				<h5 title={{ .type }}>{{ .name }} @ <a href="{{ .url }}" title="{{ .entity }}">{{ .entity }}</a></h5>
+				<aside>{{ .startdate }} • {{ .enddate | default (tr "today") }}</aside>
+				{{- if .roles }}
+				<p><b>{{ tr "roles" }}</b>: {{ .roles | join ", " }}</p>
+				{{- end }}
+				{{- if .description }}
+				{{ .description | md }}
+				{{- end }}
+				{{- if .highlights }}
+				<h6>{{ tr "highlights" }}</h6>
+				<p>{{ .highlights | join " • " }}</p>
+				{{- end }}
+				{{- if or .keywords }}
+				<p>
+					{{- range .keywords }}
+					<mark>{{ . }}</mark>
+					{{- end }}
+				</p>
+				{{- end }}
+			</article>
+			{{- end }}
+		</section>
+		{{- end }}
+		{{- if .volunteer }}
+		<section>
+			<h3>{{ tr "volunteer" }}</h3>
+			{{- range .volunteer }}
+			<article>
+				<h5>{{ .position }} @ <a href="{{ .url }}" title="{{ .organization }}">{{ .organization }}</a></h5>
+				<aside>{{ .startdate }} • {{ .enddate | default (tr "today") }}</aside>
+				{{- if .summary }}
+				{{ .summary | md }}
+				{{- end }}
+				{{- if .highlights }}
+				<h6>{{ tr "highlights" }}</h6>
+				<p>{{ .highlights | join " • " }}</p>
+				{{- end }}
+			</article>
+			{{- end }}
+		</section>
+		{{- end }}
+		{{- if .certificates }}
+		<section>
+			<h3>{{ tr "certificates" }}</h3>
+			{{- range .certificates }}
+			<article>
+				<h5>{{ .name }} @ <a href="{{ .url }}" title="{{ .issuer }}">{{ .issuer }}</a></h5>
+				<p>{{ .date }}</p>
+			</article>
+			{{- end }}
+		</section>
+		{{- end }}
+		{{- if .awards }}
+		<section>
+			<h3>{{ tr "awards" }}</h3>
+			{{- range .awards }}
+			<article>
+				<h5>{{ .title }} @ {{ .awarder }}</h5>
+				<aside>{{ .date }}</aside>
+				{{- if .summary }}
+				{{ .summary | md }}
+				{{- end }}
+			</article>
+			{{- end }}
+		</section>
+		{{- end }}
+		{{- if .publications }}
+		<section>
+			<h3>{{ tr "publications" }}</h3>
+			{{- range .publications }}
+			<article>
+				<h5>{{ .name }} @ <a href="{{ .url }}" title="{{ .name }}">{{ .publisher }}</a></h5>
+				<aside>{{ .releasedate }}</aside>
+				{{- if .summary }}
+				{{ .summary | md }}
+				{{- end }}
+			</article>
+			{{- end }}
+		</section>
+		{{- end }}
+		{{- if .languages }}
+		<section>
+			<h3>{{ tr "languages" }}</h3>
+			{{- range .languages }}
+			<p><b>{{ .language }}</b>: {{ .fluency }}</p>
+			{{- end }}
+		</section>
+		{{- end }}
+		{{- if .skills }}
+		<section>
+			<h3>{{ tr "skills" }}</h3>
+			{{- range .skills }}
+			<p><b>{{ .name }}</b> (<i>{{ .level }}</i>){{ if .keywords }}: {{ .keywords | join " • " }}{{ end }}</p>
+			{{- end }}
+		</section>
+		{{- end }}
+		{{- if .interests }}
+		<section>
+			<h3>{{ tr "interests" }}</h3>
+			{{- range .interests }}
+			<p><b>{{ .name }}</b>{{ if .keywords }}: {{ .keywords | join " • " }}{{ end }}</p>
+			{{- end }}
+		</section>
+		{{- end }}
+	</main>
+	<footer>
+		<p>{{ tr "generated_by" }} <a href="https://github.com/nikaro/goresume" title="JSON Resume Builder">GoResume</a></p>
+	</footer>
+</body>
+
+</html>

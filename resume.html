@@ -9,52 +9,6 @@
   <title>Stephen Brown II – Senior Software Engineer</title>
   <link rel="icon" href="data:,">
   <style>
-    /* Monaspace Font Families */
-    @font-face {
-      font-family: 'Monaspace Argon';
-      src: url('Variable Web Fonts/Monaspace Argon/Monaspace Argon Var.woff2') format('woff2'),
-        url('Variable Web Fonts/Monaspace Argon/Monaspace Argon Var.woff') format('woff');
-      font-weight: 100 900;
-      font-stretch: 75% 125%;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Monaspace Neon';
-      src: url('Variable Web Fonts/Monaspace Neon/Monaspace Neon Var.woff2') format('woff2'),
-        url('Variable Web Fonts/Monaspace Neon/Monaspace Neon Var.woff') format('woff');
-      font-weight: 100 900;
-      font-stretch: 75% 125%;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Monaspace Xenon';
-      src: url('Variable Web Fonts/Monaspace Xenon/Monaspace Xenon Var.woff2') format('woff2'),
-        url('Variable Web Fonts/Monaspace Xenon/Monaspace Xenon Var.woff') format('woff');
-      font-weight: 100 900;
-      font-stretch: 75% 125%;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Monaspace Radon';
-      src: url('Variable Web Fonts/Monaspace Radon/Monaspace Radon Var.woff2') format('woff2'),
-        url('Variable Web Fonts/Monaspace Radon/Monaspace Radon Var.woff') format('woff');
-      font-weight: 100 900;
-      font-stretch: 75% 125%;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Monaspace Krypton';
-      src: url('Variable Web Fonts/Monaspace Krypton/Monaspace Krypton Var.woff2') format('woff2'),
-        url('Variable Web Fonts/Monaspace Krypton/Monaspace Krypton Var.woff') format('woff');
-      font-weight: 100 900;
-      font-stretch: 75% 125%;
-      font-style: normal;
-    }
-
     /* Reset and base styles */
     * {
       margin: 0;
@@ -68,23 +22,22 @@
     }
 
     html {
-      font-size: 14px;
+      font-size: 16px;
     }
 
     body {
-      font-family: 'Monaspace Argon', 'Monaspace Neon', monospace, sans-serif;
-      line-height: 1.5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
       color: #000000;
       background: #ffffff;
       max-width: 210mm;
       margin: 0 auto;
-      padding: 1.5rem;
+      padding: 2rem;
     }
 
     /* Typography */
     h1 {
-      font-family: 'Monaspace Neon', 'Monaspace Argon', sans-serif;
-      font-size: 2.25rem;
+      font-size: 2.5rem;
       font-weight: 700;
       letter-spacing: -0.03em;
       line-height: 1.1;
@@ -92,8 +45,7 @@
     }
 
     h2 {
-      font-family: 'Monaspace Argon', sans-serif;
-      font-size: 1rem;
+      font-size: 1.125rem;
       font-weight: 400;
       letter-spacing: -0.01em;
       color: #666666;
@@ -102,36 +54,33 @@
     }
 
     h3 {
-      font-family: 'Monaspace Krypton', 'Monaspace Xenon', monospace;
-      font-size: 0.8125rem;
+      font-size: 0.875rem;
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      margin-top: 1.75rem;
-      margin-bottom: 0.875rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
       padding-bottom: 0.375rem;
       border-bottom: 2px solid #000000;
     }
 
     h4 {
-      font-family: 'Monaspace Xenon', 'Monaspace Argon', monospace;
-      font-size: 1rem;
+      font-size: 1.125rem;
       font-weight: 600;
       margin-bottom: 0.25rem;
       line-height: 1.3;
     }
 
     h5 {
-      font-family: 'Monaspace Argon', sans-serif;
-      font-size: 0.8125rem;
+      font-size: 0.875rem;
       font-weight: 600;
       color: #666666;
       margin-bottom: 0.5rem;
     }
 
     p {
-      margin-bottom: 0.875rem;
-      line-height: 1.55;
+      margin-bottom: 1rem;
+      line-height: 1.65;
     }
 
     a {
@@ -154,8 +103,8 @@
     li {
       position: relative;
       padding-left: 1.25rem;
-      margin-bottom: 0.4rem;
-      line-height: 1.55;
+      margin-bottom: 0.5rem;
+      line-height: 1.65;
     }
 
     li:before {
@@ -169,22 +118,19 @@
     /* Header section */
     .header {
       margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
       border-bottom: 3px solid #000000;
       width: 100%;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) max-content;
-      grid-template-areas:
-        "identity contact"
-        "profiles profiles";
-      column-gap: 2rem;
-      row-gap: 1.5rem;
-      align-items: start;
-      padding-bottom: 1.5rem;
+      position: relative;
+      display: table;
+      table-layout: fixed;
     }
 
-    .identity {
-      grid-area: identity;
-      min-width: 0;
+    .header > div:first-child {
+      display: table-cell;
+      vertical-align: top;
+      width: 50%;
+      padding-right: 2rem;
     }
 
     .header h1 {
@@ -197,18 +143,16 @@
     }
 
     .contact {
-      grid-area: contact;
+      display: table-cell;
+      vertical-align: top;
+      width: 50%;
       text-align: right;
       font-size: 0.875rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.375rem;
-      align-items: flex-end;
     }
 
     .contact-item {
       display: block;
-      margin: 0;
+      margin-bottom: 0.375rem;
     }
 
     .contact a {
@@ -221,16 +165,12 @@
 
     /* Profiles/Links */
     .profiles {
-      grid-area: profiles;
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
+      margin-top: 0.75rem;
       justify-content: flex-end;
-      align-items: center;
-      width: 100%;
     }
-
-    /* No need for ::after border anymore since header has border-bottom */
 
     /* Summary section */
     .summary {
@@ -241,13 +181,13 @@
     }
 
     /* Section containers */
-    section {
+    .section {
       margin-bottom: 1.5rem;
     }
 
     .entry {
       margin-bottom: 1.25rem;
-      break-inside: avoid-region;
+      page-break-inside: avoid;
     }
 
     .entry-header {
@@ -290,31 +230,16 @@
       color: #333333;
     }
 
-    .reference-entry {
-      margin-bottom: 0 !important;
-    }
-
-    .reference-header {
-      margin-bottom: 0 !important;
-      text-align: right;
-    }
-
-    .reference-quote {
-      text-align: center;
-    }
-
     /* Skills section */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
       margin-top: 1rem;
-      /* Masonry layout if supported */
-      grid-template-rows: masonry;
     }
 
     .skill-category {
-      break-inside: avoid;
+      page-break-inside: avoid;
     }
 
     .skill-name {
@@ -365,20 +290,12 @@
     /* Certificates specific styling */
     .certificates-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem 1.5rem;
-    }
-
-    /* References multi-column grid */
-    .references-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.25rem;
-      align-items: center;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem 2rem;
     }
 
     .certificate-item {
-      break-inside: avoid;
+      page-break-inside: avoid;
     }
 
     .certificate-title {
@@ -396,20 +313,14 @@
 
     /* Profiles/Links */
     .profiles {
-      grid-area: profiles;
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: 0.75rem;
       justify-content: flex-end;
-      align-items: center;
-      width: 100%;
     }
 
     .profile-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
       font-size: 0.875rem;
       padding: 0.375rem 0.875rem;
       border: 1px solid #000000;
@@ -449,56 +360,56 @@
 
     /* Print styles */
     @media print {
+      body {
+        padding: 0;
+      }
+
       .header {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 40%);
-        column-gap: 1.5rem;
-        align-items: start;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        display: table;
+        width: 100%;
+        table-layout: fixed;
       }
 
-      .identity,
-      .contact {
-        align-self: start;
+      .header > div:first-child {
+        display: table-cell;
+        vertical-align: top;
+        width: 50%;
+        padding-right: 2rem;
       }
 
-      .contact {
-        display: block;
+      .header > .contact {
+        display: table-cell;
+        vertical-align: top;
+        width: 50%;
         text-align: right;
       }
 
-      .contact-item+.contact-item {
-        margin-top: 0.125rem;
+      h1 {
+        font-size: 2.25rem;
       }
 
-      .profiles {
-        margin-top: 0.125rem;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 0.125rem 0.5rem;
+      h2 {
+        font-size: 1rem;
       }
 
-      .profile-link {
-        border: none;
-        padding: 0;
-        font-size: 0.75rem;
-        gap: 0.25rem;
-        background: none;
-        color: #000000;
+      h3 {
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
       }
 
-      .profile-link:hover {
-        background: none;
-        color: #000000;
+      .section {
+        margin-bottom: 1rem;
       }
 
-      .profile-name {
-        display: none;
+      .entry {
+        margin-bottom: 1rem;
       }
 
-      .profile-url {
-        display: inline;
-        overflow-wrap: anywhere;
+      .summary {
+        margin-bottom: 1rem;
+        padding: 0.5rem 0;
       }
 
       a {
@@ -506,52 +417,62 @@
         color: #000000;
       }
 
-      .keywords {
-        gap: 0 !important;
-        /* flex-wrap: nowrap !important; */
-        justify-content: start !important;
-        width: 100%;
+      /* Profile links as text in print */
+      .profiles {
+        display: block;
       }
 
-      .keyword {
-        white-space: nowrap !important;
-        padding: 0.25rem 0.5rem !important;
+      .profile-link {
+        border: none;
+        padding: 0;
+        font-size: 0.75rem;
+        background: none;
+        display: block;
+        margin-bottom: 0.25rem;
       }
 
-      /* Hide certain sections when printing */
-      #projects,
-      #languages,
-      #interests,
-      #references {
-        display: none !important;
+      /* Show URL in print */
+      .profile-url {
+        display: inline;
       }
     }
 
     /* Responsive adjustments */
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
       body {
         padding: 1rem;
       }
 
-      .header {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          "identity"
-          "contact"
-          "profiles";
-        row-gap: 1rem;
-      }
-
-      .header h1 {
+      h1 {
         font-size: 2rem;
       }
 
-      .header h2 {
+      h2 {
         font-size: 1rem;
       }
 
+      .header {
+        display: block;
+      }
+
+      .header > div {
+        display: block;
+        width: 100%;
+      }
+
       .contact {
-        align-items: flex-end;
+        display: block;
+        width: 100%;
+        text-align: left;
+        margin-top: 1rem;
+      }
+
+      .contact-item {
+        margin-bottom: 0.5rem;
+      }
+
+      .profiles {
+        justify-content: flex-start;
       }
 
       .skills-grid,
@@ -569,7 +490,7 @@
 <body>
   <!-- Header -->
   <header class="header">
-    <div class="identity">
+    <div>
       <h1>Stephen Brown II</h1>
       <h2>Senior Software Engineer</h2>
     </div>
@@ -586,28 +507,27 @@
       <div class="contact-item">
         <a href="https://stephenbrown2.github.io/resume">stephenbrown2.github.io/resume</a>
       </div>
-
-    </div>
-    <div class="profiles">
-      <a href="https://github.com/StephenBrown2" class="profile-link" title="GitHub">
-        <span class="profile-name">GitHub</span>
-        <span class="profile-url">https://github.com/StephenBrown2</span>
-      </a>
-      <a href="https://gitlab.com/StephenBrown2" class="profile-link" title="GitLab">
-        <span class="profile-name">GitLab</span>
-        <span class="profile-url">https://gitlab.com/StephenBrown2</span>
-      </a>
+      <div class="profiles">
+        <a href="https://github.com/StephenBrown2" class="profile-link" title="GitHub">
+          <span class="profile-name">GitHub</span>
+          <span class="profile-url">: https://github.com/StephenBrown2</span>
+        </a>
+        <a href="https://gitlab.com/StephenBrown2" class="profile-link" title="GitLab">
+          <span class="profile-name">GitLab</span>
+          <span class="profile-url">: https://gitlab.com/StephenBrown2</span>
+        </a>
+      </div>
     </div>
   </header>
 
   <!-- Summary -->
   <div class="summary">
-    <p>Senior software engineer with 11+ years building secure, production-scale backend services and APIs across multiple stacks and languages. Deep interest in Bitcoin and conviction about the importance of self-custody. Strong engineering fundamentals with proven ability to rapidly learn new technologies—mastered Go in months and became primary code reviewer. Experience in secure API design. Track record of cross-functional collaboration, hardening security-sensitive systems, and taking end-to-end ownership from ideation through delivery. Passionate about solving real problems through pragmatic engineering and innovative solutions.</p>
+    <p>Senior software engineer with 11+ years building secure, production-scale backend services and APIs across multiple stacks and languages. Deep interest in Bitcoin and conviction about the importance of self-custody. Strong engineering fundamentals with proven ability to rapidly learn new technologies—mastered Go in months and became primary code reviewer. Expert in secure key management, API design, and cross-functional collaboration. Track record building SDKs and libraries consumed by mobile apps, hardening security-sensitive systems, and taking end-to-end ownership from ideation through delivery. Passionate about solving real problems through pragmatic engineering and innovative solutions.</p>
 
   </div>
 
   <!-- Work Experience -->
-  <section id="work">
+  <section class="section">
     <h3>Work</h3>
     <div class="entry">
       <div class="entry-header">
@@ -619,8 +539,7 @@
             2022-10-03 – Today
           </div>
         </div>
-        <div class="entry-subtitle">
-          <a href="https://jumpcloud.com">JumpCloud, Inc.</a> · Remote
+        <div class="entry-subtitle">Remote
         </div>
       </div>
       <ul>
@@ -651,8 +570,7 @@
             2021-05-16 – 2022-10-03
           </div>
         </div>
-        <div class="entry-subtitle">
-          <a href="https://jumpcloud.com">JumpCloud, Inc.</a> · Longmont, CO
+        <div class="entry-subtitle">Longmont, CO
         </div>
       </div>
       <ul>
@@ -683,8 +601,7 @@
             2019-10-01 – 2021-05-01
           </div>
         </div>
-        <div class="entry-subtitle">
-          <a href="https://objectrocket.com">ObjectRocket</a> · Remote
+        <div class="entry-subtitle">Remote
         </div>
       </div>
       <ul>
@@ -722,8 +639,7 @@
             2014-01-06 – 2019-10-01
           </div>
         </div>
-        <div class="entry-subtitle">
-          <a href="https://rackspace.com">Rackspace Technology</a> · San Antonio, TX / Remote
+        <div class="entry-subtitle">San Antonio, TX / Remote
         </div>
       </div>
       <ul>
@@ -737,7 +653,7 @@
         <li>Led team initiatives to implement code quality standards, automated testing, and consistent development practices</li>
         <li>Collaborated with distributed UK-based team as sole US member, demonstrating strong remote work capabilities</li>
         <li>Built comprehensive reporting and data analysis tools for operational insights and workflow optimization</li>
-        <li>Maintained Linux systems, web servers (Apache) database servers (MySQL) and enterprise support operations</li>
+        <li>Maintained Linux systems, web servers (Apache), database servers (MySQL), and enterprise support operations</li>
       </ul>
       <div class="keywords">
         <span class="keyword">Python</span>
@@ -762,8 +678,7 @@
             2011-04-01 – 2013-12-30
           </div>
         </div>
-        <div class="entry-subtitle">
-          <a href="https://ccp.jhu.edu">Johns Hopkins University</a> · Baltimore, MD
+        <div class="entry-subtitle">Baltimore, MD
         </div>
       </div>
       <div class="entry-description">
@@ -793,8 +708,7 @@
             2010-04-01 – 2011-04-01
           </div>
         </div>
-        <div class="entry-subtitle">
-          Various Employers · Baltimore / Columbia, MD
+        <div class="entry-subtitle">Baltimore / Columbia, MD
         </div>
       </div>
       <div class="entry-description">
@@ -816,7 +730,7 @@
   </section>
 
   <!-- Projects -->
-  <section id="projects">
+  <section class="section">
     <h3>Projects</h3>
     <div class="entry">
       <div class="entry-header">
@@ -1035,56 +949,56 @@
   </section>
 
   <!-- Skills -->
-  <section id="skills">
+  <section class="section">
     <h3>Skills</h3>
     <div class="skills-grid">
       <div class="skill-category">
         <div class="skill-name">Software languages</div>
         <div class="skill-keywords">
-          Python (Advanced) · Golang (Advanced)
+          Python (Advanced), · Golang (Advanced)
         </div>
       </div>
       <div class="skill-category">
         <div class="skill-name">Python Frameworks & Libraries</div>
         <div class="skill-keywords">
-          Flask (Advanced) · FastAPI (Intermediate) · SQLAlchemy (Advanced) · Pydantic (Advanced) · pytest (Advanced)
+          Flask (Advanced), · FastAPI (Intermediate), · SQLAlchemy (Advanced), · Pydantic (Advanced), · pytest (Advanced)
         </div>
       </div>
       <div class="skill-category">
         <div class="skill-name">Databases</div>
         <div class="skill-keywords">
-          PostgreSQL (Advanced) · Redis (Advanced) · MySQL (Advanced)
+          PostgreSQL (Advanced), · Redis (Advanced), · MySQL (Advanced)
         </div>
       </div>
       <div class="skill-category">
         <div class="skill-name">API Technologies</div>
         <div class="skill-keywords">
-          OpenAPI (Advanced) · REST APIs (Advanced) · JSON (Advanced)
+          OpenAPI (Advanced), · REST APIs (Advanced), · JSON (Advanced)
         </div>
       </div>
       <div class="skill-category">
         <div class="skill-name">Development practices</div>
         <div class="skill-keywords">
-          Docker (Advanced) · Git (Advanced)
+          Docker (Advanced), · Git (Advanced)
         </div>
       </div>
       <div class="skill-category">
         <div class="skill-name">Configuration management</div>
         <div class="skill-keywords">
-          Bash/Shell scripting (Advanced) · Ansible (Advanced)
+          Bash/Shell scripting (Advanced), · Ansible (Advanced)
         </div>
       </div>
       <div class="skill-category">
         <div class="skill-name">Infrastructure</div>
         <div class="skill-keywords">
-          Linux (Advanced) · Kubernetes (Beginner) · AWS (Intermediate) · Terraform (Beginner)
+          Linux (Advanced), · Kubernetes (Beginner), · AWS (Beginner), · Terraform (Beginner)
         </div>
       </div>
     </div>
   </section>
 
   <!-- Education -->
-  <section id="education">
+  <section class="section">
     <h3>Education</h3>
     <div class="entry">
       <div class="entry-header">
@@ -1100,13 +1014,12 @@
           LeTourneau University
         </div>
       </div>
-      <!--
-      <div class="entry-description" id="gpa">: 2.4</div> -->
+      <div class="entry-description">Score: 2.4</div>
     </div>
   </section>
 
   <!-- Certificates -->
-  <section id="certificates">
+  <section class="section">
     <h3>Certificates</h3>
     <div class="certificates-grid">
       <div class="certificate-item">
@@ -1166,7 +1079,7 @@
   <!-- Two-column sections -->
   <div class="two-column">
     <!-- Languages -->
-    <section id="languages">
+    <section class="section">
       <h3>Languages</h3>
       <div class="compact-list">
         <div class="compact-item">
@@ -1177,13 +1090,9 @@
     </section>
 
     <!-- Interests -->
-    <section id="interests">
+    <section class="section">
       <h3>Interests</h3>
       <div class="compact-list">
-        <div class="compact-item">
-          <div class="compact-title">Bitcoin</div>
-          <div class="compact-meta">Decentralization · Financial Sovereignty · Sound Money</div>
-        </div>
         <div class="compact-item">
           <div class="compact-title">Tesla</div>
           <div class="compact-meta">Electric · Sustainable · Energy · Storage · Transportation</div>
@@ -1205,48 +1114,46 @@
   </div>
 
   <!-- References -->
-  <section id="references">
+  <section class="section">
     <h3>References</h3>
-    <div class="references-grid">
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Eva Aldana</h4><span class="reference-role">Former Manager</span>
-        </div>
+    <div class="entry">
+      <div class="entry-header">
+        <h4>Eva Aldana</h4>
       </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Jesse Wiles</h4><span class="reference-role">Former Teammate</span>
-        </div>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <h4>Jesse Wiles</h4>
       </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Freddy Esteban Perez</h4><span class="reference-role">Former Teammate</span>
-        </div>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <h4>Freddy Esteban Perez</h4>
       </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Duncan H. Murray</h4><span class="reference-role">Former Manager</span>
-        </div>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <h4>Duncan H. Murray</h4>
       </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Dan Hand</h4><span class="reference-role">Former Teammate</span>
-        </div>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <h4>Dan Hand</h4>
       </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Sam Sharpe</h4><span class="reference-role">Former Teammate</span>
-        </div>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <h4>Sam Sharpe</h4>
       </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Ryan Mazurek</h4><span class="reference-role">Former Manager</span>
-        </div>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <h4>Ryan Mazurek</h4>
       </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Micah Culpepper</h4><span class="reference-role">Former Colleague</span>
-        </div>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <h4>Micah Culpepper</h4>
       </div>
     </div>
   </section>

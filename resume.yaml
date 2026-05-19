@@ -5,7 +5,14 @@ basics:
   email: hire@stephen.brownii.email
   phone: (443) 219-4559
   url: https://stephenbrown2.github.io/resume
-  summary: Experienced software engineer who builds and maintains production services at scale, prioritizing security, reliability, and developer productivity. I take ownership of ambiguous problems from discovery through delivery, write tested, reliable code, and collaborate to improve engineering workflows. I learn new languages and stacks quickly, and bring a proven track record modernizing CI/CD, hardening security, and mentoring teammates.
+  summary: >-
+    Senior software engineer with 11+ years building secure, production-scale backend services
+    and APIs across multiple stacks and languages. Deep interest in Bitcoin and conviction about
+    the importance of self-custody. Strong engineering fundamentals with proven ability to rapidly
+    learn new technologies—mastered Go in months and became primary code reviewer. Experience in
+    secure API design. Track record of cross-functional collaboration, hardening security-sensitive
+    systems, and taking end-to-end ownership from ideation through delivery. Passionate about solving
+    real problems through pragmatic engineering and innovative solutions.
   location:
     city: Delaware
     region: OH
@@ -24,13 +31,13 @@ work:
     startDate: "2022-10-03"
     summary: ""
     highlights:
-      - Moved to an internal developer acceleration team that prioritized reliability and security.
-      - 'Led CI/CD modernization: migrated tests to a faster runner, moved functional tests to self-hosted runners, and removed legacy VPN infrastructure to cut wait time and improve security.'
-      - Hardened security by adding obfuscation and encryption, removing plaintext fallbacks for sensitive data.
-      - Embedded SQL migrations in agents to improve upgrade resilience and reduce field incidents.
-      - Improved Go CI tasks and linters to raise code quality and consistency.
-      - Simplified onboarding with better tooling, documentation, and mentoring to reduce ramp-up time.
-      - Used AWS-hosted Kubernetes and container tooling for backend development and local testing.
+      - Joined internal developer acceleration team prioritizing reliability, security, and engineering productivity across platform services.
+      - 'Led CI/CD modernization: migrated tests to faster runners, moved functional tests to self-hosted infrastructure, and removed legacy VPN dependencies to improve security posture and reduce wait times.'
+      - Hardened security-sensitive systems by implementing encryption and obfuscation, removing plaintext fallbacks for sensitive data, and improving key management practices.
+      - Designed and embedded SQL migrations directly in agents to improve upgrade resilience and reduce field incidents.
+      - Enhanced Go CI tasks and linters to raise code quality, consistency, and security across backend services.
+      - Built onboarding tooling and documentation to reduce ramp-up time and improve team productivity.
+      - Developed and maintained backend services using AWS-hosted Kubernetes, Docker, and container orchestration for production and local development.
     location: Remote
     keywords:
       - Golang
@@ -110,7 +117,7 @@ work:
       - Led team initiatives to implement code quality standards, automated testing, and consistent development practices
       - Collaborated with distributed UK-based team as sole US member, demonstrating strong remote work capabilities
       - Built comprehensive reporting and data analysis tools for operational insights and workflow optimization
-      - Maintained Linux systems, web servers (Apache), database servers (MySQL), and enterprise support operations
+      - Maintained Linux systems, web servers (Apache) database servers (MySQL) and enterprise support operations
     keywords:
       - Python
       - Flask
@@ -203,7 +210,7 @@ certificates:
 skills:
   - name: Software languages
     keywords:
-      - Python (Advanced),
+      - Python (Advanced)
       - Golang (Advanced)
     details:
       - text: Python
@@ -212,10 +219,10 @@ skills:
         comment: Advanced
   - name: Python Frameworks & Libraries
     keywords:
-      - Flask (Advanced),
-      - FastAPI (Intermediate),
-      - SQLAlchemy (Advanced),
-      - Pydantic (Advanced),
+      - Flask (Advanced)
+      - FastAPI (Intermediate)
+      - SQLAlchemy (Advanced)
+      - Pydantic (Advanced)
       - pytest (Advanced)
     details:
       - text: Flask
@@ -230,8 +237,8 @@ skills:
         comment: Advanced
   - name: Databases
     keywords:
-      - PostgreSQL (Advanced),
-      - Redis (Advanced),
+      - PostgreSQL (Advanced)
+      - Redis (Advanced)
       - MySQL (Advanced)
     details:
       - text: PostgreSQL
@@ -242,8 +249,8 @@ skills:
         comment: Advanced
   - name: API Technologies
     keywords:
-      - OpenAPI (Advanced),
-      - REST APIs (Advanced),
+      - OpenAPI (Advanced)
+      - REST APIs (Advanced)
       - JSON (Advanced)
     details:
       - text: OpenAPI
@@ -254,7 +261,7 @@ skills:
         comment: Advanced
   - name: Development practices
     keywords:
-      - Docker (Advanced),
+      - Docker (Advanced)
       - Git (Advanced)
     details:
       - text: Docker
@@ -263,7 +270,7 @@ skills:
         comment: Advanced
   - name: Configuration management
     keywords:
-      - Bash/Shell scripting (Advanced),
+      - Bash/Shell scripting (Advanced)
       - Ansible (Advanced)
     details:
       - text: Bash/Shell scripting
@@ -272,9 +279,9 @@ skills:
         comment: Advanced
   - name: Infrastructure
     keywords:
-      - Linux (Advanced),
-      - Kubernetes (Beginner),
-      - AWS (Beginner),
+      - Linux (Advanced)
+      - Kubernetes (Beginner)
+      - AWS (Intermediate)
       - Terraform (Beginner)
     details:
       - text: Linux
@@ -282,15 +289,21 @@ skills:
       - text: Kubernetes
         comment: Beginner
       - text: AWS
-        comment: Beginner
+        comment: Intermediate
       - text: Terraform
         comment: Beginner
 languages:
   - language: English
     fluency: Native
 interests:
+  - name: Bitcoin
+    summary: Decentralized money is the future of finance
+    keywords:
+      - Decentralization
+      - Financial Sovereignty
+      - Sound Money
   - name: Tesla
-    summary: Electric cars are the future, and they're here now
+    summary: Electric cars are the future of transportation, and they're here now
     keywords:
       - Electric
       - Sustainable
@@ -379,7 +392,7 @@ references:
         value: ryan.mazurek@rackspace.com
   - name: Micah Culpepper
     reference: ""
-    role: Colleague
+    role: Former Colleague
     category: professional
     private: false
     contact:

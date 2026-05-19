@@ -1,0 +1,738 @@
+<!doctype html>
+<!--
+    Author: David Carvajal
+    Source: https://github.com/davcd/jsonresume-theme-actual
+-->
+<html lang='{{ .meta.lang | default "en" }}'>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    @charset "UTF-8";
+
+    /* Workaround for 'break-before:avoid' */
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+    }
+
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+    }
+
+    span,
+    q {
+      display: block;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    @page {
+      size: A4;
+      margin: 15mm 0 20mm 0;
+    }
+
+    @page :first {
+      margin-top: 10mm;
+    }
+
+    a {
+      color: #222222;
+      font-weight: inherit;
+      text-decoration: none;
+    }
+
+    a[href] {
+      text-decoration: underline;
+      text-decoration-color: #888888;
+    }
+
+    p,
+    q {
+      line-height: 1.25em;
+    }
+
+    li {
+      line-height: 1.35em;
+    }
+
+    li:first-child {
+      margin-top: 0;
+    }
+
+    .content {
+      width: 1000px;
+      height: auto;
+      padding: 0 50px;
+      margin: 0 auto;
+      font-family: Helvetica, Arial, sans-serif;
+      color: #222222;
+    }
+
+    .table {
+      width: 100%;
+      display: table;
+    }
+
+    .table .main {
+      display: table-cell;
+      width: 70%;
+      padding-right: 50px;
+    }
+
+    .table .side {
+      display: table-cell;
+      width: 30%;
+      padding-left: 50px;
+      text-align: right;
+    }
+
+    .summary {
+      font-size: 15px;
+    }
+
+    .summary:empty {
+      display: none;
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: normal;
+      margin: 0 0 20px 0;
+    }
+
+    .margin-container-2:not(:first-child) {
+      margin-top: 20px;
+    }
+
+    .margin-container-3:not(:first-child) {
+      margin-top: 30px;
+    }
+
+    .margin-container-4:not(:first-child) {
+      margin-top: 50px;
+    }
+
+    .padding-container-2 {
+      padding: 20px 0;
+    }
+
+    .margin-text-1 {
+      margin-top: 2px;
+    }
+
+    .margin-text-1:empty {
+      display: none;
+    }
+
+    .margin-text-2 {
+      margin-top: 4px;
+    }
+
+    .margin-text-2:empty {
+      display: none;
+    }
+
+    .margin-text-3 {
+      margin-top: 6px;
+    }
+
+    .margin-text-3:empty {
+      display: none;
+    }
+
+    .margin-text-4 {
+      margin-top: 8px;
+    }
+
+    .margin-text-4:empty {
+      display: none;
+    }
+
+    .margin-text-5 {
+      margin-top: 14px;
+    }
+
+    .margin-text-5:empty {
+      display: none;
+    }
+
+    .no-break {
+      break-inside: avoid;
+    }
+
+    .no-alone-1 {
+      break-inside: avoid;
+    }
+
+    .no-alone-1::after {
+      content: "";
+      display: block;
+      height: 75px;
+      margin-bottom: -75px;
+    }
+
+    .no-alone-2 {
+      break-inside: avoid;
+    }
+
+    .no-alone-2::after {
+      content: "";
+      display: block;
+      height: 150px;
+      margin-bottom: -150px;
+    }
+
+    .markdown h1 {
+      font-size: 160%;
+      font-weight: bolder;
+    }
+
+    .markdown h2 {
+      font-size: 150%;
+      font-weight: bolder;
+    }
+
+    .markdown h3 {
+      font-size: 140%;
+      font-weight: bolder;
+    }
+
+    .markdown h4 {
+      font-size: 130%;
+      font-weight: bold;
+    }
+
+    .markdown h5 {
+      font-size: 120%;
+      font-weight: bold;
+    }
+
+    .markdown h6 {
+      font-size: 110%;
+      font-weight: bold;
+    }
+
+    .markdown ul,
+    .markdown ol {
+      margin-left: 20px;
+    }
+
+    .markdown img {
+      display: block;
+      margin: 20px auto;
+      max-width: 1000px;
+      text-align: center;
+    }
+
+    .markdown blockquote {
+      margin: 20px 0;
+      padding: 15px 20px;
+    }
+
+    .markdown blockquote p {
+      display: inline;
+    }
+
+    .markdown code {
+      font-family: monospace;
+    }
+
+    .main .highlights {
+      width: auto;
+      display: block;
+      padding: 0 10px;
+      margin-bottom: 0;
+      columns: 2;
+      column-width: 310px;
+      column-gap: 10px;
+    }
+
+    .main .highlights li {
+      font-size: 14px;
+      list-style: none;
+    }
+
+    .main .highlights li:before {
+      content: "· ";
+      vertical-align: middle;
+    }
+
+    .main .left {
+      display: table-cell;
+    }
+
+    .main .left .title {
+      font-size: 18px;
+      font-weight: bold;
+      display: block;
+    }
+
+    .main .left .subtitle {
+      font-size: 16px;
+      font-weight: lighter;
+      display: block;
+    }
+
+    .main .right {
+      text-align: right;
+      display: table-cell;
+    }
+
+    .main .right .date {
+      font-size: 15px;
+      font-weight: lighter;
+      white-space: nowrap;
+    }
+
+    .basics .main {
+      vertical-align: middle;
+    }
+
+    .basics .main .name {
+      font-size: 80px;
+      line-height: 1em;
+      font-weight: bold;
+      display: block;
+      margin-left: -5.6px;
+    }
+
+    .basics .main .label {
+      font-size: 40px;
+      line-height: 1em;
+      font-weight: lighter;
+      display: block;
+      margin-left: -1.6px;
+    }
+
+    .basics .side {
+      vertical-align: middle;
+      padding-left: 0;
+      padding-top: 15px;
+    }
+
+    .basics .side .contact {
+      list-style-type: none;
+    }
+
+    .basics .side .contact li {
+      font-size: 18px;
+      line-height: 1.6em;
+    }
+
+    .links ul {
+      list-style: none;
+    }
+
+    .links ul li {
+      font-size: 14px;
+    }
+
+    .education .title {
+      font-size: 15px;
+    }
+
+    .education .institution {
+      font-size: 15px;
+      font-weight: lighter;
+    }
+
+    .awards .header .title {
+      font-size: 15px;
+    }
+
+    .awards .header .awarder {
+      font-size: 15px;
+      font-weight: lighter;
+    }
+
+    .awards .summary {
+      font-size: 14px;
+    }
+
+    .certificates .name {
+      font-size: 15px;
+    }
+
+    .certificates .issuer {
+      font-size: 15px;
+      font-weight: lighter;
+    }
+
+    .skills .section-title {
+      margin: 0;
+    }
+
+    .skills .container {
+      display: block;
+      columns: 2;
+      column-gap: 10px;
+    }
+
+    .skills .container .article {
+      break-inside: avoid-column;
+      min-width: 120px;
+      padding-top: 20px;
+    }
+
+    .skills .container .article span {
+      display: block;
+      font-size: 18px;
+      font-weight: lighter;
+    }
+
+    .skills .container .article li {
+      font-size: 14px;
+      list-style: none;
+    }
+
+    .languages ul {
+      list-style: none;
+    }
+
+    .languages ul li {
+      font-size: 14px;
+    }
+
+
+    .interests .section-title {
+      margin: 0;
+    }
+
+    .interests .container {
+      display: block;
+      columns: 2;
+      column-gap: 10px;
+    }
+
+    .interests .container .article {
+      break-inside: avoid-column;
+      min-width: 120px;
+      padding-top: 20px;
+    }
+
+    .interests .container .article span {
+      display: block;
+      font-size: 18px;
+      font-weight: lighter;
+    }
+
+    .interests .container .article li {
+      font-size: 14px;
+      list-style: none;
+    }
+
+    .references .name {
+      font-size: 15px;
+    }
+
+    .references q {
+      font-size: 14.5px;
+      font-weight: lighter;
+      font-style: italic;
+    }
+  </style>
+  <title>{{ .basics.name }} – {{ .basics.label }}</title>
+</head>
+
+<body>
+  <div class="content">
+    <div class="basics">
+      <div class="table padding-container-2">
+        <div class="main">
+          <span class="name">{{ .basics.name }}</span>
+          <span class="label">{{ .basics.label }}</span>
+        </div>
+        <div class="side">
+          <ul class="contact">
+            <li>{{ .basics.phone }}</li>
+            <li>{{ .basics.email }}</li>
+            <li class="margin-text-5">{{ .basics.location.city }}, {{ .basics.location.region }}, {{
+              .basics.location.countrycode }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="summary markdown padding-container-2">
+        {{ .basics.summary | md }}
+      </div>
+    </div>
+    <div class="table">
+      <div class="main">
+        {{- if .work }}
+        <div class="work margin-container-3">
+          <p class="section-title no-alone-2">{{ "work" | tr }}</p>
+          <div class="container">
+            {{- range .work }}
+            <div class="article margin-container-3">
+              <div class="header no-alone-1">
+                <div class="table">
+                  <div class="left">
+                    <span class="title">{{ .position }}</span>
+                    <span class="subtitle margin-text-1">
+                      <a href="{{ .url }}">{{ .name }}</a> · {{ .location }}
+                    </span>
+                  </div>
+                  <div class="right">
+                    <span class="date">{{ .startdate }} – {{ .enddate | default ("today" | tr) }}</span>
+                  </div>
+                </div>
+              </div>
+              {{- if .summary }}
+              <div class="summary markdown margin-text-4">
+                {{ .summary | md }}
+              </div>
+              {{- end }}
+              {{- if .highlights }}
+              <ul class="highlights margin-text-4 no-break">
+                {{- range .highlights }}
+                <li>{{ . }}</li>
+                {{- end }}
+              </ul>
+              {{- end }}
+            </div>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+        {{- if .projects }}
+        <div class="projects margin-container-3">
+          <p class="section-title no-alone-2">{{ "projects" | tr }}</p>
+          <div class="container">
+            {{- range .projects }}
+            <div class="article margin-container-3">
+              <div class="header no-alone-1">
+                <div class="table">
+                  <div class="left">
+                    <span class="title">{{ join ", " .roles }}</span>
+                    <span class="subtitle margin-text-1">
+                      <a href="{{ .url }}">{{ .name }}</a>
+                    </span>
+                  </div>
+                  <div class="right">
+                    <span class="date">{{ .startdate }} – {{ .enddate | default (tr "today") }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="summary markdown margin-text-4">
+                {{ .description | md }}
+              </div>
+              {{- if .highlights }}
+              <ul class="highlights margin-text-4 no-break">
+                {{- range .highlights }}
+                <li>{{ . }}</li>
+                {{- end }}
+              </ul>
+              {{- end }}
+            </div>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+        {{- if .publications }}
+        <div class="publications margin-container-3">
+          <p class="section-title no-alone-2">{{ "publications" | tr }}</p>
+          <div class="container">
+            {{- range .publications }}
+            <div class="article margin-container-3">
+              <div class="header no-alone-1">
+                <div class="table">
+                  <div class="left">
+                    <span class="title">
+                      <a href="{{ .url }}">{{ .name }}</a>
+                    </span>
+                    <span class="subtitle margin-text-1">{{ .publisher }}</span>
+                  </div>
+                  <div class="right">
+                    <span class="date">{{ .releasedate }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="summary markdown margin-text-4">
+                {{ .summary | md }}
+              </div>
+            </div>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+        {{- if .volunteer }}
+        <div class="volunteer margin-container-3">
+          <p class="section-title no-alone-2">{{ "volunteer" | tr }}</p>
+          <div class="container">
+            {{- range .volunteer }}
+            <div class="article margin-container-3">
+              <div class="header no-alone-1">
+                <div class="table">
+                  <div class="left">
+                    <span class="title">{{ .position }}</span>
+                    <span class="subtitle margin-text-1">
+                      <a href="{{ .url }}">{{ .organization }}</a>
+                    </span>
+                  </div>
+                  <div class="right">
+                    <span class="date">{{ .startdate }} – {{ .enddate | default (tr "today") }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="summary markdown margin-text-4">
+                {{ .summary | md }}
+              </div>
+            </div>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+      </div>
+      <div class="side">
+        {{- if .skills }}
+        <div class="skills margin-container-3">
+          <p class="section-title no-alone-1">{{ "skills" | tr }}</p>
+          <div class="container">
+            {{- range .skills }}
+            <div class="article no-break">
+              <span>{{ .name }}</span>
+              {{- if .keywords }}
+              <ul class="margin-text-2">
+                {{- range .keywords }}
+                <li>{{ . }}</li>
+                {{- end }}
+              </ul>
+              {{- end }}
+            </div>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+        {{- if .education }}
+        <div class="education margin-container-3">
+          <p class="section-title no-alone-1">{{ "education" | tr }}</p>
+          <div class="container">
+            {{- range .education }}
+            <div class="article margin-container-2 no-break">
+              <div class="title markdown">
+                {{ list .studytype .area | join ", " | md }}
+              </div>
+              <span class="institution margin-text-2">
+                <a href="{{ .url }}">{{ .institution }}</a>
+              </span>
+            </div>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+        {{- if .certificates }}
+        <div class="certificates margin-container-3">
+          <p class="section-title no-alone-1">{{ "certificates" | tr }}</p>
+          <div class="container">
+            {{- range .certificates }}
+            <div class="article margin-container-2 no-break">
+              <div class="name markdown">
+                <a href="{{ .url }}">{{ .name }}</a>
+              </div>
+              <span class="issuer margin-text-2">
+                <a href="{{ .url }}">{{ .issue }}</a>
+              </span>
+            </div>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+        {{- if .awards }}
+        <div class="awards margin-container-3">
+          <p class="section-title no-alone-1">{{ "awards" | tr }}</p>
+          <div class="container">
+            {{- range .awards }}
+            <div class="article margin-container-2 no-break">
+              <div class="header">
+                <span class="title">{{ .title }}</span>
+                <span class="awarder margin-text-2">{{ .awarder }}</span>
+              </div>
+              <div class="summary markdown margin-text-3">
+                {{ .summary | md }}
+              </div>
+            </div>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+        {{- if .references }}
+        <div class="references margin-container-3">
+          <p class="section-title no-alone-2">{{ "references" | tr }}</p>
+          <div class="container">
+            {{- range .references }}
+            <div class="article margin-container-2 no-break">
+              <span class="name">{{ .name }}</span>
+              <q class="margin-text-2">{{ .reference }}</q>
+            </div>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+        {{- if .languages }}
+        <div class="languages margin-container-3 no-break">
+          <p class="section-title no-alone-1">{{ "languages" | tr }}</p>
+          <div class="container">
+            <ul>
+              {{- range .languages }}
+              <li class="article margin-text-2">{{ .language }} · {{ .fluency }}</li>
+              {{- end }}
+            </ul>
+          </div>
+        </div>
+        {{- end }}
+        {{- if .interests }}
+        <div class="interests margin-container-3">
+          <p class="section-title no-alone-1">{{ "interests" | tr }}</p>
+          <div class="container">
+            {{- range .interests }}
+            <div class="article no-break">
+              <span>{{ .name }}</span>
+              {{- if .keywords }}
+              <ul class="margin-text-2">
+                {{- range .keywords }}
+                <li>{{ . }}</li>
+                {{- end }}
+              </ul>
+              {{- end }}
+            </div>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+        {{- if .basics.profiles }}
+        <div class="links margin-container-3 no-break">
+          <p class="section-title no-alone-1">{{ "profiles" | tr }}</p>
+          <div class="container">
+            <ul>
+              {{- if .basics.url }}
+              <li class="article">
+                <a href="{{ .basics.url }}">{{ .basics.url | trimPrefix "https://" }}</a>
+              </li>
+              {{- end }}
+              {{- range .basics.profiles }}
+              {{- if eq (.network | lower) "pdf" }}
+              <li class="article margin-text-4">
+                <a href="{{ .url }}" download="{{ .username }}.pdf">{{ .url | trimPrefix "https://" }}</a>
+              </li>
+              {{- else }}
+              <li class="article margin-text-4">
+                <a href="{{ .url }}">{{ .url | trimPrefix "https://" }}</a>
+              </li>
+              {{- end }}
+              {{- end }}
+            </ul>
+          </div>
+        </div>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

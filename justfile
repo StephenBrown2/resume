@@ -1,9 +1,21 @@
-serve:
-    python3 -m http.server
+export filename := "resume.yaml"
 
-go:
-    goresume export --resume resume.yaml --html-theme positive --html-output docs/index.html
-    python3 -m http.server --directory docs
+build theme="block":
+    goresume export --resume {{filename}} --html-theme {{theme}} --html-output docs/index.html
+
+serve directory="docs":
+    python3 -m http.server --directory {{directory}}
+
+go: build serve
 
 validate:
-    goresume validate --resume resume.yaml
+    goresume validate --resume {{filename}}
+
+watch:
+  #!/usr/bin/env sh
+  inotifywait -m -r . \
+    --exclude "(.*\\.pdf$)|public|justfile|\\.git" \
+    -e close_write,move,create,delete \
+    | while read -r directory events filename; do
+      just go
+    done
