@@ -12,6 +12,32 @@
         rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
+        :root {
+            --slate-grey: #6d737f;
+            --royal-blue: #0a5999;
+            --tan: #ceba97;
+            --text-dark-blue: #002851;
+            --light-text: #fcfbf8;
+            --black: #01121e;
+            --white: white;
+            --goldenrod: #db9905;
+            --sky-blue: #85d0f1;
+            --light-salmon: #ff9668;
+            --dodger-blue: #0095d6;
+            --medium-sea-green: #399e6a;
+            --light-steel-blue: #bfc5d3;
+            --sand: #938469;
+            --beige: #e9ebf2;
+
+            --selection-bg-color: var(--light-steel-blue);
+            --link-color: var(--royal-blue);
+            --link-visited-color: var(--dodger-blue);
+            --header-color: var(--slate-grey);
+            --skills-header-color: var(--text-dark-blue);
+            --keyword-color: var(--link-color);
+            --references-color: var(--medium-sea-green);
+        }
+
         html,
         body,
         main,
@@ -22,7 +48,7 @@
         h1,
         h2,
         h3 {
-            font-family: "Inter", "Open Sans", "sans-serif";
+            font-family: 'Inter', 'Open Sans', 'sans-serif';
             font-size: 14px;
             line-height: 1.4;
             margin: 0;
@@ -36,13 +62,13 @@
 
         ::selection {
             color: #fff;
-            background: #e48a8a;
+            background: var(--selection-bg-color);
             /* WebKit/Blink Browsers */
         }
 
         ::-moz-selection {
             color: #fff;
-            background: #e48a8a;
+            background: var(--selection-bg-color);
             /* Gecko Browsers */
         }
 
@@ -51,12 +77,12 @@
         }
 
         a {
-            color: #002b49;
+            color: var(--link-color);
             text-decoration: none;
         }
 
         a:visited {
-            color: #C5A063;
+            color: var(--link-visited-color);
         }
 
         a:hover {
@@ -71,7 +97,7 @@
 
         h2 {
             text-transform: uppercase;
-            color: #898989;
+            color: var(--header-color);
             font-size: 2em;
             position: relative;
             font-weight: 400;
@@ -88,7 +114,7 @@
             margin-bottom: 5px;
             /*width: 85%;*/
             float: left;
-            break-after: avoid;
+            /* break-after: avoid; */
         }
 
         table {
@@ -97,9 +123,9 @@
         }
 
         td:first-child {
-            letter-spacing: 2px;
-            color: #bd5b5b;
-            font-size: 20px;
+            letter-spacing: 0;
+            color: var(--skills-header-color);
+            font-size: 16px;
         }
 
         td:last-child {
@@ -125,7 +151,7 @@
             margin-top: 1em;
             overflow: hidden;
             /* Clear floated children */
-            break-inside: avoid;
+            /* break-inside: avoid; */
             break-before: avoid;
         }
 
@@ -135,7 +161,6 @@
 
         section>header {
             position: relative;
-            /* display: none; */
         }
 
         p+ul {
@@ -181,7 +206,7 @@
 
         span.keywords {
             font-size: 12px;
-            color: #b16666;
+            color: var(--keyword-color);
         }
 
         thead {
@@ -231,7 +256,8 @@
             font-size: 24px;
             /*transform: translateX(-110%); PDF no likey */
             margin-left: -10px;
-            color: #dadada;
+            /* color: #dadada; */
+            color: var(--header-color);
         }
 
         header>h2 {
@@ -241,7 +267,7 @@
         .label {
             float: right;
             /* color: #dadada; */
-            color: #898989;
+            color: var(--header-color);
         }
 
         #summary {
@@ -251,13 +277,13 @@
         }
 
         #skills td {
-            padding-top: 7px;
-            padding-bottom: 7px;
+            padding-top: 5px;
+            padding-bottom: 5px;
         }
 
         #references>p,
         #references>p>a {
-            color: #961e1e;
+            color: var(--references-color);
             text-align: center;
             margin: 30px;
             font-weight: bold;
@@ -275,7 +301,7 @@
     <main>
         <header>
             <h1>{{ (.basics.name | split " ")._0 }} <span
-                    style="color: #C5A063;">{{ (.basics.name | splitn " " 2 )._1 }}</span></h1>
+                    style="color: var(--link-color);">{{ (.basics.name | splitn " " 2 )._1 }}</span></h1>
             <span class="label">{{ default "" .basics.label | title }}</span>
             <p id="contact">
                 {{ with .basics.email }}<span class="email"><a href="mailto:{{ . }}">{{ . }}</a></span>{{ end }}
@@ -285,7 +311,6 @@
         </header>
 
         <section id="summary">{{ .basics.summary }}</section>
-
         <hr>
         <section id="employment">
             <header> <span class="fa fa-lg fa-building"></span>
@@ -310,30 +335,8 @@
                     {{ end }}
                 </ul>
                 {{ end }}
-                {{ with .keywords }}<span class="keywords">{{ . | join " " }}</span>{{ end }}
+                {{ with .keywords }}<span class="keywords">{{ . | join " | " }}</span>{{ end }}
             </div>
-            {{ end }}
-        </section>
-
-        <hr>
-        <section id="projects">
-            <header> <span class="fa fa-lg fa-star"></span>
-                <h2>projects</h2>
-            </header>
-            {{ if .projects }}
-            {{ range .projects }}
-            <div>
-                <h3><em>{{ .role }}</em>,
-                    {{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}
-                </h3>
-                <span
-                    class="tenure">{{ $start := or (index . "startDate") (index . "StartDate") }}{{ $end := or (index . "endDate") (index . "EndDate") }}{{ if $end }}{{ default "" $start }}
-                    — {{ default "" $end }}{{ else }}{{ default "" $start }} — Present{{ end }}</span>
-                <p>{{ .description }}</p>
-            </div>
-            {{ end }}
-            {{ else }}
-            <!-- no projects defined in resume.json -->
             {{ end }}
         </section>
 
@@ -344,12 +347,59 @@
             </header>
             {{ range .education }}
             <div>
-                <h3><em>{{ .description }}</em>, {{ .institution }}</h3>
+                <h3>{{ with .studyType }}{{ . }} — {{ end }}<em>{{ .area }}</em>, {{ .institution }}</h3>
                 <span class="tenure">{{ if .enddate }}{{ .startdate | toDate "2006-01-02" | date "Jan 2006" }} —
                     {{ .enddate | toDate "2006-01-02" | date "Jan 2006" }}{{ else }}{{ .startdate | toDate "2006-01-02" | date "Jan 2006" }}
                     — Present{{ end }}</span>
                 {{ with .location }}<span class="location">{{ . }}</span>{{ end }}
             </div>
+            {{ end }}
+        </section>
+
+        <hr>
+        <section id="skills">
+            <header> <span class="fa fa-lg fa-code"></span>
+                <h2>skills</h2>
+            </header>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Skill</th>
+                        <th>Keywords</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range .skills }}
+                    <tr>
+                        <td style="width: 25%;">{{ .name }}</td>
+                        <td class="keywords">{{ .keywords | join " " }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </section>
+
+        <hr>
+        <section id="projects">
+            <header> <span class="fa fa-lg fa-star"></span>
+                <h2>projects</h2>
+            </header>
+            {{ if .projects }}
+            {{ range .projects }}
+            <div>
+                <h3>{{ with .roles }}<em>{{ . | join ", " }}</em>,{{ end }}
+                    {{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}
+                </h3>
+                <span class="tenure">{{ if or .startDate .endDate }}
+                    {{ with .startDate }}{{ . | toDate "2006-01-02" | date "Jan 2006" }}{{ end }} —
+                    {{ if .endDate }}{{ .endDate | toDate "2006-01-02" | date "Jan 2006" }}{{ else }}Present{{ end }}
+                    {{ end }}
+                </span>
+                <p>{{ .description }}</p>
+            </div>
+            {{ end }}
+            {{ else }}
+            <!-- no projects defined in resume.json -->
             {{ end }}
         </section>
 
