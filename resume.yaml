@@ -1,18 +1,11 @@
 $schema: https://raw.githubusercontent.com/jsonresume/resume-schema/refs/heads/master/schema.json
 basics:
   name: Stephen Brown II
-  label: Senior Software Engineer
+  label: Platform Support & Security Engineer
   email: hire@stephen.brownii.email
   phone: (443) 219-4559
   url: https://stephenbrown2.github.io/resume
-  summary: >-
-    Senior software engineer with 11+ years building secure, production-scale backend services
-    and APIs across multiple stacks and languages. Deep interest in Bitcoin and conviction about
-    the importance of self-custody. Strong engineering fundamentals with proven ability to rapidly
-    learn new technologies—mastered Go in months and became primary code reviewer. Experience in
-    secure API design. Track record of cross-functional collaboration, hardening security-sensitive
-    systems, and taking end-to-end ownership from ideation through delivery. Passionate about solving
-    real problems through pragmatic engineering and innovative solutions.
+  summary: 12+ years building and maintaining production systems. Focused on reliability, security, and developer productivity. I own problems end-to-end, write testable code, and improve the workflows around me.  Most of my recent work is in Go and TypeScript; my open source time goes into personal finance tooling. I pick up new languages quickly and have a track record of doing so on the job.
   location:
     city: Delaware
     region: OH
@@ -29,15 +22,18 @@ work:
     position: Senior Software Engineer
     url: https://jumpcloud.com
     startDate: "2022-10-03"
+    endDate: "2026-05-18"
     summary: ""
     highlights:
-      - Joined internal developer acceleration team prioritizing reliability, security, and engineering productivity across platform services.
-      - 'Led CI/CD modernization: migrated tests to faster runners, moved functional tests to self-hosted infrastructure, and removed legacy VPN dependencies to improve security posture and reduce wait times.'
-      - Hardened security-sensitive systems by implementing encryption and obfuscation, removing plaintext fallbacks for sensitive data, and improving key management practices.
-      - Designed and embedded SQL migrations directly in agents to improve upgrade resilience and reduce field incidents.
-      - Enhanced Go CI tasks and linters to raise code quality, consistency, and security across backend services.
-      - Built onboarding tooling and documentation to reduce ramp-up time and improve team productivity.
-      - Developed and maintained backend services using AWS-hosted Kubernetes, Docker, and container orchestration for production and local development.
+      - Moved to an internal developer acceleration team focused on reliability and security.
+      - Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%.
+      - Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime.
+      - Raised code quality across 20+ repositories; improvements paved the path for adoption across 250+ engineers org-wide.
+      - Consulted by dozens of engineers on design and implementation; directly mentored 5+ engineers through onboarding.
+      - Designed and prototyped a Linux PAM module for direct JumpCloud user and password management on device.
+      - Built a Linux tray app bringing UX parity across 30+ supported OS versions spanning Windows, macOS, and Linux.
+      - Led a tamper-resistance and uninstall-protection initiative spanning 3 OS families; scoped and simplified research into a manageable deliverable.
+      - Began incorporating AI assistance in 2026, cutting research and PoC development time by an estimated 25–50%.
     location: Remote
     keywords:
       - Golang
@@ -46,6 +42,8 @@ work:
       - AWS
       - PostgreSQL
       - MongoDB
+      - AI
+      - LLMs
   - company: JumpCloud, Inc.
     position: Software Engineer 3
     url: https://jumpcloud.com
@@ -53,14 +51,9 @@ work:
     endDate: "2022-10-03"
     summary: ""
     highlights:
-      - Founded and grew a Linux-focused team to support client devices across multiple distributions.
-      - Fast-tracked to a senior engineering role after demonstrating rapid learning and ownership.
-      - Introduced static compilation (Zig/static builds) and build automation to simplify releases.
-      - Implemented and maintained the Go on-device agent using gRPC and protobuf to communicate to backend.
-      - Implemented and maintained backend services in Go and NodeJS, storing data in MongoDB and PostgreSQL.
-      - Wrote Python functional tests to validate agent behavior and increase release confidence.
-      - Rapidly learned Go and became a primary reviewer for Go code quality and best practices.
-      - Used Docker Compose for local development and collaborated on Kubernetes backend deployments.
+      - Founded a Linux-focused team (grew from 3 to 6 engineers) supporting client devices across multiple distros.
+      - Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed.
+      - Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10+ Linux distributions spanning RHEL 7 to Ubuntu 22.04.
     location: Longmont, CO
     keywords:
       - Golang
@@ -69,478 +62,265 @@ work:
       - Github
       - AWS
   - company: ObjectRocket
-    location: Remote
-    description: "A Rackspace Technology Company"
     position: Software Developer
     url: https://objectrocket.com
     startDate: "2019-10-01"
     endDate: "2021-05-01"
     summary: ""
     highlights:
-      - Architected and maintained scalable Python applications using Flask and SQLAlchemy for database abstraction
-      - Designed and implemented RESTful APIs with comprehensive OpenAPI documentation and validation
-      - Developed comprehensive test suites using pytest to ensure code quality and system reliability
-      - Built new microservices in Golang using GoBuffalo framework with focus on performance and maintainability
-      - Leveraged PostgreSQL and Redis for high-performance data storage and caching solutions
-      - Containerized all applications using Docker for consistent development and deployment environments
-      - Deployed and managed services in OpenShift and Kubernetes environments with custom Helm charts
-      - Evaluated and documented AWS Fargate deployment strategies for monitoring infrastructure
-      - Collaborated on cross-functional teams to deliver complex features and system improvements
+      - Maintained Python applications and libraries; contributed to 12+ microservices in Go (GoBuffalo).
+      - Deployed across Docker, OpenShift, and Kubernetes environments.
+    location: Remote
     keywords:
-      - AWS
-      - FastAPI
       - Python
-      - Pydantic
-      - Kubernetes
-      - Remote
       - Golang
-      - SQLAlchemy
+      - Kubernetes
       - Docker
-      - Flask
-      - pytest
-  - company: Rackspace Technology
-    location: San Antonio, TX / Remote
-    description: "The #1 managed cloud company"
-    position: Linux Administrator -> Software Engineer
+      - AWS
+  - company: Rackspace (US / Hosting / Technology)
+    position: Multiple roles
     url: https://rackspace.com
     startDate: "2014-01-06"
     endDate: "2019-10-01"
-    summary: ""
+    summary: Progressed from Linux System Administrator to Automation Engineer, focusing on internal tooling, CI/CD, and operational reliability.
     highlights:
-      - Architected and maintained scalable Python applications using Flask framework with comprehensive error handling and validation
-      - Built RESTful APIs and backend services integrated with MySQL databases using SQLAlchemy ORM
-      - Developed comprehensive test suites using pytest to ensure code quality and automated testing workflows
-      - Implemented CI/CD pipelines using Docker, Ansible, and Jenkins for automated deployment and testing
-      - Created Python automation tools that migrated thousands of scheduled maintenances, saving weeks of manual work
-      - Contributed to internal Python libraries and frameworks, including Librack client library for API interactions
-      - Developed React-based frontend components that integrated with backend APIs for maintenance scheduling systems
-      - Led team initiatives to implement code quality standards, automated testing, and consistent development practices
-      - Collaborated with distributed UK-based team as sole US member, demonstrating strong remote work capabilities
-      - Built comprehensive reporting and data analysis tools for operational insights and workflow optimization
-      - Maintained Linux systems, web servers (Apache) database servers (MySQL) and enterprise support operations
+      - Built a core internal web platform from scratch (React/JS, Python/Flask, MySQL) serving a team of 10–20 engineers.
+      - Authored Python client libraries and automation tooling used by an estimated 250–500 engineers org-wide.
+      - Implemented 3 CI/CD pipelines (dev/staging/production) in Jenkins; led cross-team code quality and onboarding improvements.
+    location: San Antonio, TX / Remote
+    keywords:
+      - Python
+      - Linux
+      - Docker
+      - Ansible
+      - Jenkins
+      - React
+      - Flask
+      - Git
+      - JavaScript
+      - MySQL
+
+projects:
+  - name: Actual Budget
+    description: Contributor to a local-first personal finance app (26k+ GitHub stars, TypeScript/React). Features and fixes across the codebase; built multi-account import plugin and custom themes.
+    highlights:
+      - Features and fixes across TypeScript/React codebase; built multi-account import plugin and custom themes.
+    keywords:
+      - TypeScript
+      - React
+      - Node.js
+      - Open Source
+    startDate: "2024-01-01"
+    url: https://github.com/actualbudget/actual
+    roles:
+      - Contributor
+    type: open-source
+  - name: actual-multi-account-import
+    description: Plugin for Actual Budget to import transactions across multiple accounts in a single operation
+    highlights: []
+    keywords:
+      - TypeScript
+      - JavaScript
+    startDate: "2024-06-01"
+    url: https://github.com/StephenBrown2/actual-multi-account-import
+    roles:
+      - Creator
+    type: side-project
+  - name: ynab-export
+    description: CLI tool to export YNAB budget data as JSON for migration or archival
+    highlights: []
+    keywords:
+      - TypeScript
+      - CLI
+    startDate: "2024-01-01"
+    url: https://github.com/StephenBrown2/ynab-export
+    roles:
+      - Creator
+    type: side-project
+  - name: Rackspace Internal Tooling
+    description: Built internal Python API client and Flask web/API framework, used org-wide.
+    highlights: []
     keywords:
       - Python
       - Flask
-      - SQLAlchemy
-      - pytest
-      - MySQL
-      - Docker
-      - Jenkins
-      - Ansible
-      - React
-      - Remote
-  - company: Johns Hopkins University
-    position: Linux System Administrator
-    url: https://ccp.jhu.edu
-    startDate: "2011-04-01"
-    endDate: "2013-12-30"
-    summary: Bloomberg School Of Public Health, Center For Communication Programs
-    highlights:
-      - Maintained and automated servers supporting Drupal multisite deployments with LAMP stack and Apache Solr search indexes on physical and virtual hosts.
-      - Successfully led team to adoption of git and a development > staging > production deployment workflow
-      - Designed Puppet configuration management to maintain and deploy to development and production servers
-    location: Baltimore, MD
+      - API
+    startDate: "2017-10-17"
+    endDate: "2019-10-01"
+    roles:
+      - Creator
+    type: internal
+skills:
+  - name: Bash/Shell scripting
+    level: Advanced
+    domain: Systems
     keywords:
-      - Linux
-      - Git
-      - Puppet
-      - Drupal
-      - Vagrant
-  - company: Various Employers
-    position: Technical Support & Testing
-    startDate: "2010-04-01"
-    endDate: "2011-04-01"
-    summary: Multiple entry-level roles after college providing in-store and on-site technical support, desktop/server troubleshooting, and tier-3 test escalations.
-    highlights:
-      - Performed diagnostics, repair, and support for Windows desktops and servers in retail and on-site environments.
-      - Resolved and escalated complex software issues as a Tier-3 test specialist; coordinated with engineering to close high-impact tickets.
-      - Delivered customer-facing support and communicated technical issues clearly to non-technical audiences; contributed to process improvements.
-    location: Baltimore / Columbia, MD
+      - Write reliable shell scripts for automation and operational tasks
+    years: 15
+  - name: Golang
+    level: Advanced
+    domain: Languages
     keywords:
-      - Troubleshooting
-      - Debugging
-      - Testing
-      - Customer Service
-education:
-  - institution: LeTourneau University
-    website: https://letu.edu
-    area: Computer Information Systems
-    studyType: Bachelor of Science
-    startDate: "2005-08-01"
-    endDate: "2009-12-15"
-    score: "2.4"
-    courses: []
+      - On-device agents and backend services; comfortable with concurrency, gRPC, and code review
+    years: 4
+  - name: Python
+    level: Advanced
+    domain: Languages
+    keywords:
+      - Backend services, automation, test tooling, and CLI tools; familiar with async patterns
+    years: 8
+  - name: TypeScript
+    level: Intermediate
+    domain: Languages
+    keywords:
+      - Active contributor to a large TypeScript/React open source project (Actual Budget)
+    years: 2
+  - name: React
+    level: Intermediate
+    domain: Languages
+    keywords:
+      - Modern React with hooks and TypeScript; active open source contributor (Actual Budget)
+    years: 3
+  - name: Perl
+    level: Familiar
+    domain: Languages
+    keywords:
+      - Fluent as a Linux admin; syntax still familiar, not actively used in the last decade
+    years: 3
+  - name: Docker
+    level: Advanced
+    domain: Infrastructure & Cloud
+    keywords:
+      - Portable development and deployment workflows
+    years: 3
+  - name: Linux
+    level: Advanced
+    domain: Systems
+    keywords:
+      - Extensive production and development experience across distributions
+    years: 16
+  - name: Git / Jujutsu
+    level: Advanced
+    domain: Systems
+    keywords:
+      - Daily use for source control, branching, and code review
+    years: 9
+  - name: PostgreSQL
+    level: Advanced
+    domain: Databases
+    keywords:
+      - Schema design, migrations, and integration in production services
+    years: 3
+  - name: MongoDB
+    level: Advanced
+    domain: Databases
+    keywords:
+      - Document store usage in production backend services
+    years: 3
+  - name: Kubernetes
+    level: Intermediate
+    domain: Infrastructure & Cloud
+    keywords:
+      - Read and interpret Helm charts and manifests; familiar with deployment concepts
+    years: 2
+  - name: AWS
+    level: Intermediate
+    domain: Infrastructure & Cloud
+    keywords:
+      - EC2, hosted Kubernetes, and basic service infrastructure
+    years: 1
+  - name: Ansible
+    level: Advanced
+    domain: Infrastructure & Cloud
+    keywords:
+      - Infrastructure configuration management
+    years: 3
+  - name: Terraform
+    level: Beginner
+    domain: Infrastructure & Cloud
+    keywords:
+      - Infrastructure as code for managing deployments
+    years: 1
 certificates:
   - name: Triplebyte certified Generalist Software Engineer
     date: "2020-08-20"
-    website: https://triplebyte.com/tb/stephen-brown-ii-xjpelfb/certificate/track/generalist
+    url: https://triplebyte.com/tb/stephen-brown-ii-xjpelfb/certificate/track/generalist
     issuer: Triplebyte
-  - name: "Red Hat Certified Engineer (ID: 140-027-434)"
+  - name: 'Red Hat Certified Engineer (ID: 140-027-434)'
     date: "2014-03-12"
-    website: https://rhtapps.redhat.com/verify?certId=140-027-434
-    issuer: Red hat
-  - name: "Red Hat Certified System Administrator (ID: 140-027-434)"
-    date: "2014-02-19"
-    website: https://rhtapps.redhat.com/verify?certId=140-027-434
+    url: https://rhtapps.redhat.com/verify?certId=140-027-434
     issuer: Red Hat
-  - name: "LPIC-1 (LPI ID: LPI000223384, Verification Code: ltd26ep79p)"
+  - name: 'Red Hat Certified System Administrator (ID: 140-027-434)'
+    date: "2014-02-19"
+    url: https://rhtapps.redhat.com/verify?certId=140-027-434
+    issuer: Red Hat
+  - name: 'LPIC-1 (LPI ID: LPI000223384, Verification Code: ltd26ep79p)'
     date: "2010-12-30"
-    website: https://cs.lpi.org/caf/Xamman/certification
+    url: https://cs.lpi.org/caf/Xamman/certification
     issuer: Linux Professional Institute
   - name: Linux+ (Powered by LPI)
     date: "2010-12-30"
-    website: https://www.certmetrics.com/comptia/public/verification.aspx?code=B8FPZJHDMH1QCCCL
+    url: https://www.certmetrics.com/comptia/public/verification.aspx?code=B8FPZJHDMH1QCCCL
     issuer: CompTIA
   - name: Server+
     date: "2010-12-30"
-    website: https://www.certmetrics.com/comptia/public/verification.aspx?code=VXPPY2FJMGB4SWHY
+    url: https://www.certmetrics.com/comptia/public/verification.aspx?code=VXPPY2FJMGB4SWHY
     issuer: CompTIA
   - name: Security+
     date: "2010-03-02"
-    website: https://www.certmetrics.com/comptia/public/verification.aspx?code=Q7D5J84BCL41KZ8G
+    url: https://www.certmetrics.com/comptia/public/verification.aspx?code=Q7D5J84BCL41KZ8G
     issuer: CompTIA
   - name: Network+
     date: "2010-02-08"
-    website: https://www.certmetrics.com/comptia/public/verification.aspx?code=R4LQNYQB2LRQKJV8
+    url: https://www.certmetrics.com/comptia/public/verification.aspx?code=R4LQNYQB2LRQKJV8
     issuer: CompTIA
   - name: A+ (IT Technician)
     date: "2010-01-21"
-    website: https://www.certmetrics.com/comptia/public/verification.aspx?code=CM1SNZCB2KEEYD90
+    url: https://www.certmetrics.com/comptia/public/verification.aspx?code=CM1SNZCB2KEEYD90
     issuer: CompTIA
-skills:
-  - name: Software languages
-    keywords:
-      - Python (Advanced)
-      - Golang (Advanced)
-    details:
-      - text: Python
-        comment: Advanced
-      - text: Golang
-        comment: Advanced
-  - name: Python Frameworks & Libraries
-    keywords:
-      - Flask (Advanced)
-      - FastAPI (Intermediate)
-      - SQLAlchemy (Advanced)
-      - Pydantic (Advanced)
-      - pytest (Advanced)
-    details:
-      - text: Flask
-        comment: Advanced
-      - text: FastAPI
-        comment: Intermediate
-      - text: SQLAlchemy
-        comment: Advanced
-      - text: Pydantic
-        comment: Advanced
-      - text: pytest
-        comment: Advanced
-  - name: Databases
-    keywords:
-      - PostgreSQL (Advanced)
-      - Redis (Advanced)
-      - MySQL (Advanced)
-    details:
-      - text: PostgreSQL
-        comment: Advanced
-      - text: Redis
-        comment: Advanced
-      - text: MySQL
-        comment: Advanced
-  - name: API Technologies
-    keywords:
-      - OpenAPI (Advanced)
-      - REST APIs (Advanced)
-      - JSON (Advanced)
-    details:
-      - text: OpenAPI
-        comment: Advanced
-      - text: REST APIs
-        comment: Advanced
-      - text: JSON
-        comment: Advanced
-  - name: Development practices
-    keywords:
-      - Docker (Advanced)
-      - Git (Advanced)
-    details:
-      - text: Docker
-        comment: Advanced
-      - text: Git
-        comment: Advanced
-  - name: Configuration management
-    keywords:
-      - Bash/Shell scripting (Advanced)
-      - Ansible (Advanced)
-    details:
-      - text: Bash/Shell scripting
-        comment: Advanced
-      - text: Ansible
-        comment: Advanced
-  - name: Infrastructure
-    keywords:
-      - Linux (Advanced)
-      - Kubernetes (Beginner)
-      - AWS (Intermediate)
-      - Terraform (Beginner)
-    details:
-      - text: Linux
-        comment: Advanced
-      - text: Kubernetes
-        comment: Beginner
-      - text: AWS
-        comment: Intermediate
-      - text: Terraform
-        comment: Beginner
+education:
+  - institution: LeTourneau University
+    url: https://letu.edu
+    area: Science
+    studyType: Bachelor
+    startDate: "2005-08-01"
+    endDate: "2009-12-15"
+    score: "2.4"
+    description: Computer Information Systems
+    location: Longview, TX
 languages:
   - language: English
     fluency: Native
+    years: 33
 interests:
   - name: Bitcoin
-    summary: Decentralized money is the future of finance
-    keywords:
-      - Decentralization
-      - Financial Sovereignty
-      - Sound Money
-  - name: Tesla
-    summary: Electric cars are the future of transportation, and they're here now
-    keywords:
-      - Electric
-      - Sustainable
-      - Energy
-      - Storage
-      - Transportation
-  - name: Solar Power
-    summary: It powers the earth, why not your house?
-    keywords:
-      - Electric
-      - Sustainable
-      - Energy
+    summary: Long-term holder and River customer. Interested in sound money and sovereign financial tools.
   - name: Personal Finance
-    summary: Budgeting rocks! How else am I going to meet my goals?
-    keywords:
-      - Money
-      - Stewardship
+    summary: Budgeting and financial independence. Active contributor to Actual Budget, a personal finance app I use daily.
   - name: Home Automation
     summary: Why doesn't the fireplace turn on by itself when it's cold outside?
-    keywords:
-      - Automation
-      - Techno-toys
+  - name: Solar Power
+    summary: It powers the earth, why not your house?
 references:
+  - name: Scott Thurston - Staff Software Engineer
+  - name: Daniel Judge - Manager
+  - name: Jose Palma - Staff Software Engineer
+  - name: Steve Zazeski - Senior Software Engineer
+  - name: Benjamin Schneider - Senior Software Engineer
+  - name: David Harris - Senior QA Engineer
+  - name: Julio César López Hernández - Senior Software Engineer
   - name: Eva Aldana
-    reference: ""
-    role: Former Manager
-    category: professional
-    private: false
-    contact:
-      - label: Email
-        category: email
-        value: eva.coche@rackspace.com
+    reference: Former Manager · eva.coche@rackspace.com
   - name: Jesse Wiles
-    reference: ""
-    role: Former Teammate
-    category: professional
-    private: false
-    contact:
-      - label: Email
-        category: email
-        value: Jesse.Wiles@rackspace.com
+    reference: Former Teammate · Jesse.Wiles@rackspace.com
   - name: Freddy Esteban Perez
-    reference: ""
-    role: Former Teammate
-    category: professional
-    private: false
-    contact:
-      - label: Email
-        category: email
-        value: Freddy.Perez@rackspace.com
+    reference: Former Teammate · Freddy.Perez@rackspace.com
   - name: Duncan H. Murray
-    reference: ""
-    role: Former Manager
-    category: professional
-    private: false
-    contact:
-      - label: Email
-        category: email
-        value: duncan.h.murray@rackspace.co.uk
+    reference: Former Manager · duncan.h.murray@rackspace.co.uk
   - name: Dan Hand
-    reference: ""
-    role: Former Teammate
-    category: professional
-    private: false
-    contact:
-      - label: Email
-        category: email
-        value: email@danielhand.io
+    reference: Former Teammate · email@danielhand.io
   - name: Sam Sharpe
-    reference: ""
-    role: Former Teammate
-    category: professional
-    private: false
-    contact:
-      - label: Email
-        category: email
-        value: sam.sharpe@rackspace.co.uk
+    reference: Former Teammate · sam.sharpe@rackspace.co.uk
   - name: Ryan Mazurek
-    reference: ""
-    role: Former Manager
-    category: professional
-    private: false
-    contact:
-      - label: Email
-        category: email
-        value: ryan.mazurek@rackspace.com
+    reference: Former Manager · ryan.mazurek@rackspace.com
   - name: Micah Culpepper
-    reference: ""
-    role: Former Colleague
-    category: professional
-    private: false
-    contact:
-      - label: Email
-        category: email
-        value: micah.culpepper@rackspace.com
-projects:
-  - name: Pydantic
-    description: Open source data validation and settings management using Python type annotations
-    highlights:
-      - Contributed bug fixes and feature improvements to Pydantic 1.x during active development
-      - Participated in issue discussions and provided detailed bug reports to improve library stability
-      - Enhanced data validation capabilities used by thousands of Python developers worldwide
-    keywords:
-      - Python
-      - Data Validation
-      - Type Annotations
-      - Open Source
-    startDate: "2020-01-01"
-    endDate: "2021-12-31"
-    url: https://github.com/pydantic/pydantic/issues?q=author%3AStephenBrown2
-    roles:
-      - Open Source Contributor
-    entity: Pydantic Community
-    type: open source
-  - name: Emcee
-    description: An (unreleased) Python 3.6+ client for the internal Maintenance Calendar
-    highlights:
-      - Learned client design practices and version controlled releases
-    keywords:
-      - Python
-      - JSON
-      - API
-      - Types
-    startDate: "2018-01-31"
-    endDate: "2019-10-01"
-    url: https://github.rackspace.com/emcee/emcee
-    roles:
-      - Creator
-    entity: Rackspace Hosting
-    type: side project
-  - name: Stepladder
-    type: internal
-    description: A Flask-based web and API framework for internal tools
-    summary:
-      Learned remote collaboration and discussion skills while improving coding
-      ability
-    roles:
-      - Contributor
-    url: https://stepladder.rax.io/about
-    startDate: "2017-10-17"
-    endDate: "2019-10-01"
-    highlights: []
-    entity: Rackspace Hosting
-    keywords:
-      - Python
-      - Javascript
-      - HTML
-      - JSON
-      - API
-  - name: Hammertime
-    type: internal
-    description: CLI for interacting with Customer Servers
-    summary: Added features and fixed bugs in the hammertime tool while maintaining
-    roles:
-      - Maintainer
-    url: https://github.rackspace.com/GTSLAE/mono/tree/master/hammertime
-    startDate: "2018-09-11"
-    endDate: "2019-10-01"
-    highlights: []
-    entity: Rackspace Hosting
-    keywords:
-      - Python
-  - name: Librack
-    type: internal
-    description:
-      A fully featured Python library with objects covering many Rackspace
-      systems, meant to be a one stop shop for other python projects
-    summary:
-      Learned to follow in the steps of an active project including interface
-      guarantees and deprecation
-    roles:
-      - Maintainer
-    url: https://stepladder.rax.io/librack_docs
-    startDate: "2018-01-02"
-    endDate: "2019-10-01"
-    highlights: []
-    entity: Rackspace Hosting
-    keywords:
-      - Python
-  - name: Automaint
-    type: internal
-    description:
-      A Jinja2 and Flask application running an Angular based web UI to generate
-      and quality-check maintenance templates for execution
-    summary: Learned to follow in the steps of an active project including deprecation
-    roles:
-      - Contributor
-    url: https://stepladder.rax.io/automaint
-    startDate: "2016-09-06"
-    endDate: "2017-09-20"
-    highlights: []
-    entity: Rackspace Hosting
-    keywords:
-      - Python
-  - name: Intensify
-    type: internal
-    description: CLI tool/Python module for managing Intensive usernames and passwords
-    summary: Assisted in quality testing and bug reporting
-    roles:
-      - Bug reporter
-    url: https://github.rackspace.com/SupportTools/intensify/blob/master/README.md
-    repo: https://github.rackspace.com/SupportTools/intensify
-    startDate: "2015-10-23"
-    endDate: "2016-10-06"
-    highlights: []
-    entity: Rackspace Hosting
-    keywords:
-      - Python
-  - name: Overtime/Hammertime
-    type: internal
-    description: CLI for interacting with Customer Servers
-    summary:
-      Added features and reported bugs to overtime, initially a fork integrating
-      cloud support from another tool, hammercloud, now merged back into upstream hammertime
-    roles:
-      - Bug reporter
-    url: https://github.rackspace.com/GTSLAE/mono/tree/master/hammertime
-    repo: https://github.rackspace.com/SupportTools/overtime
-    startDate: "2015-03-08"
-    highlights: []
-    entity: Rackspace Hosting
-    keywords:
-      - Python
-  - name: Knowledge for Health
-    type: public
-    description: ""
-    summary:
-      Jr System Administrator managing entire project's CentOS linux servers
-      and Drupal websites
-    roles:
-      - System Administrator
-    url: https://www.k4health.org
-    startDate: "2011-04-01"
-    endDate: "2013-12-30"
-    highlights: []
-    entity: Johns Hopkins University - CCP
-    keywords:
-      - Linux
-      - Drupal
-      - LAMP
+    reference: Colleague · micah.culpepper@rackspace.com

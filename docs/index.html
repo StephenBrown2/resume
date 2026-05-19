@@ -1,1255 +1,468 @@
-<!doctype html>
-<html lang='en'>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Stephen Brown II">
-  <meta name="description" content="Stephen Brown II - Senior Software Engineer">
-  <title>Stephen Brown II – Senior Software Engineer</title>
-  <link rel="icon" href="data:,">
-  <style>
-    /* Monaspace Font Families */
-    @font-face {
-      font-family: 'Monaspace Argon';
-      src: url('Variable Web Fonts/Monaspace Argon/Monaspace Argon Var.woff2') format('woff2'),
-        url('Variable Web Fonts/Monaspace Argon/Monaspace Argon Var.woff') format('woff');
-      font-weight: 100 900;
-      font-stretch: 75% 125%;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Monaspace Neon';
-      src: url('Variable Web Fonts/Monaspace Neon/Monaspace Neon Var.woff2') format('woff2'),
-        url('Variable Web Fonts/Monaspace Neon/Monaspace Neon Var.woff') format('woff');
-      font-weight: 100 900;
-      font-stretch: 75% 125%;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Monaspace Xenon';
-      src: url('Variable Web Fonts/Monaspace Xenon/Monaspace Xenon Var.woff2') format('woff2'),
-        url('Variable Web Fonts/Monaspace Xenon/Monaspace Xenon Var.woff') format('woff');
-      font-weight: 100 900;
-      font-stretch: 75% 125%;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Monaspace Radon';
-      src: url('Variable Web Fonts/Monaspace Radon/Monaspace Radon Var.woff2') format('woff2'),
-        url('Variable Web Fonts/Monaspace Radon/Monaspace Radon Var.woff') format('woff');
-      font-weight: 100 900;
-      font-stretch: 75% 125%;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Monaspace Krypton';
-      src: url('Variable Web Fonts/Monaspace Krypton/Monaspace Krypton Var.woff2') format('woff2'),
-        url('Variable Web Fonts/Monaspace Krypton/Monaspace Krypton Var.woff') format('woff');
-      font-weight: 100 900;
-      font-stretch: 75% 125%;
-      font-style: normal;
-    }
-
-    /* Reset and base styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    @page {
-      size: A4;
-      margin: 20mm;
-    }
-
-    html {
-      font-size: 14px;
-    }
-
-    body {
-      font-family: 'Monaspace Argon', 'Monaspace Neon', monospace, sans-serif;
-      line-height: 1.5;
-      color: #000000;
-      background: #ffffff;
-      max-width: 210mm;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
-
-    /* Typography */
-    h1 {
-      font-family: 'Monaspace Neon', 'Monaspace Argon', sans-serif;
-      font-size: 2.25rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 0.25rem;
-    }
-
-    h2 {
-      font-family: 'Monaspace Argon', sans-serif;
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: -0.01em;
-      color: #666666;
-      margin-bottom: 0.5rem;
-      text-transform: lowercase;
-    }
-
-    h3 {
-      font-family: 'Monaspace Krypton', 'Monaspace Xenon', monospace;
-      font-size: 0.8125rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-top: 1.75rem;
-      margin-bottom: 0.875rem;
-      padding-bottom: 0.375rem;
-      border-bottom: 2px solid #000000;
-    }
-
-    h4 {
-      font-family: 'Monaspace Xenon', 'Monaspace Argon', monospace;
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-      line-height: 1.3;
-    }
-
-    h5 {
-      font-family: 'Monaspace Argon', sans-serif;
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: #666666;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      margin-bottom: 0.875rem;
-      line-height: 1.55;
-    }
-
-    a {
-      color: #000000;
-      text-decoration: none;
-      border-bottom: 1px solid #cccccc;
-      transition: border-color 0.2s;
-    }
-
-    a:hover {
-      border-bottom-color: #000000;
-    }
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    li {
-      position: relative;
-      padding-left: 1.25rem;
-      margin-bottom: 0.4rem;
-      line-height: 1.55;
-    }
-
-    li:before {
-      content: "·";
-      position: absolute;
-      left: 0;
-      font-weight: bold;
-      font-size: 1.2em;
-    }
-
-    /* Header section */
-    .header {
-      margin-bottom: 1.5rem;
-      border-bottom: 3px solid #000000;
-      width: 100%;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) max-content;
-      grid-template-areas:
-        "identity contact"
-        "profiles profiles";
-      column-gap: 2rem;
-      row-gap: 1.5rem;
-      align-items: start;
-      padding-bottom: 1.5rem;
-    }
-
-    .identity {
-      grid-area: identity;
-      min-width: 0;
-    }
-
-    .header h1 {
-      display: block;
-    }
-
-    .header h2 {
-      display: block;
-      margin-top: 0.5rem;
-    }
-
-    .contact {
-      grid-area: contact;
-      text-align: right;
-      font-size: 0.875rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.375rem;
-      align-items: flex-end;
-    }
-
-    .contact-item {
-      display: block;
-      margin: 0;
-    }
-
-    .contact a {
-      border: none;
-    }
-
-    .contact a:hover {
-      color: #666666;
-    }
-
-    /* Profiles/Links */
-    .profiles {
-      grid-area: profiles;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: flex-end;
-      align-items: center;
-      width: 100%;
-    }
-
-    /* No need for ::after border anymore since header has border-bottom */
-
-    /* Summary section */
-    .summary {
-      font-size: 0.9375rem;
-      line-height: 1.6;
-      margin-bottom: 1.25rem;
-      padding: 0.75rem 0;
-    }
-
-    /* Section containers */
-    section {
-      margin-bottom: 1.5rem;
-    }
-
-    .entry {
-      margin-bottom: 1.25rem;
-      break-inside: avoid-region;
-    }
-
-    .entry-header {
-      margin-bottom: 0.75rem;
-    }
-
-    .entry-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.5rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .entry-title {
-      flex: 1;
-      min-width: 60%;
-    }
-
-    .entry-date {
-      font-size: 0.875rem;
-      color: #666666;
-      white-space: nowrap;
-    }
-
-    .entry-subtitle {
-      font-size: 0.9375rem;
-      color: #666666;
-      margin-bottom: 0.5rem;
-    }
-
-    .entry-location {
-      font-size: 0.875rem;
-      color: #999999;
-    }
-
-    .entry-description {
-      margin-bottom: 0.75rem;
-      color: #333333;
-    }
-
-    .reference-entry {
-      margin-bottom: 0 !important;
-    }
-
-    .reference-header {
-      margin-bottom: 0 !important;
-      text-align: right;
-    }
-
-    .reference-quote {
-      text-align: center;
-    }
-
-    /* Skills section */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-top: 1rem;
-      /* Masonry layout if supported */
-      grid-template-rows: masonry;
-    }
-
-    .skill-category {
-      break-inside: avoid;
-    }
-
-    .skill-name {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      font-size: 0.9375rem;
-    }
-
-    .skill-keywords {
-      font-size: 0.875rem;
-      color: #666666;
-      line-height: 1.6;
-    }
-
-    /* Two column layout for smaller sections */
-    .two-column {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    /* Compact list for certificates, languages, etc */
-    .compact-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .compact-item {
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid #eeeeee;
-    }
-
-    .compact-item:last-child {
-      border-bottom: none;
-    }
-
-    .compact-title {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .compact-meta {
-      font-size: 0.875rem;
-      color: #666666;
-    }
-
-    /* Certificates specific styling */
-    .certificates-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem 1.5rem;
-    }
-
-    /* References multi-column grid */
-    .references-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.25rem;
-      align-items: center;
-    }
-
-    .certificate-item {
-      break-inside: avoid;
-    }
-
-    .certificate-title {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-      font-size: 0.8125rem;
-      line-height: 1.4;
-    }
-
-    .certificate-meta {
-      font-size: 0.75rem;
-      color: #666666;
-      line-height: 1.5;
-    }
-
-    /* Profiles/Links */
-    .profiles {
-      grid-area: profiles;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-      justify-content: flex-end;
-      align-items: center;
-      width: 100%;
-    }
-
-    .profile-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      font-size: 0.875rem;
-      padding: 0.375rem 0.875rem;
-      border: 1px solid #000000;
-      border-radius: 0;
-      transition: background-color 0.2s, color 0.2s;
-      text-decoration: none;
-    }
-
-    /* Hide URL on screen, show only network name */
-    .profile-url {
-      display: none;
-    }
-
-    .profile-link:hover {
-      background-color: #000000;
-      color: #ffffff;
-      border-bottom: 1px solid #000000;
-    }
-
-    /* Keywords/Tags */
-    .keywords {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .keyword {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.75rem;
-      background-color: #f5f5f5;
-      border: 1px solid #e0e0e0;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 500;
-    }
-
-    /* Print styles */
-    @media print {
-      .header {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 40%);
-        column-gap: 1.5rem;
-        align-items: start;
-      }
-
-      .identity,
-      .contact {
-        align-self: start;
-      }
-
-      .contact {
-        display: block;
-        text-align: right;
-      }
-
-      .contact-item+.contact-item {
-        margin-top: 0.125rem;
-      }
-
-      .profiles {
-        margin-top: 0.125rem;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 0.125rem 0.5rem;
-      }
-
-      .profile-link {
-        border: none;
-        padding: 0;
-        font-size: 0.75rem;
-        gap: 0.25rem;
-        background: none;
-        color: #000000;
-      }
-
-      .profile-link:hover {
-        background: none;
-        color: #000000;
-      }
-
-      .profile-name {
-        display: none;
-      }
-
-      .profile-url {
-        display: inline;
-        overflow-wrap: anywhere;
-      }
-
-      a {
-        border-bottom: none;
-        color: #000000;
-      }
-
-      .keywords {
-        gap: 0 !important;
-        /* flex-wrap: nowrap !important; */
-        justify-content: start !important;
-        width: 100%;
-      }
-
-      .keyword {
-        white-space: nowrap !important;
-        padding: 0.25rem 0.5rem !important;
-      }
-
-      /* Hide certain sections when printing */
-      #projects,
-      #languages,
-      #interests,
-      #references {
-        display: none !important;
-      }
-    }
-
-    /* Responsive adjustments */
-    @media screen and (max-width: 768px) {
-      body {
-        padding: 1rem;
-      }
-
-      .header {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          "identity"
-          "contact"
-          "profiles";
-        row-gap: 1rem;
-      }
-
-      .header h1 {
-        font-size: 2rem;
-      }
-
-      .header h2 {
-        font-size: 1rem;
-      }
-
-      .contact {
-        align-items: flex-end;
-      }
-
-      .skills-grid,
-      .two-column {
-        grid-template-columns: 1fr;
-      }
-
-      .certificates-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephen Brown II — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #0a0a0a;
+    --ink:    #1c1c1c;
+    --muted:  #6a6a6a;
+    --rule:   #e0e0e0;
+    --page:   #fafaf8;
+    --accent: #c0561a;
+    --serif:  'Instrument Serif', Georgia, serif;
+    --sans:   'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 15px; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--page);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 805px;
+    margin: 0 auto;
+    padding: 48px 48px 64px;
+  }
+
+  /* ── Header ─────────────────────────────── */
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1.5px solid var(--black);
+    margin-bottom: 26px;
+  }
+
+  .title-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 5px;
+  }
+
+  .name {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: var(--black);
+  }
+
+  .contact {
+    text-align: right;
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.85;
+  }
+  .contact a { color: var(--muted); text-decoration: none; }
+  .contact a:hover { color: var(--accent); }
+
+  /* ── Sections ───────────────────────────── */
+  section { margin-bottom: 22px; }
+
+  .section-label {
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 11px;
+  }
+
+  /* ── Summary ────────────────────────────── */
+  .summary p {
+    font-size: 0.87rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  /* ── Jobs ───────────────────────────────── */
+  .job { margin-bottom: 16px; }
+  .job:last-child { margin-bottom: 0; }
+
+  .job-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+
+  .job-title { font-size: 0.87rem; font-weight: 600; color: var(--black); }
+  .job-dates  { font-size: 0.74rem; color: var(--muted); }
+
+  .job-meta {
+    font-size: 0.76rem;
+    color: var(--muted);
+    margin-bottom: 7px;
+  }
+  .job-meta a { color: var(--muted); text-decoration: none; font-weight: 500; }
+  .job-meta a:hover { color: var(--accent); }
+
+  .job-summary {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 5px;
+  }
+
+  .highlights { list-style: none; }
+  .highlights li {
+    font-size: 0.81rem;
+    font-weight: 300;
+    line-height: 1.55;
+    padding-left: 13px;
+    position: relative;
+    margin-bottom: 3px;
+    color: var(--ink);
+  }
+  .highlights li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
+  .tag {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+
+  .job-divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 14px 0;
+  }
+
+  /* ── Projects ───────────────────────────── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .project {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 10px 12px;
+  }
+
+  .project-name { font-size: 0.81rem; font-weight: 600; color: var(--black); margin-bottom: 3px; }
+  .project-name a { color: inherit; text-decoration: none; }
+  .project-name a:hover { color: var(--accent); }
+
+  .project-desc { font-size: 0.75rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; }
+
+  /* ── Skills ─────────────────────────────── */
+  .skills-domains {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 40px;
+  }
+
+  .skill-group-label {
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 6px;
+  }
+
+  .skill-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.79rem;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .skill-name { font-weight: 500; color: var(--black); }
+  .skill-level {
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .skill-level.adv { color: var(--black); }
+  .skill-level.mid { color: var(--ink); }
+
+  /* ── Footer ─────────────────────────────── */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.7fr;
+    gap: 0 40px;
+    align-items: start;
+  }
+
+  .edu-degree { font-size: 0.81rem; font-weight: 600; color: var(--black); }
+  .edu-detail { font-size: 0.73rem; color: var(--muted); margin-top: 1px; }
+
+  .cert-list { font-size: 0.76rem; color: var(--muted); line-height: 1.8; }
+  .cert-list a { color: var(--muted); text-decoration: none; }
+  .cert-list a:hover { color: var(--accent); }
+
+  /* ── Print ──────────────────────────────── */
+  @page {
+    size: letter;
+    margin: 0.3in;
+  }
+
+  @media print {
+    html { font-size: 12pt; }
+    body { background: white; }
+    .page { max-width: 100%; padding: 0; }
+
+    a { color: inherit !important; text-decoration: none !important; }
+
+    .job           { page-break-inside: avoid; }
+    .project       { page-break-inside: avoid; }
+    .section-label { page-break-after: avoid; }
+    header         { page-break-after: avoid; }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 28px 20px 48px; }
+    header { grid-template-columns: 1fr; }
+    .contact { text-align: left; }
+    .skills-domains { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 14px 0; }
+    .name { font-size: 1.9rem; }
+  }
+</style>
 </head>
-
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="identity">
-      <h1>Stephen Brown II</h1>
-      <h2>Senior Software Engineer</h2>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div>
+      <div class="title-label">Platform Support &amp; Security Engineer</div>
+      <h1 class="name">Stephen Brown II</h1>
     </div>
     <div class="contact">
-      <div class="contact-item">
-        <a href="mailto:hire@stephen.brownii.email">hire@stephen.brownii.email</a>
-      </div>
-      <div class="contact-item">
-        <a href="tel:(443) 219-4559">(443) 219-4559</a>
-      </div>
-      <div class="contact-item">
-        Delaware, OH
-      </div>
-      <div class="contact-item">
-        <a href="https://stephenbrown2.github.io/resume">stephenbrown2.github.io/resume</a>
-      </div>
-
-    </div>
-    <div class="profiles">
-      <a href="https://github.com/StephenBrown2" class="profile-link" title="GitHub">
-        <span class="profile-name">GitHub</span>
-        <span class="profile-url">https://github.com/StephenBrown2</span>
-      </a>
-      <a href="https://gitlab.com/StephenBrown2" class="profile-link" title="GitLab">
-        <span class="profile-name">GitLab</span>
-        <span class="profile-url">https://gitlab.com/StephenBrown2</span>
-      </a>
+      <a href="mailto:hire@stephen.brownii.email">hire@stephen.brownii.email</a><br>
+      (443) 219-4559 &middot; Delaware, OH<br>
+      <a href="https://github.com/StephenBrown2">github.com/StephenBrown2</a><br>
+      <a href="https://stephenbrown2.github.io/resume">stephenbrown2.github.io/resume</a>
     </div>
   </header>
 
-  <!-- Summary -->
-  <div class="summary">
-    <p>Senior software engineer with 11+ years building secure, production-scale backend services and APIs across multiple stacks and languages. Deep interest in Bitcoin and conviction about the importance of self-custody. Strong engineering fundamentals with proven ability to rapidly learn new technologies—mastered Go in months and became primary code reviewer. Experience in secure API design. Track record of cross-functional collaboration, hardening security-sensitive systems, and taking end-to-end ownership from ideation through delivery. Passionate about solving real problems through pragmatic engineering and innovative solutions.</p>
+  <!-- SUMMARY -->
+  <section class="summary">
+    <div class="section-label">Profile</div>
+    <p>12+&nbsp;years&nbsp;building and maintaining production systems. Focused&nbsp;on&nbsp;reliability, security, and developer productivity. I&nbsp;own&nbsp;problems end-to-end, write testable code, and improve the workflows around me. Most&nbsp;of&nbsp;my recent work is in Go and TypeScript; my open source time goes into personal finance tooling. I&nbsp;pick&nbsp;up new languages quickly and have a track record of doing so on the job.</p>
+  </section>
 
-  </div>
+  <!-- EXPERIENCE -->
+  <section>
+    <div class="section-label">Experience</div>
 
-  <!-- Work Experience -->
-  <section id="work">
-    <h3>Work</h3>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>Senior Software Engineer</h4>
-          </div>
-          <div class="entry-date">
-            2022-10-03 – Today
-          </div>
-        </div>
-        <div class="entry-subtitle">
-          <a href="https://jumpcloud.com">JumpCloud, Inc.</a> · Remote
-        </div>
+    <div class="job">
+      <div class="job-header">
+        <span class="job-title">Senior Software Engineer</span>
+        <span class="job-dates">Oct 2022 – May 2026</span>
       </div>
-      <ul>
-        <li>Joined internal developer acceleration team prioritizing reliability, security, and engineering productivity across platform services.</li>
-        <li>Led CI/CD modernization: migrated tests to faster runners, moved functional tests to self-hosted infrastructure, and removed legacy VPN dependencies to improve security posture and reduce wait times.</li>
-        <li>Hardened security-sensitive systems by implementing encryption and obfuscation, removing plaintext fallbacks for sensitive data, and improving key management practices.</li>
-        <li>Designed and embedded SQL migrations directly in agents to improve upgrade resilience and reduce field incidents.</li>
-        <li>Enhanced Go CI tasks and linters to raise code quality, consistency, and security across backend services.</li>
-        <li>Built onboarding tooling and documentation to reduce ramp-up time and improve team productivity.</li>
-        <li>Developed and maintained backend services using AWS-hosted Kubernetes, Docker, and container orchestration for production and local development.</li>
+      <div class="job-meta"><a href="https://jumpcloud.com">JumpCloud, Inc.</a> &middot; Remote</div>
+      <ul class="highlights">
+        <li>Moved&nbsp;to&nbsp;an internal developer acceleration team focused on reliability and security.</li>
+        <li>Owned&nbsp;CI/CD&nbsp;modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%.</li>
+        <li>Hardened&nbsp;agent&nbsp;security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime.</li>
+        <li>Raised&nbsp;code&nbsp;quality across 20+ repositories; improvements paved the path for adoption across 250+ engineers org-wide.</li>
+        <li>Consulted&nbsp;by&nbsp;dozens of engineers on design and implementation; directly mentored 5+ engineers through onboarding.</li>
+        <li>Designed&nbsp;and&nbsp;prototyped a Linux PAM module for direct JumpCloud user and password management on device.</li>
+        <li>Built&nbsp;a&nbsp;Linux tray app bringing UX parity across 30+ supported OS versions spanning Windows, macOS, and Linux.</li>
+        <li>Led&nbsp;a&nbsp;tamper-resistance and uninstall-protection initiative spanning 3 OS families; scoped and simplified research into a manageable deliverable.</li>
+        <li>Began&nbsp;incorporating&nbsp;AI assistance in 2026, cutting research and PoC development time by an estimated 25–50%.</li>
       </ul>
-      <div class="keywords">
-        <span class="keyword">Golang</span>
-        <span class="keyword">Docker</span>
-        <span class="keyword">Github</span>
-        <span class="keyword">AWS</span>
-        <span class="keyword">PostgreSQL</span>
-        <span class="keyword">MongoDB</span>
+      <div class="tags">
+        <span class="tag">Go</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">Kubernetes</span><span class="tag">AI</span><span class="tag">LLMs</span>
       </div>
     </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>Software Engineer 3</h4>
-          </div>
-          <div class="entry-date">
-            2021-05-16 – 2022-10-03
-          </div>
-        </div>
-        <div class="entry-subtitle">
-          <a href="https://jumpcloud.com">JumpCloud, Inc.</a> · Longmont, CO
-        </div>
-      </div>
-      <ul>
-        <li>Founded and grew a Linux-focused team to support client devices across multiple distributions.</li>
-        <li>Fast-tracked to a senior engineering role after demonstrating rapid learning and ownership.</li>
-        <li>Introduced static compilation (Zig/static builds) and build automation to simplify releases.</li>
-        <li>Implemented and maintained the Go on-device agent using gRPC and protobuf to communicate to backend.</li>
-        <li>Implemented and maintained backend services in Go and NodeJS, storing data in MongoDB and PostgreSQL.</li>
-        <li>Wrote Python functional tests to validate agent behavior and increase release confidence.</li>
-        <li>Rapidly learned Go and became a primary reviewer for Go code quality and best practices.</li>
-        <li>Used Docker Compose for local development and collaborated on Kubernetes backend deployments.</li>
-      </ul>
-      <div class="keywords">
-        <span class="keyword">Golang</span>
-        <span class="keyword">Docker</span>
-        <span class="keyword">Linux</span>
-        <span class="keyword">Github</span>
-        <span class="keyword">AWS</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>Software Developer</h4>
-          </div>
-          <div class="entry-date">
-            2019-10-01 – 2021-05-01
-          </div>
-        </div>
-        <div class="entry-subtitle">
-          <a href="https://objectrocket.com">ObjectRocket</a> · Remote
-        </div>
-      </div>
-      <ul>
-        <li>Architected and maintained scalable Python applications using Flask and SQLAlchemy for database abstraction</li>
-        <li>Designed and implemented RESTful APIs with comprehensive OpenAPI documentation and validation</li>
-        <li>Developed comprehensive test suites using pytest to ensure code quality and system reliability</li>
-        <li>Built new microservices in Golang using GoBuffalo framework with focus on performance and maintainability</li>
-        <li>Leveraged PostgreSQL and Redis for high-performance data storage and caching solutions</li>
-        <li>Containerized all applications using Docker for consistent development and deployment environments</li>
-        <li>Deployed and managed services in OpenShift and Kubernetes environments with custom Helm charts</li>
-        <li>Evaluated and documented AWS Fargate deployment strategies for monitoring infrastructure</li>
-        <li>Collaborated on cross-functional teams to deliver complex features and system improvements</li>
-      </ul>
-      <div class="keywords">
-        <span class="keyword">AWS</span>
-        <span class="keyword">FastAPI</span>
-        <span class="keyword">Python</span>
-        <span class="keyword">Pydantic</span>
-        <span class="keyword">Kubernetes</span>
-        <span class="keyword">Remote</span>
-        <span class="keyword">Golang</span>
-        <span class="keyword">SQLAlchemy</span>
-        <span class="keyword">Docker</span>
-        <span class="keyword">Flask</span>
-        <span class="keyword">pytest</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>Linux Administrator -> Software Engineer</h4>
-          </div>
-          <div class="entry-date">
-            2014-01-06 – 2019-10-01
-          </div>
-        </div>
-        <div class="entry-subtitle">
-          <a href="https://rackspace.com">Rackspace Technology</a> · San Antonio, TX / Remote
-        </div>
-      </div>
-      <ul>
-        <li>Architected and maintained scalable Python applications using Flask framework with comprehensive error handling and validation</li>
-        <li>Built RESTful APIs and backend services integrated with MySQL databases using SQLAlchemy ORM</li>
-        <li>Developed comprehensive test suites using pytest to ensure code quality and automated testing workflows</li>
-        <li>Implemented CI/CD pipelines using Docker, Ansible, and Jenkins for automated deployment and testing</li>
-        <li>Created Python automation tools that migrated thousands of scheduled maintenances, saving weeks of manual work</li>
-        <li>Contributed to internal Python libraries and frameworks, including Librack client library for API interactions</li>
-        <li>Developed React-based frontend components that integrated with backend APIs for maintenance scheduling systems</li>
-        <li>Led team initiatives to implement code quality standards, automated testing, and consistent development practices</li>
-        <li>Collaborated with distributed UK-based team as sole US member, demonstrating strong remote work capabilities</li>
-        <li>Built comprehensive reporting and data analysis tools for operational insights and workflow optimization</li>
-        <li>Maintained Linux systems, web servers (Apache) database servers (MySQL) and enterprise support operations</li>
-      </ul>
-      <div class="keywords">
-        <span class="keyword">Python</span>
-        <span class="keyword">Flask</span>
-        <span class="keyword">SQLAlchemy</span>
-        <span class="keyword">pytest</span>
-        <span class="keyword">MySQL</span>
-        <span class="keyword">Docker</span>
-        <span class="keyword">Jenkins</span>
-        <span class="keyword">Ansible</span>
-        <span class="keyword">React</span>
-        <span class="keyword">Remote</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>Linux System Administrator</h4>
-          </div>
-          <div class="entry-date">
-            2011-04-01 – 2013-12-30
-          </div>
-        </div>
-        <div class="entry-subtitle">
-          <a href="https://ccp.jhu.edu">Johns Hopkins University</a> · Baltimore, MD
-        </div>
-      </div>
-      <div class="entry-description">
-        <p>Bloomberg School Of Public Health, Center For Communication Programs</p>
 
+    <hr class="job-divider">
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-title">Software Engineer 3</span>
+        <span class="job-dates">May 2021 – Oct 2022</span>
       </div>
-      <ul>
-        <li>Maintained and automated servers supporting Drupal multisite deployments with LAMP stack and Apache Solr search indexes on physical and virtual hosts.</li>
-        <li>Successfully led team to adoption of git and a development > staging > production deployment workflow</li>
-        <li>Designed Puppet configuration management to maintain and deploy to development and production servers</li>
+      <div class="job-meta"><a href="https://jumpcloud.com">JumpCloud, Inc.</a> &middot; Longmont, CO</div>
+      <ul class="highlights">
+        <li>Founded&nbsp;a&nbsp;Linux-focused team (grew from 3 to 6 engineers) supporting client devices across multiple distros.</li>
+        <li>Built&nbsp;and&nbsp;maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed.</li>
+        <li>Introduced&nbsp;Zig-based&nbsp;static compilation, enabling amd64 and arm64 support across 10+ Linux distributions spanning RHEL&nbsp;7 to Ubuntu&nbsp;22.04.</li>
       </ul>
-      <div class="keywords">
-        <span class="keyword">Linux</span>
-        <span class="keyword">Git</span>
-        <span class="keyword">Puppet</span>
-        <span class="keyword">Drupal</span>
-        <span class="keyword">Vagrant</span>
+      <div class="tags">
+        <span class="tag">Go</span><span class="tag">gRPC</span><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">Docker</span>
       </div>
     </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>Technical Support & Testing</h4>
-          </div>
-          <div class="entry-date">
-            2010-04-01 – 2011-04-01
-          </div>
-        </div>
-        <div class="entry-subtitle">
-          Various Employers · Baltimore / Columbia, MD
-        </div>
-      </div>
-      <div class="entry-description">
-        <p>Multiple entry-level roles after college providing in-store and on-site technical support, desktop/server troubleshooting, and tier-3 test escalations.</p>
 
+    <hr class="job-divider">
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-title">Software Developer</span>
+        <span class="job-dates">Oct 2019 – May 2021</span>
       </div>
-      <ul>
-        <li>Performed diagnostics, repair, and support for Windows desktops and servers in retail and on-site environments.</li>
-        <li>Resolved and escalated complex software issues as a Tier-3 test specialist; coordinated with engineering to close high-impact tickets.</li>
-        <li>Delivered customer-facing support and communicated technical issues clearly to non-technical audiences; contributed to process improvements.</li>
+      <div class="job-meta"><a href="https://objectrocket.com">ObjectRocket</a> &middot; Remote</div>
+      <ul class="highlights">
+        <li>Maintained&nbsp;Python&nbsp;applications and libraries; contributed to 12+ microservices in Go (GoBuffalo).</li>
+        <li>Deployed&nbsp;across&nbsp;Docker, OpenShift, and Kubernetes environments.</li>
       </ul>
-      <div class="keywords">
-        <span class="keyword">Troubleshooting</span>
-        <span class="keyword">Debugging</span>
-        <span class="keyword">Testing</span>
-        <span class="keyword">Customer Service</span>
+      <div class="tags">
+        <span class="tag">Go</span><span class="tag">Python</span><span class="tag">Kubernetes</span><span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <hr class="job-divider">
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-title">Linux Admin → Automation Engineer</span>
+        <span class="job-dates">Jan 2014 – Oct 2019</span>
+      </div>
+      <div class="job-meta"><a href="https://rackspace.com">Rackspace</a> &middot; San Antonio, TX / Remote</div>
+      <ul class="highlights">
+        <li>Built&nbsp;a&nbsp;core internal web platform from scratch (React/JS, Python/Flask, MySQL) serving a team of 10–20 engineers.</li>
+        <li>Authored&nbsp;Python&nbsp;client libraries and automation tooling used by an estimated 250–500 engineers org-wide.</li>
+        <li>Implemented&nbsp;3&nbsp;CI/CD pipelines (dev/staging/production) in Jenkins; led cross-team code quality and onboarding improvements.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">Linux</span><span class="tag">Ansible</span><span class="tag">Jenkins</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- OPEN SOURCE -->
+  <section>
+    <div class="section-label">Open Source &amp; Projects</div>
+    <div class="projects-grid">
+
+      <div class="project">
+        <div class="project-name"><a href="https://github.com/actualbudget/actual">Actual Budget</a></div>
+        <div class="project-desc">Contributor&nbsp;to&nbsp;a local-first personal finance app (26k★). Features&nbsp;and&nbsp;fixes across TypeScript/React codebase; built multi-account import plugin and custom themes.</div>
+        <div class="project-tags">
+          <span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Node.js</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-name"><a href="https://github.com/StephenBrown2/actual-multi-account-import">actual-multi-account-import</a></div>
+        <div class="project-desc">Actual&nbsp;Budget&nbsp;plugin to import transactions across multiple accounts in one operation.</div>
+        <div class="project-tags">
+          <span class="tag">TypeScript</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-name"><a href="https://github.com/StephenBrown2/ynab-export">ynab-export</a></div>
+        <div class="project-desc">CLI&nbsp;tool&nbsp;to export YNAB budget data as JSON for migration or archival.</div>
+        <div class="project-tags">
+          <span class="tag">TypeScript</span><span class="tag">CLI</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-name">Rackspace Internal Tooling</div>
+        <div class="project-desc">Built&nbsp;internal&nbsp;Python API client and Flask web/API framework, used org-wide.</div>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">Flask</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="section-label">Skills</div>
+    <div class="skills-domains">
+
+      <div>
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-item"><span class="skill-name">Go</span><span class="skill-level adv">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">Python</span><span class="skill-level adv">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">TypeScript</span><span class="skill-level mid">Intermediate</span></div>
+        <div class="skill-item"><span class="skill-name">React</span><span class="skill-level mid">Intermediate</span></div>
+        <div class="skill-item"><span class="skill-name">Perl</span><span class="skill-level">Familiar</span></div>
+      </div>
+
+      <div>
+        <div class="skill-group-label">Infrastructure & Cloud</div>
+        <div class="skill-item"><span class="skill-name">Docker</span><span class="skill-level adv">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">Ansible</span><span class="skill-level adv">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">Kubernetes</span><span class="skill-level mid">Intermediate</span></div>
+        <div class="skill-item"><span class="skill-name">AWS</span><span class="skill-level mid">Intermediate</span></div>
+        <div class="skill-item"><span class="skill-name">Terraform</span><span class="skill-level">Beginner</span></div>
+      </div>
+
+      <div>
+        <div class="skill-group-label">Systems</div>
+        <div class="skill-item"><span class="skill-name">Linux</span><span class="skill-level adv">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">Bash / Shell</span><span class="skill-level adv">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">Git / Jujutsu</span><span class="skill-level adv">Advanced</span></div>
+      </div>
+
+      <div>
+        <div class="skill-group-label">Databases</div>
+        <div class="skill-item"><span class="skill-name">PostgreSQL</span><span class="skill-level adv">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">MongoDB</span><span class="skill-level adv">Advanced</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION + CERTS -->
+  <section>
+    <div class="section-label">Education &amp; Certifications</div>
+    <div class="footer-grid">
+      <div>
+        <div class="edu-degree">B.S. Computer Information Systems</div>
+        <div class="edu-detail">LeTourneau University &middot; 2009</div>
+      </div>
+      <div class="cert-list">
+        <a href="https://rhtapps.redhat.com/verify?certId=140-027-434">Red Hat Certified Engineer &amp; RHCSA</a>
+        &nbsp;&middot;&nbsp;
+        Triplebyte Generalist (2020)
+        &nbsp;&middot;&nbsp;
+        LPIC-1
+        &nbsp;&middot;&nbsp;
+        CompTIA Linux+, Server+, Security+, Network+, A+
       </div>
     </div>
   </section>
 
-  <!-- Projects -->
-  <section id="projects">
-    <h3>Projects</h3>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>
-              <a href="https://github.com/pydantic/pydantic/issues?q=author%3AStephenBrown2">Pydantic</a>
-            </h4>
-          </div>
-          <div class="entry-date">
-            2020-01-01 – 2021-12-31
-          </div>
-        </div>
-        <div class="entry-subtitle">Pydantic Community</div>
-      </div>
-      <div class="entry-description">
-        <p>Open source data validation and settings management using Python type annotations</p>
-
-      </div>
-      <ul>
-        <li>Contributed bug fixes and feature improvements to Pydantic 1.x during active development</li>
-        <li>Participated in issue discussions and provided detailed bug reports to improve library stability</li>
-        <li>Enhanced data validation capabilities used by thousands of Python developers worldwide</li>
-      </ul>
-      <div class="keywords">
-        <span class="keyword">Python</span>
-        <span class="keyword">Data Validation</span>
-        <span class="keyword">Type Annotations</span>
-        <span class="keyword">Open Source</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>
-              <a href="https://github.rackspace.com/emcee/emcee">Emcee</a>
-            </h4>
-          </div>
-          <div class="entry-date">
-            2018-01-31 – 2019-10-01
-          </div>
-        </div>
-        <div class="entry-subtitle">Rackspace Hosting</div>
-      </div>
-      <div class="entry-description">
-        <p>An (unreleased) Python 3.6+ client for the internal Maintenance Calendar</p>
-
-      </div>
-      <ul>
-        <li>Learned client design practices and version controlled releases</li>
-      </ul>
-      <div class="keywords">
-        <span class="keyword">Python</span>
-        <span class="keyword">JSON</span>
-        <span class="keyword">API</span>
-        <span class="keyword">Types</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>
-              <a href="https://stepladder.rax.io/about">Stepladder</a>
-            </h4>
-          </div>
-          <div class="entry-date">
-            2017-10-17 – 2019-10-01
-          </div>
-        </div>
-        <div class="entry-subtitle">Rackspace Hosting</div>
-      </div>
-      <div class="entry-description">
-        <p>A Flask-based web and API framework for internal tools</p>
-
-      </div>
-      <div class="keywords">
-        <span class="keyword">Python</span>
-        <span class="keyword">Javascript</span>
-        <span class="keyword">HTML</span>
-        <span class="keyword">JSON</span>
-        <span class="keyword">API</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>
-              <a href="https://github.rackspace.com/GTSLAE/mono/tree/master/hammertime">Hammertime</a>
-            </h4>
-          </div>
-          <div class="entry-date">
-            2018-09-11 – 2019-10-01
-          </div>
-        </div>
-        <div class="entry-subtitle">Rackspace Hosting</div>
-      </div>
-      <div class="entry-description">
-        <p>CLI for interacting with Customer Servers</p>
-
-      </div>
-      <div class="keywords">
-        <span class="keyword">Python</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>
-              <a href="https://stepladder.rax.io/librack_docs">Librack</a>
-            </h4>
-          </div>
-          <div class="entry-date">
-            2018-01-02 – 2019-10-01
-          </div>
-        </div>
-        <div class="entry-subtitle">Rackspace Hosting</div>
-      </div>
-      <div class="entry-description">
-        <p>A fully featured Python library with objects covering many Rackspace systems, meant to be a one stop shop for other python projects</p>
-
-      </div>
-      <div class="keywords">
-        <span class="keyword">Python</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>
-              <a href="https://stepladder.rax.io/automaint">Automaint</a>
-            </h4>
-          </div>
-          <div class="entry-date">
-            2016-09-06 – 2017-09-20
-          </div>
-        </div>
-        <div class="entry-subtitle">Rackspace Hosting</div>
-      </div>
-      <div class="entry-description">
-        <p>A Jinja2 and Flask application running an Angular based web UI to generate and quality-check maintenance templates for execution</p>
-
-      </div>
-      <div class="keywords">
-        <span class="keyword">Python</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>
-              <a href="https://github.rackspace.com/SupportTools/intensify/blob/master/README.md">Intensify</a>
-            </h4>
-          </div>
-          <div class="entry-date">
-            2015-10-23 – 2016-10-06
-          </div>
-        </div>
-        <div class="entry-subtitle">Rackspace Hosting</div>
-      </div>
-      <div class="entry-description">
-        <p>CLI tool/Python module for managing Intensive usernames and passwords</p>
-
-      </div>
-      <div class="keywords">
-        <span class="keyword">Python</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>
-              <a href="https://github.rackspace.com/GTSLAE/mono/tree/master/hammertime">Overtime/Hammertime</a>
-            </h4>
-          </div>
-          <div class="entry-date">
-            2015-03-08 – Today
-          </div>
-        </div>
-        <div class="entry-subtitle">Rackspace Hosting</div>
-      </div>
-      <div class="entry-description">
-        <p>CLI for interacting with Customer Servers</p>
-
-      </div>
-      <div class="keywords">
-        <span class="keyword">Python</span>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>
-              <a href="https://www.k4health.org">Knowledge for Health</a>
-            </h4>
-          </div>
-          <div class="entry-date">
-            2011-04-01 – 2013-12-30
-          </div>
-        </div>
-        <div class="entry-subtitle">Johns Hopkins University - CCP</div>
-      </div>
-      <div class="keywords">
-        <span class="keyword">Linux</span>
-        <span class="keyword">Drupal</span>
-        <span class="keyword">LAMP</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills">
-    <h3>Skills</h3>
-    <div class="skills-grid">
-      <div class="skill-category">
-        <div class="skill-name">Software languages</div>
-        <div class="skill-keywords">
-          Python (Advanced) · Golang (Advanced)
-        </div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-name">Python Frameworks & Libraries</div>
-        <div class="skill-keywords">
-          Flask (Advanced) · FastAPI (Intermediate) · SQLAlchemy (Advanced) · Pydantic (Advanced) · pytest (Advanced)
-        </div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-name">Databases</div>
-        <div class="skill-keywords">
-          PostgreSQL (Advanced) · Redis (Advanced) · MySQL (Advanced)
-        </div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-name">API Technologies</div>
-        <div class="skill-keywords">
-          OpenAPI (Advanced) · REST APIs (Advanced) · JSON (Advanced)
-        </div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-name">Development practices</div>
-        <div class="skill-keywords">
-          Docker (Advanced) · Git (Advanced)
-        </div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-name">Configuration management</div>
-        <div class="skill-keywords">
-          Bash/Shell scripting (Advanced) · Ansible (Advanced)
-        </div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-name">Infrastructure</div>
-        <div class="skill-keywords">
-          Linux (Advanced) · Kubernetes (Beginner) · AWS (Intermediate) · Terraform (Beginner)
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section id="education">
-    <h3>Education</h3>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-meta">
-          <div class="entry-title">
-            <h4>Bachelor of Science, Computer Information Systems</h4>
-          </div>
-          <div class="entry-date">
-            2005-08-01 – 2009-12-15
-          </div>
-        </div>
-        <div class="entry-subtitle">
-          LeTourneau University
-        </div>
-      </div>
-      <!--
-      <div class="entry-description" id="gpa">: 2.4</div> -->
-    </div>
-  </section>
-
-  <!-- Certificates -->
-  <section id="certificates">
-    <h3>Certificates</h3>
-    <div class="certificates-grid">
-      <div class="certificate-item">
-        <div class="certificate-title">Triplebyte certified Generalist Software Engineer</div>
-        <div class="certificate-meta">Triplebyte · 2020-08-20
-        </div>
-      </div>
-      <div class="certificate-item">
-        <div class="certificate-title">Red Hat Certified Engineer (ID: 140-027-434)</div>
-        <div class="certificate-meta">Red hat · 2014-03-12
-        </div>
-      </div>
-      <div class="certificate-item">
-        <div class="certificate-title">Red Hat Certified System Administrator (ID: 140-027-434)</div>
-        <div class="certificate-meta">Red Hat · 2014-02-19
-        </div>
-      </div>
-      <div class="certificate-item">
-        <div class="certificate-title">LPIC-1 (LPI ID: LPI000223384, Verification Code: ltd26ep79p)</div>
-        <div class="certificate-meta">Linux Professional Institute · 2010-12-30
-        </div>
-      </div>
-      <div class="certificate-item">
-        <div class="certificate-title">Linux+ (Powered by LPI)</div>
-        <div class="certificate-meta">CompTIA · 2010-12-30
-        </div>
-      </div>
-      <div class="certificate-item">
-        <div class="certificate-title">Server+</div>
-        <div class="certificate-meta">CompTIA · 2010-12-30
-        </div>
-      </div>
-      <div class="certificate-item">
-        <div class="certificate-title">Security+</div>
-        <div class="certificate-meta">CompTIA · 2010-03-02
-        </div>
-      </div>
-      <div class="certificate-item">
-        <div class="certificate-title">Network+</div>
-        <div class="certificate-meta">CompTIA · 2010-02-08
-        </div>
-      </div>
-      <div class="certificate-item">
-        <div class="certificate-title">A+ (IT Technician)</div>
-        <div class="certificate-meta">CompTIA · 2010-01-21
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Awards -->
-
-  <!-- Publications -->
-
-  <!-- Volunteer -->
-
-  <!-- Two-column sections -->
-  <div class="two-column">
-    <!-- Languages -->
-    <section id="languages">
-      <h3>Languages</h3>
-      <div class="compact-list">
-        <div class="compact-item">
-          <div class="compact-title">English</div>
-          <div class="compact-meta">Native</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Interests -->
-    <section id="interests">
-      <h3>Interests</h3>
-      <div class="compact-list">
-        <div class="compact-item">
-          <div class="compact-title">Bitcoin</div>
-          <div class="compact-meta">Decentralization · Financial Sovereignty · Sound Money</div>
-        </div>
-        <div class="compact-item">
-          <div class="compact-title">Tesla</div>
-          <div class="compact-meta">Electric · Sustainable · Energy · Storage · Transportation</div>
-        </div>
-        <div class="compact-item">
-          <div class="compact-title">Solar Power</div>
-          <div class="compact-meta">Electric · Sustainable · Energy</div>
-        </div>
-        <div class="compact-item">
-          <div class="compact-title">Personal Finance</div>
-          <div class="compact-meta">Money · Stewardship</div>
-        </div>
-        <div class="compact-item">
-          <div class="compact-title">Home Automation</div>
-          <div class="compact-meta">Automation · Techno-toys</div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- References -->
-  <section id="references">
-    <h3>References</h3>
-    <div class="references-grid">
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Eva Aldana</h4><span class="reference-role">Former Manager</span>
-        </div>
-      </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Jesse Wiles</h4><span class="reference-role">Former Teammate</span>
-        </div>
-      </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Freddy Esteban Perez</h4><span class="reference-role">Former Teammate</span>
-        </div>
-      </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Duncan H. Murray</h4><span class="reference-role">Former Manager</span>
-        </div>
-      </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Dan Hand</h4><span class="reference-role">Former Teammate</span>
-        </div>
-      </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Sam Sharpe</h4><span class="reference-role">Former Teammate</span>
-        </div>
-      </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Ryan Mazurek</h4><span class="reference-role">Former Manager</span>
-        </div>
-      </div>
-      <div class="entry reference-entry">
-        <div class="entry-header reference-header">
-          <h4>Micah Culpepper</h4><span class="reference-role">Former Colleague</span>
-        </div>
-      </div>
-    </div>
-  </section>
+</div>
 </body>
-
 </html>
