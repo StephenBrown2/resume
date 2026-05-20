@@ -6,7 +6,8 @@
 <title>Stephen Brown II — Resume</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
   :root {
     --black:  #0a0a0a;
@@ -16,7 +17,7 @@
     --page:   #fafaf8;
     --accent: #c0561a;
     --serif:  'Instrument Serif', Georgia, serif;
-    --sans:   'Plus Jakarta Sans', system-ui, sans-serif;
+    --sans:   'Inter', 'Inter Variable', system-ui, sans-serif;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,6 +29,7 @@
     color: var(--ink);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'liga' 1, 'calt' 1, 'ss01' 1, 'ss02' 1, 'ss07' 1;
   }
 
   .page {
@@ -230,6 +232,32 @@
   .cert-list a { color: var(--muted); text-decoration: none; }
   .cert-list a:hover { color: var(--accent); }
 
+  /* ── Testimonial ────────────────────────────── */
+  .testimonial {
+    border-left: 2px solid var(--accent);
+    padding: 10px 16px;
+    margin-top: 4px;
+  }
+
+  .testimonial blockquote {
+    font-size: 0.82rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .testimonial cite {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--muted);
+    font-style: normal;
+    letter-spacing: 0.02em;
+  }
+
+  .print-only { display: none; }
+
   /* ── Print ──────────────────────────────── */
   @page {
     size: letter;
@@ -241,6 +269,7 @@
     body { background: white; }
     .page { max-width: 100%; padding: 0; }
 
+    .print-only { display: inline; }
     a { color: inherit !important; text-decoration: none !important; }
 
     .job           { page-break-inside: avoid; }
@@ -266,14 +295,13 @@
   <!-- HEADER -->
   <header>
     <div>
-      <div class="title-label">Platform Support &amp; Security Engineer</div>
       <h1 class="name">Stephen Brown II</h1>
     </div>
     <div class="contact">
       <a href="mailto:hire@stephen.brownii.email">hire@stephen.brownii.email</a><br>
       (443) 219-4559 &middot; Delaware, OH<br>
       <a href="https://github.com/StephenBrown2">github.com/StephenBrown2</a><br>
-      <a href="https://stephenbrown2.github.io/resume">stephenbrown2.github.io/resume</a>
+      <span class="print-only"><a href="https://stephenbrown2.github.io/resume">stephenbrown2.github.io/resume</a></span>
     </div>
   </header>
 
@@ -378,26 +406,26 @@
       </div>
 
       <div class="project">
-        <div class="project-name"><a href="https://github.com/StephenBrown2/actual-multi-account-import">actual-multi-account-import</a></div>
-        <div class="project-desc">Actual&nbsp;Budget&nbsp;plugin to import transactions across multiple accounts in one operation.</div>
+        <div class="project-name"><a href="https://alpha.lunchmoney.dev/v2/docs">Lunch Money v2 API</a></div>
+        <div class="project-desc">Contributed to the design of the v2 developer API for Lunch Money, a personal finance app. Currently in open alpha.</div>
         <div class="project-tags">
-          <span class="tag">TypeScript</span>
+          <span class="tag">API Design</span><span class="tag">Personal Finance</span>
         </div>
       </div>
 
       <div class="project">
-        <div class="project-name"><a href="https://github.com/StephenBrown2/ynab-export">ynab-export</a></div>
-        <div class="project-desc">CLI&nbsp;tool&nbsp;to export YNAB budget data as JSON for migration or archival.</div>
+        <div class="project-name"><a href="https://github.com/StephenBrown2/fold-budget">fold-budget</a></div>
+        <div class="project-desc">Converts&nbsp;Fold&nbsp;Bitcoin rewards card CSV statements to a standard budget import format, including memos.</div>
         <div class="project-tags">
-          <span class="tag">TypeScript</span><span class="tag">CLI</span>
+          <span class="tag">Go</span><span class="tag">Bitcoin</span><span class="tag">Personal Finance</span>
         </div>
       </div>
 
       <div class="project">
-        <div class="project-name">Rackspace Internal Tooling</div>
-        <div class="project-desc">Built&nbsp;internal&nbsp;Python API client and Flask web/API framework, used org-wide.</div>
+        <div class="project-name"><a href="https://github.com/StephenBrown2/actual-wallos-import">actual-wallos-import</a></div>
+        <div class="project-desc">Imports&nbsp;Wallos&nbsp;subscription tracker data into Actual Budget as scheduled transactions, via export file or direct API.</div>
         <div class="project-tags">
-          <span class="tag">Python</span><span class="tag">Flask</span>
+          <span class="tag">TypeScript</span><span class="tag">Actual Budget</span>
         </div>
       </div>
 
@@ -460,6 +488,15 @@
         &nbsp;&middot;&nbsp;
         CompTIA Linux+, Server+, Security+, Network+, A+
       </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section>
+    <div class="section-label">Reference</div>
+    <div class="testimonial">
+      <blockquote>"Stephen is a very thoughtful, meticulous engineer. I can count on him to understand the nuances of technologies we work with, and leverage them to make our products more robust."</blockquote>
+      <cite><a href="https://www.linkedin.com/in/scott-thurston-80031/" style="color:var(--muted);text-decoration:none;">Scott Thurston, Principal Software Engineer, JumpCloud</a></cite>
     </div>
   </section>
 
