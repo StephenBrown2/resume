@@ -161,7 +161,7 @@ skills:
     domain: Languages
     keywords:
       - On-device agents and backend services; comfortable with concurrency, gRPC, and code review
-    years: 4
+    years: 6
   - name: Python
     level: Advanced
     domain: Languages
@@ -191,7 +191,7 @@ skills:
     domain: Infrastructure & Cloud
     keywords:
       - Portable development and deployment workflows
-    years: 3
+    years: 10
   - name: Linux
     level: Advanced
     domain: Systems
@@ -203,19 +203,25 @@ skills:
     domain: Systems
     keywords:
       - Daily use for source control, branching, and code review
-    years: 9
+    years: 13
   - name: PostgreSQL
     level: Advanced
     domain: Databases
     keywords:
       - Schema design, migrations, and integration in production services
-    years: 3
+    years: 6
   - name: MongoDB
     level: Advanced
     domain: Databases
     keywords:
       - Document store usage in production backend services
-    years: 3
+    years: 5
+  - name: SQLite
+    level: Advanced
+    domain: Databases
+    keywords:
+      - Embedded database usage in production and local-first applications
+    years: 8
   - name: Kubernetes
     level: Intermediate
     domain: Infrastructure & Cloud
@@ -227,19 +233,19 @@ skills:
     domain: Infrastructure & Cloud
     keywords:
       - EC2, hosted Kubernetes, and basic service infrastructure
-    years: 1
+    years: 5
   - name: Ansible
     level: Advanced
     domain: Infrastructure & Cloud
     keywords:
       - Infrastructure configuration management
-    years: 3
+    years: 7
   - name: Terraform
     level: Beginner
     domain: Infrastructure & Cloud
     keywords:
       - Infrastructure as code for managing deployments
-    years: 1
+    years: 2
 certificates:
   - name: Triplebyte certified Generalist Software Engineer
     date: "2020-08-20"
@@ -301,26 +307,67 @@ interests:
   - name: Solar Power
     summary: It powers the earth, why not your house?
 references:
-  - name: Scott Thurston - Staff Software Engineer
-  - name: Daniel Judge - Manager
-  - name: Jose Palma - Staff Software Engineer
-  - name: Steve Zazeski - Senior Software Engineer
-  - name: Benjamin Schneider - Senior Software Engineer
-  - name: David Harris - Senior QA Engineer
-  - name: Julio César López Hernández - Senior Software Engineer
+  - name: Scott Thurston
+    role: Principal Software Engineer at JumpCloud
+    category: Senior colleague (non-managing)
+    url: https://www.linkedin.com/in/scott-thurston-80031/
+    email: scott.thurston@jumpcloud.com
+    summary: Stephen is a very thoughtful, meticulous engineer. I can count on him to understand the nuances of technologies we work with, and leverage them to make our products more robust.
+  - name: Jose Palma
+    role: Staff Software Engineer at JumpCloud
+    category: Senior colleague (non-managing)
+    url: https://www.linkedin.com/in/joserpalma/
+    email: jose.palma@jumpcloud.com
+    summary: Stephen is a great software engineer with a technical focus in Go, Bash, and device and identity management, along with strong foundational Linux skills. In our time working together, he demonstrated a practical understanding of these technologies and a straightforward approach to problem-solving. He will bring these specific technical capabilities to any team looking to leverage his skill set.
+  - name: Steve Zazeski
+    role: Senior Software Engineer at JumpCloud
+    category: Teammate
+    url: https://www.linkedin.com/in/stevezazeski/
+    email: steve.zazeski@jumpcloud.com
+    summary: Stephen is an exceptional teammate with an impressive command of Linux systems and a proactive approach to software quality. He has a keen eye for system architecture, often identifying edge cases and integration issues before they can escalate. As a curious, tech-forward developer, he elevates the work of everyone around him. I highly recommend him and truly appreciate the opportunity to work alongside him on the devices team.
+  - name: Benjamin Schneider
+    role: Senior Software Engineer at JumpCloud
+    category: Teammate
+    url: https://www.linkedin.com/in/benjamin-schneider-5a865723/
+    email: benjamin.schneider@jumpcloud.com
+    summary: Stephen was a joy to work with at JumpCloud. He takes a very thorough and intelligent approach to engineering and brings with him a wealth of experience and knowledge.
+  - name: Daniel Judge
+    role: Senior Engineering Manager at JumpCloud
+    category: Manager
+    email: daniel.judge@jumpcloud.com
+  - name: David Gaffield
+    role: Director, Engineering at JumpCloud
+    category: Manager
+    email: david.gaffield@jumpcloud.com
+  - name: David Harris
+    role: Senior QA Engineer at JumpCloud
+    category: Teammate
+    email: david.harris@jumpcloud.com
+  - name: Julio César López Hernández
+    role: Senior Software Engineer at JumpCloud
+    category: Teammate
+    email: julio.hernandez@jumpcloud.com
   - name: Eva Aldana
-    reference: Former Manager · eva.coche@rackspace.com
+    category: Manager
+    email: eva.coche@rackspace.com
   - name: Jesse Wiles
-    reference: Former Teammate · Jesse.Wiles@rackspace.com
+    category: Teammate
+    email: Jesse.Wiles@rackspace.com
   - name: Freddy Esteban Perez
-    reference: Former Teammate · Freddy.Perez@rackspace.com
+    category: Teammate
+    email: Freddy.Perez@rackspace.com
   - name: Duncan H. Murray
-    reference: Former Manager · duncan.h.murray@rackspace.co.uk
+    category: Manager
+    email: duncan.h.murray@rackspace.co.uk
   - name: Dan Hand
-    reference: Former Teammate · email@danielhand.io
+    category: Teammate
+    email: email@danielhand.io
   - name: Sam Sharpe
-    reference: Former Teammate · sam.sharpe@rackspace.co.uk
+    category: Teammate
+    email: sam.sharpe@rackspace.co.uk
   - name: Ryan Mazurek
-    reference: Former Manager · ryan.mazurek@rackspace.com
+    category: Manager
+    email: ryan.mazurek@rackspace.com
   - name: Micah Culpepper
-    reference: Colleague · micah.culpepper@rackspace.com
+    category: Colleague
+    email: micah.culpepper@rackspace.com
