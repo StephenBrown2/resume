@@ -124,40 +124,40 @@ projects:
     roles:
       - Contributor
     type: open-source
-  - name: actual-multi-account-import
-    description: Plugin for Actual Budget to import transactions across multiple accounts in a single operation
+  - name: Lunch Money v2 API
+    description: Contributed to the design of the v2 developer API for Lunch Money, a personal finance app. Currently in open alpha.
     highlights: []
     keywords:
-      - TypeScript
-      - JavaScript
-    startDate: "2024-06-01"
-    url: https://github.com/StephenBrown2/actual-multi-account-import
+      - API Design
+      - Personal Finance
+    startDate: "2025-01-01"
+    url: https://alpha.lunchmoney.dev/v2/docs
     roles:
-      - Creator
-    type: side-project
-  - name: ynab-export
-    description: CLI tool to export YNAB budget data as JSON for migration or archival
+      - Contributor
+    type: open-source
+  - name: fold-budget
+    description: Converts Fold Bitcoin rewards card CSV statements to a standard budget import format, including memos.
     highlights: []
     keywords:
-      - TypeScript
-      - CLI
+      - Go
+      - Bitcoin
+      - Personal Finance
     startDate: "2024-01-01"
-    url: https://github.com/StephenBrown2/ynab-export
+    url: https://github.com/StephenBrown2/fold-budget
     roles:
       - Creator
     type: side-project
-  - name: Rackspace Internal Tooling
-    description: Built internal Python API client and Flask web/API framework, used org-wide.
+  - name: actual-wallos-import
+    description: Imports Wallos subscription tracker data into Actual Budget as scheduled transactions, via export file or direct API.
     highlights: []
     keywords:
-      - Python
-      - Flask
-      - API
-    startDate: "2017-10-17"
-    endDate: "2019-10-01"
+      - TypeScript
+      - Actual Budget
+    startDate: "2024-01-01"
+    url: https://github.com/StephenBrown2/actual-wallos-import
     roles:
       - Creator
-    type: internal
+    type: side-project
 skills:
   - name: Bash/Shell scripting
     level: Advanced
