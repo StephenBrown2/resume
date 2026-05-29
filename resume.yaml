@@ -162,98 +162,82 @@ skills:
   - name: Bash/Shell scripting
     level: Advanced
     domain: Systems
-    keywords:
-      - Write reliable shell scripts for automation and operational tasks
+    summary: Write reliable shell scripts for automation and operational tasks
     years: 15
   - name: Golang
     level: Advanced
     domain: Languages
-    keywords:
-      - On-device agents and backend services; comfortable with concurrency, gRPC, and code review
+    summary: On-device agents and backend services; comfortable with concurrency, gRPC, and code review
     years: 6
   - name: Python
     level: Advanced
     domain: Languages
-    keywords:
-      - Backend services, automation, test tooling, and CLI tools; familiar with async patterns
+    summary: Backend services, automation, test tooling, and CLI tools; familiar with async patterns
     years: 8
   - name: TypeScript
     level: Intermediate
     domain: Languages
-    keywords:
-      - Active contributor to a large TypeScript/React open source project (Actual Budget)
+    summary: Active contributor to a large TypeScript/React open source project (Actual Budget)
     years: 2
   - name: React
     level: Intermediate
     domain: Languages
-    keywords:
-      - Modern React with hooks and TypeScript; active open source contributor (Actual Budget)
+    summary: Modern React with hooks and TypeScript; active open source contributor (Actual Budget)
     years: 5
   - name: Perl
     level: Familiar
     domain: Languages
-    keywords:
-      - Fluent as a Linux admin; syntax still familiar, not actively used in the last decade
+    summary: Fluent as a Linux admin; syntax still familiar, not actively used in the last decade
     years: 3
   - name: Docker
     level: Advanced
     domain: Infrastructure & Cloud
-    keywords:
-      - Portable development and deployment workflows
+    summary: Portable development and deployment workflows
     years: 10
   - name: Linux
     level: Advanced
     domain: Systems
-    keywords:
-      - Extensive production and development experience across distributions
+    summary: Extensive production and development experience across distributions
     years: 16
   - name: Git / Jujutsu
     level: Advanced
     domain: Systems
-    keywords:
-      - Daily use for source control, branching, and code review
+    summary: Daily use for source control, branching, and code review
     years: 15
   - name: PostgreSQL
     level: Advanced
     domain: Databases
-    keywords:
-      - Schema design, migrations, and integration in production services
+    summary: Schema design, migrations, and integration in production services
     years: 6
   - name: MongoDB
     level: Advanced
     domain: Databases
-    keywords:
-      - Document store usage in production backend services
+    summary: Document store usage in production backend services
     years: 5
   - name: SQLite
     level: Advanced
     domain: Databases
-    keywords:
-      - Embedded database usage in production and local-first applications
+    summary: Embedded database usage in production and local-first applications
     years: 8
   - name: Kubernetes
     level: Intermediate
     domain: Infrastructure & Cloud
-    keywords:
-      - Read and interpret Helm charts and manifests; familiar with deployment concepts
+    summary: Read and interpret Helm charts and manifests; familiar with deployment concepts
     years: 6
   - name: AWS
     level: Intermediate
     domain: Infrastructure & Cloud
-    keywords:
-      - EC2, hosted Kubernetes, and basic service infrastructure
+    summary: EC2, hosted Kubernetes, and basic service infrastructure
     years: 5
   - name: Ansible
     level: Advanced
     domain: Infrastructure & Cloud
-    keywords:
-      - Infrastructure configuration management
+    summary: Infrastructure configuration management
     years: 7
   - name: Terraform
     level: Beginner
     domain: Infrastructure & Cloud
-    keywords:
-      - Infrastructure as code for managing deployments
+    summary: Infrastructure as code for managing deployments
     years: 2
 certificates:
   - name: Triplebyte certified Generalist Software Engineer
