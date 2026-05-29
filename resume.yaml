@@ -179,7 +179,7 @@ skills:
     domain: Languages
     keywords:
       - Modern React with hooks and TypeScript; active open source contributor (Actual Budget)
-    years: 3
+    years: 5
   - name: Perl
     level: Familiar
     domain: Languages
@@ -203,7 +203,7 @@ skills:
     domain: Systems
     keywords:
       - Daily use for source control, branching, and code review
-    years: 13
+    years: 15
   - name: PostgreSQL
     level: Advanced
     domain: Databases
