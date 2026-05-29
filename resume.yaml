@@ -17,6 +17,15 @@ basics:
     - network: GitLab
       username: StephenBrown2
       url: https://gitlab.com/StephenBrown2
+disposition:
+  travel: 25
+  authorization: citizen
+  commitment:
+    - permanent
+    - full-time
+  remote: true
+  relocation:
+    willing: false
 work:
   - company: JumpCloud, Inc.
     position: Senior Software Engineer
