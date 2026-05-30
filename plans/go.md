@@ -1,0 +1,285 @@
+# Go implementation plan
+
+**Read `plans/shared-context.md` first.** This document covers only Go-specific decisions.
+
+---
+
+## Goal
+
+Replace the two existing schema-type files (`json-resume.go`, `fresh-resume.go`) and the `goresume` CLI dependency with a single self-contained Go program in `go/`. The program reads `resume.yaml`, groups work entries by employer, and writes `docs/index.html`.
+
+---
+
+## Language version and module
+
+- **Go 1.24** (latest stable as of 2025). Use `go 1.24` in `go.mod`.
+- Module path: `github.com/StephenBrown2/resume/go` (or `resume-renderer` — use whatever fits `go.mod` conventions for a local tool).
+- Use Go's standard library wherever possible; external dependencies should be minimal.
+
+---
+
+## Dependencies
+
+| Package | Purpose |
+|---|---|
+| `gopkg.in/yaml.v3` | YAML parsing |
+| `html/template` | HTML rendering with auto-escaping |
+
+No other external dependencies. `html/template` handles HTML escaping automatically; use it instead of `text/template`.
+
+---
+
+## File structure
+
+```
+go/
+  go.mod
+  go.sum
+  main.go         # CLI entry point, flag parsing
+  resume.go       # data model structs
+  render.go       # HTML rendering logic, template funcs
+  template.go     # embedded HTML template string (using go:embed or a raw string literal)
+```
+
+Delete `json-resume.go` and `fresh-resume.go` from the repo root — they were schema type definitions for a different tool and are now superseded.
+
+---
+
+## Data model (`resume.go`)
+
+Define structs matching the hybrid YAML schema. Use `yaml:"field"` tags throughout. All optional fields should use pointer types or `omitempty`.
+
+```go
+type Resume struct {
+    Basics       Basics        `yaml:"basics"`
+    Disposition  Disposition   `yaml:"disposition"`
+    Work         []WorkEntry   `yaml:"work"`
+    Projects     []Project     `yaml:"projects"`
+    Skills       Skills        `yaml:"skills"`
+    Certificates []Certificate `yaml:"certificates"`
+    Education    []Education   `yaml:"education"`
+    Languages    []Language    `yaml:"languages"`
+    Interests    []Interest    `yaml:"interests"`
+    Testimonials []Testimonial `yaml:"testimonials"`
+    References   []Reference   `yaml:"references"`
+}
+
+type Basics struct {
+    Name     string   `yaml:"name"`
+    Label    string   `yaml:"label"`
+    Email    string   `yaml:"email"`
+    Phone    string   `yaml:"phone"`
+    URL      string   `yaml:"url"`
+    Summary  string   `yaml:"summary"`
+    Location Location `yaml:"location"`
+    Profiles []Profile `yaml:"profiles"`
+}
+
+type Location struct {
+    City        string `yaml:"city"`
+    Region      string `yaml:"region"`
+    CountryCode string `yaml:"countryCode"`
+}
+
+type Profile struct {
+    Network  string `yaml:"network"`
+    Username string `yaml:"username"`
+    URL      string `yaml:"url"`
+}
+
+type Disposition struct {
+    Travel        int        `yaml:"travel"`
+    Authorization string     `yaml:"authorization"`
+    Commitment    []string   `yaml:"commitment"`
+    Remote        bool       `yaml:"remote"`
+    Relocation    Relocation `yaml:"relocation"`
+}
+
+type Relocation struct {
+    Willing      bool     `yaml:"willing"`
+    Destinations []string `yaml:"destinations"`
+}
+
+type WorkEntry struct {
+    Employer      string   `yaml:"employer"`
+    EmployerGroup string   `yaml:"employerGroup"` // optional; overrides grouping key
+    Position      string   `yaml:"position"`
+    URL           string   `yaml:"url"`
+    StartDate     string   `yaml:"startDate"`
+    EndDate       string   `yaml:"endDate"`
+    Summary       string   `yaml:"summary"`
+    Location      string   `yaml:"location"`
+    Highlights    []string `yaml:"highlights"`
+    Keywords      []string `yaml:"keywords"`
+}
+
+type Skills struct {
+    Sets []SkillSet  `yaml:"sets"`
+    List []SkillItem `yaml:"list"`
+}
+
+type SkillSet struct {
+    Name   string   `yaml:"name"`
+    Skills []string `yaml:"skills"`
+}
+
+type SkillItem struct {
+    Name    string `yaml:"name"`
+    Level   string `yaml:"level"`
+    Summary string `yaml:"summary"`
+    Years   int    `yaml:"years"`
+}
+
+// ... Project, Certificate, Education, Language, Interest, Testimonial, Reference
+// (follow the same pattern; see schema.json for all fields)
+```
+
+---
+
+## Employer grouping (`render.go`)
+
+Define an intermediate type:
+
+```go
+type EmployerGroup struct {
+    DisplayName string
+    FormerNames []string // distinct employer names beyond DisplayName, in order
+    URL         string
+    StartDate   string   // earliest across all positions
+    EndDate     string   // latest (empty = "Present")
+    Positions   []WorkEntry
+}
+```
+
+Implement `groupWork(entries []WorkEntry) []EmployerGroup`:
+
+1. Walk entries in order.
+2. For each entry, compute its key: `entry.EmployerGroup` if non-empty, else `entry.Employer`.
+3. If the key matches the current open group's key, append the entry to the current group and update `StartDate` / `FormerNames`.
+4. Otherwise, close the current group and start a new one.
+5. Return the completed groups.
+
+---
+
+## Date formatting (`render.go`)
+
+```go
+func formatDate(iso string) string {
+    if iso == "" {
+        return "Present"
+    }
+    // Parse YYYY-MM-DD, YYYY-MM, or YYYY
+    // Return "Jan 2006" format for YYYY-MM-DD and YYYY-MM
+    // Return "2006" for YYYY-only
+}
+```
+
+Use `time.Parse` with multiple layout attempts. Map month number to 3-letter abbreviation.
+
+---
+
+## Non-breaking space insertion (`render.go`)
+
+```go
+// nbspShortWords replaces spaces after words of ≤4 chars with &nbsp;
+// when the following word is longer, preventing awkward wraps.
+func nbspShortWords(s string) template.HTML {
+    // split on spaces, for each word if len(word) <= 4 and next word exists,
+    // join with &nbsp; instead of space
+    // return as template.HTML to bypass auto-escaping of the entity
+}
+```
+
+This is used only in the summary paragraph via a custom template function.
+
+---
+
+## HTML template (`template.go`)
+
+Embed the full HTML template as a raw string constant or use `//go:embed template.html`. Use `html/template` syntax.
+
+Key template functions to register:
+- `formatDate` — date string → display string
+- `nbspSummary` — applies `nbspShortWords` to summary text, returns `template.HTML`
+- `levelClass` — level string → CSS class suffix (`"adv"`, `"mid"`, or `""`)
+- `skillByName` — looks up a `SkillItem` in the list by name for a given skill set entry
+
+Pass a single data struct to the template:
+
+```go
+type TemplateData struct {
+    Basics        Basics
+    EmployerGroups []EmployerGroup
+    Projects      []Project
+    SkillSets     []SkillSet
+    SkillList     []SkillItem
+    Certificates  []Certificate
+    Education     []Education
+    Languages     []Language
+    Interests     []Interest
+    Testimonials  []Testimonial
+}
+```
+
+---
+
+## `main.go`
+
+```go
+func main() {
+    input  := flag.String("input",  "../resume.yaml",      "path to resume YAML")
+    output := flag.String("output", "../docs/index.html",  "path to write HTML")
+    flag.Parse()
+
+    data, err := os.ReadFile(*input)
+    // handle err
+
+    var resume Resume
+    err = yaml.Unmarshal(data, &resume)
+    // handle err
+
+    groups := groupWork(resume.Work)
+
+    tmplData := TemplateData{
+        Basics:         resume.Basics,
+        EmployerGroups: groups,
+        // ...
+    }
+
+    tmpl := template.Must(template.New("resume").Funcs(funcMap).Parse(resumeTemplate))
+    
+    out, err := os.Create(*output)
+    // handle err
+    defer out.Close()
+    
+    err = tmpl.Execute(out, tmplData)
+    // handle err
+    
+    fmt.Fprintf(os.Stderr, "wrote %s\n", *output)
+}
+```
+
+---
+
+## Justfile integration
+
+Add a `go` recipe to the existing `justfile` at the repo root:
+
+```just
+go-build:
+    cd go && go build -o resume-renderer .
+
+go-render: go-build
+    go/resume-renderer --input resume.yaml --output docs/index.html
+```
+
+Replace the existing `build` recipe's `goresume` call with `go-render` as the new default.
+
+---
+
+## Notes
+
+- The two existing root-level `.go` files (`json-resume.go`, `fresh-resume.go`) were part of a now-deleted tool and should be removed.
+- Do not use `text/template`; always use `html/template` to ensure proper escaping.
+- The `template.HTML` type in `html/template` is an escape hatch for trusted pre-escaped content — use it only for `nbspSummary` output and `&middot;` / `&amp;` / `&nbsp;` literals in the template itself.
+- Build with `go build ./...` from the `go/` directory. No CGo; pure Go only.
