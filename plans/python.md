@@ -12,7 +12,7 @@ A Python CLI script in `python/` that reads `resume.yaml`, groups work entries b
 
 ## Language version
 
-- **Python 3.13** (latest stable as of mid-2025). No compatibility shims for older versions.
+- **Python 3.14.5** (latest stable). No compatibility shims for older versions.
 - Use `match` statements (structural pattern matching) where appropriate.
 - Use `|` for union types in annotations (e.g. `str | None` instead of `Optional[str]`).
 
@@ -46,29 +46,34 @@ python/
 [project]
 name = "resume-renderer"
 version = "0.1.0"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = [
     "pyyaml>=6.0",
     "jinja2>=3.1",
+    "pydantic>=2.0",
+    "jsonschema>=4.26",
 ]
 
 [project.scripts]
 resume-renderer = "resume_renderer.main:main"
 ```
 
-No other external packages. `pyyaml` for YAML; `jinja2` for HTML templating with auto-escaping.
+- **`pyyaml`** — YAML parsing.
+- **`jinja2`** — HTML templating with auto-escaping.
+- **`pydantic`** — data model validation and coercion; replaces hand-written `from_dict` loaders. Use `model_validate` to construct models from the raw YAML dict.
+- **`jsonschema`** 4.26.0 — JSON Schema Draft 2020-12 validation against `schema.json` before Pydantic model construction.
 
 ---
 
 ## Data model (`model.py`)
 
-Use `@dataclass` with `field(default_factory=list)` for list fields and `None` defaults for optional scalars. Define a `from_dict` classmethod on each class (or use a simple recursive loader function).
+Use **Pydantic v2** `BaseModel` for all types. Pydantic handles optional fields, default values, and type coercion from the raw YAML dict automatically via `model_validate`. Use `model_config = ConfigDict(extra="allow")` on all models to match the `additionalProperties: true` policy of the schema.
 
 ```python
-from dataclasses import dataclass, field
+from pydantic import BaseModel, ConfigDict
 
-@dataclass
-class WorkEntry:
+class WorkEntry(BaseModel):
+    model_config = ConfigDict(extra="allow")
     employer: str
     position: str
     startDate: str
@@ -77,88 +82,76 @@ class WorkEntry:
     url: str | None = None
     summary: str | None = None
     location: str | None = None
-    highlights: list[str] = field(default_factory=list)
-    keywords: list[str] = field(default_factory=list)
+    highlights: list[str] = []
+    keywords: list[str] = []
 
-@dataclass
-class SkillSet:
+class SkillSet(BaseModel):
+    model_config = ConfigDict(extra="allow")
     name: str
-    skills: list[str] = field(default_factory=list)
+    skills: list[str] = []
 
-@dataclass
-class SkillItem:
+class SkillItem(BaseModel):
+    model_config = ConfigDict(extra="allow")
     name: str
     level: str
     summary: str | None = None
     years: int | None = None
 
-@dataclass
-class Skills:
-    sets: list[SkillSet] = field(default_factory=list)
-    list: list[SkillItem] = field(default_factory=list)
+class Skills(BaseModel):
+    model_config = ConfigDict(extra="allow")
+    sets: list[SkillSet] = []
+    list: list[SkillItem] = []
 
-@dataclass
-class Basics:
+class Location(BaseModel):
+    model_config = ConfigDict(extra="allow")
+    city: str = ""
+    region: str = ""
+    countryCode: str = ""
+
+class Profile(BaseModel):
+    model_config = ConfigDict(extra="allow")
+    network: str = ""
+    username: str = ""
+    url: str = ""
+
+class Basics(BaseModel):
+    model_config = ConfigDict(extra="allow")
     name: str
     label: str = ""
     email: str = ""
     phone: str = ""
     url: str = ""
     summary: str = ""
-    location: Location = field(default_factory=lambda: Location())
-    profiles: list[Profile] = field(default_factory=list)
-
-@dataclass
-class Location:
-    city: str = ""
-    region: str = ""
-    countryCode: str = ""
-
-@dataclass
-class Profile:
-    network: str = ""
-    username: str = ""
-    url: str = ""
+    location: Location = Location()
+    profiles: list[Profile] = []
 
 # ... Disposition, Relocation, Project, Certificate, Education,
 #     Language, Interest, Testimonial, Reference
-# (follow same pattern; all fields with sensible defaults)
+# (follow same pattern)
 
-@dataclass
-class Resume:
-    basics: Basics = field(default_factory=Basics)
+class Resume(BaseModel):
+    model_config = ConfigDict(extra="allow")
+    basics: Basics
     disposition: Disposition | None = None
-    work: list[WorkEntry] = field(default_factory=list)
-    projects: list[Project] = field(default_factory=list)
-    skills: Skills = field(default_factory=Skills)
-    certificates: list[Certificate] = field(default_factory=list)
-    education: list[Education] = field(default_factory=list)
-    languages: list[Language] = field(default_factory=list)
-    interests: list[Interest] = field(default_factory=list)
-    testimonials: list[Testimonial] = field(default_factory=list)
-    references: list[Reference] = field(default_factory=list)
+    work: list[WorkEntry] = []
+    projects: list[Project] = []
+    skills: Skills = Skills()
+    certificates: list[Certificate] = []
+    education: list[Education] = []
+    languages: list[Language] = []
+    interests: list[Interest] = []
+    testimonials: list[Testimonial] = []
+    references: list[Reference] = []
 ```
 
-### Loading from dict
-
-Write a `load_resume(data: dict) -> Resume` function that recursively constructs the dataclass tree from the raw `yaml.safe_load()` output. Handle missing keys with `.get()` and defaults. Avoid `dacite` or other third-party loaders.
+### Loading
 
 ```python
-def load_resume(data: dict) -> Resume:
-    basics_raw = data.get("basics", {})
-    basics = Basics(
-        name=basics_raw.get("name", ""),
-        # ... etc
-        location=Location(**basics_raw.get("location", {})),
-        profiles=[Profile(**p) for p in basics_raw.get("profiles", [])],
-    )
-    work = [
-        WorkEntry(**{k: v for k, v in entry.items()})
-        for entry in data.get("work", [])
-    ]
-    # ... etc
-    return Resume(basics=basics, work=work, ...)
+raw = yaml.safe_load(Path(args.input).read_text(encoding="utf-8"))
+resume = Resume.model_validate(raw)
 ```
+
+No manual `from_dict` function needed — Pydantic's `model_validate` recurses into nested models automatically.
 
 ---
 
@@ -328,6 +321,62 @@ Pass it to the template context. In template: `{{ skill_map[skill_name].level | 
 
 ---
 
+## Schema validation (`main.py`)
+
+Before constructing Pydantic models, validate the raw dict against `schema.json` using `jsonschema`:
+
+```python
+import jsonschema
+import json
+
+def validate_schema(raw: dict, schema_path: str) -> None:
+    schema = json.loads(Path(schema_path).read_text())
+    validator = jsonschema.Draft202012Validator(schema)
+    errors = list(validator.iter_errors(raw))
+    if errors:
+        for e in errors:
+            print(f"validation error: {e.json_path}: {e.message}", file=sys.stderr)
+        sys.exit(1)
+```
+
+Call before `Resume.model_validate(raw)`. Pydantic validation catches structural issues too; jsonschema catches schema-declared constraints (e.g. URI format, integer ranges) that Pydantic won't.
+
+## `--name-font` flag
+
+```python
+parser.add_argument("-f", "--name-font", default="Instrument Serif",
+                    help="Google Fonts family name for the name heading")
+```
+
+In `main()`, compute the font link and CSS value:
+
+```python
+font_url = args.name_font.replace(" ", "+")
+google_fonts_link = (
+    f'<link href="https://fonts.googleapis.com/css2?family={font_url}:ital@0;1'
+    f'&display=swap" rel="stylesheet">'
+)
+name_font_css = f"'{args.name_font}', Georgia, serif"
+```
+
+Pass both to the template context:
+
+```python
+html = tmpl.render(
+    google_fonts_link=Markup(google_fonts_link),  # Markup = pre-escaped, safe
+    name_font_css=name_font_css,
+    # ... rest of context
+)
+```
+
+In the template:
+
+```jinja2
+{{ google_fonts_link }}   {# already Markup, not double-escaped #}
+...
+--name-font: {{ name_font_css }};
+```
+
 ## `main.py`
 
 ```python
@@ -335,7 +384,7 @@ import argparse
 import sys
 from pathlib import Path
 import yaml
-from .model import load_resume
+from .model import Resume
 from .grouping import group_work
 from .render import build_env
 
@@ -343,12 +392,24 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Render resume.yaml to HTML")
     parser.add_argument("-i", "--input",  default="../resume.yaml")
     parser.add_argument("-o", "--output", default="../docs/index.html")
+    parser.add_argument("-f", "--name-font", default="Instrument Serif",
+                        help="Google Fonts family name for the name heading")
+    parser.add_argument("--skip-validation", action="store_true")
     args = parser.parse_args()
 
     raw = yaml.safe_load(Path(args.input).read_text(encoding="utf-8"))
-    resume = load_resume(raw)
+    if not args.skip_validation:
+        validate_schema(raw, "schema.json")
+    resume = Resume.model_validate(raw)
     groups = group_work(resume.work)
     skill_map = {item.name: item for item in resume.skills.list}
+
+    font_url = args.name_font.replace(" ", "+")
+    google_fonts_link = Markup(
+        f'<link href="https://fonts.googleapis.com/css2?family={font_url}:ital@0;1'
+        f'&amp;display=swap" rel="stylesheet">'
+    )
+    name_font_css = f"'{args.name_font}', Georgia, serif"
 
     template_dir = Path(__file__).parent
     env = build_env(template_dir)

@@ -12,7 +12,7 @@ Replace the two existing schema-type files (`json-resume.go`, `fresh-resume.go`)
 
 ## Language version and module
 
-- **Go 1.24** (latest stable as of 2025). Use `go 1.24` in `go.mod`.
+- **Go 1.26.3** (latest stable). Use `go 1.26.3` in `go.mod`.
 - Module path: `github.com/StephenBrown2/resume/go` (or `resume-renderer` — use whatever fits `go.mod` conventions for a local tool).
 - Use Go's standard library wherever possible; external dependencies should be minimal.
 
@@ -20,10 +20,11 @@ Replace the two existing schema-type files (`json-resume.go`, `fresh-resume.go`)
 
 ## Dependencies
 
-| Package | Purpose |
-|---|---|
-| `gopkg.in/yaml.v3` | YAML parsing |
-| `html/template` | HTML rendering with auto-escaping |
+| Package | Version | Purpose |
+|---|---|---|
+| `github.com/goccy/go-yaml` | latest | YAML parsing (faster than `gopkg.in/yaml.v3`; better error messages; handles anchors and complex tags correctly) |
+| `github.com/santhosh-tekuri/jsonschema/v6` | v6.0.2 | JSON Schema Draft 2020-12 validation |
+| `html/template` | stdlib | HTML rendering with auto-escaping |
 
 No other external dependencies. `html/template` handles HTML escaping automatically; use it instead of `text/template`.
 
@@ -223,19 +224,76 @@ type TemplateData struct {
 
 ---
 
+## Schema validation (`main.go`)
+
+After parsing YAML into `map[string]any` (before unmarshalling into the struct), validate against `schema.json` using `santhosh-tekuri/jsonschema/v6`:
+
+```go
+import (
+    "github.com/santhosh-tekuri/jsonschema/v6"
+    goyaml "github.com/goccy/go-yaml"
+)
+
+func validateSchema(schemaPath string, data map[string]any) error {
+    c := jsonschema.NewCompiler()
+    sch, err := c.Compile(schemaPath)
+    if err != nil {
+        return fmt.Errorf("compile schema: %w", err)
+    }
+    if err := sch.Validate(data); err != nil {
+        return fmt.Errorf("schema validation: %w", err)
+    }
+    return nil
+}
+```
+
+Pass `--skip-validation` to bypass this step. The `goccy/go-yaml` library's `Unmarshal` with a `map[string]any` target produces the raw data needed for jsonschema validation, then unmarshal again (or reuse) into the typed struct.
+
+## `--name-font` flag and Google Fonts URL
+
+```go
+nameFont := flag.String("name-font", "Instrument Serif", "Google Fonts family for the name heading")
+
+// Convert to URL form
+fontURL := strings.ReplaceAll(*nameFont, " ", "+")
+googleFontsLink := fmt.Sprintf(
+    `<link href="https://fonts.googleapis.com/css2?family=%s:ital@0;1&display=swap" rel="stylesheet">`,
+    fontURL,
+)
+// CSS var
+nameFontCSS := fmt.Sprintf("'%s', Georgia, serif", *nameFont)
+```
+
+Pass both `googleFontsLink` and `nameFontCSS` into the template data struct so the template can inject them in the right places.
+
 ## `main.go`
 
 ```go
 func main() {
-    input  := flag.String("input",  "../resume.yaml",      "path to resume YAML")
-    output := flag.String("output", "../docs/index.html",  "path to write HTML")
+    input    := flag.String("input",    "../resume.yaml",     "path to resume YAML")
+    output   := flag.String("output",   "../docs/index.html", "path to write HTML")
+    nameFont := flag.String("name-font","Instrument Serif",   "Google Fonts family for name heading")
+    skipVal  := flag.Bool("skip-validation", false,           "skip JSON Schema validation")
     flag.Parse()
 
     data, err := os.ReadFile(*input)
     // handle err
 
+    // Unmarshal to raw map for schema validation
+    var raw map[string]any
+    err = goyaml.Unmarshal(data, &raw)
+    // handle err
+
+    if !*skipVal {
+        if err := validateSchema("schema.json", raw); err != nil {
+            fmt.Fprintln(os.Stderr, "validation error:", err)
+            os.Exit(1)
+        }
+    }
+
+    // Unmarshal to typed struct
     var resume Resume
-    err = yaml.Unmarshal(data, &resume)
+    err = goyaml.Unmarshal(data, &resume)
     // handle err
 
     groups := groupWork(resume.Work)

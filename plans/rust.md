@@ -12,7 +12,7 @@ A Rust binary in `rust/` that reads `resume.yaml`, groups work entries by employ
 
 ## Language version and edition
 
-- **Rust 1.87** or later (latest stable as of mid-2025). Declare `edition = "2024"` in `Cargo.toml`.
+- **Rust 1.96.0** (latest stable). Declare `edition = "2024"` in `Cargo.toml`.
 - Minimum supported Rust version (MSRV) is not a concern — target latest stable.
 
 ---
@@ -26,12 +26,15 @@ serde_yaml  = "0.9"
 minijinja   = "2"        # Jinja2-compatible templating with auto-escaping
 clap        = { version = "4", features = ["derive"] }
 thiserror   = "2"
+jsonschema  = "0.46"     # JSON Schema Draft 2020-12 validation
 
 [dev-dependencies]
 # none required
 ```
 
 **`minijinja`** is preferred over `askama` here because the template can be edited without a recompile, matches Jinja2 syntax closely, and has first-class HTML auto-escaping. Use `minijinja::Environment` with auto-escaping enabled.
+
+**`jsonschema`** (crate by Stranger6667) supports Draft 2020-12, which matches the `$schema` declared in `schema.json`.
 
 ---
 
@@ -152,7 +155,81 @@ struct Args {
 
     #[arg(short, long, default_value = "../docs/index.html")]
     output: std::path::PathBuf,
+
+    #[arg(short = 'f', long, default_value = "Instrument Serif",
+          help = "Google Fonts family name for the name heading")]
+    name_font: String,
+
+    #[arg(long, help = "Skip JSON Schema validation")]
+    skip_validation: bool,
 }
+```
+
+## Schema validation (`src/main.rs`)
+
+After parsing the YAML file content to a `serde_json::Value` (convert via `serde_yaml` → `serde_json`), validate against `schema.json`:
+
+```rust
+use jsonschema::validator_for;
+
+fn validate(schema_path: &str, data: &serde_json::Value) -> Result<()> {
+    let schema_str = std::fs::read_to_string(schema_path)?;
+    let schema: serde_json::Value = serde_json::from_str(&schema_str)?;
+    let validator = validator_for(&schema)?;
+    let result = validator.validate(data);
+    if let Err(errors) = result {
+        for e in errors {
+            eprintln!("validation error: {e}");
+        }
+        return Err(Error::Validation);
+    }
+    Ok(())
+}
+```
+
+Add `serde_json = "1"` to `Cargo.toml` dependencies (needed for the `jsonschema` crate's input type). The pipeline is:
+
+1. Read YAML bytes.
+2. Deserialize to `serde_yaml::Value`, then convert to `serde_json::Value` via `serde_json::to_value(serde_yaml::from_slice(bytes)?)`.
+3. Validate with jsonschema.
+4. Deserialize to typed `Resume` struct via `serde_yaml::from_slice(bytes)`.
+
+## `--name-font` handling (`src/render.rs`)
+
+```rust
+pub fn font_link(name: &str) -> String {
+    let url_name = name.replace(' ', "+");
+    format!(
+        r#"<link href="https://fonts.googleapis.com/css2?family={url_name}:ital@0;1&display=swap" rel="stylesheet">"#
+    )
+}
+
+pub fn name_font_css(name: &str) -> String {
+    format!("'{name}', Georgia, serif")
+}
+```
+
+Add `font_link` and `name_font_css` outputs to `TemplateData`:
+
+```rust
+#[derive(serde::Serialize)]
+pub struct TemplateData {
+    pub google_fonts_link: String,  // raw HTML <link> tag
+    pub name_font_css:     String,  // CSS value for --name-font
+    // ... rest of fields
+}
+```
+
+In the template, insert them unescaped:
+
+```jinja2
+{{ google_fonts_link | safe }}
+```
+
+and in the CSS:
+
+```jinja2
+--name-font: {{ name_font_css | safe }};
 ```
 
 ---

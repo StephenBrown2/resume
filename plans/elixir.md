@@ -12,8 +12,8 @@ An Elixir Mix project in `elixir/` that compiles to a standalone `escript` execu
 
 ## Language version
 
-- **Elixir 1.18** with **OTP 27** (latest stable as of mid-2025).
-- Use the modern `mix new --script` or standard `mix new` approach. The project compiles to an escript — a self-contained binary runnable with `elixir resume_renderer`.
+- **Elixir 1.19.5** with **OTP 26–28** (latest stable). Target OTP 27 as the build baseline; the binary will run on OTP 26, 27, or 28.
+- Use the modern `mix new` approach. The project compiles to an escript — a self-contained binary runnable with `elixir resume_renderer`.
 
 ---
 
@@ -47,13 +47,16 @@ Build with `mix escript.build`, producing `./resume_renderer`.
 ```elixir
 defp deps do
   [
-    {:yaml_elixir, "~> 2.11"},   # YAML parsing (wraps yamerl)
-    {:ex_doc, "~> 0.34", only: :dev, runtime: false}  # optional docs
+    {:yaml_elixir,    "~> 2.11"},   # YAML parsing (wraps yamerl)
+    {:ex_json_schema, "~> 0.11"},   # JSON Schema Draft 4 validation
+    {:ex_doc,         "~> 0.34", only: :dev, runtime: false}
   ]
 end
 ```
 
-**`yaml_elixir`** parses YAML into Elixir maps/lists/primitives. It is the standard choice in the ecosystem, wraps Erlang's `yamerl`, and handles the nested structures in the resume cleanly.
+**`yaml_elixir`** parses YAML into Elixir maps/lists/primitives.
+
+**`ex_json_schema` 0.11.4** — the standard Elixir JSON Schema library. **Important limitation:** it supports only Draft 4. Our `schema.json` declares `$schema: "https://json-schema.org/draft/2020-12/schema"`. In practice the schema uses only basic features (type, properties, items, additionalProperties) that are compatible with Draft 4, so validation will catch most structural errors. Log a warning at startup noting that validation is best-effort (Draft 4 only). Provide `--skip-validation` to bypass entirely.
 
 EEx is built into Elixir's standard library — no dependency needed.
 
@@ -371,6 +374,50 @@ This compiles the EEx templates at compile time, making the binary efficient and
 
 ---
 
+## Schema validation (`cli.ex`)
+
+```elixir
+defp validate_schema(raw) do
+  schema_json = File.read!("schema.json") |> Jason.decode!()
+  # ex_json_schema validates against Draft 4; warn about the limitation
+  IO.warn("Note: schema validation is Draft 4 only (schema.json declares 2020-12)")
+  schema = ExJsonSchema.Schema.resolve(schema_json)
+  case ExJsonSchema.Validator.validate(schema, raw) do
+    :ok -> :ok
+    {:error, errors} ->
+      Enum.each(errors, fn {msg, path} ->
+        IO.puts(:stderr, "validation error at #{path}: #{msg}")
+      end)
+      System.halt(1)
+  end
+end
+```
+
+Add `{:jason, "~> 1.4"}` to deps for JSON decoding of `schema.json`. Call `validate_schema(raw)` after YAML parsing unless `--skip-validation` is passed.
+
+## `--name-font` flag and Google Fonts URL
+
+```elixir
+{opts, _, _} = OptionParser.parse(args,
+  strict: [input: :string, output: :string, name_font: :string,
+           skip_validation: :boolean],
+  aliases: [i: :input, o: :output, f: :name_font]
+)
+name_font = opts[:name_font] || "Instrument Serif"
+font_url  = String.replace(name_font, " ", "+")
+google_fonts_link =
+  ~s(<link href="https://fonts.googleapis.com/css2?family=#{font_url}:ital@0;1&amp;display=swap" rel="stylesheet">)
+name_font_css = "'#{name_font}', Georgia, serif"
+```
+
+Pass `google_fonts_link` and `name_font_css` as arguments to `Render.render_resume/N`. In the EEx template, output them with `<%=` (unescaped since they are pre-built trusted strings):
+
+```eex
+<%= google_fonts_link %>
+...
+--name-font: <%= name_font_css %>;
+```
+
 ## `cli.ex` (escript entry point)
 
 ```elixir
@@ -379,16 +426,27 @@ defmodule ResumeRenderer.CLI do
 
   def main(args) do
     {opts, _, _} = OptionParser.parse(args,
-      strict: [input: :string, output: :string],
-      aliases: [i: :input, o: :output]
+      strict: [input: :string, output: :string, name_font: :string,
+               skip_validation: :boolean],
+      aliases: [i: :input, o: :output, f: :name_font]
     )
-    input  = opts[:input]  || "../resume.yaml"
-    output = opts[:output] || "../docs/index.html"
+    input     = opts[:input]     || "../resume.yaml"
+    output    = opts[:output]    || "../docs/index.html"
+    name_font = opts[:name_font] || "Instrument Serif"
+    skip_val  = opts[:skip_validation] || false
 
+    Application.ensure_all_started(:yaml_elixir)
     {:ok, raw} = YamlElixir.read_from_file(input)
+
+    unless skip_val, do: validate_schema(raw)
+
     resume = Model.Resume.from_map(raw)
     groups = Grouping.group_work(resume.work)
     skill_map = Map.new(resume.skills.list, fn item -> {item.name, item} end)
+
+    font_url = String.replace(name_font, " ", "+")
+    google_fonts_link = ~s(<link href="https://fonts.googleapis.com/css2?family=#{font_url}:ital@0;1&amp;display=swap" rel="stylesheet">)
+    name_font_css = "'#{name_font}', Georgia, serif"
 
     html = Render.render_resume(
       resume.basics,

@@ -12,7 +12,8 @@ A Java CLI application in `java/` that reads `resume.yaml`, groups work entries 
 
 ## Language version
 
-- **Java 24** (latest stable as of mid-2025). Set `<java.version>24</java.version>` and `--enable-preview` if needed for pattern matching features. Use `source`/`target` 24 in the Maven compiler plugin.
+- **Java 26** (latest GA release). Set `<java.version>26</java.version>`. Use `source`/`target` 26 in the Maven compiler plugin. Java 25 is the current LTS; either is acceptable, but the plans target 26 for latest-stable alignment.
+- Records, pattern matching, and sealed interfaces are all stable (no `--enable-preview` needed).
 - No module-info.java required; a simple unnamed module is fine.
 
 ---
@@ -43,12 +44,19 @@ A Java CLI application in `java/` that reads `resume.yaml`, groups work entries 
 <dependency>
   <groupId>com.fasterxml.jackson.dataformat</groupId>
   <artifactId>jackson-dataformat-yaml</artifactId>
-  <version>2.18.x</version>  <!-- use latest 2.18.x -->
+  <version>2.18.x</version>  <!-- use latest 2.18.x; Jackson 3.x requires Java 17+ and is used by networknt 3.x -->
 </dependency>
 <dependency>
   <groupId>com.fasterxml.jackson.core</groupId>
   <artifactId>jackson-databind</artifactId>
   <version>2.18.x</version>
+</dependency>
+
+<!-- JSON Schema validation (Draft 2020-12) -->
+<dependency>
+  <groupId>com.networknt</groupId>
+  <artifactId>json-schema-validator</artifactId>
+  <version>3.0.3</version>  <!-- requires Java 17+; use Jackson 3.x -->
 </dependency>
 
 <!-- Templating -->
@@ -60,6 +68,8 @@ A Java CLI application in `java/` that reads `resume.yaml`, groups work entries 
 ```
 
 **Pebble** is a Jinja2/Twig-style templating engine with automatic HTML escaping, `for` loops with `loop.last`, `|` filters, and macros. It is well-maintained, has no transitive surprise dependencies, and is significantly simpler than Freemarker for this use case.
+
+**networknt json-schema-validator 3.x** uses Jackson 3.x internally. If Jackson version conflicts arise between 2.x (YAML) and 3.x (schema-validator), resolve by using Jackson 3.x for both — `jackson-dataformat-yaml` has a 3.x line compatible with Java 17+. Alternatively, use version 2.x of the schema-validator with Jackson 2.x to avoid the conflict entirely.
 
 ---
 
@@ -274,23 +284,74 @@ Then in the template: `{{ skillMap[skillName].level | level_class }}`.
 
 ---
 
+## Schema validation (`Main.java`)
+
+After reading the YAML, convert it to a JSON string (via Jackson) and validate against `schema.json` using networknt's validator:
+
+```java
+import com.networknt.schema.*;
+import com.fasterxml.jackson.databind.JsonNode;
+
+static void validateSchema(JsonNode data, String schemaPath) throws Exception {
+    JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
+    SchemaValidatorsConfig config = SchemaValidatorsConfig.builder().build();
+    JsonSchema schema = factory.getSchema(
+        URI.create("file://" + Path.of(schemaPath).toAbsolutePath()),
+        config
+    );
+    Set<ValidationMessage> errors = schema.validate(data);
+    if (!errors.isEmpty()) {
+        errors.forEach(e -> System.err.println("validation error: " + e.getMessage()));
+        System.exit(1);
+    }
+}
+```
+
+The YAML `ObjectMapper` produces a `JsonNode` tree that networknt can validate directly — no intermediate JSON string needed.
+
+## `--name-font` flag and Google Fonts URL
+
+Add to `Main.java`'s arg parsing:
+
+```java
+String nameFont = "Instrument Serif";
+boolean skipValidation = false;
+for (int i = 0; i < args.length; i++) {
+    // ...existing flags...
+    if (args[i].equals("--name-font") || args[i].equals("-f")) nameFont = args[++i];
+    if (args[i].equals("--skip-validation"))                    skipValidation = true;
+}
+String fontUrl        = nameFont.replace(" ", "+");
+String googleFontsLink = String.format(
+    "<link href=\"https://fonts.googleapis.com/css2?family=%s:ital@0;1&amp;display=swap\" rel=\"stylesheet\">",
+    fontUrl);
+String nameFontCSS    = String.format("'%s', Georgia, serif", nameFont);
+```
+
+Pass `googleFontsLink` and `nameFontCSS` to `HtmlRenderer` and from there into the Pebble template context as raw strings. In Pebble, output them with `{{ googleFontsLink | raw }}` and `{{ nameFontCSS | raw }}` to prevent double-escaping.
+
 ## `Main.java`
 
 ```java
 public class Main {
     public static void main(String[] args) throws Exception {
-        // Parse --input / -i and --output / -o manually
-        // (no external CLI library; args parsing is ~15 lines with a simple loop)
-        String input  = "../resume.yaml";
-        String output = "../docs/index.html";
+        // Parse --input / -i, --output / -o, --name-font / -f, --skip-validation
+        String input    = "../resume.yaml";
+        String output   = "../docs/index.html";
+        String nameFont = "Instrument Serif";
+        boolean skipVal = false;
         for (int i = 0; i < args.length; i++) {
-            if (args[i].equals("--input")  || args[i].equals("-i")) input  = args[++i];
-            if (args[i].equals("--output") || args[i].equals("-o")) output = args[++i];
+            if (args[i].equals("--input")  || args[i].equals("-i")) input    = args[++i];
+            if (args[i].equals("--output") || args[i].equals("-o")) output   = args[++i];
+            if (args[i].equals("--name-font") || args[i].equals("-f")) nameFont = args[++i];
+            if (args[i].equals("--skip-validation"))                   skipVal  = true;
         }
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory())
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        Resume resume = mapper.readValue(Path.of(input).toFile(), Resume.class);
+        JsonNode rawTree = mapper.readTree(Path.of(input).toFile());
+        if (!skipVal) validateSchema(rawTree, "schema.json");
+        Resume resume = mapper.treeToValue(rawTree, Resume.class);
 
         List<EmployerGroup> groups = WorkGrouper.group(resume.work());
         String html = HtmlRenderer.render(resume, groups);
