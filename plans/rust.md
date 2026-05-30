@@ -23,6 +23,7 @@ A Rust binary in `rust/` that reads `resume.yaml`, groups work entries by employ
 [dependencies]
 serde       = { version = "1", features = ["derive"] }
 serde_yaml  = "0.9"
+serde_json  = "1"        # required by jsonschema crate for input type
 minijinja   = "2"        # Jinja2-compatible templating with auto-escaping
 clap        = { version = "4", features = ["derive"] }
 thiserror   = "2"
@@ -133,6 +134,8 @@ pub enum Error {
     Yaml(#[from] serde_yaml::Error),
     #[error("template error: {0}")]
     Template(#[from] minijinja::Error),
+    #[error("schema validation failed")]
+    Validation,
 }
 
 pub type Result<T> = std::result::Result<T, Error>;

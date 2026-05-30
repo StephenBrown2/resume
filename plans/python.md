@@ -354,7 +354,7 @@ In `main()`, compute the font link and CSS value:
 font_url = args.name_font.replace(" ", "+")
 google_fonts_link = (
     f'<link href="https://fonts.googleapis.com/css2?family={font_url}:ital@0;1'
-    f'&display=swap" rel="stylesheet">'
+    f'&amp;display=swap" rel="stylesheet">'
 )
 name_font_css = f"'{args.name_font}', Georgia, serif"
 ```
@@ -426,6 +426,8 @@ def main() -> None:
         languages=resume.languages,
         interests=resume.interests,
         testimonials=resume.testimonials,
+        google_fonts_link=Markup(google_fonts_link),
+        name_font_css=name_font_css,
     )
 
     out = Path(args.output)
@@ -467,5 +469,4 @@ python-render:
 - `yaml.safe_load` is sufficient; no need for `ruamel.yaml` unless round-trip preservation is required (it is not here).
 - `markupsafe.Markup` is part of Jinja2's dependency tree — no extra install needed.
 - Use `__future__.annotations` (`from __future__ import annotations`) at the top of each file to enable PEP 563 deferred evaluation if you use forward references in type hints, though Python 3.13 handles most cases correctly without it.
-- Do not use `pydantic` — it adds a significant dependency for no benefit over plain dataclasses here. The YAML is trusted internal data, not user input requiring validation.
 - Jinja2's `autoescape` with `["html"]` will escape values interpolated with `{{ }}`. Pre-built `Markup` objects (from `nbsp_words`) are treated as already-safe and not double-escaped. Template literal text (`&middot;`, `&amp;`) is always passed through verbatim.

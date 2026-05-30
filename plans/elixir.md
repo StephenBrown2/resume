@@ -49,6 +49,7 @@ defp deps do
   [
     {:yaml_elixir,    "~> 2.11"},   # YAML parsing (wraps yamerl)
     {:ex_json_schema, "~> 0.11"},   # JSON Schema Draft 4 validation
+    {:jason,          "~> 1.4"},    # JSON decoding for schema.json
     {:ex_doc,         "~> 0.34", only: :dev, runtime: false}
   ]
 end

@@ -29,9 +29,9 @@ A Java CLI application in `java/` that reads `resume.yaml`, groups work entries 
 <packaging>jar</packaging>
 
 <properties>
-  <java.version>24</java.version>
-  <maven.compiler.source>24</maven.compiler.source>
-  <maven.compiler.target>24</maven.compiler.target>
+  <java.version>26</java.version>
+  <maven.compiler.source>26</maven.compiler.source>
+  <maven.compiler.target>26</maven.compiler.target>
 </properties>
 ```
 
