@@ -23,18 +23,6 @@ resume.html
 
 A stale HTML snapshot at the repo root, distinct from `docs/index.html`. It appears to predate the current build pipeline. Once `docs/index.html` is being generated correctly by a renderer, this file has no purpose.
 
-### `themes/`
-
-```
-themes/actual.html
-themes/block.html
-themes/positive.html
-themes/simple-compact.html
-themes/simple.html
-```
-
-Template files for the old `goresume` tool. The new renderers embed their own template; these are unused. Delete the entire `themes/` directory.
-
 ### `Variable Web Fonts/` (root-level copy)
 
 ```
@@ -154,3 +142,31 @@ Before committing the cleanup:
 - [ ] `docs/index.html` opens correctly in a browser
 - [ ] `git status` shows only intentional deletions and modifications
 - [ ] No language build artifacts are staged (`go/resume-renderer`, `rust/target/`, etc.)
+
+---
+
+## Future step: theme extensibility
+
+**Do not touch `themes/` during cleanup.** The five HTML files there are kept as the starting point for a multi-theme system. They predate the new schema and are not yet wired into any renderer, but they represent reusable layout alternatives worth preserving.
+
+### What needs to happen before themes are usable
+
+1. **Update each theme to the new schema field names.** The existing themes were written against the old `goresume` / JSON Resume field layout. They reference field names and section structures that may not match the hybrid schema (e.g. `name` vs `employer`, `company` vs `employer`, `reference` vs `testimonial`/`references` split, `skills[].keywords` vs `skills.sets`/`skills.list`, etc.). Each theme file must be audited and updated to use the fields defined in `schema.json`.
+
+2. **Port each theme to each language's template format.** Each renderer uses a different template engine:
+
+   | Language | Template engine | Theme file extension |
+   |---|---|---|
+   | Go | `html/template` | `.gohtml` or `.html` |
+   | Rust | Minijinja (Jinja2-compatible) | `.html.jinja` or `.html` |
+   | Python | Jinja2 | `.html` |
+   | Elixir | EEx | `.html.eex` |
+   | Java | Pebble (Jinja2/Twig-style) | `.html` |
+
+   Jinja2-syntax themes (Rust, Python, Java/Pebble) will be the most portable — a single theme file may work across all three with minor adjustments. Go and Elixir will require separate ports.
+
+3. **Add a `--theme` flag to each renderer.** The flag should accept a theme name (e.g. `block`, `simple`, `actual`) and resolve it to the corresponding template file, replacing the single embedded template. The default theme should produce output equivalent to the current `docs/index.html`.
+
+4. **Move themes into the renderer subdirectories** (or a shared `themes/` directory that each renderer reads from) once the template format question is resolved. The current `themes/` directory at the repo root can serve as the canonical source of truth until then.
+
+5. **Add `just <lang>-render --theme <name>` recipes** (or a `theme` parameter) to the justfile once the flag exists in all renderers.
