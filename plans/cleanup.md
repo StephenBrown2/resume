@@ -122,13 +122,45 @@ elixir/resume_renderer
 java/target/
 ```
 
-### `README.md`
+### `README.md` (top-level)
 
-Update to describe the new build process. At minimum, remove any references to `goresume` and point to `just <lang>-render` (or the chosen default) as the way to regenerate `docs/index.html`.
+Review and update for final consistency (see the README consistency checklist below).
 
 ### `.pre-commit-config.yaml`
 
 The current hooks (`trailing-whitespace`, `end-of-file-fixer`, `check-json`, `check-yaml`, `check-added-large-files`) are all still appropriate. No changes needed unless new language-specific linters are desired.
+
+---
+
+## README consistency check
+
+Perform this review after all five implementations are complete and their
+individual READMEs have been written.
+
+### Top-level `README.md`
+
+- [ ] Repository layout table lists all five language subdirectories with correct README links
+- [ ] `just <lang>-render` commands match the actual justfile recipe names
+- [ ] GitHub Pages URL is still correct
+- [ ] Schema validation example uses a renderer that is confirmed working
+- [ ] No references to `goresume`, `yq`, or other removed tools remain
+
+### Per-language READMEs (`go/`, `rust/`, `python/`, `elixir/`, `java/`)
+
+For each of the five `<lang>/README.md` files, verify:
+
+- [ ] Prerequisite versions match what was actually used (language version, tool versions)
+- [ ] Build command matches the justfile recipe and produces the expected artifact
+- [ ] Run command and flag table are consistent with the CLI implemented in that language
+- [ ] Default `--input` / `--output` paths are correct relative to the subdirectory
+- [ ] Any caveats (e.g. Elixir Draft 4 schema validation, Rust compile-time template embedding) are noted
+- [ ] No cross-language contradictions: flags, defaults, and output path conventions are identical across all five READMEs
+
+### Cross-README consistency
+
+- [ ] All five READMEs document the same flag names and defaults as `plans/shared-context.md`
+- [ ] The top-level README's recipe list matches every `<lang>-render` recipe that exists in the justfile
+- [ ] Installation prerequisite instructions use consistent version numbers where the same tool appears in multiple READMEs
 
 ---
 
@@ -163,7 +195,7 @@ Before committing the cleanup:
    | Elixir | EEx | `.html.eex` |
    | Java | Pebble (Jinja2/Twig-style) | `.html` |
 
-   Jinja2-syntax themes (Rust, Python, Java/Pebble) will be the most portable — a single theme file may work across all three with minor adjustments. Go and Elixir will require separate ports.
+   Jinja2-syntax themes (Rust, Python, Java/Pebble) will be the most portable - a single theme file may work across all three with minor adjustments. Go and Elixir will require separate ports.
 
 3. **Add a `--theme` flag to each renderer.** The flag should accept a theme name (e.g. `block`, `simple`, `actual`) and resolve it to the corresponding template file, replacing the single embedded template. The default theme should produce output equivalent to the current `docs/index.html`.
 

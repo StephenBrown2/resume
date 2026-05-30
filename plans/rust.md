@@ -13,7 +13,7 @@ A Rust binary in `rust/` that reads `resume.yaml`, groups work entries by employ
 ## Language version and edition
 
 - **Rust 1.96.0** (latest stable). Declare `edition = "2024"` in `Cargo.toml`.
-- Minimum supported Rust version (MSRV) is not a concern — target latest stable.
+- Minimum supported Rust version (MSRV) is not a concern - target latest stable.
 
 ---
 
@@ -272,7 +272,7 @@ pub fn format_date(iso: &str) -> String {
 }
 ```
 
-Use the standard library only — parse the date string manually by splitting on `-`. Map month number to `["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]`.
+Use the standard library only - parse the date string manually by splitting on `-`. Map month number to `["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]`.
 
 ---
 
@@ -378,6 +378,19 @@ For the skills section, look up level per skill name:
 
 ---
 
+## `rust/README.md`
+
+Create `rust/README.md` documenting this implementation. It should cover:
+
+- **Prerequisites:** Rust 1.96.0+ (edition 2024). Install via [rustup](https://rustup.rs/).
+- **Build:** `cargo build --release` (or `just rust-build` from the repo root).
+- **Run:** `./target/release/resume-renderer [flags]` - list all flags with `--help`.
+- **Flags:** table matching the CLI interface in `shared-context.md` (`--input`, `--output`, `--name-font`, `--skip-validation`).
+- **Output:** writes `docs/index.html` (relative to the repo root when using the default path).
+- **Template:** note that `src/template.html` is embedded at compile time via `include_str!()` - the binary is fully self-contained.
+
+---
+
 ## Build and run
 
 ```sh
@@ -401,6 +414,6 @@ rust-render: rust-build
 ## Notes
 
 - Use `serde_yaml 0.9` which wraps `libyaml`; it handles the YAML multi-line strings in the resume correctly.
-- `minijinja` auto-escape in Html mode will escape `&`, `<`, `>`, `"` in template variables. HTML entities written literally in the template (`&middot;`, `&nbsp;`) are passed through unescaped because they are template text, not values — this is correct.
+- `minijinja` auto-escape in Html mode will escape `&`, `<`, `>`, `"` in template variables. HTML entities written literally in the template (`&middot;`, `&nbsp;`) are passed through unescaped because they are template text, not values - this is correct.
 - The `include_str!()` macro embeds the template at compile time; the binary is fully self-contained.
 - For the `selectattr` filter in the skills template: minijinja 2.x supports it natively. If it is unavailable, pre-build a `skill_map: HashMap<String, SkillItem>` in `TemplateData` and use `skill_map[skill_name]` in the template instead.

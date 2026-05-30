@@ -69,7 +69,7 @@ A Java CLI application in `java/` that reads `resume.yaml`, groups work entries 
 
 **Pebble** is a Jinja2/Twig-style templating engine with automatic HTML escaping, `for` loops with `loop.last`, `|` filters, and macros. It is well-maintained, has no transitive surprise dependencies, and is significantly simpler than Freemarker for this use case.
 
-**networknt json-schema-validator 3.x** uses Jackson 3.x internally. If Jackson version conflicts arise between 2.x (YAML) and 3.x (schema-validator), resolve by using Jackson 3.x for both — `jackson-dataformat-yaml` has a 3.x line compatible with Java 17+. Alternatively, use version 2.x of the schema-validator with Jackson 2.x to avoid the conflict entirely.
+**networknt json-schema-validator 3.x** uses Jackson 3.x internally. If Jackson version conflicts arise between 2.x (YAML) and 3.x (schema-validator), resolve by using Jackson 3.x for both - `jackson-dataformat-yaml` has a 3.x line compatible with Java 17+. Alternatively, use version 2.x of the schema-validator with Jackson 2.x to avoid the conflict entirely.
 
 ---
 
@@ -275,7 +275,7 @@ Pebble syntax is nearly identical to Jinja2. Key differences from the Rust/Pytho
 - Macros: `{% macro job_tags(keywords) %}...{% endmacro %}` for DRY tag rendering.
 - Use `{{ variable | raw }}` to output pre-escaped HTML from filters that produce `&nbsp;`.
 
-Skills lookup — in Pebble, build a map in Java and pass it as `skillMap: Map<String, SkillItem>`:
+Skills lookup - in Pebble, build a map in Java and pass it as `skillMap: Map<String, SkillItem>`:
 ```java
 Map<String, SkillItem> skillMap = skills.list().stream()
     .collect(Collectors.toMap(SkillItem::name, s -> s));
@@ -307,7 +307,7 @@ static void validateSchema(JsonNode data, String schemaPath) throws Exception {
 }
 ```
 
-The YAML `ObjectMapper` produces a `JsonNode` tree that networknt can validate directly — no intermediate JSON string needed.
+The YAML `ObjectMapper` produces a `JsonNode` tree that networknt can validate directly - no intermediate JSON string needed.
 
 ## `--name-font` flag and Google Fonts URL
 
@@ -365,6 +365,19 @@ public class Main {
 
 ---
 
+## `java/README.md`
+
+Create `java/README.md` documenting this implementation. It should cover:
+
+- **Prerequisites:** Java 26+ JDK and Maven 3.9+. Install the JDK via [SDKMAN](https://sdkman.io/) (`sdk install java 26-open`) or a package manager; Maven via `sdk install maven` or `brew install maven`.
+- **Build:** `mvn -q package -DskipTests` (produces `target/resume-renderer-1.0-SNAPSHOT.jar`; or `just java-build` from the repo root).
+- **Run:** `java -jar target/resume-renderer-1.0-SNAPSHOT.jar [flags]` (or `just java-render` from the repo root).
+- **Flags:** table matching the CLI interface in `shared-context.md` (`--input`, `--output`, `--name-font`, `--skip-validation`).
+- **Output:** writes `docs/index.html` (relative to the repo root when using the default path).
+- **Fat jar:** note that `maven-shade-plugin` bundles all dependencies - the jar is fully self-contained and needs only a JRE to run.
+
+---
+
 ## Build and run
 
 ```sh
@@ -392,5 +405,5 @@ java-render: java-build
 - Jackson 2.18 deserializes Java records directly; no `@JsonCreator` boilerplate needed if field names match YAML keys (after camelCase mapping).
 - Pebble 3.x auto-escapes HTML by default. Literal HTML entities in the template text (`&middot;`, `&amp;`) are passed through unchanged. Filter output that contains entities must use `| raw` or the `{% autoescape false %}` block.
 - `List.copyOf()` and `Map.of()` (available since Java 9) make the grouping logic concise without Guava.
-- Avoid streams where a simple `for` loop is clearer — this is a small transformation and readability matters.
-- Do not use any preview features (`--enable-preview`) — records and pattern matching are stable in Java 21+.
+- Avoid streams where a simple `for` loop is clearer - this is a small transformation and readability matters.
+- Do not use any preview features (`--enable-preview`) - records and pattern matching are stable in Java 21+.

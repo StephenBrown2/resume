@@ -13,7 +13,7 @@ An Elixir Mix project in `elixir/` that compiles to a standalone `escript` execu
 ## Language version
 
 - **Elixir 1.19.5** with **OTP 26–28** (latest stable). Target OTP 27 as the build baseline; the binary will run on OTP 26, 27, or 28.
-- Use the modern `mix new` approach. The project compiles to an escript — a self-contained binary runnable with `elixir resume_renderer`.
+- Use the modern `mix new` approach. The project compiles to an escript - a self-contained binary runnable with `elixir resume_renderer`.
 
 ---
 
@@ -57,9 +57,9 @@ end
 
 **`yaml_elixir`** parses YAML into Elixir maps/lists/primitives.
 
-**`ex_json_schema` 0.11.4** — the standard Elixir JSON Schema library. **Important limitation:** it supports only Draft 4. Our `schema.json` declares `$schema: "https://json-schema.org/draft/2020-12/schema"`. In practice the schema uses only basic features (type, properties, items, additionalProperties) that are compatible with Draft 4, so validation will catch most structural errors. Log a warning at startup noting that validation is best-effort (Draft 4 only). Provide `--skip-validation` to bypass entirely.
+**`ex_json_schema` 0.11.4** - the standard Elixir JSON Schema library. **Important limitation:** it supports only Draft 4. Our `schema.json` declares `$schema: "https://json-schema.org/draft/2020-12/schema"`. In practice the schema uses only basic features (type, properties, items, additionalProperties) that are compatible with Draft 4, so validation will catch most structural errors. Log a warning at startup noting that validation is best-effort (Draft 4 only). Provide `--skip-validation` to bypass entirely.
 
-EEx is built into Elixir's standard library — no dependency needed.
+EEx is built into Elixir's standard library - no dependency needed.
 
 ---
 
@@ -289,7 +289,7 @@ Call `h(value)` in the template for all user-supplied string values. Pre-escaped
 
 ## EEx template (`priv/template.html.eex`)
 
-EEx uses `<%= expr %>` for output and `<% expr %>` for logic. It is pure Elixir — no DSL.
+EEx uses `<%= expr %>` for output and `<% expr %>` for logic. It is pure Elixir - no DSL.
 
 ```eex
 <!DOCTYPE html>
@@ -360,10 +360,10 @@ EEx uses `<%= expr %>` for output and `<% expr %>` for logic. It is pure Elixir 
 </html>
 ```
 
-For the position partial, since EEx has no include mechanism, define a local function in `render.ex` that evaluates a sub-template string, or use a `render_position` anonymous function bound before calling `EEx.eval_file`. The cleanest approach for EEx is to define named functions and call them with `<%= ResumeRenderer.Render.position_html(pos) %>` — those functions build HTML strings using EEx evaluated at compile time via `EEx.function_from_file`.
+For the position partial, since EEx has no include mechanism, define a local function in `render.ex` that evaluates a sub-template string, or use a `render_position` anonymous function bound before calling `EEx.eval_file`. The cleanest approach for EEx is to define named functions and call them with `<%= ResumeRenderer.Render.position_html(pos) %>` - those functions build HTML strings using EEx evaluated at compile time via `EEx.function_from_file`.
 
 ```elixir
-# In render.ex — compile a partial at compile time
+# In render.ex - compile a partial at compile time
 require EEx
 EEx.function_from_file(:def, :position_html, "priv/position.html.eex", [:pos, :show_employer, :group])
 EEx.function_from_file(:def, :render_resume, "priv/template.html.eex",
@@ -470,6 +470,21 @@ end
 
 ---
 
+## `elixir/README.md`
+
+Create `elixir/README.md` documenting this implementation. It should cover:
+
+- **Prerequisites:** Elixir 1.19.5+ with OTP 27. Install via [asdf](https://asdf-vm.com/) (`asdf plugin add elixir && asdf install`) or [mise](https://mise.jdx.dev/), or the official installers at <https://elixir-lang.org/install.html>.
+- **Setup:** `mix deps.get`.
+- **Build:** `mix escript.build` (produces `./resume_renderer`; or `just elixir-build` from the repo root).
+- **Run:** `./resume_renderer [flags]` (or `just elixir-render` from the repo root).
+- **Flags:** table matching the CLI interface in `shared-context.md` (`--input`, `--output`, `--name-font`, `--skip-validation`).
+- **Output:** writes `docs/index.html` (relative to the repo root when using the default path).
+- **Template:** note that `priv/template.html.eex` is compiled into the escript at build time via `EEx.function_from_file` - no runtime template files needed.
+- **Schema validation caveat:** note that `ex_json_schema` supports Draft 4 only; validation is best-effort.
+
+---
+
 ## Build and run
 
 ```sh
@@ -494,7 +509,7 @@ elixir-render: elixir-build
 ## Notes
 
 - `YamlElixir.read_from_file/1` returns `{:ok, map}` where map keys are strings (not atoms). Always access with string keys (`m["employer"]`), not atom keys.
-- EEx compiled via `EEx.function_from_file` generates a module-level function — this is the idiomatic way to use EEx for production rendering. Do not use `EEx.eval_file` at runtime; it parses the template on every invocation.
+- EEx compiled via `EEx.function_from_file` generates a module-level function - this is the idiomatic way to use EEx for production rendering. Do not use `EEx.eval_file` at runtime; it parses the template on every invocation.
 - Since EEx does not HTML-escape by default, the `h/1` helper must be called on every user-supplied value in the template. Pre-formatted values (dates, `nbsp_words` output) do not need `h/1` because they are constructed from trusted string operations.
 - Lexicographic comparison of ISO 8601 date strings is valid for sorting/comparison as long as all dates use the same format precision. The YAML consistently uses `"YYYY-MM-DD"`, so `min_date/2` using `<=` is correct.
 - The escript includes the Elixir runtime but not OTP applications by default. `yaml_elixir` requires its application to be started; add `Application.ensure_all_started(:yaml_elixir)` at the top of `main/1`, or configure it in `mix.exs` escript options: `escript: [main_module: ..., app: nil]` and start manually.

@@ -20,7 +20,7 @@ A Python CLI script in `python/` that reads `resume.yaml`, groups work entries b
 
 ## Package management
 
-Use **`uv`** (not pip/poetry/pipenv) — it is the current standard for Python project management. Initialize with `uv init --app resume-renderer` inside the `python/` directory.
+Use **`uv`** (not pip/poetry/pipenv) - it is the current standard for Python project management. Initialize with `uv init --app resume-renderer` inside the `python/` directory.
 
 ```
 python/
@@ -58,10 +58,10 @@ dependencies = [
 resume-renderer = "resume_renderer.main:main"
 ```
 
-- **`pyyaml`** — YAML parsing.
-- **`jinja2`** — HTML templating with auto-escaping.
-- **`pydantic`** — data model validation and coercion; replaces hand-written `from_dict` loaders. Use `model_validate` to construct models from the raw YAML dict.
-- **`jsonschema`** 4.26.0 — JSON Schema Draft 2020-12 validation against `schema.json` before Pydantic model construction.
+- **`pyyaml`** - YAML parsing.
+- **`jinja2`** - HTML templating with auto-escaping.
+- **`pydantic`** - data model validation and coercion; replaces hand-written `from_dict` loaders. Use `model_validate` to construct models from the raw YAML dict.
+- **`jsonschema`** 4.26.0 - JSON Schema Draft 2020-12 validation against `schema.json` before Pydantic model construction.
 
 ---
 
@@ -151,7 +151,7 @@ raw = yaml.safe_load(Path(args.input).read_text(encoding="utf-8"))
 resume = Resume.model_validate(raw)
 ```
 
-No manual `from_dict` function needed — Pydantic's `model_validate` recurses into nested models automatically.
+No manual `from_dict` function needed - Pydantic's `model_validate` recurses into nested models automatically.
 
 ---
 
@@ -300,7 +300,7 @@ Standard Jinja2 with auto-escaping. Key patterns:
       {% endfor %}
     </div>
   {% else %}
-    {# single position — render as bare job div with employer in meta #}
+    {# single position - render as bare job div with employer in meta #}
     {% set pos = group.positions[0] %}
     {% set show_employer = true %}
     {% include "_job_position.html" %}
@@ -441,6 +441,19 @@ if __name__ == "__main__":
 
 ---
 
+## `python/README.md`
+
+Create `python/README.md` documenting this implementation. It should cover:
+
+- **Prerequisites:** Python 3.14+ and [uv](https://docs.astral.sh/uv/). Install uv via `curl -LsSf https://astral.sh/uv/install.sh | sh` or `brew install uv`.
+- **Setup:** `uv sync` (installs dependencies into a local `.venv`).
+- **Run:** `uv run resume-renderer [flags]` (or `just python-render` from the repo root).
+- **Flags:** table matching the CLI interface in `shared-context.md` (`--input`, `--output`, `--name-font`, `--skip-validation`).
+- **Output:** writes `docs/index.html` (relative to the repo root when using the default path).
+- **Package layout:** note the `src/resume_renderer/` structure and the `resume-renderer` entry point defined in `pyproject.toml`.
+
+---
+
 ## Build and run
 
 ```sh
@@ -467,6 +480,6 @@ python-render:
 ## Notes
 
 - `yaml.safe_load` is sufficient; no need for `ruamel.yaml` unless round-trip preservation is required (it is not here).
-- `markupsafe.Markup` is part of Jinja2's dependency tree — no extra install needed.
+- `markupsafe.Markup` is part of Jinja2's dependency tree - no extra install needed.
 - Use `__future__.annotations` (`from __future__ import annotations`) at the top of each file to enable PEP 563 deferred evaluation if you use forward references in type hints, though Python 3.13 handles most cases correctly without it.
 - Jinja2's `autoescape` with `["html"]` will escape values interpolated with `{{ }}`. Pre-built `Markup` objects (from `nbsp_words`) are treated as already-safe and not double-escaped. Template literal text (`&middot;`, `&amp;`) is always passed through verbatim.

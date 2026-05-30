@@ -13,7 +13,7 @@ Replace the two existing schema-type files (`json-resume.go`, `fresh-resume.go`)
 ## Language version and module
 
 - **Go 1.26.3** (latest stable). Use `go 1.26.3` in `go.mod`.
-- Module path: `github.com/StephenBrown2/resume/go` (or `resume-renderer` — use whatever fits `go.mod` conventions for a local tool).
+- Module path: `github.com/StephenBrown2/resume/go` (or `resume-renderer` - use whatever fits `go.mod` conventions for a local tool).
 - Use Go's standard library wherever possible; external dependencies should be minimal.
 
 ---
@@ -42,7 +42,7 @@ go/
   template.go     # embedded HTML template string (using go:embed or a raw string literal)
 ```
 
-Delete `json-resume.go` and `fresh-resume.go` from the repo root — they were schema type definitions for a different tool and are now superseded.
+Delete `json-resume.go` and `fresh-resume.go` from the repo root - they were schema type definitions for a different tool and are now superseded.
 
 ---
 
@@ -200,10 +200,10 @@ This is used only in the summary paragraph via a custom template function.
 Embed the full HTML template as a raw string constant or use `//go:embed template.html`. Use `html/template` syntax.
 
 Key template functions to register:
-- `formatDate` — date string → display string
-- `nbspSummary` — applies `nbspShortWords` to summary text, returns `template.HTML`
-- `levelClass` — level string → CSS class suffix (`"adv"`, `"mid"`, or `""`)
-- `skillByName` — looks up a `SkillItem` in the list by name for a given skill set entry
+- `formatDate` - date string → display string
+- `nbspSummary` - applies `nbspShortWords` to summary text, returns `template.HTML`
+- `levelClass` - level string → CSS class suffix (`"adv"`, `"mid"`, or `""`)
+- `skillByName` - looks up a `SkillItem` in the list by name for a given skill set entry
 
 Pass a single data struct to the template:
 
@@ -319,6 +319,19 @@ func main() {
 
 ---
 
+## `go/README.md`
+
+Create `go/README.md` documenting this implementation. It should cover:
+
+- **Prerequisites:** Go 1.26.3+. Install via `go install` or a version manager such as `mise` or `asdf`.
+- **Build:** `go build -o resume-renderer .` (or `just go-build` from the repo root).
+- **Run:** `./resume-renderer [flags]` - list all flags with `./resume-renderer --help`.
+- **Flags:** table matching the CLI interface in `shared-context.md` (`--input`, `--output`, `--name-font`, `--skip-validation`).
+- **Output:** writes `docs/index.html` (relative to the repo root when using the default path).
+- **Module:** note the module path and that no CGo is used.
+
+---
+
 ## Justfile integration
 
 Add a `go` recipe to the existing `justfile` at the repo root:
@@ -339,5 +352,5 @@ Replace the existing `build` recipe's `goresume` call with `go-render` as the ne
 
 - The two existing root-level `.go` files (`json-resume.go`, `fresh-resume.go`) were part of a now-deleted tool and should be removed.
 - Do not use `text/template`; always use `html/template` to ensure proper escaping.
-- The `template.HTML` type in `html/template` is an escape hatch for trusted pre-escaped content — use it only for `nbspSummary` output and `&middot;` / `&amp;` / `&nbsp;` literals in the template itself.
+- The `template.HTML` type in `html/template` is an escape hatch for trusted pre-escaped content - use it only for `nbspSummary` output and `&middot;` / `&amp;` / `&nbsp;` literals in the template itself.
 - Build with `go build ./...` from the `go/` directory. No CGo; pure Go only.

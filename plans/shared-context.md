@@ -102,7 +102,7 @@ name, role, category, email, url
 
 Before rendering, validate the parsed YAML data against `schema.json` using the language's JSON Schema validation library (see each language plan for the specific library). The schema declares `"$schema": "https://json-schema.org/draft/2020-12/schema"`.
 
-Validation failures should be printed to stderr with a descriptive message and cause the program to exit with a non-zero status. Validation is a pre-flight check — a failed validation does not necessarily mean the data is unrenderable, so consider using `--skip-validation` as an escape hatch.
+Validation failures should be printed to stderr with a descriptive message and cause the program to exit with a non-zero status. Validation is a pre-flight check - a failed validation does not necessarily mean the data is unrenderable, so consider using `--skip-validation` as an escape hatch.
 
 ---
 
@@ -110,18 +110,18 @@ Validation failures should be printed to stderr with a descriptive message and c
 
 This is the most important non-trivial logic. The `work[]` array is already in reverse-chronological order (most recent first).
 
-**Step 1 — Assign a group key to each entry:**
+**Step 1 - Assign a group key to each entry:**
 - If `employerGroup` is present, use it as the group key.
 - Otherwise, use the `employer` name as the group key.
 
-**Step 2 — Group consecutive entries sharing the same group key** into an `EmployerGroup`. Non-consecutive entries with the same key are treated as separate groups (two separate stints at the same company).
+**Step 2 - Group consecutive entries sharing the same group key** into an `EmployerGroup`. Non-consecutive entries with the same key are treated as separate groups (two separate stints at the same company).
 
-**Step 3 — Compute group-level metadata:**
+**Step 3 - Compute group-level metadata:**
 - `displayName`: the `employer` of the first (most recent) entry in the group.
 - `url`: the `url` of the first entry.
 - `startDate`: the earliest `startDate` among all entries in the group.
 - `endDate`: the latest `endDate` among all entries (empty string / absent = "Present").
-- `formerNames`: any distinct `employer` values beyond the first, in display order — used to note name changes, e.g. "(formerly Rackspace Technology)".
+- `formerNames`: any distinct `employer` values beyond the first, in display order - used to note name changes, e.g. "(formerly Rackspace Technology)".
 
 ---
 
@@ -237,7 +237,7 @@ When a group has **exactly one position**, render it as the existing bare `job` 
 </div>
 ```
 
-Between top-level items (employer groups and lone jobs alike) insert `<hr class="job-divider">` — but not after the last item.
+Between top-level items (employer groups and lone jobs alike) insert `<hr class="job-divider">` - but not after the last item.
 
 ### New and modified CSS
 
@@ -298,7 +298,7 @@ Add the following inside the `<style>` block (in addition to all existing CSS fr
 }
 ```
 
-The `<link>` block in `<head>` becomes dynamic — the Instrument Serif link is replaced by the font-specific link generated from `--name-font`, while the Inter link remains fixed:
+The `<link>` block in `<head>` becomes dynamic - the Instrument Serif link is replaced by the font-specific link generated from `--name-font`, while the Inter link remains fixed:
 
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -342,7 +342,7 @@ All implementations must accept:
 | `--output` / `-o` | `../docs/index.html` | Path to write HTML output |
 | `--name-font` / `-f` | `Instrument Serif` | Google Fonts family name for the name heading |
 | `--skip-validation` | false | Skip JSON Schema validation of the YAML |
-| `--help` / `-h` | — | Print usage |
+| `--help` / `-h` | - | Print usage |
 
 ---
 
