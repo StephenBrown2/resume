@@ -5,7 +5,7 @@ basics:
   email: hire@stephen.brownii.email
   phone: (443) 219-4559
   url: https://stephenbrown2.github.io/resume
-  summary: 12+ years building and maintaining production systems. Focused on reliability, security, and developer productivity. I own problems end-to-end, write testable code, and improve the workflows around me.  Most of my recent work is in Go and TypeScript; my open source time goes into personal finance tooling. I pick up new languages quickly and have a track record of doing so on the job.
+  summary: 12+ years building and maintaining production systems. Focused on reliability, security, and developer productivity. I own problems end-to-end, write testable code, and improve the workflows around me.  Most of my recent work is in Go and TypeScript; my open source time goes into personal finance tooling. I pick up new languages quickly and have a track record of doing so on the job.
   location:
     city: Delaware
     region: OH
@@ -27,22 +27,22 @@ disposition:
   relocation:
     willing: false
 work:
-  - company: JumpCloud, Inc.
+  - employer: JumpCloud, Inc.
     position: Senior Software Engineer
     url: https://jumpcloud.com
     startDate: "2022-10-03"
     endDate: "2026-05-18"
     summary: ""
     highlights:
-      - Moved to an internal developer acceleration team focused on reliability and security.
-      - Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%.
-      - Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime.
-      - Raised code quality across 20+ repositories; improvements paved the path for adoption across 250+ engineers org-wide.
-      - Consulted by dozens of engineers on design and implementation; directly mentored 5+ engineers through onboarding.
-      - Designed and prototyped a Linux PAM module for direct JumpCloud user and password management on device.
-      - Built a Linux tray app bringing UX parity across 30+ supported OS versions spanning Windows, macOS, and Linux.
-      - Led a tamper-resistance and uninstall-protection initiative spanning 3 OS families; scoped and simplified research into a manageable deliverable.
-      - Began incorporating AI assistance in 2026, cutting research and PoC development time by an estimated 25–50%.
+      - Moved to an internal developer acceleration team focused on reliability and security.
+      - Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%.
+      - Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime.
+      - Raised code quality across 20+ repositories; improvements paved the path for adoption across 250+ engineers org-wide.
+      - Consulted by dozens of engineers on design and implementation; directly mentored 5+ engineers through onboarding.
+      - Designed and prototyped a Linux PAM module for direct JumpCloud user and password management on device.
+      - Built a Linux tray app bringing UX parity across 30+ supported OS versions spanning Windows, macOS, and Linux.
+      - Led a tamper-resistance and uninstall-protection initiative spanning 3 OS families; scoped and simplified research into a manageable deliverable.
+      - Began incorporating AI assistance in 2026, cutting research and PoC development time by an estimated 25–50%.
     location: Remote
     keywords:
       - Golang
@@ -53,16 +53,16 @@ work:
       - MongoDB
       - AI
       - LLMs
-  - company: JumpCloud, Inc.
+  - employer: JumpCloud, Inc.
     position: Software Engineer 3
     url: https://jumpcloud.com
     startDate: "2021-05-16"
     endDate: "2022-10-03"
     summary: ""
     highlights:
-      - Founded a Linux-focused team (grew from 3 to 6 engineers) supporting client devices across multiple distros.
-      - Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed.
-      - Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10+ Linux distributions spanning RHEL 7 to Ubuntu 22.04.
+      - Founded a Linux-focused team (grew from 3 to 6 engineers) supporting client devices across multiple distros.
+      - Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed.
+      - Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10+ Linux distributions spanning RHEL 7 to Ubuntu 22.04.
     location: Longmont, CO
     keywords:
       - Golang
@@ -70,15 +70,15 @@ work:
       - Linux
       - Github
       - AWS
-  - company: ObjectRocket
+  - employer: ObjectRocket
     position: Software Developer
     url: https://objectrocket.com
     startDate: "2019-10-01"
     endDate: "2021-05-01"
     summary: ""
     highlights:
-      - Maintained Python applications and libraries; contributed to 12+ microservices in Go (GoBuffalo).
-      - Deployed across Docker, OpenShift, and Kubernetes environments.
+      - Maintained Python applications and libraries; contributed to 12+ microservices in Go (GoBuffalo).
+      - Deployed across Docker, OpenShift, and Kubernetes environments.
     location: Remote
     keywords:
       - Python
@@ -86,16 +86,16 @@ work:
       - Kubernetes
       - Docker
       - AWS
-  - company: Rackspace (US / Hosting / Technology)
+  - employer: Rackspace (US / Hosting / Technology)
     position: Multiple roles
     url: https://rackspace.com
     startDate: "2014-01-06"
     endDate: "2019-10-01"
     summary: Progressed from Linux System Administrator to Automation Engineer, focusing on internal tooling, CI/CD, and operational reliability.
     highlights:
-      - Built a core internal web platform from scratch (React/JS, Python/Flask, MySQL) serving a team of 10–20 engineers.
-      - Authored Python client libraries and automation tooling used by an estimated 250–500 engineers org-wide.
-      - Implemented 3 CI/CD pipelines (dev/staging/production) in Jenkins; led cross-team code quality and onboarding improvements.
+      - Built a core internal web platform from scratch (React/JS, Python/Flask, MySQL) serving a team of 10–20 engineers.
+      - Authored Python client libraries and automation tooling used by an estimated 250–500 engineers org-wide.
+      - Implemented 3 CI/CD pipelines (dev/staging/production) in Jenkins; led cross-team code quality and onboarding improvements.
     location: San Antonio, TX / Remote
     keywords:
       - Python
@@ -113,7 +113,7 @@ projects:
   - name: Actual Budget
     description: Contributor to a local-first personal finance app (26k+ GitHub stars, TypeScript/React). Features and fixes across the codebase; built multi-account import plugin and custom themes.
     highlights:
-      - Features and fixes across TypeScript/React codebase; built multi-account import plugin and custom themes.
+      - Features and fixes across TypeScript/React codebase; built multi-account import plugin and custom themes.
     keywords:
       - TypeScript
       - React
@@ -159,86 +159,97 @@ projects:
       - Creator
     type: side-project
 skills:
-  - name: Bash/Shell scripting
-    level: Advanced
-    domain: Systems
-    summary: Write reliable shell scripts for automation and operational tasks
-    years: 15
-  - name: Golang
-    level: Advanced
-    domain: Languages
-    summary: On-device agents and backend services; comfortable with concurrency, gRPC, and code review
-    years: 6
-  - name: Python
-    level: Advanced
-    domain: Languages
-    summary: Backend services, automation, test tooling, and CLI tools; familiar with async patterns
-    years: 8
-  - name: TypeScript
-    level: Intermediate
-    domain: Languages
-    summary: Active contributor to a large TypeScript/React open source project (Actual Budget)
-    years: 2
-  - name: React
-    level: Intermediate
-    domain: Languages
-    summary: Modern React with hooks and TypeScript; active open source contributor (Actual Budget)
-    years: 5
-  - name: Perl
-    level: Familiar
-    domain: Languages
-    summary: Fluent as a Linux admin; syntax still familiar, not actively used in the last decade
-    years: 3
-  - name: Docker
-    level: Advanced
-    domain: Infrastructure & Cloud
-    summary: Portable development and deployment workflows
-    years: 10
-  - name: Linux
-    level: Advanced
-    domain: Systems
-    summary: Extensive production and development experience across distributions
-    years: 16
-  - name: Git / Jujutsu
-    level: Advanced
-    domain: Systems
-    summary: Daily use for source control, branching, and code review
-    years: 15
-  - name: PostgreSQL
-    level: Advanced
-    domain: Databases
-    summary: Schema design, migrations, and integration in production services
-    years: 6
-  - name: MongoDB
-    level: Advanced
-    domain: Databases
-    summary: Document store usage in production backend services
-    years: 5
-  - name: SQLite
-    level: Advanced
-    domain: Databases
-    summary: Embedded database usage in production and local-first applications
-    years: 8
-  - name: Kubernetes
-    level: Intermediate
-    domain: Infrastructure & Cloud
-    summary: Read and interpret Helm charts and manifests; familiar with deployment concepts
-    years: 6
-  - name: AWS
-    level: Intermediate
-    domain: Infrastructure & Cloud
-    summary: EC2, hosted Kubernetes, and basic service infrastructure
-    years: 5
-  - name: Ansible
-    level: Advanced
-    domain: Infrastructure & Cloud
-    summary: Infrastructure configuration management
-    years: 7
-  - name: Terraform
-    level: Beginner
-    domain: Infrastructure & Cloud
-    summary: Infrastructure as code for managing deployments
-    years: 2
+  sets:
+    - name: Languages
+      skills:
+        - Golang
+        - Python
+        - TypeScript
+        - React
+        - Perl
+    - name: Systems
+      skills:
+        - Linux
+        - Bash/Shell scripting
+        - Git / Jujutsu
+    - name: Databases
+      skills:
+        - PostgreSQL
+        - MongoDB
+        - SQLite
+    - name: Infrastructure & Cloud
+      skills:
+        - Docker
+        - Kubernetes
+        - AWS
+        - Ansible
+        - Terraform
+  list:
+    - name: Bash/Shell scripting
+      level: Advanced
+      summary: Write reliable shell scripts for automation and operational tasks
+      years: 15
+    - name: Golang
+      level: Advanced
+      summary: On-device agents and backend services; comfortable with concurrency, gRPC, and code review
+      years: 6
+    - name: Python
+      level: Advanced
+      summary: Backend services, automation, test tooling, and CLI tools; familiar with async patterns
+      years: 8
+    - name: TypeScript
+      level: Intermediate
+      summary: Active contributor to a large TypeScript/React open source project (Actual Budget)
+      years: 2
+    - name: React
+      level: Intermediate
+      summary: Modern React with hooks and TypeScript; active open source contributor (Actual Budget)
+      years: 5
+    - name: Perl
+      level: Familiar
+      summary: Fluent as a Linux admin; syntax still familiar, not actively used in the last decade
+      years: 3
+    - name: Docker
+      level: Advanced
+      summary: Portable development and deployment workflows
+      years: 10
+    - name: Linux
+      level: Advanced
+      summary: Extensive production and development experience across distributions
+      years: 16
+    - name: Git / Jujutsu
+      level: Advanced
+      summary: Daily use for source control, branching, and code review
+      years: 15
+    - name: PostgreSQL
+      level: Advanced
+      summary: Schema design, migrations, and integration in production services
+      years: 6
+    - name: MongoDB
+      level: Advanced
+      summary: Document store usage in production backend services
+      years: 5
+    - name: SQLite
+      level: Advanced
+      summary: Embedded database usage in production and local-first applications
+      years: 8
+    - name: Kubernetes
+      level: Intermediate
+      summary: Read and interpret Helm charts and manifests; familiar with deployment concepts
+      years: 6
+    - name: AWS
+      level: Intermediate
+      summary: EC2, hosted Kubernetes, and basic service infrastructure
+      years: 5
+    - name: Ansible
+      level: Advanced
+      summary: Infrastructure configuration management
+      years: 7
+    - name: Terraform
+      level: Beginner
+      summary: Infrastructure as code for managing deployments
+      years: 2
+
 certificates:
   - name: Triplebyte certified Generalist Software Engineer
     date: "2020-08-20"
@@ -279,12 +290,11 @@ certificates:
 education:
   - institution: LeTourneau University
     url: https://letu.edu
-    area: Science
-    studyType: Bachelor
+    area: Computer Information Systems
+    studyType: Bachelor of Science
     startDate: "2005-08-01"
     endDate: "2009-12-15"
     score: "2.4"
-    description: Computer Information Systems
     location: Longview, TX
 languages:
   - language: English
@@ -299,31 +309,32 @@ interests:
     summary: Why doesn't the fireplace turn on by itself when it's cold outside?
   - name: Solar Power
     summary: It powers the earth, why not your house?
-references:
+testimonials:
   - name: Scott Thurston
     role: Principal Software Engineer at JumpCloud
     category: Senior colleague (non-managing)
     url: https://www.linkedin.com/in/scott-thurston-80031/
     email: scott.thurston@jumpcloud.com
-    reference: Stephen is a very thoughtful, meticulous engineer. I can count on him to understand the nuances of technologies we work with, and leverage them to make our products more robust.
+    quote: Stephen is a very thoughtful, meticulous engineer. I can count on him to understand the nuances of technologies we work with, and leverage them to make our products more robust.
   - name: Jose Palma
     role: Staff Software Engineer at JumpCloud
     category: Senior colleague (non-managing)
     url: https://www.linkedin.com/in/joserpalma/
     email: jose.palma@jumpcloud.com
-    reference: Stephen is a great software engineer with a technical focus in Go, Bash, and device and identity management, along with strong foundational Linux skills. In our time working together, he demonstrated a practical understanding of these technologies and a straightforward approach to problem-solving. He will bring these specific technical capabilities to any team looking to leverage his skill set.
+    quote: Stephen is a great software engineer with a technical focus in Go, Bash, and device and identity management, along with strong foundational Linux skills. In our time working together, he demonstrated a practical understanding of these technologies and a straightforward approach to problem-solving. He will bring these specific technical capabilities to any team looking to leverage his skill set.
   - name: Steve Zazeski
     role: Senior Software Engineer at JumpCloud
     category: Teammate
     url: https://www.linkedin.com/in/stevezazeski/
     email: steve.zazeski@jumpcloud.com
-    reference: Stephen is an exceptional teammate with an impressive command of Linux systems and a proactive approach to software quality. He has a keen eye for system architecture, often identifying edge cases and integration issues before they can escalate. As a curious, tech-forward developer, he elevates the work of everyone around him. I highly recommend him and truly appreciate the opportunity to work alongside him on the devices team.
+    quote: Stephen is an exceptional teammate with an impressive command of Linux systems and a proactive approach to software quality. He has a keen eye for system architecture, often identifying edge cases and integration issues before they can escalate. As a curious, tech-forward developer, he elevates the work of everyone around him. I highly recommend him and truly appreciate the opportunity to work alongside him on the devices team.
   - name: Benjamin Schneider
     role: Senior Software Engineer at JumpCloud
     category: Teammate
     url: https://www.linkedin.com/in/benjamin-schneider-5a865723/
     email: benjamin.schneider@jumpcloud.com
-    reference: Stephen was a joy to work with at JumpCloud. He takes a very thorough and intelligent approach to engineering and brings with him a wealth of experience and knowledge.
+    quote: Stephen was a joy to work with at JumpCloud. He takes a very thorough and intelligent approach to engineering and brings with him a wealth of experience and knowledge.
+references:
   - name: Daniel Judge
     role: Senior Engineering Manager at JumpCloud
     category: Manager
