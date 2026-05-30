@@ -1,0 +1,360 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stephenbrown2.github.io/resume/schema.json",
+  "title": "Stephen Brown II — Resume Schema",
+  "description": "Hybrid JSON Resume / FRESH schema describing the resume.yaml format. Inherits JSON Resume's top-level structure and date conventions; borrows FRESH's disposition, employer field, skills sets/list, testimonials/references split, and leaf-level enrichments (summary, years, quote, role, category). additionalProperties is true throughout, matching both parent schemas.",
+  "type": "object",
+  "additionalProperties": true,
+  "definitions": {
+    "iso8601": {
+      "type": "string",
+      "description": "Date in YYYY-MM-DD, YYYY-MM, or YYYY format.",
+      "pattern": "^([1-2][0-9]{3}-[0-1][0-9]-[0-3][0-9]|[1-2][0-9]{3}-[0-1][0-9]|[1-2][0-9]{3})$"
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Link to the JSON schema this document conforms to."
+    },
+    "basics": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Personal and contact information. Matches JSON Resume basics.",
+      "properties": {
+        "name": { "type": "string" },
+        "label": { "type": "string", "description": "Job title or professional tagline." },
+        "image": { "type": "string", "format": "uri", "description": "URL to a photo." },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "url": { "type": "string", "format": "uri", "description": "Personal or portfolio website." },
+        "summary": { "type": "string", "description": "Short professional summary." },
+        "location": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "address": { "type": "string" },
+            "postalCode": { "type": "string" },
+            "city": { "type": "string" },
+            "countryCode": { "type": "string", "description": "ISO 3166-1 alpha-2 country code." },
+            "region": { "type": "string", "description": "State or province." }
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "additionalItems": false,
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "network": { "type": "string", "description": "e.g. GitHub, LinkedIn" },
+              "username": { "type": "string" },
+              "url": { "type": "string", "format": "uri" }
+            }
+          }
+        }
+      }
+    },
+    "disposition": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Employment preferences. From FRESH schema.",
+      "properties": {
+        "travel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage of time willing to travel."
+        },
+        "authorization": {
+          "type": "string",
+          "description": "Work authorization status, e.g. citizen, work-visa."
+        },
+        "commitment": {
+          "type": "array",
+          "additionalItems": false,
+          "description": "Desired work commitment types.",
+          "items": {
+            "type": "string",
+            "description": "e.g. permanent, contract, full-time, part-time, seasonal."
+          }
+        },
+        "remote": {
+          "type": "boolean",
+          "description": "Open to remote work."
+        },
+        "relocation": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "willing": {
+              "type": ["boolean", "string"],
+              "description": "Willingness to relocate."
+            },
+            "destinations": {
+              "type": "array",
+              "additionalItems": false,
+              "description": "Preferred relocation destinations.",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "work": {
+      "type": "array",
+      "additionalItems": false,
+      "description": "Employment history. Uses FRESH field names (employer, keywords) with JSON Resume date conventions (startDate/endDate).",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "employer": {
+            "type": "string",
+            "description": "Employer name. (FRESH: employer; JSON Resume equivalent: name)"
+          },
+          "position": { "type": "string", "description": "Job title." },
+          "url": { "type": "string", "format": "uri", "description": "Employer website." },
+          "startDate": { "$ref": "#/definitions/iso8601" },
+          "endDate": { "$ref": "#/definitions/iso8601" },
+          "summary": { "type": "string", "description": "Overview of role and responsibilities." },
+          "highlights": {
+            "type": "array",
+            "additionalItems": false,
+            "description": "Notable accomplishments.",
+            "items": { "type": "string" }
+          },
+          "location": { "type": "string", "description": "Freeform location, e.g. Remote or San Antonio, TX." },
+          "keywords": {
+            "type": "array",
+            "additionalItems": false,
+            "description": "Technologies and concepts associated with this role. (FRESH)",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "additionalItems": false,
+      "description": "Open source contributions and side projects. Matches JSON Resume projects.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "name": { "type": "string", "description": "Project name. (JSON Resume: name; FRESH equivalent: title)" },
+          "description": { "type": "string", "description": "Short project summary." },
+          "highlights": {
+            "type": "array",
+            "additionalItems": false,
+            "items": { "type": "string" }
+          },
+          "keywords": {
+            "type": "array",
+            "additionalItems": false,
+            "items": { "type": "string" }
+          },
+          "startDate": { "$ref": "#/definitions/iso8601" },
+          "endDate": { "$ref": "#/definitions/iso8601" },
+          "url": { "type": "string", "format": "uri" },
+          "roles": {
+            "type": "array",
+            "additionalItems": false,
+            "description": "Your role(s) on the project, e.g. Contributor, Creator. (JSON Resume: roles[]; FRESH equivalent: role string)",
+            "items": { "type": "string" }
+          },
+          "entity": { "type": "string", "description": "Affiliated organization, if any." },
+          "type": {
+            "type": "string",
+            "description": "Project category, e.g. open-source, side-project, volunteering."
+          }
+        }
+      }
+    },
+    "skills": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Skills organized into named domain groups (sets) with per-skill detail (list). Matches FRESH skills structure; domain grouping replaces the per-skill domain annotation.",
+      "properties": {
+        "sets": {
+          "type": "array",
+          "additionalItems": false,
+          "description": "Domain groupings that reference skills by name. (FRESH: skills.sets)",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Group name, e.g. Languages, Systems, Databases, Infrastructure & Cloud."
+              },
+              "skills": {
+                "type": "array",
+                "additionalItems": false,
+                "description": "Skill names referencing entries in skills.list.",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "list": {
+          "type": "array",
+          "additionalItems": false,
+          "description": "Individual skill definitions. (FRESH: skills.list)",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "name": { "type": "string" },
+              "level": {
+                "type": "string",
+                "description": "Freeform mastery level, e.g. Beginner, Familiar, Intermediate, Advanced."
+              },
+              "summary": {
+                "type": "string",
+                "description": "One-line description of how and where this skill is used. (FRESH)"
+              },
+              "years": {
+                "type": ["number", "string"],
+                "description": "Approximate years of experience. (FRESH)"
+              }
+            }
+          }
+        }
+      }
+    },
+    "certificates": {
+      "type": "array",
+      "additionalItems": false,
+      "description": "Professional certifications. Matches JSON Resume certificates.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "name": { "type": "string" },
+          "date": { "$ref": "#/definitions/iso8601" },
+          "url": { "type": "string", "format": "uri", "description": "Verification URL." },
+          "issuer": { "type": "string" }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "additionalItems": false,
+      "description": "Educational history. Mostly JSON Resume; location borrowed from FRESH.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "institution": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "area": { "type": "string", "description": "Field of study, e.g. Computer Information Systems." },
+          "studyType": { "type": "string", "description": "Degree type, e.g. Bachelor of Science." },
+          "startDate": { "$ref": "#/definitions/iso8601" },
+          "endDate": { "$ref": "#/definitions/iso8601" },
+          "score": { "type": "string", "description": "GPA or equivalent." },
+          "location": { "type": "string", "description": "Institution location. (FRESH)" },
+          "courses": {
+            "type": "array",
+            "additionalItems": false,
+            "description": "Notable courses taken. (JSON Resume)",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "languages": {
+      "type": "array",
+      "additionalItems": false,
+      "description": "Spoken languages. JSON Resume field names (language, fluency) with FRESH years enrichment.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "language": { "type": "string", "description": "e.g. English, Spanish." },
+          "fluency": {
+            "type": "string",
+            "description": "Proficiency level, e.g. Native, Fluent, Beginner. (JSON Resume: fluency; FRESH equivalent: level)"
+          },
+          "years": {
+            "type": ["number", "string"],
+            "description": "Years speaking the language. (FRESH)"
+          }
+        }
+      }
+    },
+    "interests": {
+      "type": "array",
+      "additionalItems": false,
+      "description": "Personal interests. JSON Resume structure with FRESH summary field instead of keywords.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "name": { "type": "string" },
+          "summary": {
+            "type": "string",
+            "description": "Brief description of the interest. (FRESH; JSON Resume uses keywords[] instead)"
+          },
+          "keywords": {
+            "type": "array",
+            "additionalItems": false,
+            "description": "Optional tags for the interest. (JSON Resume)",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "testimonials": {
+      "type": "array",
+      "additionalItems": false,
+      "description": "Public endorsements with a quoted statement. Corresponds to FRESH testimonials. People without a quote go in references instead.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "name": { "type": "string", "description": "Full name of the person giving the testimonial." },
+          "role": { "type": "string", "description": "Their title and organization. (FRESH)" },
+          "category": {
+            "type": "string",
+            "description": "Relationship to candidate, e.g. Manager, Teammate, Senior colleague (non-managing). (FRESH)"
+          },
+          "quote": {
+            "type": "string",
+            "description": "Verbatim endorsement text. (FRESH: quote; JSON Resume equivalent: reference)"
+          },
+          "url": { "type": "string", "format": "uri", "description": "Profile URL, e.g. LinkedIn." },
+          "email": { "type": "string", "format": "email", "description": "Contact email." },
+          "private": {
+            "type": "boolean",
+            "description": "Whether this testimonial should be kept private. (FRESH)"
+          }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "additionalItems": false,
+      "description": "Contact-only references without a public quote. People with a quoted statement go in testimonials instead.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "name": { "type": "string" },
+          "role": { "type": "string", "description": "Their title and organization. (FRESH)" },
+          "category": {
+            "type": "string",
+            "description": "Relationship to candidate, e.g. Manager, Teammate, Colleague. (FRESH)"
+          },
+          "email": { "type": "string", "format": "email", "description": "Contact email." },
+          "url": { "type": "string", "format": "uri", "description": "Profile URL, e.g. LinkedIn." },
+          "private": {
+            "type": "boolean",
+            "description": "Whether this reference should be kept private. (FRESH)"
+          }
+        }
+      }
+    }
+  }
+}

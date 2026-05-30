@@ -1,5 +1,6 @@
 out/
 *.json
+!schema.json
 *.pdf
 !.vscode/
 !.vscode/settings.json

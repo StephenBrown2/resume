@@ -1,4 +1,4 @@
-$schema: https://raw.githubusercontent.com/jsonresume/resume-schema/refs/heads/master/schema.json
+$schema: ./schema.json
 basics:
   name: Stephen Brown II
   label: Platform Support & Security Engineer
