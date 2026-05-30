@@ -1,6 +1,6 @@
 # Post-implementation cleanup plan
 
-Execute this plan **after** at least one language implementation is working and producing correct output from `resume.yaml` → `docs/index.html`.
+Execute this plan **after all five language implementations** (Go, Rust, Python, Elixir, Java) are complete and each produces correct output from `resume.yaml` → `docs/index.html`.
 
 ---
 
@@ -61,7 +61,54 @@ validate:
 
 The `serve` and `watch` recipes can stay as-is (they are tool-agnostic). The `go` alias recipe (`go: build serve`) should be renamed or removed to avoid shadowing the new `go-render` recipe.
 
-After cleanup, the default recipe (run by bare `just`) should invoke whichever language implementation has been chosen as the primary build.
+**Default recipe:** The bare `just` invocation should print available render recipes rather than silently run one language's build. Use Just's built-in `--list` for this:
+
+```just
+default:
+    @just --list
+```
+
+**Working-directory syntax:** Any recipe that previously used `cd <dir> && ...` must be converted to use Just's `[working-directory]` attribute instead:
+
+```just
+[working-directory: 'go']
+go-build:
+    go build -o resume-renderer .
+
+[working-directory: 'go']
+go-render: go-build
+    ./resume-renderer --input ../resume.yaml --output ../docs/index.html
+
+[working-directory: 'rust']
+rust-build:
+    cargo build --release
+
+[working-directory: 'rust']
+rust-render: rust-build
+    ./target/release/resume-renderer --input ../resume.yaml --output ../docs/index.html
+
+[working-directory: 'python']
+python-render:
+    uv run resume-renderer --input ../resume.yaml --output ../docs/index.html
+
+[working-directory: 'elixir']
+elixir-build:
+    mix escript.build
+
+[working-directory: 'elixir']
+elixir-render: elixir-build
+    ./resume_renderer --input ../resume.yaml --output ../docs/index.html
+
+[working-directory: 'java']
+java-build:
+    mvn -q package -DskipTests
+
+java-render: java-build
+    java -jar java/target/resume-renderer-1.0-SNAPSHOT.jar \
+         --input resume.yaml --output docs/index.html
+```
+
+The `serve` and `watch` recipes operate from the repo root and need no working-directory attribute.
 
 ### `.gitignore`
 
