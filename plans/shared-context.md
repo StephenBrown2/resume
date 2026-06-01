@@ -172,6 +172,23 @@ Inter supports the `tnum` OpenType feature. Apply it to elements that display ye
 }
 ```
 
+### Character disambiguation for Inter
+
+Inter includes OpenType stylistic sets that improve legibility by disambiguating similar characters. Enable them on `body` alongside antialiasing:
+
+```css
+body {
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'dlig' 1, 'calt' 1, 'ss01' 1, 'ss04' 1, 'ss07' 1;
+}
+```
+
+- `dlig` - discretionary ligatures
+- `calt` - contextual alternates
+- `ss01` - alternate digit one (serif base, distinct from lowercase L)
+- `ss04` - disambiguation, no slashed zero (open zero; conflicts with `ss02`)
+- `ss07` - open digit seven
+
 ### New employer-group HTML structure
 
 When a group has **more than one position**, wrap the positions in an `employer-group` div instead of rendering them as bare `job` divs:
