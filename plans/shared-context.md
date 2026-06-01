@@ -129,6 +129,17 @@ This is the most important non-trivial logic. The `work[]` array is already in r
 
 The output is a self-contained HTML file. Read the existing `docs/index.html` in full to understand all CSS custom properties, class names, and section structure. The new implementations must produce equivalent output with the additions below.
 
+### Header: title label
+
+Render `basics.label` as a `.title-label` element directly above the `.name` heading:
+
+```html
+<p class="title-label">Senior Software Engineer</p>
+<h1 class="name">Stephen Brown II</h1>
+```
+
+The `.title-label` class is already defined in `docs/index.html` (small caps, accent color, letter-spaced).
+
 ### Font customization
 
 The name at the top of the resume uses a display/serif font specified at render time via the `--name-font` CLI flag. The rest of the page uses Inter (body, labels, dates, tags, etc.).
