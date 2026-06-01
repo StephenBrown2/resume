@@ -5,7 +5,7 @@ const resumeTemplate = `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{.Basics.Name}} — Resume</title>
+<title>{{.Basics.Name}} - Resume</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {{.GoogleFontsLink}}
@@ -309,6 +309,7 @@ const resumeTemplate = `<!DOCTYPE html>
     .job            { page-break-inside: avoid; }
     .project        { page-break-inside: avoid; }
     .section-intro  { break-inside: avoid; page-break-inside: avoid; }
+    .section-label  { break-after: avoid; page-break-after: avoid; }
     header          { page-break-after: avoid; }
   }
 
@@ -364,26 +365,26 @@ const resumeTemplate = `<!DOCTYPE html>
   <section>
     <div class="section-intro">
       <div class="section-label">Skills</div>
-      <div class="skills-domains">
-        {{- range .SkillSets}}
-        <div>
-          <div class="skill-group-label">{{.Name}}</div>
-          {{- $list := $.SkillList}}
-          {{- range .Skills}}
-          {{- $skill := skillByName $list .}}
-          <div class="skill-item">
-            <span class="skill-name">{{$skill.Name}}</span>
-            {{- $cls := levelClass $skill.Level}}
-            {{- if $cls}}
-            <span class="skill-level {{$cls}}">{{$skill.Level}}</span>
-            {{- else}}
-            <span class="skill-level">{{$skill.Level}}</span>
-            {{- end}}
-          </div>
+    </div>
+    <div class="skills-domains">
+      {{- range .SkillSets}}
+      <div>
+        <div class="skill-group-label">{{.Name}}</div>
+        {{- $list := $.SkillList}}
+        {{- range .Skills}}
+        {{- $skill := skillByName $list .}}
+        <div class="skill-item">
+          <span class="skill-name">{{$skill.Name}}</span>
+          {{- $cls := levelClass $skill.Level}}
+          {{- if $cls}}
+          <span class="skill-level {{$cls}}">{{$skill.Level}}</span>
+          {{- else}}
+          <span class="skill-level">{{$skill.Level}}</span>
           {{- end}}
         </div>
         {{- end}}
       </div>
+      {{- end}}
     </div>
   </section>
 

@@ -5,7 +5,7 @@ basics:
   email: hire@stephen.brownii.email
   phone: (443) 219-4559
   url: https://stephenbrown2.github.io/resume
-  summary: 12+ years building and maintaining production systems. Focused on reliability, security, and developer productivity. I own problems end-to-end, write testable code, and improve the workflows around me.  Most of my recent work is in Go and TypeScript; my open source time goes into personal finance tooling. I pick up new languages quickly and have a track record of doing so on the job.
+  summary: 15 years in technology - 6 as a Linux systems administrator, 9 as a software engineer. Focused on reliability, security, and developer productivity. I own problems end-to-end, write testable code, and improve the workflows around me. Most of my recent work is in Go and TypeScript; my open source time goes into personal finance tooling. I pick up new languages quickly and have a track record of doing so on the job.
   location:
     city: Delaware
     region: OH
@@ -27,7 +27,7 @@ disposition:
   relocation:
     willing: false
 work:
-  - employer: JumpCloud, Inc.
+  - employer: JumpCloud
     position: Senior Software Engineer
     url: https://jumpcloud.com
     startDate: "2022-10-03"
@@ -54,7 +54,7 @@ work:
       - AI
       - LLMs
       - GitHub
-  - employer: JumpCloud, Inc.
+  - employer: JumpCloud
     position: Software Engineer 3
     url: https://jumpcloud.com
     startDate: "2021-05-16"
@@ -90,29 +90,148 @@ work:
       - Kubernetes
       - Docker
       - AWS
-  - employer: Rackspace (US / Hosting / Technology)
+  - employer: Rackspace Technology
     employerGroup: Rackspace
-    position: Linux Admin -> Automation Engineer
+    position: Automation Engineer I
     url: https://rackspace.com
-    startDate: "2014-01-06"
+    startDate: "2018-09-11"
     endDate: "2019-10-01"
-    summary: Progressed from Linux System Administrator to Automation Engineer, focusing on internal tooling, CI/CD, and operational reliability.
+    summary: "Global Linux Automation Engineers"
     highlights:
-      - Built a core internal web platform from scratch (React/JS, Python/Flask, MySQL) serving a team of 10–20 engineers.
-      - Authored Python client libraries and automation tooling used by an estimated 250–500 engineers org-wide.
-      - Implemented 3 CI/CD pipelines (dev/staging/production) in Jenkins; led cross-team code quality and onboarding improvements.
-    location: San Antonio, TX / Remote
+      - Worked with UK-based team as sole US member.
+      - Maintained and developed Stepladder, a framework for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Librack client library).
+      - Implemented and configured deployment tools using Docker, Ansible, and Jenkins; designed and built Jenkins 2.x Pipeline for PR testing.
+      - Led team to implement better checks and consistency to improve and maintain code quality.
+    location: Remote
     keywords:
       - Python
-      - React
-      - JavaScript
-      - Linux
-      - Ansible
       - Jenkins
+      - Ansible
       - Docker
+      - GitHub
+  - employer: Rackspace Hosting
+    employerGroup: Rackspace
+    position: Automation Engineer I
+    url: https://rackspace.com
+    startDate: "2017-06-03"
+    endDate: "2018-09-10"
+    summary: "Global SysAd Maintenance Team"
+    highlights:
+      - Automated migration of scheduled maintenances to consolidate calendars, saving weeks of manual work.
+      - Developed reporting and categorization tools for whole team use.
+      - Wrote tools which enabled more efficient team workflows not otherwise possible.
+      - Inverted traditional scheduling process to improve customer experience.
+    location: San Antonio, TX
+    keywords:
+      - Python
+      - Linux
+  - employer: Rackspace US, Inc.
+    employerGroup: Rackspace
+    position: Linux System Administrator I
+    url: https://rackspace.com
+    startDate: "2015-05-16"
+    endDate: "2017-06-03"
+    summary: "Global SysAd Maintenance Team"
+    highlights:
+      - Quickly identified and proposed tools and training to make team process more efficient.
+      - Contributed multiple features to team's jinja2-based templating system (Automaint).
+      - Developed an auto-numbering tool for maintenance templates using React.
+      - Developed a custom UI accessing the maintenance calendar backend, presenting upcoming services using the fullcalendar.js library.
+    location: San Antonio, TX
+    keywords:
+      - Linux
+      - Bash
+      - Python
+      - React
       - Flask
+  - employer: Rackspace US, Inc.
+    employerGroup: Rackspace
+    position: Linux System Administrator I
+    url: https://rackspace.com
+    startDate: "2014-01-06"
+    endDate: "2015-05-15"
+    summary: "Global Technical Support - Enterprise (2nd shift)"
+    highlights:
+      - Installed, configured, updated, and troubleshot services for customers including OS, web server, database, application server, and mail (Apache, MySQL, PHP, FTP, SSH, DNS).
+      - Contributed features and bug fixes to internal Python projects including a password retrieval CLI (intensify) and login automation tools (overtime/hammertime).
+    location: San Antonio, TX
+    keywords:
+      - Linux
+      - Bash
+      - Python
+  - employer: "Johns Hopkins University, Knowledge for Health Project"
+    position: Linux System Administrator
+    url: https://ccp.jhu.edu
+    startDate: "2013-07-01"
+    endDate: "2013-12-30"
+    summary: Bloomberg School Of Public Health, Center For Communication Programs
+    highlights:
+      - Maintained and automated servers supporting Drupal multisite deployments with LAMP stack on physical and virtual hosts, and Apache Solr search indexes.
+      - Successfully led team to adoption of git and a development > staging > production deployment workflow.
+      - Designed Puppet configuration management to maintain and deploy to development and production servers.
+    location: Baltimore, MD
+    keywords:
+      - Linux
       - Git
-      - MySQL
+      - Puppet
+      - Drupal
+      - Vagrant
+  - employer: "Johns Hopkins University, Knowledge for Health Project"
+    position: Junior Linux Systems Administrator
+    url: https://ccp.jhu.edu
+    startDate: "2011-04-01"
+    endDate: "2013-07-01"
+    summary: Bloomberg School Of Public Health, Center For Communication Programs
+    highlights:
+      - Hired as a contractor; brought on as full-time employee within 6 months.
+      - Maintained CentOS 5 servers supporting 30+ websites for the K4Health project.
+    location: Washington DC / Baltimore, MD
+    keywords:
+      - Linux
+      - CentOS
+      - Drupal
+  - employer: MICROS Systems
+    position: Software Escalations Specialist
+    url: https://micros.com
+    startDate: "2011-01-01"
+    endDate: "2011-04-01"
+    summary: ""
+    highlights:
+      - Analyzed and diagnosed the most difficult customer-reported issues.
+      - Documented issues for developer and QA teams to remedy.
+    location: Columbia, MD
+    keywords:
+      - Troubleshooting
+      - Debugging
+      - Testing
+      - SQL
+  - employer: Geek Squad
+    position: Counter Operations Agent
+    url: https://geeksquad.com
+    startDate: "2010-10-01"
+    endDate: "2010-12-01"
+    summary: ""
+    highlights:
+      - Diagnosed client issues, checked in computers for service, and maintained customer relationships through the repair process.
+    location: Baltimore, MD
+    keywords:
+      - Troubleshooting
+      - Customer Service
+  - employer: "Solnet Network and Web Services, LLC."
+    position: Tech Support Specialist
+    url: https://solnetweb.com
+    startDate: "2010-03-01"
+    endDate: "2010-10-01"
+    summary: On-site technical support for Windows desktops, servers, and networking infrastructure.
+    highlights:
+      - Supported desktops and end-node business networking; ran and terminated CAT5 cabling for 12+ client accounts.
+      - Resolved virus infections, Outlook issues, PC migrations, and network connectivity issues.
+      - Wiped and reinstalled Windows XP systems using DBAN, Sysprep, and Clonezilla.
+    location: Baltimore, MD
+    keywords:
+      - Windows
+      - Networking
+      - Customer Service
 
 projects:
   - name: Actual Budget
