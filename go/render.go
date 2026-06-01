@@ -2,6 +2,8 @@ package main
 
 import (
 	"html/template"
+	"math/rand/v2"
+	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -15,6 +17,66 @@ type EmployerGroup struct {
 	StartDate   string
 	EndDate     string
 	Positions   []WorkEntry
+}
+
+// filterWorkSince returns only entries whose endDate is absent (current) or
+// falls on or after the cutoff. The cutoff string may be YYYY, YYYY-MM, or
+// YYYY-MM-DD; shorter forms are right-padded to YYYY-MM-DD for comparison.
+func filterWorkSince(entries []WorkEntry, since string) []WorkEntry {
+	cutoff := padDate(since)
+	var out []WorkEntry
+	for _, e := range entries {
+		if e.EndDate == "" || padDate(e.EndDate) >= cutoff {
+			out = append(out, e)
+		}
+	}
+	return out
+}
+
+// padDate right-pads a partial ISO date to YYYY-MM-DD for lexicographic comparison.
+func padDate(s string) string {
+	switch len(s) {
+	case 4: // YYYY
+		return s + "-01-01"
+	case 7: // YYYY-MM
+		return s + "-01"
+	default:
+		return s
+	}
+}
+
+// shuffleKeywords randomises keyword order for work entries and projects.
+func shuffleKeywords(resume *Resume) {
+	for i := range resume.Work {
+		rand.Shuffle(len(resume.Work[i].Keywords), func(a, b int) {
+			resume.Work[i].Keywords[a], resume.Work[i].Keywords[b] = resume.Work[i].Keywords[b], resume.Work[i].Keywords[a]
+		})
+	}
+	for i := range resume.Projects {
+		rand.Shuffle(len(resume.Projects[i].Keywords), func(a, b int) {
+			resume.Projects[i].Keywords[a], resume.Projects[i].Keywords[b] = resume.Projects[i].Keywords[b], resume.Projects[i].Keywords[a]
+		})
+	}
+}
+
+// sortSkillSets sorts each domain's skill names by proficiency descending,
+// then alphabetically ascending within the same level.
+func sortSkillSets(sets []SkillSet, list []SkillItem) {
+	rank := map[string]int{"Advanced": 3, "Intermediate": 2, "Familiar": 1, "Beginner": 0}
+	idx := make(map[string]SkillItem, len(list))
+	for _, s := range list {
+		idx[s.Name] = s
+	}
+	for i := range sets {
+		sort.SliceStable(sets[i].Skills, func(a, b int) bool {
+			ra := rank[idx[sets[i].Skills[a]].Level]
+			rb := rank[idx[sets[i].Skills[b]].Level]
+			if ra != rb {
+				return ra > rb
+			}
+			return sets[i].Skills[a] < sets[i].Skills[b]
+		})
+	}
 }
 
 // groupWork groups consecutive WorkEntry items sharing the same group key.

@@ -363,27 +363,6 @@ const resumeTemplate = `<!DOCTYPE html>
 
   <section>
     <div class="section-intro">
-      <div class="section-label">Open Source &amp; Projects</div>
-      <div class="projects-grid">
-        {{- range .Projects}}
-        <div class="project">
-          <div class="project-name">
-            {{- if .URL}}<a href="{{.URL}}">{{.Name}}</a>{{else}}{{.Name}}{{end}}
-          </div>
-          <div class="project-desc">{{.Description}}</div>
-          {{- if .Keywords}}
-          <div class="project-tags">
-            {{- range .Keywords}}<span class="tag">{{.}}</span>{{end}}
-          </div>
-          {{- end}}
-        </div>
-        {{- end}}
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-intro">
       <div class="section-label">Skills</div>
       <div class="skills-domains">
         {{- range .SkillSets}}
@@ -400,6 +379,27 @@ const resumeTemplate = `<!DOCTYPE html>
             {{- else}}
             <span class="skill-level">{{$skill.Level}}</span>
             {{- end}}
+          </div>
+          {{- end}}
+        </div>
+        {{- end}}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-intro">
+      <div class="section-label">Open Source &amp; Projects</div>
+      <div class="projects-grid">
+        {{- range .Projects}}
+        <div class="project">
+          <div class="project-name">
+            {{- if .URL}}<a href="{{.URL}}">{{.Name}}</a>{{else}}{{.Name}}{{end}}
+          </div>
+          <div class="project-desc">{{.Description}}</div>
+          {{- if .Keywords}}
+          <div class="project-tags">
+            {{- range .Keywords}}<span class="tag">{{.}}</span>{{end}}
           </div>
           {{- end}}
         </div>

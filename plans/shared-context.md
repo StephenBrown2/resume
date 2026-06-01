@@ -77,6 +77,8 @@ When `id` is present and the ID is not already embedded in the `url` (`strings.C
 
 If the ID is already in the URL (e.g. RHCE: `?certId=140-027-434`), skip both the tooltip and the print span — the URL itself is the verification reference.
 
+Sort certificates by `date` descending (most recent first) before rendering.
+
 ### `education[]`
 ```yaml
 institution, url, area, studyType, startDate, endDate, score, location
@@ -372,6 +374,15 @@ When rendering `skills.list`, apply a modifier class on `.skill-level` based on 
 
 The skills section iterates `skills.sets` for the group structure and looks up each skill name in `skills.list` to get the level for display.
 
+### Skill sort order
+
+Within each domain, sort skills by proficiency descending, then name ascending:
+`Advanced`(3) > `Intermediate`(2) > `Familiar`(1) > `Beginner`(0). Apply before rendering; do not alter the source data order.
+
+### Keyword shuffle
+
+Shuffle `keywords` arrays for work entries and open source projects on each render. Skills are **not** shuffled — they are sorted as above.
+
 ### HTML escaping
 
 All user-supplied string values must be HTML-escaped before insertion (`&`, `<`, `>`, `"`, `'`).
@@ -397,6 +408,7 @@ All implementations must accept:
 | `--output` / `-o` | `../docs/index.html` | Path to write HTML output (use `../docs/{lang}-index.html` when testing) |
 | `--name-font` / `-f` | `Instrument Serif` | Google Fonts family name for the name heading |
 | `--schema` | _(derived)_ | Path to JSON Schema file. Resolution order: (1) this flag if set, (2) `$schema` field in the YAML resolved relative to the input file's directory, (3) `schema.json` in the same directory as the input file |
+| `--since` | _(none)_ | Exclude work entries whose `endDate` falls before this date. Accepts `YYYY`, `YYYY-MM`, or `YYYY-MM-DD`. Entries with no `endDate` (current role) are always included. |
 | `--skip-validation` | false | Skip JSON Schema validation of the YAML |
 | `--help` / `-h` | - | Print usage |
 
@@ -441,7 +453,7 @@ When testing, pass `--output ../docs/{lang}-index.html` to avoid overwriting the
   .section-label { page-break-after: avoid; break-after: avoid; }
   ```
   `break-before/after: avoid` are unreliable hints in both Firefox and Chromium. The reliable fix is wrapping `.section-label` and its first content sibling in `<div class="section-intro">` and using `break-inside: avoid` on that container. Each section uses this wrapper so the label is always atomically bound to its content.
-- Section order: header, summary, experience, open source & projects, skills, education & certifications, references (testimonials)
+- Section order: header, summary, experience, skills, open source & projects, education & certifications, references (testimonials)
 - The `print-only` span in the contact block containing the full resume URL
 - The `&middot;` separator used in `.job-meta` and `.contact`
 - The `.footer-grid` layout for education + certifications on one row

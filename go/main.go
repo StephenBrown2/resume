@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 
 	goyaml "github.com/goccy/go-yaml"
@@ -17,6 +18,7 @@ func main() {
 	output := flag.String("output", "../docs/index.html", "path to write HTML")
 	nameFont := flag.String("name-font", "Instrument Serif", "Google Fonts family for name heading")
 	schema := flag.String("schema", "", "path to JSON Schema file (default: schema.json next to --input)")
+	since := flag.String("since", "", "exclude jobs whose end date is before this date (YYYY, YYYY-MM, or YYYY-MM-DD)")
 	skipVal := flag.Bool("skip-validation", false, "skip JSON Schema validation")
 	flag.Parse()
 
@@ -54,7 +56,17 @@ func main() {
 	))
 	nameFontCSS := template.CSS(fmt.Sprintf("'%s', Georgia, serif", *nameFont))
 
-	groups := groupWork(resume.Work)
+	sort.Slice(resume.Certificates, func(i, j int) bool {
+		return resume.Certificates[i].Date > resume.Certificates[j].Date
+	})
+	shuffleKeywords(&resume)
+	sortSkillSets(resume.Skills.Sets, resume.Skills.List)
+
+	work := resume.Work
+	if *since != "" {
+		work = filterWorkSince(work, *since)
+	}
+	groups := groupWork(work)
 
 	tmplData := TemplateData{
 		Basics:          resume.Basics,
