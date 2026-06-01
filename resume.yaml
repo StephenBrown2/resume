@@ -14,9 +14,9 @@ basics:
     - network: GitHub
       username: StephenBrown2
       url: https://github.com/StephenBrown2
-    - network: GitLab
-      username: StephenBrown2
-      url: https://gitlab.com/StephenBrown2
+    - network: LinkedIn
+      username: stephen-brown2
+      url: https://linkedin.com/in/stephen-brown2
 disposition:
   travel: 25
   authorization: citizen
@@ -46,13 +46,14 @@ work:
     location: Remote
     keywords:
       - Golang
-      - Docker
-      - Github
-      - AWS
       - PostgreSQL
       - MongoDB
+      - Docker
+      - AWS
+      - Kubernetes
       - AI
       - LLMs
+      - GitHub
   - employer: JumpCloud, Inc.
     position: Software Engineer 3
     url: https://jumpcloud.com
@@ -66,11 +67,14 @@ work:
     location: Longmont, CO
     keywords:
       - Golang
-      - Docker
+      - gRPC
+      - Python
       - Linux
-      - Github
+      - Docker
+      - GitHub
       - AWS
   - employer: ObjectRocket
+    employerGroup: Rackspace
     position: Software Developer
     url: https://objectrocket.com
     startDate: "2019-10-01"
@@ -81,13 +85,14 @@ work:
       - Deployed across Docker, OpenShift, and Kubernetes environments.
     location: Remote
     keywords:
-      - Python
       - Golang
+      - Python
       - Kubernetes
       - Docker
       - AWS
   - employer: Rackspace (US / Hosting / Technology)
-    position: Multiple roles
+    employerGroup: Rackspace
+    position: Linux Admin -> Automation Engineer
     url: https://rackspace.com
     startDate: "2014-01-06"
     endDate: "2019-10-01"
@@ -99,14 +104,14 @@ work:
     location: San Antonio, TX / Remote
     keywords:
       - Python
+      - React
+      - JavaScript
       - Linux
-      - Docker
       - Ansible
       - Jenkins
-      - React
+      - Docker
       - Flask
       - Git
-      - JavaScript
       - MySQL
 
 projects:
@@ -139,7 +144,7 @@ projects:
     description: Converts Fold Bitcoin rewards card CSV statements to a standard budget import format, including memos.
     highlights: []
     keywords:
-      - Go
+      - Golang
       - Bitcoin
       - Personal Finance
     startDate: "2024-01-01"
@@ -167,16 +172,6 @@ skills:
         - TypeScript
         - React
         - Perl
-    - name: Systems
-      skills:
-        - Linux
-        - Bash/Shell scripting
-        - Git / Jujutsu
-    - name: Databases
-      skills:
-        - PostgreSQL
-        - MongoDB
-        - SQLite
     - name: Infrastructure & Cloud
       skills:
         - Docker
@@ -184,8 +179,18 @@ skills:
         - AWS
         - Ansible
         - Terraform
+    - name: Systems
+      skills:
+        - Linux
+        - Bash / Shell
+        - Git / Jujutsu
+    - name: Databases
+      skills:
+        - PostgreSQL
+        - MongoDB
+        - SQLite
   list:
-    - name: Bash/Shell scripting
+    - name: Bash / Shell
       level: Advanced
       summary: Write reliable shell scripts for automation and operational tasks
       years: 15
@@ -251,22 +256,26 @@ skills:
       years: 2
 
 certificates:
-  - name: Triplebyte certified Generalist Software Engineer
-    date: "2020-08-20"
-    url: https://triplebyte.com/tb/stephen-brown-ii-xjpelfb/certificate/track/generalist
-    issuer: Triplebyte
-  - name: 'Red Hat Certified Engineer (ID: 140-027-434)'
+  - name: RHCE
     date: "2014-03-12"
     url: https://rhtapps.redhat.com/verify?certId=140-027-434
     issuer: Red Hat
-  - name: 'Red Hat Certified System Administrator (ID: 140-027-434)'
+    id: "140-027-434"
+  - name: RHCSA
     date: "2014-02-19"
     url: https://rhtapps.redhat.com/verify?certId=140-027-434
     issuer: Red Hat
-  - name: 'LPIC-1 (LPI ID: LPI000223384, Verification Code: ltd26ep79p)'
+    id: "140-027-434"
+  - name: Generalist Software Engineer
+    date: "2020-08-20"
+    url: https://triplebyte.com/tb/stephen-brown-ii-xjpelfb/certificate/track/generalist
+    issuer: Triplebyte
+  - name: LPIC-1
     date: "2010-12-30"
     url: https://cs.lpi.org/caf/Xamman/certification
     issuer: Linux Professional Institute
+    id: "LPI000223384"
+    verificationCode: "ltd26ep79p"
   - name: Linux+ (Powered by LPI)
     date: "2010-12-30"
     url: https://www.certmetrics.com/comptia/public/verification.aspx?code=B8FPZJHDMH1QCCCL
@@ -291,7 +300,7 @@ education:
   - institution: LeTourneau University
     url: https://letu.edu
     area: Computer Information Systems
-    studyType: Bachelor of Science
+    studyType: B.S.
     startDate: "2005-08-01"
     endDate: "2009-12-15"
     score: "2.4"

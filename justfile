@@ -1,15 +1,31 @@
 export filename := "resume.yaml"
 
-build theme="block":
-    goresume export --resume {{filename}} --html-theme {{theme}} --html-output docs/index.html
+# ── Go ───────────────────────────────────────────────────────────────────────
+
+[working-directory: 'go']
+go-build:
+    go build -o resume-renderer .
+
+[working-directory: 'go']
+go-render: go-build
+    ./resume-renderer --input ../{{filename}} --output ../docs/index.html
+
+[working-directory: 'go']
+go-validate: go-build
+    ./resume-renderer --input ../{{filename}} --output /dev/null
+
+# ── Generic (calls all implemented language renderers) ───────────────────────
+
+build: go-render
+
+validate: go-validate
+
+# ── Dev helpers ──────────────────────────────────────────────────────────────
 
 serve directory="docs":
     python3 -m http.server --directory {{directory}}
 
-go: build serve
-
-validate:
-    goresume validate --resume {{filename}}
+dev: build serve
 
 watch:
   #!/usr/bin/env sh
@@ -17,5 +33,5 @@ watch:
     --exclude "(.*\\.pdf$)|public|justfile|\\.git" \
     -e close_write,move,create,delete \
     | while read -r directory events filename; do
-      just go
+      just build
     done

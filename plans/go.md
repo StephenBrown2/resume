@@ -12,7 +12,7 @@ Replace the two existing schema-type files (`json-resume.go`, `fresh-resume.go`)
 
 ## Language version and module
 
-- **Go 1.26.3** (latest stable). Use `go 1.26.3` in `go.mod`.
+- Go 1.26.3 (latest stable). Use `go 1.26.3` in `go.mod`.
 - Module path: `github.com/StephenBrown2/resume/go` (or `resume-renderer` - use whatever fits `go.mod` conventions for a local tool).
 - Use Go's standard library wherever possible; external dependencies should be minimal.
 
@@ -181,17 +181,27 @@ Use `time.Parse` with multiple layout attempts. Map month number to 3-letter abb
 
 ## Non-breaking space insertion (`render.go`)
 
+The rule is: if the *next* word is ≤4 characters, replace the preceding space with `&nbsp;` (nbsp *precedes* short words, not trails them). This binds short connector words to their predecessor, preventing them from stranding at the start of a line.
+
 ```go
-// nbspShortWords replaces spaces after words of ≤4 chars with &nbsp;
-// when the following word is longer, preventing awkward wraps.
 func nbspShortWords(s string) template.HTML {
-    // split on spaces, for each word if len(word) <= 4 and next word exists,
-    // join with &nbsp; instead of space
-    // return as template.HTML to bypass auto-escaping of the entity
+    words := strings.Split(s, " ")
+    var parts []string
+    for i, word := range words {
+        escaped := template.HTMLEscapeString(word)
+        if i == len(words)-1 {
+            parts = append(parts, escaped)
+        } else if utf8.RuneCountInString(words[i+1]) <= 4 {
+            parts = append(parts, escaped+"&nbsp;")
+        } else {
+            parts = append(parts, escaped+" ")
+        }
+    }
+    return template.HTML(strings.Join(parts, ""))
 }
 ```
 
-This is used only in the summary paragraph via a custom template function.
+This is used only in the summary paragraph via the `nbspSummary` template function.
 
 ---
 
@@ -334,17 +344,25 @@ Create `go/README.md` documenting this implementation. It should cover:
 
 ## Justfile integration
 
-Add a `go` recipe to the existing `justfile` at the repo root:
+Add language-specific recipes to the `justfile` using `[working-directory]` rather than `cd`:
 
 ```just
+[working-directory: 'go']
 go-build:
-    cd go && go build -o resume-renderer .
+    go build -o resume-renderer .
 
+[working-directory: 'go']
 go-render: go-build
-    go/resume-renderer --input resume.yaml --output docs/index.html
+    ./resume-renderer --input ../resume.yaml --output ../docs/index.html
+
+[working-directory: 'go']
+go-validate: go-build
+    ./resume-renderer --input ../resume.yaml --output /dev/null
 ```
 
-Replace the existing `build` recipe's `goresume` call with `go-render` as the new default.
+The generic `build` and `validate` recipes call their language-specific counterparts. As other languages are implemented, their render recipes are added to `build`.
+
+When testing, pass `--output ../docs/go-index.html` to avoid overwriting the canonical `docs/index.html`.
 
 ---
 
@@ -353,4 +371,8 @@ Replace the existing `build` recipe's `goresume` call with `go-render` as the ne
 - The two existing root-level `.go` files (`json-resume.go`, `fresh-resume.go`) were part of a now-deleted tool and should be removed.
 - Do not use `text/template`; always use `html/template` to ensure proper escaping.
 - The `template.HTML` type in `html/template` is an escape hatch for trusted pre-escaped content - use it only for `nbspSummary` output and `&middot;` / `&amp;` / `&nbsp;` literals in the template itself.
+- CSS comments are stripped by `html/template` when it processes `<style>` blocks. Do not use `/* */` comments in the template; they will be replaced with whitespace.
+- Multi-line CSS selectors: `html/template`'s CSS sanitizer drops lines that contain only a selector fragment (e.g. `.foo,` with no `{`). Keep comma-separated selectors on a single line: `.foo, .bar { ... }`.
+- Bullet character: use the literal `–` en-dash character in the CSS `content` property (`content: '–';`). Do not use the CSS escape `'\2013'` — `html/template`'s CSS context sanitizer may alter backslash sequences, producing a visually different glyph.
+- CSS values injected via template variables must use the appropriate `template.CSS` type (not `string`) to avoid `ZgotmplZ` substitution. In particular, `NameFontCSS` in `TemplateData` must be `template.CSS`.
 - Build with `go build ./...` from the `go/` directory. No CGo; pure Go only.

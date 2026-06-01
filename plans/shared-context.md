@@ -69,7 +69,13 @@ list:
 ### `certificates[]`
 ```yaml
 name, date, url, issuer
+id: string              # optional; cert ID (e.g. "140-027-434", "LPI000223384")
+verificationCode: string  # optional; secondary lookup code (LPI only)
 ```
+
+When `id` is present and the ID is not already embedded in the `url` (`strings.Contains(url, id)`), render it as a `title` attribute on the cert link/span (hover tooltip on screen), and in print mode append a `.print-only` span: ` (id)`. If `verificationCode` is also present, append both: ` (id / verificationCode)` and include both in the tooltip: `"ID: {id} · Verification Code: {verificationCode}"`.
+
+If the ID is already in the URL (e.g. RHCE: `?certId=140-027-434`), skip both the tooltip and the print span — the URL itself is the verification reference.
 
 ### `education[]`
 ```yaml
@@ -100,7 +106,9 @@ name, role, category, email, url
 
 ## Schema validation
 
-Before rendering, validate the parsed YAML data against `schema.json` using the language's JSON Schema validation library (see each language plan for the specific library). The schema declares `"$schema": "https://json-schema.org/draft/2020-12/schema"`.
+Before rendering, validate the parsed YAML data against the JSON Schema file using the language's JSON Schema validation library (see each language plan for the specific library). The schema declares `"$schema": "https://json-schema.org/draft/2020-12/schema"`.
+
+Resolve the schema path in this order: (1) `--schema` flag if explicitly set; (2) the `$schema` field in the YAML, resolved relative to the input file's directory; (3) `schema.json` in the same directory as the input file.
 
 Validation failures should be printed to stderr with a descriptive message and cause the program to exit with a non-zero status. Validation is a pre-flight check - a failed validation does not necessarily mean the data is unrenderable, so consider using `--skip-validation` as an escape hatch.
 
@@ -202,7 +210,7 @@ body {
 
 ### New employer-group HTML structure
 
-When a group has **more than one position**, wrap the positions in an `employer-group` div instead of rendering them as bare `job` divs:
+When a group has more than one position, wrap the positions in an `employer-group` div instead of rendering them as bare `job` divs:
 
 ```html
 <div class="employer-group">
@@ -247,7 +255,7 @@ When a group has **more than one position**, wrap the positions in an `employer-
 </div>
 ```
 
-When a group has **exactly one position**, render it as the existing bare `job` div (employer name shown in `.job-meta`, no wrapping group element):
+When a group has exactly one position, render it as the existing bare `job` div (employer name shown in `.job-meta`, no wrapping group element):
 
 ```html
 <div class="job">
@@ -267,6 +275,21 @@ When a group has **exactly one position**, render it as the existing bare `job` 
 
 Between top-level items (employer groups and lone jobs alike) insert `<hr class="job-divider">` - but not after the last item.
 
+### Section structure with `section-intro`
+
+Every `<section>` wraps its `.section-label` and first content block in `<div class="section-intro">` to keep them together across page breaks. For sections with a single content container (Profile, Projects, Skills, Education), the entire content is inside `section-intro`. For sections with multiple content items (Experience, References), only the label and first item go inside `section-intro`; remaining items follow as siblings:
+
+```html
+<section>
+  <div class="section-intro">
+    <div class="section-label">Experience</div>
+    <!-- first employer-group or job -->
+  </div>
+  <hr class="job-divider">
+  <!-- remaining groups/jobs -->
+</section>
+```
+
 ### New and modified CSS
 
 Add the following inside the `<style>` block (in addition to all existing CSS from `docs/index.html`):
@@ -282,9 +305,7 @@ Add the following inside the `<style>` block (in addition to all existing CSS fr
 /* ── Tabular numbers for date alignment ── */
 .job-dates,
 .skill-item,
-.edu-detail {
-  font-variant-numeric: tabular-nums;
-}
+.edu-detail { font-variant-numeric: tabular-nums; }
 
 /* ── Employer group (multiple positions) ──── */
 .employer-group { margin-bottom: 0; }
@@ -304,8 +325,7 @@ Add the following inside the `<style>` block (in addition to all existing CSS fr
   font-weight: 700;
   color: var(--black);
 }
-.employer-name a { color: inherit; text-decoration: none; }
-.employer-name a:hover { color: var(--accent); }
+.employer-name a, .project-name a { color: inherit; }
 
 .employer-former {
   font-size: 0.73rem;
@@ -325,6 +345,8 @@ Add the following inside the `<style>` block (in addition to all existing CSS fr
   margin: 10px 0 10px 10px;
 }
 ```
+
+Link styles cascade from the global `a { color: var(--muted); text-decoration: none; }` and `a:hover { color: var(--accent); }` rules. Do not add redundant per-component link overrides. The one exception is `.employer-name a { color: inherit; }` and `.project-name a { color: inherit; }` which intentionally override the muted default to use the parent element's black color.
 
 The `<link>` block in `<head>` becomes dynamic - the Instrument Serif link is replaced by the font-specific link generated from `--name-font`, while the Inter link remains fixed:
 
@@ -356,7 +378,12 @@ All user-supplied string values must be HTML-escaped before insertion (`&`, `<`,
 
 ### Non-breaking spaces in summary
 
-The summary paragraph in the header section uses non-breaking spaces (`&nbsp;`) between short words and the following word to prevent awkward line breaks. The pattern: for any word 4 characters or shorter followed by a longer word, replace the space between them with `&nbsp;`. Example: `"I own problems"` → `"I&nbsp;own problems"`. This applies only to the `basics.summary` paragraph.
+The summary paragraph uses `&nbsp;` to prevent short connector words from starting a line alone. The rule: **if the next word is 4 characters or shorter, replace the preceding space with `&nbsp;`** (i.e. the nbsp *precedes* the short word, binding it to its predecessor).
+
+Example: `"I own problems"` → `"I&nbsp;own problems"` (nbsp before `"own"`, not after `"I"`).
+Example: `"building and maintaining"` → `"building&nbsp;and maintaining"`.
+
+This applies only to `basics.summary`. Implement as a template function (`nbspSummary`) that returns `template.HTML` to bypass auto-escaping of the `&nbsp;` entity.
 
 ---
 
@@ -367,27 +394,66 @@ All implementations must accept:
 | Flag / Arg | Default | Description |
 |---|---|---|
 | `--input` / `-i` | `../resume.yaml` | Path to input YAML file |
-| `--output` / `-o` | `../docs/index.html` | Path to write HTML output |
+| `--output` / `-o` | `../docs/index.html` | Path to write HTML output (use `../docs/{lang}-index.html` when testing) |
 | `--name-font` / `-f` | `Instrument Serif` | Google Fonts family name for the name heading |
+| `--schema` | _(derived)_ | Path to JSON Schema file. Resolution order: (1) this flag if set, (2) `$schema` field in the YAML resolved relative to the input file's directory, (3) `schema.json` in the same directory as the input file |
 | `--skip-validation` | false | Skip JSON Schema validation of the YAML |
 | `--help` / `-h` | - | Print usage |
+
+---
+
+## Justfile integration
+
+Each language lives in its own subdirectory and adds three recipes to the repo-root `justfile`. Use the `[working-directory: '{lang}']` attribute instead of `cd` in the recipe body.
+
+```just
+[working-directory: '{lang}']
+{lang}-build:
+    <build command>
+
+[working-directory: '{lang}']
+{lang}-render: {lang}-build
+    ./{binary} --input ../resume.yaml --output ../docs/index.html
+
+[working-directory: '{lang}']
+{lang}-validate: {lang}-build
+    ./{binary} --input ../resume.yaml --output /dev/null
+```
+
+The generic recipes delegate to all implemented languages:
+
+```just
+build: {lang}-render          # extend as more langs are added
+
+validate: {lang}-validate
+```
+
+When testing, pass `--output ../docs/{lang}-index.html` to avoid overwriting the canonical `docs/index.html`. The `dev` recipe (`build` + `serve`) and `watch` recipe both call `build`.
 
 ---
 
 ## What to preserve from `docs/index.html`
 
 - All CSS custom properties and their values in the `:root` block (modified as described above)
-- All `@media print` and `@media (max-width: 600px)` rules
+- All `@media print` and `@media (max-width: 600px)` rules, including section-title orphan prevention:
+  ```css
+  .section-intro  { break-inside: avoid; page-break-inside: avoid; }
+  .section-label { page-break-after: avoid; break-after: avoid; }
+  ```
+  `break-before/after: avoid` are unreliable hints in both Firefox and Chromium. The reliable fix is wrapping `.section-label` and its first content sibling in `<div class="section-intro">` and using `break-inside: avoid` on that container. Each section uses this wrapper so the label is always atomically bound to its content.
 - Section order: header, summary, experience, open source & projects, skills, education & certifications, references (testimonials)
 - The `print-only` span in the contact block containing the full resume URL
 - The `&middot;` separator used in `.job-meta` and `.contact`
 - The `.footer-grid` layout for education + certifications on one row
+- Link styles cascade from global `a` / `a:hover` rules — no per-component overrides needed except `.employer-name a` and `.project-name a` which use `color: inherit` to show black instead of muted
 
 ---
 
 ## Testing
 
-After generating `docs/index.html`, open it in a browser and verify:
+**During development, write to `docs/{lang}-index.html`** (e.g. `docs/go-index.html`) using `--output docs/go-index.html` so the canonical `docs/index.html` is not overwritten. Open the lang-prefixed file in a browser to review, then diff against the canonical to verify equivalence before promoting.
+
+After generating output, verify:
 - All sections are present and in correct order
 - JumpCloud entries are grouped under a single employer header with the overall date range
 - Dates format correctly and align with tabular numbers
@@ -395,4 +461,4 @@ After generating `docs/index.html`, open it in a browser and verify:
 - The name heading uses the specified font, loaded from Google Fonts
 - `@media print` layout looks reasonable
 
-The existing `docs/index.html` is the structural reference. Diff the two if you need to verify equivalence.
+The canonical `docs/index.html` is the structural reference. Diff the lang-prefixed output against it to verify equivalence.
