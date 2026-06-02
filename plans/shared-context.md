@@ -73,9 +73,7 @@ id: string              # optional; cert ID (e.g. "140-027-434", "LPI000223384")
 verificationCode: string  # optional; secondary lookup code (LPI only)
 ```
 
-When `id` is present and the ID is not already embedded in the `url` (`strings.Contains(url, id)`), render it as a `title` attribute on the cert link/span (hover tooltip on screen), and in print mode append a `.print-only` span: ` (id)`. If `verificationCode` is also present, append both: ` (id / verificationCode)` and include both in the tooltip: `"ID: {id} · Verification Code: {verificationCode}"`.
-
-If the ID is already in the URL (e.g. RHCE: `?certId=140-027-434`), skip both the tooltip and the print span — the URL itself is the verification reference.
+When `id` is present, render it as a `title` attribute on the cert link/span (hover tooltip on screen), and in print mode append a `.print-only` span: ` (id)`. If `verificationCode` is also present, append both: ` (id / verificationCode)` and include both in the tooltip: `"ID: {id} · Verification Code: {verificationCode}"`.
 
 Sort certificates by `date` descending (most recent first) before rendering.
 
@@ -98,6 +96,8 @@ name, summary
 ```yaml
 name, role, category, url, email, quote
 ```
+
+Sort testimonials by `quote` ascending (shortest first) before rendering.
 
 ### `references[]`  (contact-only, no quote)
 ```yaml

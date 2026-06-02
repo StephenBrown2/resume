@@ -61,6 +61,7 @@ func main() {
 	})
 	shuffleKeywords(&resume)
 	sortSkillSets(resume.Skills.Sets, resume.Skills.List)
+	sortTestimonials(resume.Testimonials)
 
 	work := resume.Work
 	if *since != "" {
@@ -104,7 +105,12 @@ func main() {
 		fmt.Fprintf(os.Stderr, "create output: %v\n", err)
 		os.Exit(1)
 	}
-	defer out.Close()
+	defer func() {
+		if err := out.Close(); err != nil {
+			fmt.Fprintf(os.Stderr, "close: %v\n", err)
+			os.Exit(1)
+		}
+	}()
 
 	if err := tmpl.Execute(out, tmplData); err != nil {
 		fmt.Fprintf(os.Stderr, "render template: %v\n", err)

@@ -3,6 +3,7 @@ package main
 import (
 	"html/template"
 	"math/rand/v2"
+	"slices"
 	"sort"
 	"strings"
 	"time"
@@ -77,6 +78,19 @@ func sortSkillSets(sets []SkillSet, list []SkillItem) {
 			return sets[i].Skills[a] < sets[i].Skills[b]
 		})
 	}
+}
+
+// sortTestimonials sorts each testimonial by length of the quote ascending.
+func sortTestimonials(list []Testimonial) {
+	slices.SortStableFunc(list, func(a, b Testimonial) int {
+		if len(a.Quote) < len(b.Quote) {
+			return -1
+		}
+		if len(a.Quote) > len(b.Quote) {
+			return 1
+		}
+		return 0
+	})
 }
 
 // groupWork groups consecutive WorkEntry items sharing the same group key.
@@ -221,9 +235,8 @@ func stripScheme(u string) string {
 }
 
 // certTitle builds the tooltip string for a certificate with an ID.
-// Returns "" if the ID is already embedded in the cert URL (no need to repeat it).
 func certTitle(c Certificate) string {
-	if c.ID == "" || strings.Contains(c.URL, c.ID) {
+	if c.ID == "" {
 		return ""
 	}
 	s := "ID: " + c.ID
@@ -236,7 +249,7 @@ func certTitle(c Certificate) string {
 // certPrintID builds the parenthetical print-only ID string.
 // Returns "" if the ID is already embedded in the cert URL (no need to repeat it).
 func certPrintID(c Certificate) string {
-	if c.ID == "" || strings.Contains(c.URL, c.ID) {
+	if c.ID == "" {
 		return ""
 	}
 	if c.VerificationCode != "" {
