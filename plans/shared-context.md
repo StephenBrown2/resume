@@ -150,6 +150,46 @@ Render `basics.label` as a `.title-label` element directly above the `.name` hea
 
 The `.title-label` class is already defined in `docs/index.html` (small caps, accent color, letter-spaced).
 
+**Label width must match name width.** Scale the label's `font-size` so its rendered text width equals the rendered text width of the name. Implement with a small inline script placed just before `</body>`:
+
+```html
+<script>
+(function() {
+  function fitLabelToName() {
+    var name = document.querySelector('h1.name');
+    var label = document.querySelector('p.title-label');
+    if (!name || !label) return;
+    label.style.fontSize = '';
+    var nr = document.createRange();
+    nr.selectNodeContents(name);
+    var nw = nr.getBoundingClientRect().width;
+    var lr = document.createRange();
+    lr.selectNodeContents(label);
+    var lw = lr.getBoundingClientRect().width;
+    if (lw <= 0 || nw <= 0 || !isFinite(nw / lw)) return;
+    var htmlFs = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    var baseFs = parseFloat(getComputedStyle(label).fontSize);
+    label.style.fontSize = ((baseFs * nw / lw) / htmlFs).toFixed(4) + 'rem';
+  }
+  document.fonts.ready.then(fitLabelToName);
+  window.addEventListener('resize', fitLabelToName);
+})();
+</script>
+```
+
+Key details:
+- Use `Range.selectNodeContents(el).getBoundingClientRect().width` for both elements — `getBoundingClientRect()` on a block element returns the container/column width, not the text width; the Range API returns the actual rendered text bounds.
+- Set `font-size` in `rem` (not `px`) so print-mode scaling (`html { font-size: 12pt }`) is preserved — both name and label scale together.
+- Reset `label.style.fontSize = ''` before measuring so the function is idempotent on resize.
+- Run after `document.fonts.ready` to ensure web fonts are loaded before measuring.
+- Re-run on `resize` for responsive correctness.
+
+Also add to `.title-label` CSS:
+```css
+width: fit-content;
+white-space: nowrap;
+```
+
 ### Font customization
 
 The name at the top of the resume uses a display/serif font specified at render time via the `--name-font` CLI flag. The rest of the page uses Inter (body, labels, dates, tags, etc.).

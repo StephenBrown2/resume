@@ -58,6 +58,8 @@ const resumeTemplate = `<!DOCTYPE html>
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 5px;
+    width: fit-content;
+    white-space: nowrap;
   }
 
   .name {
@@ -446,6 +448,28 @@ const resumeTemplate = `<!DOCTYPE html>
   </section>
 
 </div>
+<script>
+(function() {
+  function fitLabelToName() {
+    var name = document.querySelector('h1.name');
+    var label = document.querySelector('p.title-label');
+    if (!name || !label) return;
+    label.style.fontSize = '';
+    var nr = document.createRange();
+    nr.selectNodeContents(name);
+    var nw = nr.getBoundingClientRect().width;
+    var lr = document.createRange();
+    lr.selectNodeContents(label);
+    var lw = lr.getBoundingClientRect().width;
+    if (lw <= 0 || nw <= 0 || !isFinite(nw / lw)) return;
+    var htmlFs = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    var baseFs = parseFloat(getComputedStyle(label).fontSize);
+    label.style.fontSize = ((baseFs * nw / lw) / htmlFs).toFixed(4) + 'rem';
+  }
+  document.fonts.ready.then(fitLabelToName);
+  window.addEventListener('resize', fitLabelToName);
+})();
+</script>
 </body>
 </html>
 
