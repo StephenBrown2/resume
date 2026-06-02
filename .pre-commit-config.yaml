@@ -9,3 +9,18 @@ repos:
       - id: check-json
       - id: check-yaml
       - id: check-added-large-files
+
+  - repo: local
+    hooks:
+      - id: go-fmt
+        name: golangci-lint fmt (go/)
+        entry: bash -c 'cd go && ./bin/golangci-lint fmt'
+        language: system
+        types: [go]
+        pass_filenames: false
+      - id: go-lint
+        name: golangci-lint run (go/)
+        entry: bash -c 'cd go && ./bin/golangci-lint run'
+        language: system
+        types: [go]
+        pass_filenames: false

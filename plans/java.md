@@ -365,6 +365,64 @@ public class Main {
 
 ---
 
+## Formatting and linting
+
+Use **Spotless** (Maven plugin) with **google-java-format** for formatting and **Checkstyle** for linting.
+
+Add to `pom.xml`:
+
+```xml
+<plugin>
+  <groupId>com.diffplug.spotless</groupId>
+  <artifactId>spotless-maven-plugin</artifactId>
+  <version>2.44.0</version>
+  <configuration>
+    <java>
+      <googleJavaFormat>
+        <version>1.25.2</version>
+        <style>GOOGLE</style>
+      </googleJavaFormat>
+    </java>
+  </configuration>
+</plugin>
+
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-checkstyle-plugin</artifactId>
+  <version>3.6.0</version>
+  <configuration>
+    <configLocation>google_checks.xml</configLocation>
+    <failsOnError>true</failsOnError>
+    <consoleOutput>true</consoleOutput>
+  </configuration>
+</plugin>
+```
+
+### Commands
+
+- **Format:** `mvn spotless:apply`
+- **Lint:** `mvn checkstyle:check`
+
+### Justfile recipes
+
+Spotless and Checkstyle are Maven plugins; no separate install is needed beyond having Maven.
+
+```just
+[working-directory: 'java']
+java-setup:
+    mvn -q dependency:resolve
+
+[working-directory: 'java']
+java-fmt:
+    mvn -q spotless:apply
+
+[working-directory: 'java']
+java-lint:
+    mvn -q checkstyle:check
+```
+
+---
+
 ## `java/README.md`
 
 Create `java/README.md` documenting this implementation. It should cover:

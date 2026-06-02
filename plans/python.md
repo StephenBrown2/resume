@@ -441,6 +441,47 @@ if __name__ == "__main__":
 
 ---
 
+## Formatting and linting
+
+Use **ruff** for both formatting and linting. Configure in `pyproject.toml` under `[tool.ruff]`.
+
+```toml
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[dependency-groups]
+dev = ["ruff>=0.9"]
+```
+
+### Commands
+
+- **Format:** `uv run ruff format .`
+- **Lint:** `uv run ruff check .`
+
+### Justfile recipes
+
+`ruff` is installed via `uv sync` (it's a dev dep), so no separate setup recipe is needed.
+
+```just
+[working-directory: 'python']
+python-setup:
+    uv sync
+
+[working-directory: 'python']
+python-fmt:
+    uv run ruff format .
+
+[working-directory: 'python']
+python-lint:
+    uv run ruff check .
+```
+
+---
+
 ## `python/README.md`
 
 Create `python/README.md` documenting this implementation. It should cover:

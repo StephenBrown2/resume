@@ -342,6 +342,37 @@ Create `go/README.md` documenting this implementation. It should cover:
 
 ---
 
+## Formatting and linting
+
+Use **golangci-lint v2** as the single tool for both formatting and linting. It embeds gofumpt and exposes it via `golangci-lint fmt`.
+
+### Config (`go/.golangci.yml`)
+
+```yaml
+version: "2"
+
+formatters:
+  enable:
+    - gofumpt
+```
+
+The default linter set is used with no overrides. To see which linters are active: `golangci-lint linters`.
+
+### Commands
+
+- **Format:** `golangci-lint fmt` (runs gofumpt in-place)
+- **Lint:** `golangci-lint run` (uses default enabled linters)
+
+### Installation
+
+```sh
+just go-setup
+# or manually:
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+```
+
+---
+
 ## Justfile integration
 
 Add language-specific recipes to the `justfile` using `[working-directory]` rather than `cd`:
@@ -358,9 +389,21 @@ go-render: go-build
 [working-directory: 'go']
 go-validate: go-build
     ./resume-renderer --input ../resume.yaml --output /dev/null
+
+[working-directory: 'go']
+go-setup:
+    go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+[working-directory: 'go']
+go-fmt:
+    golangci-lint fmt
+
+[working-directory: 'go']
+go-lint:
+    golangci-lint run
 ```
 
-The generic `build` and `validate` recipes call their language-specific counterparts. As other languages are implemented, their render recipes are added to `build`.
+The generic `build`, `validate`, and `setup` recipes call their language-specific counterparts. As other languages are implemented, their render recipes are added to `build`.
 
 When testing, pass `--output ../docs/go-index.html` to avoid overwriting the canonical `docs/index.html`.
 

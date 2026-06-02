@@ -8,7 +8,7 @@
 - Commitment: permanent, full-time
 
 ## Summary
-12+ years building and maintaining production systems. Focused on reliability, security, and developer productivity. Own problems end-to-end, write testable code, improve workflows. Recent work in Go and TypeScript; open source in personal finance tooling. Pick up new languages quickly, track record of doing so on the job.
+15 years in technology: 6 as a Linux systems administrator, 9 as a software engineer. Focused on reliability, security, and developer productivity. Own problems end-to-end, write testable code, improve workflows. Recent work in Go and TypeScript; open source in personal finance tooling. Pick up new languages quickly, track record of doing so on the job.
 
 ## Skills
 
@@ -47,10 +47,26 @@
 
 ### Rackspace - Multiple Roles (2014-01 to 2019-10)
 Progressed from Linux Sysadmin to Automation Engineer.
+- Sole US member of a UK-based global automation team
+- Automated scheduled maintenance calendar consolidation, saving weeks of manual work
 - Built internal web platform from scratch (React/JS, Python/Flask, MySQL) for 10-20 engineers
 - Authored Python client libraries and automation tooling used by ~250-500 engineers org-wide
 - Implemented 3 CI/CD pipelines (dev/staging/prod) in Jenkins; led cross-team code quality and onboarding
+- Supported Linux servers for enterprise customers: web, database, app, mail, DNS (Apache, MySQL, PHP, SSH)
 - Stack: Python, Linux, Docker, Ansible, Jenkins, React, Flask, MySQL
+
+### Johns Hopkins University, K4Health Project - Linux System Administrator (2011-04 to 2013-12)
+Bloomberg School of Public Health, Center for Communication Programs.
+- Maintained CentOS servers supporting 30+ websites; hired as contractor, promoted to full-time within 6 months
+- Led team adoption of Git and dev/staging/production deployment workflow
+- Designed Puppet configuration management for development and production servers
+- Maintained Drupal multisite deployments with LAMP stack and Apache Solr search indexes
+- Stack: Linux, Git, Puppet, Drupal, Vagrant
+
+### MICROS Systems - Software Escalations Specialist (2011-01 to 2011-04)
+- Analyzed and diagnosed the most difficult customer-reported issues
+- Documented issues for developer and QA teams
+- Stack: SQL, Troubleshooting
 
 ## Projects
 

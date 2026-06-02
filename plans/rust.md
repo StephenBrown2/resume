@@ -378,6 +378,37 @@ For the skills section, look up level per skill name:
 
 ---
 
+## Formatting and linting
+
+Use **rustfmt** (via `cargo fmt`) for formatting and **clippy** for linting.
+
+No `rustfmt.toml` is needed; the default style is sufficient. For clippy, treat all warnings as errors in CI.
+
+### Commands
+
+- **Format:** `cargo fmt`
+- **Lint:** `cargo clippy -- -D warnings`
+
+### Justfile recipes
+
+`rustfmt` and `clippy` ship with rustup but may need to be added to the active toolchain:
+
+```just
+[working-directory: 'rust']
+rust-setup:
+    rustup component add rustfmt clippy
+
+[working-directory: 'rust']
+rust-fmt:
+    cargo fmt
+
+[working-directory: 'rust']
+rust-lint:
+    cargo clippy -- -D warnings
+```
+
+---
+
 ## `rust/README.md`
 
 Create `rust/README.md` documenting this implementation. It should cover:

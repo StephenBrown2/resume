@@ -470,6 +470,45 @@ end
 
 ---
 
+## Formatting and linting
+
+Use **`mix format`** for formatting and **Credo** for linting.
+
+Add Credo to `mix.exs` deps:
+
+```elixir
+{:credo, "~> 1.7", only: [:dev, :test], runtime: false}
+```
+
+No `.formatter.exs` changes needed; the default configuration formats all Elixir files in the project.
+
+For Credo, use strict mode (`--strict`) to catch all issues.
+
+### Commands
+
+- **Format:** `mix format`
+- **Lint:** `mix credo --strict`
+
+### Justfile recipes
+
+`credo` is a Mix dep; `mix deps.get` installs it.
+
+```just
+[working-directory: 'elixir']
+elixir-setup:
+    mix deps.get
+
+[working-directory: 'elixir']
+elixir-fmt:
+    mix format
+
+[working-directory: 'elixir']
+elixir-lint:
+    mix credo --strict
+```
+
+---
+
 ## `elixir/README.md`
 
 Create `elixir/README.md` documenting this implementation. It should cover:

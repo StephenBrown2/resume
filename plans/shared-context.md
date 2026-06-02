@@ -414,6 +414,24 @@ All implementations must accept:
 
 ---
 
+## Formatting and linting
+
+Each language implementation must be formatted and lint-clean before merging. Every language adds two justfile recipes: `{lang}-fmt` (apply formatting in-place) and `{lang}-lint` (report issues, non-zero exit on failure). Both also run as pre-commit hooks.
+
+| Language | Setup | Formatter | Linter |
+|---|---|---|---|
+| Go | `just go-setup` | `golangci-lint fmt` | `golangci-lint run` |
+| Python | `uv sync` (ruff is a dev dep) | `ruff format` | `ruff check` |
+| Rust | `rustup component add rustfmt clippy` | `cargo fmt` | `cargo clippy -- -D warnings` |
+| Java | Maven plugins; no extra install | `mvn spotless:apply` | `mvn checkstyle:check` |
+| Elixir | `mix deps.get` (credo is a dep) | `mix format` | `mix credo --strict` |
+
+Each language adds a `{lang}-setup` justfile recipe that installs any tools not managed by the language's own package manager. The generic `setup` recipe calls all implemented language setups.
+
+See individual language plans for tool configuration details.
+
+---
+
 ## Justfile integration
 
 Each language lives in its own subdirectory and adds three recipes to the repo-root `justfile`. Use the `[working-directory: '{lang}']` attribute instead of `cd` in the recipe body.
@@ -430,6 +448,18 @@ Each language lives in its own subdirectory and adds three recipes to the repo-r
 [working-directory: '{lang}']
 {lang}-validate: {lang}-build
     ./{binary} --input ../resume.yaml --output /dev/null
+
+[working-directory: '{lang}']
+{lang}-setup:
+    <install tools not managed by the lang's package manager>
+
+[working-directory: '{lang}']
+{lang}-fmt:
+    <format command>
+
+[working-directory: '{lang}']
+{lang}-lint:
+    <lint command>
 ```
 
 The generic recipes delegate to all implemented languages:

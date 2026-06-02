@@ -84,13 +84,13 @@ func main() {
 	}
 
 	funcMap := template.FuncMap{
-		"formatDate":   formatDate,
-		"nbspSummary":  nbspShortWords,
-		"levelClass":   levelClass,
-		"skillByName":  skillByName,
-		"stripScheme":  stripScheme,
-		"certTitle":    certTitle,
-		"certPrintID":  certPrintID,
+		"formatDate":  formatDate,
+		"nbspSummary": nbspShortWords,
+		"levelClass":  levelClass,
+		"skillByName": skillByName,
+		"stripScheme": stripScheme,
+		"certTitle":   certTitle,
+		"certPrintID": certPrintID,
 	}
 
 	tmpl, err := template.New("resume").Funcs(funcMap).Parse(resumeTemplate)
