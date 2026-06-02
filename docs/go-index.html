@@ -41,12 +41,12 @@
 
   header {
     display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
     gap: 24px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     border-bottom: 1.5px solid var(--black);
-    margin-bottom: 26px;
+    margin-bottom: 13px;
   }
 
   .title-label {
@@ -72,11 +72,34 @@
   a { color: var(--muted); text-decoration: none; }
   a:hover { color: var(--accent); }
 
-  .contact {
+  .header-right {
     text-align: right;
+  }
+
+  .contact {
     font-size: 0.76rem;
     color: var(--muted);
     line-height: 1.85;
+    margin-bottom: 0.5rem;
+  }
+
+  .profiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+
+  .profile-link {
+    font-size: 0.72rem;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 2px 8px;
+  }
+
+  .profile-url {
+    display: none;
   }
 
   section { margin-bottom: 22px; }
@@ -306,6 +329,45 @@
     .print-only { display: inline; }
     a { color: inherit !important; text-decoration: none !important; }
 
+    header {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .header-right {
+      display: contents;
+    }
+
+    .contact {
+      grid-column: 2;
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    .profiles {
+      grid-column: 3;
+      display: block;
+      text-align: right;
+      justify-content: flex-end;
+    }
+
+    .profile-link {
+      display: block;
+      border: none;
+      padding: 0;
+      font-size: 0.72rem;
+      margin-bottom: 2px;
+    }
+
+    .profile-url {
+      display: inline;
+    }
+
+    .profiles .print-only {
+      display: block;
+      font-size: 0.72rem;
+      margin-bottom: 2px;
+    }
+
     .job            { page-break-inside: avoid; }
     .project        { page-break-inside: avoid; }
     .section-intro  { break-inside: avoid; page-break-inside: avoid; }
@@ -316,7 +378,8 @@
   @media (max-width: 600px) {
     .page { padding: 28px 20px 48px; }
     header { grid-template-columns: 1fr; }
-    .contact { text-align: left; }
+    .header-right { text-align: left; }
+    .profiles { justify-content: flex-start; }
     .skills-domains { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 14px 0; }
@@ -332,11 +395,22 @@
       <p class="title-label">Senior Software Engineer</p>
       <h1 class="name">Stephen Brown II</h1>
     </div>
-    <div class="contact">
-      <a href="mailto:hire@stephen.brownii.email">hire@stephen.brownii.email</a><br>
-      (443) 219-4559 &middot; Delaware, OH<br>
-      <a href="https://github.com/StephenBrown2">github.com/StephenBrown2</a><br><a href="https://linkedin.com/in/stephen-brown2">linkedin.com/in/stephen-brown2</a><br>
-      <span class="print-only"><a href="https://stephenbrown2.github.io/resume">stephenbrown2.github.io/resume</a></span>
+    <div class="header-right">
+      <div class="contact">
+        <a href="mailto:hire@stephen.brownii.email">hire@stephen.brownii.email</a><br>
+        (443) 219-4559 &middot; Delaware, OH<br>
+      </div>
+      <div class="profiles">
+        <a href="https://github.com/StephenBrown2" class="profile-link" title="GitHub">
+          <span class="profile-name">GitHub</span>
+          <span class="profile-url">: github.com/StephenBrown2</span>
+        </a>
+        <a href="https://linkedin.com/in/stephen-brown2" class="profile-link" title="LinkedIn">
+          <span class="profile-name">LinkedIn</span>
+          <span class="profile-url">: linkedin.com/in/stephen-brown2</span>
+        </a>
+        <span class="print-only"><a href="https://stephenbrown2.github.io/resume">stephenbrown2.github.io/resume</a></span>
+      </div>
     </div>
   </header>
 
@@ -374,7 +448,7 @@
           <li>Led a tamper-resistance and uninstall-protection initiative spanning 3 OS families; scoped and simplified research into a manageable deliverable.</li>
           <li>Began incorporating AI assistance in 2026, cutting research and PoC development time by an estimated 25–50%.</li>
         </ul>
-        <div class="tags"><span class="tag">GitHub</span><span class="tag">LLMs</span><span class="tag">Docker</span><span class="tag">AI</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">Golang</span>
+        <div class="tags"><span class="tag">Docker</span><span class="tag">LLMs</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Golang</span><span class="tag">GitHub</span><span class="tag">AI</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -389,7 +463,7 @@
           <li>Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed.</li>
           <li>Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10&#43; Linux distributions spanning RHEL 7 to Ubuntu 22.04.</li>
         </ul>
-        <div class="tags"><span class="tag">Docker</span><span class="tag">Python</span><span class="tag">Golang</span><span class="tag">GitHub</span><span class="tag">AWS</span><span class="tag">gRPC</span><span class="tag">Linux</span>
+        <div class="tags"><span class="tag">Golang</span><span class="tag">AWS</span><span class="tag">GitHub</span><span class="tag">gRPC</span><span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">Python</span>
         </div>
       </div>
     </div>
@@ -414,7 +488,7 @@
           <li>Maintained Python applications and libraries; contributed to 12&#43; microservices in Go (GoBuffalo).</li>
           <li>Deployed across Docker, OpenShift, and Kubernetes environments.</li>
         </ul>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Golang</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">Docker</span>
+        <div class="tags"><span class="tag">AWS</span><span class="tag">Golang</span><span class="tag">Python</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -431,7 +505,7 @@
           <li>Implemented and configured deployment tools using Docker, Ansible, and Jenkins; designed and built Jenkins 2.x Pipeline for PR testing.</li>
           <li>Led team to implement better checks and consistency to improve and maintain code quality.</li>
         </ul>
-        <div class="tags"><span class="tag">Ansible</span><span class="tag">Docker</span><span class="tag">Python</span><span class="tag">Jenkins</span><span class="tag">GitHub</span>
+        <div class="tags"><span class="tag">Ansible</span><span class="tag">GitHub</span><span class="tag">Jenkins</span><span class="tag">Docker</span><span class="tag">Python</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -448,7 +522,7 @@
           <li>Wrote tools which enabled more efficient team workflows not otherwise possible.</li>
           <li>Inverted traditional scheduling process to improve customer experience.</li>
         </ul>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Linux</span>
+        <div class="tags"><span class="tag">Linux</span><span class="tag">Python</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -465,7 +539,7 @@
           <li>Developed an auto-numbering tool for maintenance templates using React.</li>
           <li>Developed a custom UI accessing the maintenance calendar backend, presenting upcoming services using the fullcalendar.js library.</li>
         </ul>
-        <div class="tags"><span class="tag">Bash</span><span class="tag">Flask</span><span class="tag">Linux</span><span class="tag">React</span><span class="tag">Python</span>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Bash</span><span class="tag">Linux</span><span class="tag">React</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -480,7 +554,7 @@
           <li>Installed, configured, updated, and troubleshot services for customers including OS, web server, database, application server, and mail (Apache, MySQL, PHP, FTP, SSH, DNS).</li>
           <li>Contributed features and bug fixes to internal Python projects including a password retrieval CLI (intensify) and login automation tools (overtime/hammertime).</li>
         </ul>
-        <div class="tags"><span class="tag">Bash</span><span class="tag">Python</span><span class="tag">Linux</span>
+        <div class="tags"><span class="tag">Bash</span><span class="tag">Linux</span><span class="tag">Python</span>
         </div>
       </div>
     </div>
@@ -506,7 +580,7 @@
           <li>Successfully led team to adoption of git and a development &gt; staging &gt; production deployment workflow.</li>
           <li>Designed Puppet configuration management to maintain and deploy to development and production servers.</li>
         </ul>
-        <div class="tags"><span class="tag">Drupal</span><span class="tag">Linux</span><span class="tag">Puppet</span><span class="tag">Git</span><span class="tag">Vagrant</span>
+        <div class="tags"><span class="tag">Linux</span><span class="tag">Drupal</span><span class="tag">Puppet</span><span class="tag">Vagrant</span><span class="tag">Git</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -521,7 +595,7 @@
           <li>Hired as a contractor; brought on as full-time employee within 6 months.</li>
           <li>Maintained CentOS 5 servers supporting 30&#43; websites for the K4Health project.</li>
         </ul>
-        <div class="tags"><span class="tag">Drupal</span><span class="tag">CentOS</span><span class="tag">Linux</span>
+        <div class="tags"><span class="tag">Drupal</span><span class="tag">Linux</span><span class="tag">CentOS</span>
         </div>
       </div>
     </div>
@@ -539,7 +613,7 @@
         <li>Analyzed and diagnosed the most difficult customer-reported issues.</li>
         <li>Documented issues for developer and QA teams to remedy.</li>
       </ul>
-      <div class="tags"><span class="tag">SQL</span><span class="tag">Debugging</span><span class="tag">Testing</span><span class="tag">Troubleshooting</span>
+      <div class="tags"><span class="tag">Debugging</span><span class="tag">SQL</span><span class="tag">Troubleshooting</span><span class="tag">Testing</span>
       </div>
     </div>
 
@@ -555,7 +629,7 @@
       <ul class="highlights">
         <li>Diagnosed client issues, checked in computers for service, and maintained customer relationships through the repair process.</li>
       </ul>
-      <div class="tags"><span class="tag">Customer Service</span><span class="tag">Troubleshooting</span>
+      <div class="tags"><span class="tag">Troubleshooting</span><span class="tag">Customer Service</span>
       </div>
     </div>
 
@@ -672,7 +746,7 @@
           <div class="project-name"><a href="https://github.com/actualbudget/actual">Actual Budget</a>
           </div>
           <div class="project-desc">Contributor to a local-first personal finance app (26k&#43; GitHub stars, TypeScript/React). Features and fixes across the codebase; built multi-account import plugin and custom themes.</div>
-          <div class="project-tags"><span class="tag">React</span><span class="tag">Open Source</span><span class="tag">Node.js</span><span class="tag">TypeScript</span>
+          <div class="project-tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">TypeScript</span><span class="tag">Open Source</span>
           </div>
         </div>
         <div class="project">
@@ -686,7 +760,7 @@
           <div class="project-name"><a href="https://github.com/StephenBrown2/fold-budget">fold-budget</a>
           </div>
           <div class="project-desc">Converts Fold Bitcoin rewards card CSV statements to a standard budget import format, including memos.</div>
-          <div class="project-tags"><span class="tag">Golang</span><span class="tag">Bitcoin</span><span class="tag">Personal Finance</span>
+          <div class="project-tags"><span class="tag">Bitcoin</span><span class="tag">Personal Finance</span><span class="tag">Golang</span>
           </div>
         </div>
         <div class="project">

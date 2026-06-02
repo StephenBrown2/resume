@@ -139,16 +139,101 @@ This is the most important non-trivial logic. The `work[]` array is already in r
 
 The output is a self-contained HTML file. Read the existing `docs/index.html` in full to understand all CSS custom properties, class names, and section structure. The new implementations must produce equivalent output with the additions below.
 
-### Header: title label
+### Header layout
 
-Render `basics.label` as a `.title-label` element directly above the `.name` heading:
+The header uses a two-column grid in screen view (50/50) and a three-column grid in print view (thirds). The HTML structure separates contact info and profile links so they can be repositioned for print:
 
 ```html
-<p class="title-label">Senior Software Engineer</p>
-<h1 class="name">Stephen Brown II</h1>
+<header>
+  <div>
+    <p class="title-label">Senior Software Engineer</p>
+    <h1 class="name">Stephen Brown II</h1>
+  </div>
+  <div class="header-right">
+    <div class="contact">
+      <a href="mailto:...">email</a><br>
+      phone &middot; city, region<br>
+      <span class="print-only"><a href="...">resume url</a></span>
+    </div>
+    <div class="profiles">
+      <a href="..." class="profile-link" title="GitHub">
+        <span class="profile-name">GitHub</span>
+        <span class="profile-url">: github.com/...</span>
+      </a>
+      <!-- repeat per profile -->
+    </div>
+  </div>
+</header>
 ```
 
-The `.title-label` class is already defined in `docs/index.html` (small caps, accent color, letter-spaced).
+**Screen (default):** Two equal columns. Left: label + name. Right: `.header-right` contains contact stacked above profiles (right-aligned).
+
+```css
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 24px;
+}
+
+.header-right { text-align: right; }
+
+.contact {
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 0.5rem;
+}
+
+.profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.profile-link {
+  font-size: 0.72rem;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 2px 8px;
+}
+
+.profile-url { display: none; }
+```
+
+**Print:** Three equal columns. `.header-right` uses `display: contents` to unwrap and let contact and profiles become direct grid items placed in columns 2 and 3.
+
+```css
+@media print {
+  header { grid-template-columns: 1fr 1fr 1fr; }
+
+  .header-right { display: contents; }
+
+  .contact {
+    grid-column: 2;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .profiles {
+    grid-column: 3;
+    display: block;
+    text-align: right;
+  }
+
+  .profile-link {
+    display: block;
+    border: none;
+    padding: 0;
+    font-size: 0.72rem;
+    margin-bottom: 2px;
+  }
+
+  .profile-url { display: inline; }
+}
+```
 
 **Label width must match name width.** Scale the label's `font-size` so its rendered text width equals the rendered text width of the name. Implement with a small inline script placed just before `</body>`:
 

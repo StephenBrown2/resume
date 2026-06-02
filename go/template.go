@@ -43,12 +43,12 @@ const resumeTemplate = `<!DOCTYPE html>
 
   header {
     display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
     gap: 24px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     border-bottom: 1.5px solid var(--black);
-    margin-bottom: 26px;
+    margin-bottom: 13px;
   }
 
   .title-label {
@@ -74,11 +74,34 @@ const resumeTemplate = `<!DOCTYPE html>
   a { color: var(--muted); text-decoration: none; }
   a:hover { color: var(--accent); }
 
-  .contact {
+  .header-right {
     text-align: right;
+  }
+
+  .contact {
     font-size: 0.76rem;
     color: var(--muted);
     line-height: 1.85;
+    margin-bottom: 0.5rem;
+  }
+
+  .profiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+
+  .profile-link {
+    font-size: 0.72rem;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 2px 8px;
+  }
+
+  .profile-url {
+    display: none;
   }
 
   section { margin-bottom: 22px; }
@@ -308,6 +331,45 @@ const resumeTemplate = `<!DOCTYPE html>
     .print-only { display: inline; }
     a { color: inherit !important; text-decoration: none !important; }
 
+    header {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .header-right {
+      display: contents;
+    }
+
+    .contact {
+      grid-column: 2;
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    .profiles {
+      grid-column: 3;
+      display: block;
+      text-align: right;
+      justify-content: flex-end;
+    }
+
+    .profile-link {
+      display: block;
+      border: none;
+      padding: 0;
+      font-size: 0.72rem;
+      margin-bottom: 2px;
+    }
+
+    .profile-url {
+      display: inline;
+    }
+
+    .profiles .print-only {
+      display: block;
+      font-size: 0.72rem;
+      margin-bottom: 2px;
+    }
+
     .job            { page-break-inside: avoid; }
     .project        { page-break-inside: avoid; }
     .section-intro  { break-inside: avoid; page-break-inside: avoid; }
@@ -318,7 +380,8 @@ const resumeTemplate = `<!DOCTYPE html>
   @media (max-width: 600px) {
     .page { padding: 28px 20px 48px; }
     header { grid-template-columns: 1fr; }
-    .contact { text-align: left; }
+    .header-right { text-align: left; }
+    .profiles { justify-content: flex-start; }
     .skills-domains { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 14px 0; }
@@ -334,13 +397,20 @@ const resumeTemplate = `<!DOCTYPE html>
       <p class="title-label">{{.Basics.Label}}</p>
       <h1 class="name">{{.Basics.Name}}</h1>
     </div>
-    <div class="contact">
-      <a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a><br>
-      {{.Basics.Phone}} &middot; {{.Basics.Location.City}}, {{.Basics.Location.Region}}<br>
-      {{range .Basics.Profiles -}}
-      <a href="{{.URL}}">{{stripScheme .URL}}</a><br>
-      {{- end}}
-      <span class="print-only"><a href="{{.Basics.URL}}">{{stripScheme .Basics.URL}}</a></span>
+    <div class="header-right">
+      <div class="contact">
+        <a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a><br>
+        {{.Basics.Phone}} &middot; {{.Basics.Location.City}}, {{.Basics.Location.Region}}<br>
+      </div>
+      <div class="profiles">
+        {{- range .Basics.Profiles}}
+        <a href="{{.URL}}" class="profile-link" title="{{.Network}}">
+          <span class="profile-name">{{.Network}}</span>
+          <span class="profile-url">: {{stripScheme .URL}}</span>
+        </a>
+        {{- end}}
+        <span class="print-only"><a href="{{.Basics.URL}}">{{stripScheme .Basics.URL}}</a></span>
+      </div>
     </div>
   </header>
 
