@@ -66,7 +66,6 @@ const resumeTemplate = `<!DOCTYPE html>
     font-family: var(--name-font);
     font-size: 2.5rem;
     font-weight: 400;
-    letter-spacing: -0.01em;
     line-height: 1;
     color: var(--black);
   }
@@ -520,24 +519,46 @@ const resumeTemplate = `<!DOCTYPE html>
 </div>
 <script>
 (function() {
-  function fitLabelToName() {
-    var name = document.querySelector('h1.name');
-    var label = document.querySelector('p.title-label');
-    if (!name || !label) return;
-    label.style.fontSize = '';
-    var nr = document.createRange();
-    nr.selectNodeContents(name);
-    var nw = nr.getBoundingClientRect().width;
-    var lr = document.createRange();
-    lr.selectNodeContents(label);
-    var lw = lr.getBoundingClientRect().width;
-    if (lw <= 0 || nw <= 0 || !isFinite(nw / lw)) return;
+  var nameEl  = document.querySelector('h1.name');
+  var labelEl = document.querySelector('p.title-label');
+  var colEl   = document.querySelector('header > div:first-child');
+
+  function fitHeader() {
+    if (!nameEl || !labelEl || !colEl) return;
+    nameEl.style.fontSize   = '';
+    labelEl.style.fontSize  = '';
+    nameEl.style.whiteSpace = 'nowrap';
+
+    var colW   = colEl.getBoundingClientRect().width;
     var htmlFs = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    var baseFs = parseFloat(getComputedStyle(label).fontSize);
-    label.style.fontSize = ((baseFs * nw / lw) / htmlFs).toFixed(4) + 'rem';
+    if (colW <= 0 || htmlFs <= 0) { nameEl.style.whiteSpace = ''; return; }
+
+    var nr = document.createRange();
+    nr.selectNodeContents(nameEl);
+    var nw = nr.getBoundingClientRect().width;
+    if (nw > 0 && isFinite(colW / nw)) {
+      nameEl.style.fontSize = ((parseFloat(getComputedStyle(nameEl).fontSize) * colW / nw) / htmlFs).toFixed(4) + 'rem';
+    }
+    // clear nowrap only after font-size is applied so the scaled text never re-wraps
+    nameEl.style.whiteSpace = '';
+
+    var lr = document.createRange();
+    lr.selectNodeContents(labelEl);
+    var lw = lr.getBoundingClientRect().width;
+    if (lw > 0 && isFinite(colW / lw)) {
+      labelEl.style.fontSize = ((parseFloat(getComputedStyle(labelEl).fontSize) * colW / lw) / htmlFs).toFixed(4) + 'rem';
+    }
   }
-  document.fonts.ready.then(fitLabelToName);
-  window.addEventListener('resize', fitLabelToName);
+
+  function resetFit() {
+    if (nameEl)  { nameEl.style.fontSize = ''; nameEl.style.whiteSpace = ''; }
+    if (labelEl) labelEl.style.fontSize = '';
+  }
+
+  document.fonts.ready.then(fitHeader);
+  window.addEventListener('resize', fitHeader);
+  window.addEventListener('beforeprint', resetFit);
+  window.addEventListener('afterprint',  fitHeader);
 })();
 </script>
 </body>

@@ -235,39 +235,60 @@ header {
 }
 ```
 
-**Label width must match name width.** Scale the label's `font-size` so its rendered text width equals the rendered text width of the name. Implement with a small inline script placed just before `</body>`:
+**Name and label both fill the left column width.** Scale both `font-size` values so their rendered text width equals the column width. Implement with a small inline script placed just before `</body>`:
 
 ```html
 <script>
 (function() {
-  function fitLabelToName() {
-    var name = document.querySelector('h1.name');
-    var label = document.querySelector('p.title-label');
-    if (!name || !label) return;
-    label.style.fontSize = '';
-    var nr = document.createRange();
-    nr.selectNodeContents(name);
-    var nw = nr.getBoundingClientRect().width;
-    var lr = document.createRange();
-    lr.selectNodeContents(label);
-    var lw = lr.getBoundingClientRect().width;
-    if (lw <= 0 || nw <= 0 || !isFinite(nw / lw)) return;
+  var nameEl  = document.querySelector('h1.name');
+  var labelEl = document.querySelector('p.title-label');
+  var colEl   = document.querySelector('header > div:first-child');
+
+  function fitHeader() {
+    if (!nameEl || !labelEl || !colEl) return;
+    nameEl.style.fontSize  = '';
+    labelEl.style.fontSize = '';
+
+    var colW   = colEl.getBoundingClientRect().width;
     var htmlFs = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    var baseFs = parseFloat(getComputedStyle(label).fontSize);
-    label.style.fontSize = ((baseFs * nw / lw) / htmlFs).toFixed(4) + 'rem';
+    if (colW <= 0 || htmlFs <= 0) return;
+
+    var nr = document.createRange();
+    nr.selectNodeContents(nameEl);
+    var nw = nr.getBoundingClientRect().width;
+    if (nw > 0 && isFinite(colW / nw)) {
+      nameEl.style.fontSize = ((parseFloat(getComputedStyle(nameEl).fontSize) * colW / nw) / htmlFs).toFixed(4) + 'rem';
+    }
+
+    var lr = document.createRange();
+    lr.selectNodeContents(labelEl);
+    var lw = lr.getBoundingClientRect().width;
+    if (lw > 0 && isFinite(colW / lw)) {
+      labelEl.style.fontSize = ((parseFloat(getComputedStyle(labelEl).fontSize) * colW / lw) / htmlFs).toFixed(4) + 'rem';
+    }
   }
-  document.fonts.ready.then(fitLabelToName);
-  window.addEventListener('resize', fitLabelToName);
+
+  function resetFit() {
+    if (nameEl)  nameEl.style.fontSize  = '';
+    if (labelEl) labelEl.style.fontSize = '';
+  }
+
+  document.fonts.ready.then(fitHeader);
+  window.addEventListener('resize', fitHeader);
+  window.addEventListener('beforeprint', resetFit);
+  window.addEventListener('afterprint',  fitHeader);
 })();
 </script>
 ```
 
 Key details:
-- Use `Range.selectNodeContents(el).getBoundingClientRect().width` for both elements — `getBoundingClientRect()` on a block element returns the container/column width, not the text width; the Range API returns the actual rendered text bounds.
-- Set `font-size` in `rem` (not `px`) so print-mode scaling (`html { font-size: 12pt }`) is preserved — both name and label scale together.
-- Reset `label.style.fontSize = ''` before measuring so the function is idempotent on resize.
-- Run after `document.fonts.ready` to ensure web fonts are loaded before measuring.
+- Measure column width via `header > div:first-child` `getBoundingClientRect().width`.
+- Use `Range.selectNodeContents(el).getBoundingClientRect().width` for text width — `getBoundingClientRect()` on a block element returns the container width, not the text width.
+- Set `font-size` in `rem` so print-mode scaling (`html { font-size: 12pt }`) preserves proportions.
+- Reset both inline styles before measuring so the function is idempotent on resize.
+- Run after `document.fonts.ready` to ensure web fonts are loaded.
 - Re-run on `resize` for responsive correctness.
+- Reset inline styles on `beforeprint` (so the 3-column print layout gets natural CSS font sizes) and re-apply on `afterprint`.
 
 Also add to `.title-label` CSS:
 ```css
