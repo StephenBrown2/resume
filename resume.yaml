@@ -159,12 +159,12 @@ work:
       - Linux
       - Bash
       - Python
-  - employer: "Johns Hopkins University, Knowledge for Health Project"
+  - employer: "Johns Hopkins Center for Communication Programs"
     position: Linux System Administrator
     url: https://ccp.jhu.edu
     startDate: "2013-07-01"
     endDate: "2013-12-30"
-    summary: Bloomberg School Of Public Health, Center For Communication Programs
+    summary: Bloomberg School Of Public Health, Knowledge for Health Project
     highlights:
       - Maintained and automated servers supporting Drupal multisite deployments with LAMP stack on physical and virtual hosts, and Apache Solr search indexes.
       - Successfully led team to adoption of git and a development > staging > production deployment workflow.
@@ -176,12 +176,12 @@ work:
       - Puppet
       - Drupal
       - Vagrant
-  - employer: "Johns Hopkins University, Knowledge for Health Project"
+  - employer: "Johns Hopkins Center for Communication Programs"
     position: Junior Linux Systems Administrator
     url: https://ccp.jhu.edu
     startDate: "2011-04-01"
     endDate: "2013-07-01"
-    summary: Bloomberg School Of Public Health, Center For Communication Programs
+    summary: Bloomberg School Of Public Health, Knowledge for Health Project
     highlights:
       - Hired as a contractor; brought on as full-time employee within 6 months.
       - Maintained CentOS 5 servers supporting 30+ websites for the K4Health project.
