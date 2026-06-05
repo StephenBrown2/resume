@@ -45,6 +45,7 @@ type svgCardData struct {
 	Name         string
 	Label        string // uppercased
 	LabelFill    string
+	LabelSize    float64
 	QRBase64     string
 	ContactLines []svgContactLine
 }
@@ -97,6 +98,7 @@ func buildSVGCardData(basics Basics, nameFont string) (svgCardData, error) {
 		Name:         basics.Name,
 		Label:        strings.ToUpper(basics.Label),
 		LabelFill:    goldSentinel,
+		LabelSize:    9.25,
 		QRBase64:     base64.StdEncoding.EncodeToString(png),
 		ContactLines: lines,
 	}, nil
@@ -115,13 +117,11 @@ const svgCardTemplate = `<?xml version="1.0" encoding="UTF-8"?>
   <rect width="288" height="180" fill="#fafaf8"/>
   <text x="32" y="49"
     font-family="{{xmlesc .NameFont}}, Liberation Serif, Georgia, serif"
-    font-size="20" fill="#0a0a0a"
-    textLength="149" lengthAdjust="spacingAndGlyphs">{{xmlesc .Name}}</text>
+    font-size="20" fill="#0a0a0a">{{xmlesc .Name}}</text>
   <text x="32" y="63"
     font-family="Inter, Liberation Sans, Arial, sans-serif"
-    font-size="8" font-weight="600"
-    fill="{{.LabelFill}}"
-    textLength="149" lengthAdjust="spacingAndGlyphs">{{xmlesc .Label}}</text>
+    font-size="{{printf "%.1f" .LabelSize}}" font-weight="600"
+    fill="{{.LabelFill}}">{{xmlesc .Label}}</text>
 {{- range .ContactLines}}
   {{- if .URL}}<a xlink:href="{{xmlesc .URL}}">{{end}}
   <text x="32" y="{{printf "%.2f" .Y}}"
@@ -205,22 +205,12 @@ scribus.closeDoc()
 `
 
 func exportViaScribus(scribus, svgPath, pdfPath string) error {
-	inputSVG := svgPath
-	// Pre-outline text with Inkscape so textLength is baked into path geometry.
-	if inkscape, err := exec.LookPath("inkscape"); err == nil {
-		outlined, err := outlineTextWithInkscape(inkscape, svgPath, pdfPath)
-		if err == nil {
-			defer os.Remove(outlined)
-			inputSVG = outlined
-		}
-	}
-
 	script, err := os.CreateTemp("", "resume-scribus-*.py")
 	if err != nil {
 		return fmt.Errorf("create scribus script: %w", err)
 	}
 	defer os.Remove(script.Name())
-	if _, err := fmt.Fprintf(script, scribyPyFmt, inputSVG, pdfPath); err != nil {
+	if _, err := fmt.Fprintf(script, scribyPyFmt, svgPath, pdfPath); err != nil {
 		script.Close()
 		return err
 	}
@@ -232,26 +222,6 @@ func exportViaScribus(scribus, svgPath, pdfPath string) error {
 		return fmt.Errorf("scribus export: %w\n%s", err, out)
 	}
 	return nil
-}
-
-// outlineTextWithInkscape converts all text elements to paths so that SVG
-// textLength constraints are baked into the path geometry before Scribus
-// imports the file (Scribus ignores textLength on import).
-func outlineTextWithInkscape(inkscape, svgPath, nearPath string) (string, error) {
-	tmp, err := os.CreateTemp(filepath.Dir(nearPath), "resume-outlined-*.svg")
-	if err != nil {
-		return "", fmt.Errorf("create outlined svg: %w", err)
-	}
-	outPath := tmp.Name()
-	tmp.Close()
-
-	actions := "select-all;object-to-path;export-filename:" + outPath + ";export-type:svg;export-do"
-	cmd := exec.Command(inkscape, "--actions", actions, svgPath)
-	if out, err := cmd.CombinedOutput(); err != nil {
-		os.Remove(outPath)
-		return "", fmt.Errorf("inkscape outline: %w\n%s", err, out)
-	}
-	return outPath, nil
 }
 
 func exportViaInkscape(inkscape, svgPath, pdfPath string) error {
