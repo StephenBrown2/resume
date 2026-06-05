@@ -70,15 +70,6 @@ func renderCardToFile(tmplName, tmplSrc string, data any, pdfPath string) error 
 	return exportPDF(tmpPath, pdfPath)
 }
 
-// generateBusinessCard renders a single 3.5×2in business card PDF.
-func generateBusinessCard(basics Basics, pdfPath string, nameFontCSS template.CSS, googleFontsLink template.HTML) error {
-	data, err := buildCardData(basics, nameFontCSS, googleFontsLink)
-	if err != nil {
-		return err
-	}
-	return renderCardToFile("business-card", businessCardTemplate, data, pdfPath)
-}
-
 // generateBusinessCardSheet renders a 10-up (2×5) Letter-size sheet PDF
 // for printing on card stock and hand-cutting. Set noGrid to omit the dashed
 // cut guides (use when printing on perforated stock such as Avery 5371).
