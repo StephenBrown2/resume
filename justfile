@@ -15,6 +15,18 @@ go-validate: go-build
     ./resume-renderer --input ../{{filename}} --output /dev/null
 
 [working-directory: 'go']
+go-pdf: go-render
+    ./resume-renderer --input ../{{filename}} --output ../docs/index.html --pdf ../output/resume.pdf
+
+[working-directory: 'go']
+go-card: go-build
+    ./resume-renderer --input ../{{filename}} --output /dev/null --business-card ../output/business-card.pdf
+
+[working-directory: 'go']
+go-sheet: go-build
+    ./resume-renderer --input ../{{filename}} --output /dev/null --sheet ../output/card-sheet.pdf
+
+[working-directory: 'go']
 go-setup:
     curl -sSfL https://golangci-lint.run/install.sh | sh -s
 

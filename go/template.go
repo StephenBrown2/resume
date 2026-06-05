@@ -6,22 +6,9 @@ const resumeTemplate = `<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{.Basics.Name}} - Resume</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-{{.GoogleFontsLink}}
-<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+` + fontsHead + `
 <style>
-  :root {
-    --black:  #0a0a0a;
-    --ink:    #1c1c1c;
-    --muted:  #6a6a6a;
-    --rule:   #e0e0e0;
-    --page:   #fafaf8;
-    --accent: #c0561a;
-    --serif:  'Instrument Serif', Georgia, serif;
-    --sans:   'Inter', 'Inter Variable', system-ui, sans-serif;
-    --name-font: {{.NameFontCSS}};
-  }
+` + cssVars + `
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 15px; }
@@ -31,8 +18,7 @@ const resumeTemplate = `<!DOCTYPE html>
     background: var(--page);
     color: var(--ink);
     line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    font-feature-settings: 'dlig' 1, 'calt' 1, 'ss01' 1, 'ss04' 1, 'ss07' 1;
+` + cssBodySmoothing + `
   }
 
   .page {

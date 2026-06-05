@@ -552,6 +552,7 @@ All implementations must accept:
 |---|---|---|
 | `--input` / `-i` | `../resume.yaml` | Path to input YAML file |
 | `--output` / `-o` | `../docs/index.html` | Path to write HTML output (use `../docs/{lang}-index.html` when testing) |
+| `--pdf` | _(none)_ | Path to write PDF output. When set, renders HTML first (via `--output`), then prints to PDF using Chromium headless. Requires `chromium`, `chromium-browser`, `google-chrome`, or `google-chrome-stable` in PATH. Incompatible with `--output /dev/null`. |
 | `--name-font` / `-f` | `Instrument Serif` | Google Fonts family name for the name heading |
 | `--schema` | _(derived)_ | Path to JSON Schema file. Resolution order: (1) this flag if set, (2) `$schema` field in the YAML resolved relative to the input file's directory, (3) `schema.json` in the same directory as the input file |
 | `--since` | _(none)_ | Exclude work entries whose `endDate` falls before this date. Accepts `YYYY`, `YYYY-MM`, or `YYYY-MM-DD`. Entries with no `endDate` (current role) are always included. |
