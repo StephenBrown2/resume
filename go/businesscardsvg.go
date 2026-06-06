@@ -223,15 +223,13 @@ const svgCardTemplate = `<?xml version="1.0" encoding="UTF-8"?>
   width="4.0in" height="2.5in" viewBox="0 0 288 180">
   <defs><!-- spot colors injected by export pipeline --></defs>
   <rect width="288" height="180" fill="` + cardBackground + `"/>
-  <text x="32" y="{{printf "%.2f" .NameY}}"
+  <text id="name-text" x="32" y="{{printf "%.2f" .NameY}}"
     font-family="{{xmlesc .NameFont}}, Liberation Serif, Georgia, serif"
-    font-size="{{printf "%.2f" .NameFontSize}}" fill="#0a0a0a"
-    textLength="{{printf "%.2f" .TextWidth}}" lengthAdjust="spacingAndGlyphs">{{xmlesc .Name}}</text>
-  <text x="32" y="{{printf "%.2f" .LabelY}}"
-    font-family="Inter, Liberation Sans, Arial, sans-serif"
-    font-size="{{printf "%.2f" .LabelSize}}" font-weight="600"
-    fill="{{.LabelFill}}"
-    textLength="{{printf "%.2f" .TextWidth}}" lengthAdjust="spacingAndGlyphs">{{xmlesc .Label}}</text>
+    font-size="{{printf "%.2f" .NameFontSize}}" fill="#0a0a0a">{{xmlesc .Name}}</text>
+  <text id="label-text" x="32" y="{{printf "%.2f" .LabelY}}"
+    font-family="Fira Sans, Liberation Sans, Arial, sans-serif"
+    font-size="{{printf "%.2f" .LabelSize}}" font-weight="700"
+    fill="{{.LabelFill}}">{{xmlesc .Label}}</text>
 {{- range .ContactLines}}
   {{- if .URL}}<a xlink:href="{{xmlesc .URL}}">{{end}}
   <text x="32" y="{{printf "%.2f" .Y}}"
@@ -267,6 +265,7 @@ func renderSVGCard(data svgCardData, svgPath string) error {
 const (
 	defaultNameFontSize  = 20.0
 	defaultLabelFontSize = 9.25
+	labelFontSizeFloor   = 14.0 // minimum label pt; overrides computed value when larger
 	// font metric ratios (Instrument Serif name, Inter 600 label)
 	serifCapHeightRatio    = 0.65
 	serifDescenderRatio    = 0.30
@@ -282,30 +281,49 @@ const (
 // then stretches the result back to the full safe-area width.
 const goMetricsAdjust = 0.93
 
+// scribusFontName returns the Scribus-style font name ("Family Style") for the
+// first family+style combination that fontconfig can resolve exactly.
+func scribusFontName(families []string, style string) string {
+	for _, f := range families {
+		if _, err := findFontFile(f, style); err == nil {
+			return f + " " + style
+		}
+	}
+	return ""
+}
+
 // computeCardLayout computes font sizes and y positions for the name and label
-// using Go font metrics. The measured width target is scaled by goMetricsAdjust
-// so Scribus's larger rendered width lands within the 224pt safe area.
-func computeCardLayout(name, label, nameFont string, targetWidth float64) (namePt, labelPt, nameY, labelY float64) {
+// using Go font metrics. Also returns Scribus font names ("Family Style") so
+// the export script can override Scribus's SVG font matching.
+// The measured width target is scaled by goMetricsAdjust so Scribus's larger
+// rendered width lands within the 224pt safe area.
+func computeCardLayout(name, label, nameFont string, targetWidth float64) (namePt, labelPt, nameY, labelY float64, nameFontScribus, labelFontScribus string) {
 	namePt = defaultNameFontSize
 	labelPt = defaultLabelFontSize
 
 	effective := targetWidth * goMetricsAdjust
 	nameFamilies := []string{nameFont, "Liberation Serif", "Georgia", "DejaVu Serif"}
-	labelFamilies := []string{"Inter", "Liberation Sans", "Arial", "DejaVu Sans"}
+	labelFamilies := []string{"Fira Sans", "Liberation Sans", "DejaVu Sans", "Arial"}
 
 	if namePath, err := firstInstalledFont(nameFamilies, "Regular"); err == nil {
 		namePt = ptSizeToFill(name, namePath, defaultNameFontSize, effective)
+		nameFontScribus = scribusFontName(nameFamilies, "Regular")
 	} else {
 		fmt.Fprintf(os.Stderr, "warn: name font not found (%v); using %.2fpt\n", err, namePt)
 	}
-	if labelPath, err := firstInstalledFont(labelFamilies, "SemiBold"); err == nil {
+	if labelPath, err := firstInstalledFont(labelFamilies, "Bold"); err == nil {
 		labelPt = ptSizeToFill(strings.ToUpper(label), labelPath, defaultLabelFontSize, effective)
-	} else if labelPath, err := firstInstalledFont(labelFamilies, "Bold"); err == nil {
+		labelFontScribus = scribusFontName(labelFamilies, "Bold")
+	} else if labelPath, err := firstInstalledFont(labelFamilies, "SemiBold"); err == nil {
 		labelPt = ptSizeToFill(strings.ToUpper(label), labelPath, defaultLabelFontSize, effective)
+		labelFontScribus = scribusFontName(labelFamilies, "SemiBold")
 	} else {
 		fmt.Fprintf(os.Stderr, "warn: label font not found (%v); using %.2fpt\n", err, labelPt)
 	}
 
+	if labelPt < labelFontSizeFloor {
+		labelPt = labelFontSizeFloor
+	}
 	nameY = svgContentX + textTopPad + namePt*serifCapHeightRatio
 	labelY = nameY + namePt*serifDescenderRatio + interTextGap + labelPt*sansCapHeightRatio
 	return
@@ -318,12 +336,12 @@ func computeCardLayout(name, label, nameFont string, targetWidth float64) (nameP
 // The SVG is kept alongside the PDF (same path, .svg extension).
 func generateBusinessCard(basics Basics, pdfPath string, nameFontCSS htmltmpl.CSS, _ htmltmpl.HTML, spotColorName string, debugCard bool) error {
 	nameFont := extractFontName(string(nameFontCSS))
-	targetWidth := svgContentRight - svgContentX // full safe-area width = 224pt
+	targetWidth := svgContentRight - svgContentX
 
-	nameFontSize, labelFontSize, nameY, labelY := computeCardLayout(
+	nameFontSize, labelFontSize, nameY, labelY, nameFontScribus, labelFontScribus := computeCardLayout(
 		basics.Name, strings.ToUpper(basics.Label), nameFont, targetWidth)
-	fmt.Fprintf(os.Stderr, "font sizes: name=%.2fpt label=%.2fpt  y: name=%.2f label=%.2f\n",
-		nameFontSize, labelFontSize, nameY, labelY)
+	fmt.Fprintf(os.Stderr, "font sizes: name=%.2fpt (%s) label=%.2fpt (%s)\n",
+		nameFontSize, nameFontScribus, labelFontSize, labelFontScribus)
 
 	data, err := buildSVGCardData(basics, nameFont, nameFontSize, labelFontSize, nameY, labelY, targetWidth, debugCard)
 	if err != nil {
@@ -334,11 +352,11 @@ func generateBusinessCard(basics Basics, pdfPath string, nameFontCSS htmltmpl.CS
 		return err
 	}
 	fmt.Fprintf(os.Stderr, "wrote %s\n", svgPath)
-	return exportSVGtoPDF(svgPath, pdfPath, spotColorName)
+	return exportSVGtoPDF(svgPath, pdfPath, nameFontScribus, labelFontScribus, spotColorName)
 }
 
 // exportSVGtoPDF exports the SVG to a PDF with a spot color channel via Scribus.
-func exportSVGtoPDF(svgPath, pdfPath, spotColorName string) error {
+func exportSVGtoPDF(svgPath, pdfPath, nameFont, labelFont, spotColorName string) error {
 	absSVG, err := filepath.Abs(svgPath)
 	if err != nil {
 		return fmt.Errorf("resolve svg path: %w", err)
@@ -351,15 +369,25 @@ func exportSVGtoPDF(svgPath, pdfPath, spotColorName string) error {
 	if err != nil {
 		return fmt.Errorf("scribus not found in PATH; install scribus to use --business-card")
 	}
-	return exportViaScribus(scribus, absSVG, absPDF, spotColorName)
+	return exportViaScribus(scribus, absSVG, absPDF, nameFont, labelFont, spotColorName)
 }
 
 // scribyPyFmt is a format string for the Scribus Python script. SVG path,
 // PDF path, and spot color name (×3) are baked in (%q / %s) so no args need
 // to be passed on the command line, avoiding Scribus treating them as
 // documents to open. Args: svgPath, spotColorName (×3), pdfPath.
+// scribyPyFmt args: svgPath, nameFontScribusName, labelFontScribusName,
+// spotColorName (×3), pdfPath.
 const scribyPyFmt = `import scribus
 scribus.openDoc(%q)
+# Explicitly set fonts on the named text frames so Scribus's SVG importer
+# font-matching (which often falls back to a system default) is overridden.
+for obj_id, font_name in (("name-text", %q), ("label-text", %q)):
+    try:
+        scribus.selectText(0, scribus.getTextLength(obj_id), obj_id)
+        scribus.setFont(font_name, obj_id)
+    except Exception:
+        pass
 scribus.defineColorCMYKFloat(%q, 0.0, 20.0, 80.0, 10.0)
 scribus.setSpotColor(%q, True)
 scribus.replaceColor("FromSVG#ffffff", %q)
@@ -367,18 +395,18 @@ pdf = scribus.PDFfile()
 pdf.file = %q
 pdf.version = 15
 pdf.outdst = 1
-pdf.fontEmbedding = 1
+pdf.fontEmbedding = 0
 pdf.save()
 scribus.closeDoc()
 `
 
-func exportViaScribus(scribus, svgPath, pdfPath, spotColorName string) error {
+func exportViaScribus(scribus, svgPath, pdfPath, nameFont, labelFont, spotColorName string) error {
 	script, err := os.CreateTemp("", "resume-scribus-*.py")
 	if err != nil {
 		return fmt.Errorf("create scribus script: %w", err)
 	}
 	defer os.Remove(script.Name())
-	if _, err := fmt.Fprintf(script, scribyPyFmt, svgPath, spotColorName, spotColorName, spotColorName, pdfPath); err != nil {
+	if _, err := fmt.Fprintf(script, scribyPyFmt, svgPath, nameFont, labelFont, spotColorName, spotColorName, spotColorName, pdfPath); err != nil {
 		script.Close()
 		return err
 	}
@@ -386,8 +414,12 @@ func exportViaScribus(scribus, svgPath, pdfPath, spotColorName string) error {
 		return err
 	}
 	cmd := exec.Command(scribus, "--no-gui", "--python-script", script.Name())
-	if out, err := cmd.CombinedOutput(); err != nil {
-		return fmt.Errorf("scribus export: %w\n%s", err, out)
+	out, err := cmd.CombinedOutput()
+	if len(out) > 0 {
+		fmt.Fprintf(os.Stderr, "scribus: %s\n", out)
+	}
+	if err != nil {
+		return fmt.Errorf("scribus export: %w", err)
 	}
 	return nil
 }
