@@ -5,6 +5,7 @@ import (
 	"fmt"
 	htmlpkg "html"
 	htmltmpl "html/template"
+	"image/color"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -14,7 +15,8 @@ import (
 	qrcode "github.com/skip2/go-qrcode"
 )
 
-const goldSentinel = "#c8a832"
+const goldSentinel = "#ffffff"
+const cardBackground = "#F8F8F8"
 
 // extractFontName returns the first CSS font-family name from a value like
 // "'Instrument Serif', Georgia, serif".
@@ -47,26 +49,21 @@ type svgCardData struct {
 	LabelFill    string
 	LabelSize    float64
 	QRBase64     string
+	QRX          float64
+	QRY          float64
+	QRSize       float64
 	ContactLines []svgContactLine
 }
 
 const (
-	svgContentX      = 32.0  // 18pt bleed + 14pt padding
-	svgLeftColW      = 149.0 // 224pt usable - 68pt QR - 7pt gap
-	svgQRX           = 188.0 // svgContentX + svgLeftColW + 7
-	svgQRY           = 80.0  // content bottom − QR size
-	svgQRSize        = 68.0
-	svgContentBotY   = 148.0 // 18 bleed + 144 live − 14 padding
-	svgContactFS     = 6.5
-	svgContactLineH  = 11.0
+	svgContentX     = 32.0  // 18pt bleed + 14pt padding
+	svgContentRight = 256.0 // 18pt bleed + 224pt usable - 14pt padding
+	svgContentBotY  = 148.0 // 18 bleed + 144 live − 14 padding
+	svgContactFS    = 6.5
+	svgContactLineH = 11.0
 )
 
 func buildSVGCardData(basics Basics, nameFont string) (svgCardData, error) {
-	png, err := qrcode.Encode(basics.URL, qrcode.Medium, 300)
-	if err != nil {
-		return svgCardData{}, fmt.Errorf("generate qr code: %w", err)
-	}
-
 	type rawLine struct{ text, url string }
 	var raw []rawLine
 	raw = append(raw, rawLine{basics.Email, "mailto:" + basics.Email})
@@ -87,6 +84,21 @@ func buildSVGCardData(basics Basics, nameFont string) (svgCardData, error) {
 		raw = append(raw, rawLine{p.Network + ": " + stripScheme(p.URL), p.URL})
 	}
 
+	qrSize := float64(len(raw)) * svgContactLineH
+	qrX := svgContentRight - qrSize
+	qrY := svgContentBotY - qrSize
+
+	q, err := qrcode.New(basics.URL, qrcode.Medium)
+	if err != nil {
+		return svgCardData{}, fmt.Errorf("generate qr code: %w", err)
+	}
+	q.BackgroundColor = color.Transparent
+	q.DisableBorder = true
+	png, err := q.PNG(300)
+	if err != nil {
+		return svgCardData{}, fmt.Errorf("encode qr png: %w", err)
+	}
+
 	startY := svgContentBotY - float64(len(raw))*svgContactLineH + svgContactFS
 	lines := make([]svgContactLine, len(raw))
 	for i, r := range raw {
@@ -100,6 +112,9 @@ func buildSVGCardData(basics Basics, nameFont string) (svgCardData, error) {
 		LabelFill:    goldSentinel,
 		LabelSize:    9.25,
 		QRBase64:     base64.StdEncoding.EncodeToString(png),
+		QRX:          qrX,
+		QRY:          qrY,
+		QRSize:       qrSize,
 		ContactLines: lines,
 	}, nil
 }
@@ -107,14 +122,16 @@ func buildSVGCardData(basics Basics, nameFont string) (svgCardData, error) {
 func xmlesc(s string) string { return htmlpkg.EscapeString(s) }
 
 // svgCardTemplate produces a 4.0×2.5in SVG with bleed (viewBox 0 0 288 180).
-// Gold elements use fill="#c8a832" as a sentinel; the export pipeline converts
-// this to a proper spot color channel (Scribus) or solidColor ref (Inkscape).
+// Gold elements use fill="#ffffff" (white) as a sentinel; the export pipeline
+// converts this to a proper spot color channel (Scribus) or solidColor ref
+// (Inkscape). White is required: gold toner applies over the base layer, so a
+// non-white base tints the gold.
 const svgCardTemplate = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   width="4.0in" height="2.5in" viewBox="0 0 288 180">
   <defs><!-- spot colors injected by export pipeline --></defs>
-  <rect width="288" height="180" fill="#fafaf8"/>
+  <rect width="288" height="180" fill="` + cardBackground + `"/>
   <text x="32" y="49"
     font-family="{{xmlesc .NameFont}}, Liberation Serif, Georgia, serif"
     font-size="20" fill="#0a0a0a">{{xmlesc .Name}}</text>
@@ -129,7 +146,7 @@ const svgCardTemplate = `<?xml version="1.0" encoding="UTF-8"?>
     font-size="6.5" fill="#6a6a6a">{{xmlesc .Text}}</text>
   {{- if .URL}}</a>{{end}}
 {{- end}}
-  <image x="188" y="80" width="68" height="68"
+  <image x="{{printf "%.2f" .QRX}}" y="{{printf "%.2f" .QRY}}" width="{{printf "%.2f" .QRSize}}" height="{{printf "%.2f" .QRSize}}"
     href="data:image/png;base64,{{.QRBase64}}"
     xlink:href="data:image/png;base64,{{.QRBase64}}"
     preserveAspectRatio="xMidYMid meet"/>
@@ -152,9 +169,10 @@ func renderSVGCard(data svgCardData, svgPath string) error {
 }
 
 // generateBusinessCard renders a 4.0×2.5in SVG (with bleed) and exports it to
-// a PDF with a Gold spot color channel via Scribus or Inkscape.
+// a PDF with a spot color channel via Scribus or Inkscape.
+// spotColorName selects the channel name (e.g. "Gold", "RDG_Gold", "PANTONE 871 C").
 // The SVG is kept alongside the PDF (same path, .svg extension).
-func generateBusinessCard(basics Basics, pdfPath string, nameFontCSS htmltmpl.CSS, _ htmltmpl.HTML) error {
+func generateBusinessCard(basics Basics, pdfPath string, nameFontCSS htmltmpl.CSS, _ htmltmpl.HTML, spotColorName string) error {
 	data, err := buildSVGCardData(basics, extractFontName(string(nameFontCSS)))
 	if err != nil {
 		return err
@@ -164,12 +182,12 @@ func generateBusinessCard(basics Basics, pdfPath string, nameFontCSS htmltmpl.CS
 		return err
 	}
 	fmt.Fprintf(os.Stderr, "wrote %s\n", svgPath)
-	return exportSVGtoPDF(svgPath, pdfPath)
+	return exportSVGtoPDF(svgPath, pdfPath, spotColorName)
 }
 
 // exportSVGtoPDF detects Scribus (preferred) or Inkscape and exports the SVG
-// to a PDF with a proper Gold spot color separation.
-func exportSVGtoPDF(svgPath, pdfPath string) error {
+// to a PDF with a proper spot color separation using spotColorName.
+func exportSVGtoPDF(svgPath, pdfPath, spotColorName string) error {
 	absSVG, err := filepath.Abs(svgPath)
 	if err != nil {
 		return fmt.Errorf("resolve svg path: %w", err)
@@ -179,22 +197,23 @@ func exportSVGtoPDF(svgPath, pdfPath string) error {
 		return fmt.Errorf("resolve pdf path: %w", err)
 	}
 	if scribus, err := exec.LookPath("scribus"); err == nil {
-		return exportViaScribus(scribus, absSVG, absPDF)
+		return exportViaScribus(scribus, absSVG, absPDF, spotColorName)
 	}
 	if inkscape, err := exec.LookPath("inkscape"); err == nil {
-		return exportViaInkscape(inkscape, absSVG, absPDF)
+		return exportViaInkscape(inkscape, absSVG, absPDF, spotColorName)
 	}
 	return fmt.Errorf("neither scribus nor inkscape found in PATH")
 }
 
-// scribyPyFmt is a format string for the Scribus Python script. SVG and PDF
-// paths are baked in (%q) so no args need to be passed on the command line,
-// avoiding Scribus treating them as documents to open.
+// scribyPyFmt is a format string for the Scribus Python script. SVG path,
+// PDF path, and spot color name (×3) are baked in (%q / %s) so no args need
+// to be passed on the command line, avoiding Scribus treating them as
+// documents to open. Args: svgPath, spotColorName (×3), pdfPath.
 const scribyPyFmt = `import scribus
 scribus.openDoc(%q)
-scribus.defineColorCMYKFloat("Gold", 0.0, 20.0, 80.0, 10.0)
-scribus.setSpotColor("Gold", True)
-scribus.replaceColor("FromSVG#c8a832", "Gold")
+scribus.defineColorCMYKFloat(%q, 0.0, 20.0, 80.0, 10.0)
+scribus.setSpotColor(%q, True)
+scribus.replaceColor("FromSVG#ffffff", %q)
 pdf = scribus.PDFfile()
 pdf.file = %q
 pdf.version = 15
@@ -204,13 +223,13 @@ pdf.save()
 scribus.closeDoc()
 `
 
-func exportViaScribus(scribus, svgPath, pdfPath string) error {
+func exportViaScribus(scribus, svgPath, pdfPath, spotColorName string) error {
 	script, err := os.CreateTemp("", "resume-scribus-*.py")
 	if err != nil {
 		return fmt.Errorf("create scribus script: %w", err)
 	}
 	defer os.Remove(script.Name())
-	if _, err := fmt.Fprintf(script, scribyPyFmt, svgPath, pdfPath); err != nil {
+	if _, err := fmt.Fprintf(script, scribyPyFmt, svgPath, spotColorName, spotColorName, spotColorName, pdfPath); err != nil {
 		script.Close()
 		return err
 	}
@@ -224,12 +243,12 @@ func exportViaScribus(scribus, svgPath, pdfPath string) error {
 	return nil
 }
 
-func exportViaInkscape(inkscape, svgPath, pdfPath string) error {
+func exportViaInkscape(inkscape, svgPath, pdfPath, spotColorName string) error {
 	svgBytes, err := os.ReadFile(svgPath)
 	if err != nil {
 		return fmt.Errorf("read svg: %w", err)
 	}
-	processed := preprocessForInkscape(string(svgBytes))
+	processed := preprocessForInkscape(string(svgBytes), spotColorName)
 
 	tmp, err := os.CreateTemp(filepath.Dir(pdfPath), "resume-inkscape-*.svg")
 	if err != nil {
@@ -254,14 +273,14 @@ func exportViaInkscape(inkscape, svgPath, pdfPath string) error {
 
 // preprocessForInkscape adds the Inkscape-specific solidColor spot color
 // definition and rewrites sentinel fills to reference it.
-func preprocessForInkscape(svg string) string {
+func preprocessForInkscape(svg, spotColorName string) string {
 	svg = strings.Replace(svg,
 		`<svg xmlns="http://www.w3.org/2000/svg"`,
 		`<svg xmlns="http://www.w3.org/2000/svg"`+
 			` xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"`+
 			` xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.0.dtd"`,
 		1)
-	solidColor := `<solidColor id="gold-solid" style="solid-color:` + goldSentinel + `;solid-opacity:1" inkscape:label="Gold"/>`
+	solidColor := `<solidColor id="gold-solid" style="solid-color:` + goldSentinel + `;solid-opacity:1" inkscape:label="` + spotColorName + `"/>`
 	svg = strings.Replace(svg,
 		`<defs><!-- spot colors injected by export pipeline --></defs>`,
 		`<defs>`+solidColor+`</defs>`,
