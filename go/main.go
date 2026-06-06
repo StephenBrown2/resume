@@ -18,10 +18,11 @@ func main() {
 	input := flag.String("input", "../resume.yaml", "path to resume YAML")
 	output := flag.String("output", "../docs/index.html", "path to write HTML")
 	pdfOutput := flag.String("pdf", "", "path to write PDF (requires chromium; uses print-layout CSS)")
-	cardOutput := flag.String("business-card", "", "path to write business card PDF (requires chromium)")
+	cardOutput := flag.String("business-card", "", "path to write business card PDF (requires scribus)")
 	sheetOutput := flag.String("sheet", "", "path to write 10-up Letter card sheet PDF for hand-cutting (requires chromium)")
 	noGrid := flag.Bool("no-grid", false, "omit cut guides on --sheet output (use with perforated stock such as Avery 5371)")
 	spotColorName := flag.String("spot-color-name", "Gold", "spot color channel name for Gold in business card PDF output (e.g. Gold, RDG_Gold, PANTONE 871 C)")
+	debugCard := flag.Bool("debug-card", false, "add red safe-area guide rect to business card SVG output")
 	nameFont := flag.String("name-font", "Instrument Serif", "Google Fonts family for name heading")
 	schema := flag.String("schema", "", "path to JSON Schema file (default: schema.json next to --input)")
 	since := flag.String("since", "", "exclude jobs whose end date is before this date (YYYY, YYYY-MM, or YYYY-MM-DD)")
@@ -138,7 +139,7 @@ func main() {
 	}
 
 	if *cardOutput != "" {
-		if err := generateBusinessCard(resume.Basics, *cardOutput, nameFontCSS, googleFontsLink, *spotColorName); err != nil {
+		if err := generateBusinessCard(resume.Basics, *cardOutput, nameFontCSS, googleFontsLink, *spotColorName, *debugCard); err != nil {
 			fmt.Fprintf(os.Stderr, "export business card: %v\n", err)
 			os.Exit(1)
 		}

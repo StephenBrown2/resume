@@ -9,11 +9,12 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strconv"
 	"strings"
 	txttmpl "text/template"
 
 	qrcode "github.com/skip2/go-qrcode"
+	"golang.org/x/image/font/opentype"
+	"golang.org/x/image/math/fixed"
 )
 
 const goldSentinel = "#ffffff"
@@ -58,6 +59,7 @@ type svgCardData struct {
 	QRY          float64
 	QRSize       float64
 	ContactLines []svgContactLine
+	DebugBox     bool // draw safe-area guide rect
 }
 
 const (
@@ -69,7 +71,7 @@ const (
 	svgColGap       = 7.0 // gap between left column and QR
 )
 
-func buildSVGCardData(basics Basics, nameFont string, nameFontSize, labelFontSize, nameY, labelY, textWidth float64) (svgCardData, error) {
+func buildSVGCardData(basics Basics, nameFont string, nameFontSize, labelFontSize, nameY, labelY, textWidth float64, debugBox bool) (svgCardData, error) {
 	type rawLine struct{ text, url string }
 	var raw []rawLine
 	raw = append(raw, rawLine{basics.Email, "mailto:" + basics.Email})
@@ -126,6 +128,7 @@ func buildSVGCardData(basics Basics, nameFont string, nameFontSize, labelFontSiz
 		QRY:          qrY,
 		QRSize:       qrSize,
 		ContactLines: lines,
+		DebugBox:     debugBox,
 	}, nil
 }
 
@@ -141,50 +144,71 @@ func countContactLines(basics Basics) int {
 	return n
 }
 
-// measureSVGTextWidth asks Inkscape for the rendered advance width (in pt) of
-// text at a given font-family, font-weight, and font-size. The measurement SVG
-// uses the same coordinate system as the card (1 user unit = 1pt).
-func measureSVGTextWidth(inkscape, text, fontFamily string, fontWeight, fontSize float64) (float64, error) {
-	esc := strings.NewReplacer(`&`, `&amp;`, `<`, `&lt;`, `>`, `&gt;`, `"`, `&quot;`).Replace(text)
-	svg := fmt.Sprintf(
-		`<?xml version="1.0" encoding="UTF-8"?>`+
-			`<svg xmlns="http://www.w3.org/2000/svg" width="288pt" height="180pt">`+
-			`<text id="t" x="0" y="50" font-family="%s" font-size="%.2f" font-weight="%.0f">%s</text>`+
-			`</svg>`,
-		fontFamily, fontSize, fontWeight, esc)
-	tmp, err := os.CreateTemp("", "cardmeasure-*.svg")
+// findFontFile returns the font file path for an exactly-matched fontconfig family.
+// Returns an error if fontconfig resolves to a different family (i.e. the requested
+// family is not installed).
+func findFontFile(family, style string) (string, error) {
+	out, err := exec.Command("fc-match", family+":style="+style, "--format=%{family}\t%{file}").Output()
 	if err != nil {
-		return 0, fmt.Errorf("create measure svg: %w", err)
+		return "", fmt.Errorf("fc-match: %w", err)
 	}
-	defer os.Remove(tmp.Name())
-	if _, err := tmp.WriteString(svg); err != nil {
-		tmp.Close()
-		return 0, err
+	parts := strings.SplitN(strings.TrimSpace(string(out)), "\t", 2)
+	if len(parts) != 2 || parts[1] == "" {
+		return "", fmt.Errorf("fc-match: unexpected output %q", out)
 	}
-	if err := tmp.Close(); err != nil {
-		return 0, err
+	if !strings.EqualFold(strings.TrimSpace(parts[0]), family) {
+		return "", fmt.Errorf("fc-match returned %q instead of %q", parts[0], family)
 	}
-	out, err := exec.Command(inkscape, "--query-id=t", "--query-width", tmp.Name()).Output()
-	if err != nil {
-		return 0, fmt.Errorf("inkscape query: %w", err)
-	}
-	w, err := strconv.ParseFloat(strings.TrimSpace(string(out)), 64)
-	if err != nil || w <= 0 {
-		return 0, fmt.Errorf("parse inkscape width %q: %w", strings.TrimSpace(string(out)), err)
-	}
-	return w, nil
+	return parts[1], nil
 }
 
-// fontSizeToFill computes the font-size (in pt) that makes text naturally fill
-// targetWidth. Falls back to nominalSize if measurement fails.
-func fontSizeToFill(inkscape, text, fontFamily string, fontWeight, nominalSize, targetWidth float64) float64 {
-	w, err := measureSVGTextWidth(inkscape, text, fontFamily, fontWeight, nominalSize)
+// firstInstalledFont returns the path to the first family in families that
+// fontconfig can resolve exactly at the given style.
+func firstInstalledFont(families []string, style string) (string, error) {
+	for _, f := range families {
+		if path, err := findFontFile(f, style); err == nil {
+			return path, nil
+		}
+	}
+	return "", fmt.Errorf("none of %v installed (style=%q)", families, style)
+}
+
+// textAdvancePt returns the advance width in points for text at ptSize, using
+// the font file at fontPath. Loaded at 72 DPI so 1 fixed-point pixel = 1 pt.
+func textAdvancePt(text, fontPath string, ptSize float64) (float64, error) {
+	raw, err := os.ReadFile(fontPath)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "warn: text width measurement failed (%v); using nominal size\n", err)
+		return 0, fmt.Errorf("read font: %w", err)
+	}
+	f, err := opentype.Parse(raw)
+	if err != nil {
+		return 0, fmt.Errorf("parse font: %w", err)
+	}
+	face, err := opentype.NewFace(f, &opentype.FaceOptions{Size: ptSize, DPI: 72})
+	if err != nil {
+		return 0, fmt.Errorf("create face: %w", err)
+	}
+	defer face.Close()
+	var total fixed.Int26_6
+	for _, r := range text {
+		if adv, ok := face.GlyphAdvance(r); ok {
+			total += adv
+		}
+	}
+	return float64(total) / 64.0, nil
+}
+
+// ptSizeToFill returns the font size (pt) that makes text's advance width equal
+// targetWidth. Falls back to nominalSize if measurement fails.
+func ptSizeToFill(text, fontPath string, nominalSize, targetWidth float64) float64 {
+	w, err := textAdvancePt(text, fontPath, nominalSize)
+	if err != nil || w <= 0 {
+		fmt.Fprintf(os.Stderr, "warn: font measurement failed (%v); using nominal size\n", err)
 		return nominalSize
 	}
 	return nominalSize * targetWidth / w
 }
+
 
 func xmlesc(s string) string { return htmlpkg.EscapeString(s) }
 
@@ -219,6 +243,9 @@ const svgCardTemplate = `<?xml version="1.0" encoding="UTF-8"?>
     href="data:image/png;base64,{{.QRBase64}}"
     xlink:href="data:image/png;base64,{{.QRBase64}}"
     preserveAspectRatio="xMidYMid meet"/>
+{{- if .DebugBox}}
+  <rect x="32" y="32" width="224" height="116" fill="none" stroke="#ff0000" stroke-width="0.5"/>
+{{- end}}
 </svg>`
 
 func renderSVGCard(data svgCardData, svgPath string) error {
@@ -248,46 +275,57 @@ const (
 	interTextGap           = 3.0 // pt between name descender bottom and label cap top
 )
 
+// goMetricsAdjust corrects for GPOS kerning and optical overhang that
+// golang.org/x/image/font/opentype does not account for. Scribus renders
+// the same font/text ~5-7% wider than the simple advance-width sum, so we
+// target a slightly narrower effective width. textLength="224" in the SVG
+// then stretches the result back to the full safe-area width.
+const goMetricsAdjust = 0.93
+
 // computeCardLayout computes font sizes and y positions for the name and label
-// given the left column width (targetWidth). Returns nominal values if
-// measurement fails.
-func computeCardLayout(inkscape, name, label, nameFont string, targetWidth float64) (namePt, labelPt, nameY, labelY float64) {
+// using Go font metrics. The measured width target is scaled by goMetricsAdjust
+// so Scribus's larger rendered width lands within the 224pt safe area.
+func computeCardLayout(name, label, nameFont string, targetWidth float64) (namePt, labelPt, nameY, labelY float64) {
 	namePt = defaultNameFontSize
 	labelPt = defaultLabelFontSize
 
-	if inkscape != "" {
-		nameFontFamily := nameFont + ", Liberation Serif, Georgia, serif"
-		labelFontFamily := "Inter, Liberation Sans, Arial, sans-serif"
-		namePt = fontSizeToFill(inkscape, name, nameFontFamily, 400, defaultNameFontSize, targetWidth)
-		labelPt = fontSizeToFill(inkscape, label, labelFontFamily, 600, defaultLabelFontSize, targetWidth)
+	effective := targetWidth * goMetricsAdjust
+	nameFamilies := []string{nameFont, "Liberation Serif", "Georgia", "DejaVu Serif"}
+	labelFamilies := []string{"Inter", "Liberation Sans", "Arial", "DejaVu Sans"}
+
+	if namePath, err := firstInstalledFont(nameFamilies, "Regular"); err == nil {
+		namePt = ptSizeToFill(name, namePath, defaultNameFontSize, effective)
+	} else {
+		fmt.Fprintf(os.Stderr, "warn: name font not found (%v); using %.2fpt\n", err, namePt)
+	}
+	if labelPath, err := firstInstalledFont(labelFamilies, "SemiBold"); err == nil {
+		labelPt = ptSizeToFill(strings.ToUpper(label), labelPath, defaultLabelFontSize, effective)
+	} else if labelPath, err := firstInstalledFont(labelFamilies, "Bold"); err == nil {
+		labelPt = ptSizeToFill(strings.ToUpper(label), labelPath, defaultLabelFontSize, effective)
+	} else {
+		fmt.Fprintf(os.Stderr, "warn: label font not found (%v); using %.2fpt\n", err, labelPt)
 	}
 
-	// nameY: baseline so cap-top sits textTopPad below content-top (y=32).
 	nameY = svgContentX + textTopPad + namePt*serifCapHeightRatio
-	// labelY: baseline placed below name descenders with a small gap.
 	labelY = nameY + namePt*serifDescenderRatio + interTextGap + labelPt*sansCapHeightRatio
 	return
 }
 
 // generateBusinessCard renders a 4.0×2.5in SVG (with bleed) and exports it to
-// a PDF with a spot color channel via Scribus or Inkscape.
+// a PDF with a spot color channel via Scribus.
 // spotColorName selects the channel name (e.g. "Gold", "RDG_Gold", "PANTONE 871 C").
+// debugCard adds a visible safe-area guide rect to the SVG for layout verification.
 // The SVG is kept alongside the PDF (same path, .svg extension).
-func generateBusinessCard(basics Basics, pdfPath string, nameFontCSS htmltmpl.CSS, _ htmltmpl.HTML, spotColorName string) error {
+func generateBusinessCard(basics Basics, pdfPath string, nameFontCSS htmltmpl.CSS, _ htmltmpl.HTML, spotColorName string, debugCard bool) error {
 	nameFont := extractFontName(string(nameFontCSS))
-
-	// QR geometry still needed for buildSVGCardData; text targets full safe area.
-	nLines := countContactLines(basics)
-	_ = nLines // qrSize/qrX are computed inside buildSVGCardData
 	targetWidth := svgContentRight - svgContentX // full safe-area width = 224pt
 
-	inkscape, _ := exec.LookPath("inkscape")
 	nameFontSize, labelFontSize, nameY, labelY := computeCardLayout(
-		inkscape, basics.Name, strings.ToUpper(basics.Label), nameFont, targetWidth)
+		basics.Name, strings.ToUpper(basics.Label), nameFont, targetWidth)
 	fmt.Fprintf(os.Stderr, "font sizes: name=%.2fpt label=%.2fpt  y: name=%.2f label=%.2f\n",
 		nameFontSize, labelFontSize, nameY, labelY)
 
-	data, err := buildSVGCardData(basics, nameFont, nameFontSize, labelFontSize, nameY, labelY, targetWidth)
+	data, err := buildSVGCardData(basics, nameFont, nameFontSize, labelFontSize, nameY, labelY, targetWidth, debugCard)
 	if err != nil {
 		return err
 	}
@@ -299,8 +337,7 @@ func generateBusinessCard(basics Basics, pdfPath string, nameFontCSS htmltmpl.CS
 	return exportSVGtoPDF(svgPath, pdfPath, spotColorName)
 }
 
-// exportSVGtoPDF detects Scribus (preferred) or Inkscape and exports the SVG
-// to a PDF with a proper spot color separation using spotColorName.
+// exportSVGtoPDF exports the SVG to a PDF with a spot color channel via Scribus.
 func exportSVGtoPDF(svgPath, pdfPath, spotColorName string) error {
 	absSVG, err := filepath.Abs(svgPath)
 	if err != nil {
@@ -310,13 +347,11 @@ func exportSVGtoPDF(svgPath, pdfPath, spotColorName string) error {
 	if err != nil {
 		return fmt.Errorf("resolve pdf path: %w", err)
 	}
-	if scribus, err := exec.LookPath("scribus"); err == nil {
-		return exportViaScribus(scribus, absSVG, absPDF, spotColorName)
+	scribus, err := exec.LookPath("scribus")
+	if err != nil {
+		return fmt.Errorf("scribus not found in PATH; install scribus to use --business-card")
 	}
-	if inkscape, err := exec.LookPath("inkscape"); err == nil {
-		return exportViaInkscape(inkscape, absSVG, absPDF, spotColorName)
-	}
-	return fmt.Errorf("neither scribus nor inkscape found in PATH")
+	return exportViaScribus(scribus, absSVG, absPDF, spotColorName)
 }
 
 // scribyPyFmt is a format string for the Scribus Python script. SVG path,
@@ -357,48 +392,3 @@ func exportViaScribus(scribus, svgPath, pdfPath, spotColorName string) error {
 	return nil
 }
 
-func exportViaInkscape(inkscape, svgPath, pdfPath, spotColorName string) error {
-	svgBytes, err := os.ReadFile(svgPath)
-	if err != nil {
-		return fmt.Errorf("read svg: %w", err)
-	}
-	processed := preprocessForInkscape(string(svgBytes), spotColorName)
-
-	tmp, err := os.CreateTemp(filepath.Dir(pdfPath), "resume-inkscape-*.svg")
-	if err != nil {
-		return fmt.Errorf("create temp svg: %w", err)
-	}
-	defer os.Remove(tmp.Name())
-	if _, err := tmp.WriteString(processed); err != nil {
-		tmp.Close()
-		return err
-	}
-	if err := tmp.Close(); err != nil {
-		return err
-	}
-
-	actions := "select-all;object-to-path;export-filename:" + pdfPath + ";export-pdf-version:1.5;export-do"
-	cmd := exec.Command(inkscape, "--actions", actions, tmp.Name())
-	if out, err := cmd.CombinedOutput(); err != nil {
-		return fmt.Errorf("inkscape export: %w\n%s", err, out)
-	}
-	return nil
-}
-
-// preprocessForInkscape adds the Inkscape-specific solidColor spot color
-// definition and rewrites sentinel fills to reference it.
-func preprocessForInkscape(svg, spotColorName string) string {
-	svg = strings.Replace(svg,
-		`<svg xmlns="http://www.w3.org/2000/svg"`,
-		`<svg xmlns="http://www.w3.org/2000/svg"`+
-			` xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"`+
-			` xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.0.dtd"`,
-		1)
-	solidColor := `<solidColor id="gold-solid" style="solid-color:` + goldSentinel + `;solid-opacity:1" inkscape:label="` + spotColorName + `"/>`
-	svg = strings.Replace(svg,
-		`<defs><!-- spot colors injected by export pipeline --></defs>`,
-		`<defs>`+solidColor+`</defs>`,
-		1)
-	svg = strings.ReplaceAll(svg, `fill="`+goldSentinel+`"`, `fill="url(#gold-solid)"`)
-	return svg
-}
