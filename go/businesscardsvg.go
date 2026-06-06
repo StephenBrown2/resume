@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"strings"
 	txttmpl "text/template"
 
@@ -44,10 +45,14 @@ type svgContactLine struct {
 
 type svgCardData struct {
 	NameFont     string
+	NameFontSize float64
+	NameY        float64
 	Name         string
 	Label        string // uppercased
 	LabelFill    string
 	LabelSize    float64
+	LabelY       float64
+	TextWidth    float64 // textLength value for SVG fallback
 	QRBase64     string
 	QRX          float64
 	QRY          float64
@@ -61,9 +66,10 @@ const (
 	svgContentBotY  = 148.0 // 18 bleed + 144 live − 14 padding
 	svgContactFS    = 6.5
 	svgContactLineH = 11.0
+	svgColGap       = 7.0 // gap between left column and QR
 )
 
-func buildSVGCardData(basics Basics, nameFont string) (svgCardData, error) {
+func buildSVGCardData(basics Basics, nameFont string, nameFontSize, labelFontSize, nameY, labelY, textWidth float64) (svgCardData, error) {
 	type rawLine struct{ text, url string }
 	var raw []rawLine
 	raw = append(raw, rawLine{basics.Email, "mailto:" + basics.Email})
@@ -107,16 +113,77 @@ func buildSVGCardData(basics Basics, nameFont string) (svgCardData, error) {
 
 	return svgCardData{
 		NameFont:     nameFont,
+		NameFontSize: nameFontSize,
+		NameY:        nameY,
 		Name:         basics.Name,
 		Label:        strings.ToUpper(basics.Label),
 		LabelFill:    goldSentinel,
-		LabelSize:    9.25,
+		LabelSize:    labelFontSize,
+		LabelY:       labelY,
+		TextWidth:    textWidth,
 		QRBase64:     base64.StdEncoding.EncodeToString(png),
 		QRX:          qrX,
 		QRY:          qrY,
 		QRSize:       qrSize,
 		ContactLines: lines,
 	}, nil
+}
+
+// countContactLines returns how many lines the contact block will have for
+// the given basics, matching the logic in buildSVGCardData.
+func countContactLines(basics Basics) int {
+	n := 1 // email always present
+	if basics.Phone != "" || basics.Location.City != "" {
+		n++
+	}
+	n++ // URL
+	n += len(basics.Profiles)
+	return n
+}
+
+// measureSVGTextWidth asks Inkscape for the rendered advance width (in pt) of
+// text at a given font-family, font-weight, and font-size. The measurement SVG
+// uses the same coordinate system as the card (1 user unit = 1pt).
+func measureSVGTextWidth(inkscape, text, fontFamily string, fontWeight, fontSize float64) (float64, error) {
+	esc := strings.NewReplacer(`&`, `&amp;`, `<`, `&lt;`, `>`, `&gt;`, `"`, `&quot;`).Replace(text)
+	svg := fmt.Sprintf(
+		`<?xml version="1.0" encoding="UTF-8"?>`+
+			`<svg xmlns="http://www.w3.org/2000/svg" width="288pt" height="180pt">`+
+			`<text id="t" x="0" y="50" font-family="%s" font-size="%.2f" font-weight="%.0f">%s</text>`+
+			`</svg>`,
+		fontFamily, fontSize, fontWeight, esc)
+	tmp, err := os.CreateTemp("", "cardmeasure-*.svg")
+	if err != nil {
+		return 0, fmt.Errorf("create measure svg: %w", err)
+	}
+	defer os.Remove(tmp.Name())
+	if _, err := tmp.WriteString(svg); err != nil {
+		tmp.Close()
+		return 0, err
+	}
+	if err := tmp.Close(); err != nil {
+		return 0, err
+	}
+	out, err := exec.Command(inkscape, "--query-id=t", "--query-width", tmp.Name()).Output()
+	if err != nil {
+		return 0, fmt.Errorf("inkscape query: %w", err)
+	}
+	w, err := strconv.ParseFloat(strings.TrimSpace(string(out)), 64)
+	if err != nil || w <= 0 {
+		return 0, fmt.Errorf("parse inkscape width %q: %w", strings.TrimSpace(string(out)), err)
+	}
+	return w, nil
+}
+
+// fontSizeToFill computes the font-size (in pt) that makes text naturally fill
+// targetWidth. Falls back to nominalSize if measurement fails.
+func fontSizeToFill(inkscape, text, fontFamily string, fontWeight, nominalSize, targetWidth float64) float64 {
+	w, err := measureSVGTextWidth(inkscape, text, fontFamily, fontWeight, nominalSize)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "warn: text width measurement failed (%v); using nominal size\n", err)
+		return nominalSize
+	}
+	return nominalSize * targetWidth / w
 }
 
 func xmlesc(s string) string { return htmlpkg.EscapeString(s) }
@@ -132,13 +199,15 @@ const svgCardTemplate = `<?xml version="1.0" encoding="UTF-8"?>
   width="4.0in" height="2.5in" viewBox="0 0 288 180">
   <defs><!-- spot colors injected by export pipeline --></defs>
   <rect width="288" height="180" fill="` + cardBackground + `"/>
-  <text x="32" y="49"
+  <text x="32" y="{{printf "%.2f" .NameY}}"
     font-family="{{xmlesc .NameFont}}, Liberation Serif, Georgia, serif"
-    font-size="20" fill="#0a0a0a">{{xmlesc .Name}}</text>
-  <text x="32" y="63"
+    font-size="{{printf "%.2f" .NameFontSize}}" fill="#0a0a0a"
+    textLength="{{printf "%.2f" .TextWidth}}" lengthAdjust="spacingAndGlyphs">{{xmlesc .Name}}</text>
+  <text x="32" y="{{printf "%.2f" .LabelY}}"
     font-family="Inter, Liberation Sans, Arial, sans-serif"
-    font-size="{{printf "%.1f" .LabelSize}}" font-weight="600"
-    fill="{{.LabelFill}}">{{xmlesc .Label}}</text>
+    font-size="{{printf "%.2f" .LabelSize}}" font-weight="600"
+    fill="{{.LabelFill}}"
+    textLength="{{printf "%.2f" .TextWidth}}" lengthAdjust="spacingAndGlyphs">{{xmlesc .Label}}</text>
 {{- range .ContactLines}}
   {{- if .URL}}<a xlink:href="{{xmlesc .URL}}">{{end}}
   <text x="32" y="{{printf "%.2f" .Y}}"
@@ -168,12 +237,57 @@ func renderSVGCard(data svgCardData, svgPath string) error {
 	return f.Close()
 }
 
+const (
+	defaultNameFontSize  = 20.0
+	defaultLabelFontSize = 9.25
+	// font metric ratios (Instrument Serif name, Inter 600 label)
+	serifCapHeightRatio    = 0.65
+	serifDescenderRatio    = 0.30
+	sansCapHeightRatio     = 0.73
+	textTopPad             = 4.0 // pt above cap-height from content top
+	interTextGap           = 3.0 // pt between name descender bottom and label cap top
+)
+
+// computeCardLayout computes font sizes and y positions for the name and label
+// given the left column width (targetWidth). Returns nominal values if
+// measurement fails.
+func computeCardLayout(inkscape, name, label, nameFont string, targetWidth float64) (namePt, labelPt, nameY, labelY float64) {
+	namePt = defaultNameFontSize
+	labelPt = defaultLabelFontSize
+
+	if inkscape != "" {
+		nameFontFamily := nameFont + ", Liberation Serif, Georgia, serif"
+		labelFontFamily := "Inter, Liberation Sans, Arial, sans-serif"
+		namePt = fontSizeToFill(inkscape, name, nameFontFamily, 400, defaultNameFontSize, targetWidth)
+		labelPt = fontSizeToFill(inkscape, label, labelFontFamily, 600, defaultLabelFontSize, targetWidth)
+	}
+
+	// nameY: baseline so cap-top sits textTopPad below content-top (y=32).
+	nameY = svgContentX + textTopPad + namePt*serifCapHeightRatio
+	// labelY: baseline placed below name descenders with a small gap.
+	labelY = nameY + namePt*serifDescenderRatio + interTextGap + labelPt*sansCapHeightRatio
+	return
+}
+
 // generateBusinessCard renders a 4.0×2.5in SVG (with bleed) and exports it to
 // a PDF with a spot color channel via Scribus or Inkscape.
 // spotColorName selects the channel name (e.g. "Gold", "RDG_Gold", "PANTONE 871 C").
 // The SVG is kept alongside the PDF (same path, .svg extension).
 func generateBusinessCard(basics Basics, pdfPath string, nameFontCSS htmltmpl.CSS, _ htmltmpl.HTML, spotColorName string) error {
-	data, err := buildSVGCardData(basics, extractFontName(string(nameFontCSS)))
+	nameFont := extractFontName(string(nameFontCSS))
+
+	// QR geometry still needed for buildSVGCardData; text targets full safe area.
+	nLines := countContactLines(basics)
+	_ = nLines // qrSize/qrX are computed inside buildSVGCardData
+	targetWidth := svgContentRight - svgContentX // full safe-area width = 224pt
+
+	inkscape, _ := exec.LookPath("inkscape")
+	nameFontSize, labelFontSize, nameY, labelY := computeCardLayout(
+		inkscape, basics.Name, strings.ToUpper(basics.Label), nameFont, targetWidth)
+	fmt.Fprintf(os.Stderr, "font sizes: name=%.2fpt label=%.2fpt  y: name=%.2f label=%.2f\n",
+		nameFontSize, labelFontSize, nameY, labelY)
+
+	data, err := buildSVGCardData(basics, nameFont, nameFontSize, labelFontSize, nameY, labelY, targetWidth)
 	if err != nil {
 		return err
 	}
