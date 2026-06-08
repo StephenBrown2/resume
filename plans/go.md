@@ -315,14 +315,14 @@ func main() {
     }
 
     tmpl := template.Must(template.New("resume").Funcs(funcMap).Parse(resumeTemplate))
-    
+
     out, err := os.Create(*output)
     // handle err
     defer out.Close()
-    
+
     err = tmpl.Execute(out, tmplData)
     // handle err
-    
+
     fmt.Fprintf(os.Stderr, "wrote %s\n", *output)
 }
 ```
