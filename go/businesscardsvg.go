@@ -51,14 +51,14 @@ type svgCardData struct {
 }
 
 const (
-	svgContentX      = 32.0  // 18pt bleed + 14pt padding
-	svgLeftColW      = 149.0 // 224pt usable - 68pt QR - 7pt gap
-	svgQRX           = 188.0 // svgContentX + svgLeftColW + 7
-	svgQRY           = 80.0  // content bottom − QR size
-	svgQRSize        = 68.0
-	svgContentBotY   = 148.0 // 18 bleed + 144 live − 14 padding
-	svgContactFS     = 6.5
-	svgContactLineH  = 11.0
+	svgContentX     = 32.0  // 18pt bleed + 14pt padding
+	svgLeftColW     = 149.0 // 224pt usable - 68pt QR - 7pt gap
+	svgQRX          = 188.0 // svgContentX + svgLeftColW + 7
+	svgQRY          = 80.0  // content bottom − QR size
+	svgQRSize       = 68.0
+	svgContentBotY  = 148.0 // 18 bleed + 144 live − 14 padding
+	svgContactFS    = 6.5
+	svgContactLineH = 11.0
 )
 
 func buildSVGCardData(basics Basics, nameFont string) (svgCardData, error) {
