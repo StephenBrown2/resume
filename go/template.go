@@ -275,6 +275,7 @@ const resumeTemplate = `<!DOCTYPE html>
   .edu-degree { font-size: 0.81rem; font-weight: 600; color: var(--black); }
   .edu-detail { font-size: 0.73rem; color: var(--muted); margin-top: 1px; }
   .cert-list { font-size: 0.76rem; color: var(--muted); line-height: 1.8; }
+  .cert-group { white-space: nowrap; }
 
   .testimonial {
     border-left: 2px solid var(--accent);
@@ -501,8 +502,7 @@ const resumeTemplate = `<!DOCTYPE html>
       </div>
       <div class="cert-list print-only">
         {{- range $i, $g := .CertGroups}}
-        {{- if gt $i 0}} &nbsp;&middot;&nbsp; {{end}}
-        {{- $g.Issuer}}: {{certGroupNames $g}}{{with certGroupID $g}} ({{.}}){{end}}
+        {{- if gt $i 0}} &nbsp;&middot;&nbsp; {{end}}<span class="cert-group">{{$g.Issuer}}: {{certGroupNames $g}}{{with certGroupID $g}} ({{.}}){{end}}</span>
         {{- end}}
       </div>
     </div>
