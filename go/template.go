@@ -145,7 +145,7 @@ const resumeTemplate = `<!DOCTYPE html>
     color: var(--ink);
   }
   .highlights li::before {
-    content: '–';
+    content: '-';
     position: absolute;
     left: 0;
     color: var(--muted);
@@ -301,7 +301,11 @@ const resumeTemplate = `<!DOCTYPE html>
     letter-spacing: 0.02em;
   }
 
+  time { font: inherit; }
+  time[title] { cursor: help; }
   .print-only { display: none; }
+  .print-employer { display: none; }
+  .screen-only { display: revert; }
 
   @page {
     size: letter;
@@ -360,6 +364,15 @@ const resumeTemplate = `<!DOCTYPE html>
     .section-intro  { break-inside: avoid; page-break-inside: avoid; }
     .section-label  { break-after: avoid; page-break-after: avoid; }
     header          { page-break-after: avoid; }
+
+    body { font-feature-settings: normal; }
+    .screen-only { display: none; }
+    .footer-grid { grid-template-columns: 1fr 2fr; gap: 17px; }
+
+    .employer-header { display: none; }
+    .employer-group .job { padding-left: 0; border-left: none; }
+    .position-divider { border-top: 1px solid var(--rule); margin: 10px 0; }
+    .print-employer { display: inline; }
   }
 
   @media (max-width: 600px) {
@@ -475,15 +488,21 @@ const resumeTemplate = `<!DOCTYPE html>
         <div class="edu-degree">{{.StudyType}} {{.Area}}</div>
         <div class="edu-detail">
           {{- if .URL}}<a href="{{.URL}}">{{.Institution}}</a>{{else}}{{.Institution}}{{end}}
-          {{- if .EndDate}} &middot; {{formatDate .EndDate}}{{end}}
+          {{- if .EndDate}} &middot; <time{{if fullDateRange .StartDate .EndDate}} title="{{fullDateRange .StartDate .EndDate}}"{{end}}>{{formatDate .EndDate}}</time>{{end}}
         </div>
         {{- end}}
       </div>
-      <div class="cert-list">
+      <div class="cert-list screen-only">
         {{- range $i, $cert := .Certificates}}
         {{- if gt $i 0}} &nbsp;&middot;&nbsp; {{end}}
         {{- if $cert.URL}}<a href="{{$cert.URL}}"{{with certTitle $cert}} title="{{.}}"{{end}}>{{$cert.Name}}</a>{{else}}<span{{with certTitle $cert}} title="{{.}}"{{end}}>{{$cert.Name}}</span>{{end}}
         {{- with certPrintID $cert}}<span class="print-only"> ({{.}})</span>{{end}}
+        {{- end}}
+      </div>
+      <div class="cert-list print-only">
+        {{- range $i, $g := .CertGroups}}
+        {{- if gt $i 0}} &nbsp;&middot;&nbsp; {{end}}
+        {{- $g.Issuer}}: {{certGroupNames $g}}{{with certGroupID $g}} ({{.}}){{end}}
         {{- end}}
       </div>
     </div>
@@ -564,7 +583,7 @@ const resumeTemplate = `<!DOCTYPE html>
           <span class="employer-former">(formerly {{.}})</span>
           {{- end}}
         </div>
-        <span class="job-dates">{{formatDate .StartDate}} &#8211; {{formatDate .EndDate}}</span>
+        <span class="job-dates"><time{{if fullDate .StartDate}} title="{{fullDate .StartDate}}"{{end}}>{{formatDate .StartDate}}</time> &#8211; <time{{if fullDate .EndDate}} title="{{fullDate .EndDate}}"{{end}}>{{formatDate .EndDate}}</time></span>
       </div>
       {{- range $j, $pos := .Positions}}
       {{- if gt $j 0}}
@@ -573,16 +592,12 @@ const resumeTemplate = `<!DOCTYPE html>
       <div class="job">
         <div class="job-header">
           <span class="job-title">{{$pos.Position}}</span>
-          <span class="job-dates">{{formatDate $pos.StartDate}} &#8211; {{formatDate $pos.EndDate}}</span>
+          <span class="job-dates"><time{{if fullDate $pos.StartDate}} title="{{fullDate $pos.StartDate}}"{{end}}>{{formatDate $pos.StartDate}}</time> &#8211; <time{{if fullDate $pos.EndDate}} title="{{fullDate $pos.EndDate}}"{{end}}>{{formatDate $pos.EndDate}}</time></span>
         </div>
         {{- if $pos.Summary}}
         <div class="job-summary">{{$pos.Summary}}</div>
         {{- end}}
-        {{- if or $pos.Location (ne $pos.Employer $.DisplayName)}}
-        <div class="job-meta">
-          {{- if ne $pos.Employer $.DisplayName}}{{$pos.Employer}}{{if $pos.Location}} &middot; {{end}}{{end}}
-          {{- $pos.Location}}</div>
-        {{- end}}
+        <div class="job-meta"><span class="print-employer">{{$.DisplayName}}{{if or $pos.Location (ne $pos.Employer $.DisplayName)}} &middot; {{end}}</span>{{- if ne $pos.Employer $.DisplayName}}{{$pos.Employer}}{{if $pos.Location}} &middot; {{end}}{{end}}{{- $pos.Location}}</div>
         {{- if $pos.Highlights}}
         <ul class="highlights">
           {{- range $pos.Highlights}}
@@ -603,7 +618,7 @@ const resumeTemplate = `<!DOCTYPE html>
     <div class="job">
       <div class="job-header">
         <span class="job-title">{{.Position}}</span>
-        <span class="job-dates">{{formatDate .StartDate}} &#8211; {{formatDate .EndDate}}</span>
+        <span class="job-dates"><time{{if fullDate .StartDate}} title="{{fullDate .StartDate}}"{{end}}>{{formatDate .StartDate}}</time> &#8211; <time{{if fullDate .EndDate}} title="{{fullDate .EndDate}}"{{end}}>{{formatDate .EndDate}}</time></span>
       </div>
       {{- if .Summary}}
       <div class="job-summary">{{.Summary}}</div>

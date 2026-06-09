@@ -19,9 +19,6 @@ func main() {
 	output := flag.String("output", "../docs/index.html", "path to write HTML")
 	pdfOutput := flag.String("pdf", "", "path to write PDF (requires chromium; uses print-layout CSS)")
 	cardOutput := flag.String("business-card", "", "path to write business card PDF (requires scribus)")
-	sheetOutput := flag.String("sheet", "", "path to write 10-up Letter card sheet PDF for hand-cutting (requires chromium)")
-	noGrid := flag.Bool("no-grid", false, "omit cut guides on --sheet output (use with perforated stock such as Avery 5371)")
-	spotColorName := flag.String("spot-color-name", "Gold", "spot color channel name for Gold in business card PDF output (e.g. Gold, RDG_Gold, PANTONE 871 C)")
 	debugCard := flag.Bool("debug-card", false, "add red safe-area guide rect to business card SVG output")
 	nameFont := flag.String("name-font", "Instrument Serif", "Google Fonts family for name heading")
 	schema := flag.String("schema", "", "path to JSON Schema file (default: schema.json next to --input)")
@@ -83,6 +80,7 @@ func main() {
 		SkillSets:       resume.Skills.Sets,
 		SkillList:       resume.Skills.List,
 		Certificates:    resume.Certificates,
+		CertGroups:      groupCerts(resume.Certificates),
 		Education:       resume.Education,
 		Languages:       resume.Languages,
 		Interests:       resume.Interests,
@@ -93,12 +91,16 @@ func main() {
 
 	funcMap := template.FuncMap{
 		"formatDate":  formatDate,
+		"fullDate":      fullDate,
+		"fullDateRange": fullDateRange,
 		"nbspSummary": nbspShortWords,
 		"levelClass":  levelClass,
 		"skillByName": skillByName,
 		"stripScheme": stripScheme,
-		"certTitle":   certTitle,
-		"certPrintID": certPrintID,
+		"certTitle":      certTitle,
+		"certPrintID":    certPrintID,
+		"certGroupNames": certGroupNames,
+		"certGroupID":    certGroupID,
 	}
 
 	tmpl, err := template.New("resume").Funcs(funcMap).Parse(resumeTemplate)
@@ -139,19 +141,11 @@ func main() {
 	}
 
 	if *cardOutput != "" {
-		if err := generateBusinessCard(resume.Basics, *cardOutput, nameFontCSS, googleFontsLink, *spotColorName, *debugCard); err != nil {
+		if err := generateBusinessCard(resume.Basics, *cardOutput, nameFontCSS, *debugCard); err != nil {
 			fmt.Fprintf(os.Stderr, "export business card: %v\n", err)
 			os.Exit(1)
 		}
 		fmt.Fprintf(os.Stderr, "wrote %s\n", *cardOutput)
-	}
-
-	if *sheetOutput != "" {
-		if err := generateBusinessCardSheet(resume.Basics, *sheetOutput, nameFontCSS, googleFontsLink, *noGrid); err != nil {
-			fmt.Fprintf(os.Stderr, "export card sheet: %v\n", err)
-			os.Exit(1)
-		}
-		fmt.Fprintf(os.Stderr, "wrote %s\n", *sheetOutput)
 	}
 }
 

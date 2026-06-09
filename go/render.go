@@ -187,6 +187,37 @@ func formatDate(iso string) string {
 	return iso
 }
 
+// fullDate returns the long-form date with day for use in title/hover text
+// ("January 2, 2006"). Returns empty string for dates without a day component
+// or for empty (Present) dates.
+func fullDate(iso string) string {
+	if iso == "" {
+		return ""
+	}
+	t, err := time.Parse("2006-01-02", iso)
+	if err != nil {
+		return ""
+	}
+	return t.Format("January 2, 2006")
+}
+
+// fullDateRange returns "Start - End" using fullDate for both ends, for use
+// as a title/hover on a single element showing a date range.
+func fullDateRange(start, end string) string {
+	s := fullDate(start)
+	e := fullDate(end)
+	if s == "" && e == "" {
+		return ""
+	}
+	if s == "" {
+		return e
+	}
+	if e == "" {
+		return s
+	}
+	return s + " - " + e
+}
+
 // nbspShortWords inserts &nbsp; before words of ≤4 chars, binding short
 // connector words to their predecessor so they don't start a line alone.
 func nbspShortWords(s string) template.HTML {
@@ -258,6 +289,75 @@ func certPrintID(c Certificate) string {
 	return c.ID
 }
 
+// CertGroup is a set of certificates from the same issuer.
+type CertGroup struct {
+	Issuer                 string
+	Certs                  []Certificate
+	SharedID               string // non-empty when all certs share the same ID
+	SharedVerificationCode string
+}
+
+// groupCerts groups a sorted certificate slice by issuer, preserving order of
+// first appearance. Sets SharedID when every cert in the group has the same ID.
+func groupCerts(certs []Certificate) []CertGroup {
+	seen := map[string]int{}
+	var groups []CertGroup
+	for _, c := range certs {
+		issuer := c.Issuer
+		if issuer == "" {
+			issuer = "Other"
+		}
+		if i, ok := seen[issuer]; ok {
+			groups[i].Certs = append(groups[i].Certs, c)
+		} else {
+			seen[issuer] = len(groups)
+			groups = append(groups, CertGroup{Issuer: issuer, Certs: []Certificate{c}})
+		}
+	}
+	for i, g := range groups {
+		if len(g.Certs) == 0 {
+			continue
+		}
+		id, vc := g.Certs[0].ID, g.Certs[0].VerificationCode
+		allSame := id != ""
+		for _, c := range g.Certs[1:] {
+			if c.ID != id || c.VerificationCode != vc {
+				allSame = false
+				break
+			}
+		}
+		if allSame {
+			groups[i].SharedID = id
+			groups[i].SharedVerificationCode = vc
+		}
+	}
+	return groups
+}
+
+// certGroupNames formats the cert names within a group:
+// two certs joined with " & ", three or more joined with ", ".
+func certGroupNames(g CertGroup) string {
+	names := make([]string, len(g.Certs))
+	for i, c := range g.Certs {
+		names[i] = c.Name
+	}
+	if len(names) == 2 {
+		return names[0] + " & " + names[1]
+	}
+	return strings.Join(names, ", ")
+}
+
+// certGroupID returns the shared ID parenthetical (e.g. "140-027-434") or "".
+func certGroupID(g CertGroup) string {
+	if g.SharedID == "" {
+		return ""
+	}
+	if g.SharedVerificationCode != "" {
+		return g.SharedID + " / " + g.SharedVerificationCode
+	}
+	return g.SharedID
+}
+
 // TemplateData is the top-level data passed to the HTML template.
 type TemplateData struct {
 	Basics          Basics
@@ -266,6 +366,7 @@ type TemplateData struct {
 	SkillSets       []SkillSet
 	SkillList       []SkillItem
 	Certificates    []Certificate
+	CertGroups      []CertGroup
 	Education       []Education
 	Languages       []Language
 	Interests       []Interest

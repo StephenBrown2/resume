@@ -157,7 +157,7 @@
     color: var(--ink);
   }
   .highlights li::before {
-    content: '–';
+    content: '-';
     position: absolute;
     left: 0;
     color: var(--muted);
@@ -313,7 +313,11 @@
     letter-spacing: 0.02em;
   }
 
+  time { font: inherit; }
+  time[title] { cursor: help; }
   .print-only { display: none; }
+  .print-employer { display: none; }
+  .screen-only { display: revert; }
 
   @page {
     size: letter;
@@ -372,6 +376,15 @@
     .section-intro  { break-inside: avoid; page-break-inside: avoid; }
     .section-label  { break-after: avoid; page-break-after: avoid; }
     header          { page-break-after: avoid; }
+
+    body { font-feature-settings: normal; }
+    .screen-only { display: none; }
+    .footer-grid { grid-template-columns: 1fr 2fr; gap: 17px; }
+
+    .employer-header { display: none; }
+    .employer-group .job { padding-left: 0; border-left: none; }
+    .position-divider { border-top: 1px solid var(--rule); margin: 10px 0; }
+    .print-employer { display: inline; }
   }
 
   @media (max-width: 600px) {
@@ -428,14 +441,14 @@
         <div>
           <span class="employer-name"><a href="https://jumpcloud.com">JumpCloud</a></span>
         </div>
-        <span class="job-dates">May 2021 &#8211; May 2026</span>
+        <span class="job-dates"><time title="May 16, 2021">May 2021</time> &#8211; <time title="May 18, 2026">May 2026</time></span>
       </div>
       <div class="job">
         <div class="job-header">
           <span class="job-title">Senior Software Engineer</span>
-          <span class="job-dates">Oct 2022 &#8211; May 2026</span>
+          <span class="job-dates"><time title="October 3, 2022">Oct 2022</time> &#8211; <time title="May 18, 2026">May 2026</time></span>
         </div>
-        <div class="job-meta">Remote</div>
+        <div class="job-meta"><span class="print-employer">JumpCloud &middot; </span>Remote</div>
         <ul class="highlights">
           <li>Moved to an internal developer acceleration team focused on reliability and security.</li>
           <li>Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%.</li>
@@ -445,24 +458,24 @@
           <li>Designed and prototyped a Linux PAM module for direct JumpCloud user and password management on device.</li>
           <li>Built a Linux tray app bringing UX parity across 30&#43; supported OS versions spanning Windows, macOS, and Linux.</li>
           <li>Led a tamper-resistance and uninstall-protection initiative spanning 3 OS families; scoped and simplified research into a manageable deliverable.</li>
-          <li>Began incorporating AI assistance in 2026, cutting research and PoC development time by an estimated 25–50%.</li>
+          <li>Began incorporating AI assistance in 2026, cutting research and PoC development time by an estimated 25-50%.</li>
         </ul>
-        <div class="tags"><span class="tag">Golang</span><span class="tag">PostgreSQL</span><span class="tag">AWS</span><span class="tag">GitHub</span><span class="tag">MongoDB</span><span class="tag">Docker</span><span class="tag">LLMs</span><span class="tag">Kubernetes</span><span class="tag">AI</span>
+        <div class="tags"><span class="tag">Golang</span><span class="tag">Docker</span><span class="tag">GitHub</span><span class="tag">AI</span><span class="tag">MongoDB</span><span class="tag">Kubernetes</span><span class="tag">LLMs</span><span class="tag">AWS</span><span class="tag">PostgreSQL</span>
         </div>
       </div>
       <div class="position-divider"></div>
       <div class="job">
         <div class="job-header">
           <span class="job-title">Software Engineer 3</span>
-          <span class="job-dates">May 2021 &#8211; Oct 2022</span>
+          <span class="job-dates"><time title="May 16, 2021">May 2021</time> &#8211; <time title="October 3, 2022">Oct 2022</time></span>
         </div>
-        <div class="job-meta">Longmont, CO</div>
+        <div class="job-meta"><span class="print-employer">JumpCloud &middot; </span>Longmont, CO</div>
         <ul class="highlights">
           <li>Founded a Linux-focused team (grew from 3 to 6 engineers) supporting client devices across multiple distros.</li>
           <li>Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed.</li>
           <li>Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10&#43; Linux distributions spanning RHEL 7 to Ubuntu 22.04.</li>
         </ul>
-        <div class="tags"><span class="tag">AWS</span><span class="tag">Golang</span><span class="tag">Linux</span><span class="tag">Python</span><span class="tag">gRPC</span><span class="tag">GitHub</span><span class="tag">Docker</span>
+        <div class="tags"><span class="tag">Golang</span><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">gRPC</span><span class="tag">GitHub</span><span class="tag">Python</span><span class="tag">Linux</span>
         </div>
       </div>
     </div>
@@ -475,85 +488,85 @@
         <div>
           <span class="employer-name"><a href="https://rackspace.com">Rackspace</a></span>
         </div>
-        <span class="job-dates">Jan 2014 &#8211; May 2021</span>
+        <span class="job-dates"><time title="January 6, 2014">Jan 2014</time> &#8211; <time title="May 1, 2021">May 2021</time></span>
       </div>
       <div class="job">
         <div class="job-header">
           <span class="job-title">Software Developer</span>
-          <span class="job-dates">Oct 2019 &#8211; May 2021</span>
+          <span class="job-dates"><time title="October 1, 2019">Oct 2019</time> &#8211; <time title="May 1, 2021">May 2021</time></span>
         </div>
-        <div class="job-meta">ObjectRocket &middot; Remote</div>
+        <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>ObjectRocket &middot; Remote</div>
         <ul class="highlights">
           <li>Maintained Python applications and libraries; contributed to 12&#43; microservices in Go (GoBuffalo).</li>
           <li>Deployed across Docker, OpenShift, and Kubernetes environments.</li>
         </ul>
-        <div class="tags"><span class="tag">Golang</span><span class="tag">AWS</span><span class="tag">Python</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
+        <div class="tags"><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Golang</span><span class="tag">AWS</span><span class="tag">Python</span>
         </div>
       </div>
       <div class="position-divider"></div>
       <div class="job">
         <div class="job-header">
           <span class="job-title">Automation Engineer I</span>
-          <span class="job-dates">Sep 2018 &#8211; Oct 2019</span>
+          <span class="job-dates"><time title="September 11, 2018">Sep 2018</time> &#8211; <time title="October 1, 2019">Oct 2019</time></span>
         </div>
         <div class="job-summary">Global Linux Automation Engineers</div>
-        <div class="job-meta">Rackspace Technology &middot; Remote</div>
+        <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace Technology &middot; Remote</div>
         <ul class="highlights">
           <li>Worked with UK-based team as sole US member.</li>
           <li>Maintained and developed Stepladder, a framework for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Librack client library).</li>
           <li>Implemented and configured deployment tools using Docker, Ansible, and Jenkins; designed and built Jenkins 2.x Pipeline for PR testing.</li>
           <li>Led team to implement better checks and consistency to improve and maintain code quality.</li>
         </ul>
-        <div class="tags"><span class="tag">Python</span><span class="tag">GitHub</span><span class="tag">Docker</span><span class="tag">Jenkins</span><span class="tag">Ansible</span>
+        <div class="tags"><span class="tag">Docker</span><span class="tag">GitHub</span><span class="tag">Ansible</span><span class="tag">Python</span><span class="tag">Jenkins</span>
         </div>
       </div>
       <div class="position-divider"></div>
       <div class="job">
         <div class="job-header">
           <span class="job-title">Automation Engineer I</span>
-          <span class="job-dates">Jun 2017 &#8211; Sep 2018</span>
+          <span class="job-dates"><time title="June 3, 2017">Jun 2017</time> &#8211; <time title="September 10, 2018">Sep 2018</time></span>
         </div>
         <div class="job-summary">Global SysAd Maintenance Team</div>
-        <div class="job-meta">Rackspace Hosting &middot; San Antonio, TX</div>
+        <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace Hosting &middot; San Antonio, TX</div>
         <ul class="highlights">
           <li>Automated migration of scheduled maintenances to consolidate calendars, saving weeks of manual work.</li>
           <li>Developed reporting and categorization tools for whole team use.</li>
           <li>Wrote tools which enabled more efficient team workflows not otherwise possible.</li>
           <li>Inverted traditional scheduling process to improve customer experience.</li>
         </ul>
-        <div class="tags"><span class="tag">Linux</span><span class="tag">Python</span>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Linux</span>
         </div>
       </div>
       <div class="position-divider"></div>
       <div class="job">
         <div class="job-header">
           <span class="job-title">Linux System Administrator I</span>
-          <span class="job-dates">May 2015 &#8211; Jun 2017</span>
+          <span class="job-dates"><time title="May 16, 2015">May 2015</time> &#8211; <time title="June 3, 2017">Jun 2017</time></span>
         </div>
         <div class="job-summary">Global SysAd Maintenance Team</div>
-        <div class="job-meta">Rackspace US, Inc. &middot; San Antonio, TX</div>
+        <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace US, Inc. &middot; San Antonio, TX</div>
         <ul class="highlights">
           <li>Quickly identified and proposed tools and training to make team process more efficient.</li>
           <li>Contributed multiple features to team&#39;s jinja2-based templating system (Automaint).</li>
           <li>Developed an auto-numbering tool for maintenance templates using React.</li>
           <li>Developed a custom UI accessing the maintenance calendar backend, presenting upcoming services using the fullcalendar.js library.</li>
         </ul>
-        <div class="tags"><span class="tag">Bash</span><span class="tag">Flask</span><span class="tag">React</span><span class="tag">Python</span><span class="tag">Linux</span>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">React</span><span class="tag">Flask</span>
         </div>
       </div>
       <div class="position-divider"></div>
       <div class="job">
         <div class="job-header">
           <span class="job-title">Linux System Administrator I</span>
-          <span class="job-dates">Jan 2014 &#8211; May 2015</span>
+          <span class="job-dates"><time title="January 6, 2014">Jan 2014</time> &#8211; <time title="May 15, 2015">May 2015</time></span>
         </div>
         <div class="job-summary">Global Technical Support - Enterprise (2nd shift)</div>
-        <div class="job-meta">Rackspace US, Inc. &middot; San Antonio, TX</div>
+        <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace US, Inc. &middot; San Antonio, TX</div>
         <ul class="highlights">
           <li>Installed, configured, updated, and troubleshot services for customers including OS, web server, database, application server, and mail (Apache, MySQL, PHP, FTP, SSH, DNS).</li>
           <li>Contributed features and bug fixes to internal Python projects including a password retrieval CLI (intensify) and login automation tools (overtime/hammertime).</li>
         </ul>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">Bash</span>
+        <div class="tags"><span class="tag">Bash</span><span class="tag">Python</span><span class="tag">Linux</span>
         </div>
       </div>
     </div>
@@ -565,36 +578,36 @@
         <div>
           <span class="employer-name"><a href="https://ccp.jhu.edu">Johns Hopkins Center for Communication Programs</a></span>
         </div>
-        <span class="job-dates">Apr 2011 &#8211; Dec 2013</span>
+        <span class="job-dates"><time title="April 1, 2011">Apr 2011</time> &#8211; <time title="December 30, 2013">Dec 2013</time></span>
       </div>
       <div class="job">
         <div class="job-header">
           <span class="job-title">Linux System Administrator</span>
-          <span class="job-dates">Jul 2013 &#8211; Dec 2013</span>
+          <span class="job-dates"><time title="July 1, 2013">Jul 2013</time> &#8211; <time title="December 30, 2013">Dec 2013</time></span>
         </div>
         <div class="job-summary">Bloomberg School Of Public Health, Knowledge for Health Project</div>
-        <div class="job-meta">Baltimore, MD</div>
+        <div class="job-meta"><span class="print-employer">Johns Hopkins Center for Communication Programs &middot; </span>Baltimore, MD</div>
         <ul class="highlights">
           <li>Maintained and automated servers supporting Drupal multisite deployments with LAMP stack on physical and virtual hosts, and Apache Solr search indexes.</li>
           <li>Successfully led team to adoption of git and a development &gt; staging &gt; production deployment workflow.</li>
           <li>Designed Puppet configuration management to maintain and deploy to development and production servers.</li>
         </ul>
-        <div class="tags"><span class="tag">Vagrant</span><span class="tag">Drupal</span><span class="tag">Git</span><span class="tag">Linux</span><span class="tag">Puppet</span>
+        <div class="tags"><span class="tag">Git</span><span class="tag">Drupal</span><span class="tag">Linux</span><span class="tag">Puppet</span><span class="tag">Vagrant</span>
         </div>
       </div>
       <div class="position-divider"></div>
       <div class="job">
         <div class="job-header">
           <span class="job-title">Junior Linux Systems Administrator</span>
-          <span class="job-dates">Apr 2011 &#8211; Jul 2013</span>
+          <span class="job-dates"><time title="April 1, 2011">Apr 2011</time> &#8211; <time title="July 1, 2013">Jul 2013</time></span>
         </div>
         <div class="job-summary">Bloomberg School Of Public Health, Knowledge for Health Project</div>
-        <div class="job-meta">Washington DC / Baltimore, MD</div>
+        <div class="job-meta"><span class="print-employer">Johns Hopkins Center for Communication Programs &middot; </span>Washington DC / Baltimore, MD</div>
         <ul class="highlights">
           <li>Hired as a contractor; brought on as full-time employee within 6 months.</li>
           <li>Maintained CentOS 5 servers supporting 30&#43; websites for the K4Health project.</li>
         </ul>
-        <div class="tags"><span class="tag">CentOS</span><span class="tag">Linux</span><span class="tag">Drupal</span>
+        <div class="tags"><span class="tag">Linux</span><span class="tag">CentOS</span><span class="tag">Drupal</span>
         </div>
       </div>
     </div>
@@ -604,7 +617,7 @@
     <div class="job">
       <div class="job-header">
         <span class="job-title">Software Test Specialist - Tier 3 Escalations</span>
-        <span class="job-dates">Jan 2011 &#8211; Apr 2011</span>
+        <span class="job-dates"><time title="January 1, 2011">Jan 2011</time> &#8211; <time title="April 1, 2011">Apr 2011</time></span>
       </div>
       <div class="job-meta"><a href="https://micros.com">MICROS Systems</a> &middot; Columbia, MD
       </div>
@@ -612,7 +625,7 @@
         <li>Analyzed and diagnosed the most difficult customer-reported issues.</li>
         <li>Documented issues for developer and QA teams to remedy.</li>
       </ul>
-      <div class="tags"><span class="tag">Debugging</span><span class="tag">Troubleshooting</span><span class="tag">SQL</span><span class="tag">Testing</span>
+      <div class="tags"><span class="tag">Debugging</span><span class="tag">SQL</span><span class="tag">Testing</span><span class="tag">Troubleshooting</span>
       </div>
     </div>
 
@@ -621,14 +634,14 @@
     <div class="job">
       <div class="job-header">
         <span class="job-title">Counter Operations Agent</span>
-        <span class="job-dates">Oct 2010 &#8211; Dec 2010</span>
+        <span class="job-dates"><time title="October 1, 2010">Oct 2010</time> &#8211; <time title="December 1, 2010">Dec 2010</time></span>
       </div>
       <div class="job-meta"><a href="https://geeksquad.com">Geek Squad</a> &middot; Baltimore, MD
       </div>
       <ul class="highlights">
         <li>Diagnosed client issues, checked in computers for service, and maintained customer relationships through the repair process.</li>
       </ul>
-      <div class="tags"><span class="tag">Troubleshooting</span><span class="tag">Customer Service</span>
+      <div class="tags"><span class="tag">Customer Service</span><span class="tag">Troubleshooting</span>
       </div>
     </div>
 
@@ -637,7 +650,7 @@
     <div class="job">
       <div class="job-header">
         <span class="job-title">Tech Support Specialist</span>
-        <span class="job-dates">Mar 2010 &#8211; Oct 2010</span>
+        <span class="job-dates"><time title="March 1, 2010">Mar 2010</time> &#8211; <time title="October 1, 2010">Oct 2010</time></span>
       </div>
       <div class="job-summary">On-site technical support for Windows desktops, servers, and networking infrastructure.</div>
       <div class="job-meta"><a href="https://solnetweb.com">Solnet Network and Web Services, LLC.</a> &middot; Baltimore, MD
@@ -647,7 +660,7 @@
         <li>Resolved virus infections, Outlook issues, PC migrations, and network connectivity issues.</li>
         <li>Wiped and reinstalled Windows XP systems using DBAN, Sysprep, and Clonezilla.</li>
       </ul>
-      <div class="tags"><span class="tag">Windows</span><span class="tag">Networking</span><span class="tag">Customer Service</span>
+      <div class="tags"><span class="tag">Customer Service</span><span class="tag">Windows</span><span class="tag">Networking</span>
       </div>
     </div>
 
@@ -759,7 +772,7 @@
           <div class="project-name"><a href="https://github.com/StephenBrown2/fold-budget">fold-budget</a>
           </div>
           <div class="project-desc">Converts Fold Bitcoin rewards card CSV statements to a standard budget import format, including memos.</div>
-          <div class="project-tags"><span class="tag">Golang</span><span class="tag">Bitcoin</span><span class="tag">Personal Finance</span>
+          <div class="project-tags"><span class="tag">Bitcoin</span><span class="tag">Personal Finance</span><span class="tag">Golang</span>
           </div>
         </div>
         <div class="project">
@@ -779,10 +792,12 @@
       <div class="footer-grid">
       <div>
         <div class="edu-degree">B.S. Computer Information Systems</div>
-        <div class="edu-detail"><a href="https://letu.edu">LeTourneau University</a> &middot; Dec 2009
+        <div class="edu-detail"><a href="https://letu.edu">LeTourneau University</a> &middot; <time title="August 1, 2005 - December 15, 2009">Dec 2009</time>
         </div>
       </div>
-      <div class="cert-list"><a href="https://triplebyte.com/tb/stephen-brown-ii-xjpelfb/certificate/track/generalist">Generalist Software Engineer</a> &nbsp;&middot;&nbsp; <a href="https://rhtapps.redhat.com/verify?certId=140-027-434" title="ID: 140-027-434">RHCE</a><span class="print-only"> (140-027-434)</span> &nbsp;&middot;&nbsp; <a href="https://rhtapps.redhat.com/verify?certId=140-027-434" title="ID: 140-027-434">RHCSA</a><span class="print-only"> (140-027-434)</span> &nbsp;&middot;&nbsp; <a href="https://cs.lpi.org/caf/Xamman/certification" title="ID: LPI000223384 · Verification Code: ltd26ep79p">LPIC-1</a><span class="print-only"> (LPI000223384 / ltd26ep79p)</span> &nbsp;&middot;&nbsp; <a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=B8FPZJHDMH1QCCCL">Linux&#43; (Powered by LPI)</a> &nbsp;&middot;&nbsp; <a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=VXPPY2FJMGB4SWHY">Server&#43;</a> &nbsp;&middot;&nbsp; <a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=Q7D5J84BCL41KZ8G">Security&#43;</a> &nbsp;&middot;&nbsp; <a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=R4LQNYQB2LRQKJV8">Network&#43;</a> &nbsp;&middot;&nbsp; <a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=CM1SNZCB2KEEYD90">A&#43; (IT Technician)</a>
+      <div class="cert-list screen-only"><a href="https://triplebyte.com/tb/stephen-brown-ii-xjpelfb/certificate/track/generalist">Generalist Software Engineer</a> &nbsp;&middot;&nbsp; <a href="https://rhtapps.redhat.com/verify?certId=140-027-434" title="ID: 140-027-434">RHCE</a><span class="print-only"> (140-027-434)</span> &nbsp;&middot;&nbsp; <a href="https://rhtapps.redhat.com/verify?certId=140-027-434" title="ID: 140-027-434">RHCSA</a><span class="print-only"> (140-027-434)</span> &nbsp;&middot;&nbsp; <a href="https://cs.lpi.org/caf/Xamman/certification" title="ID: LPI000223384 · Verification Code: ltd26ep79p">LPIC-1</a><span class="print-only"> (LPI000223384 / ltd26ep79p)</span> &nbsp;&middot;&nbsp; <a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=B8FPZJHDMH1QCCCL">Linux&#43; (Powered by LPI)</a> &nbsp;&middot;&nbsp; <a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=VXPPY2FJMGB4SWHY">Server&#43;</a> &nbsp;&middot;&nbsp; <a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=Q7D5J84BCL41KZ8G">Security&#43;</a> &nbsp;&middot;&nbsp; <a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=R4LQNYQB2LRQKJV8">Network&#43;</a> &nbsp;&middot;&nbsp; <a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=CM1SNZCB2KEEYD90">A&#43; (IT Technician)</a>
+      </div>
+      <div class="cert-list print-only">Triplebyte: Generalist Software Engineer &nbsp;&middot;&nbsp; Red Hat: RHCE &amp; RHCSA (140-027-434) &nbsp;&middot;&nbsp; Linux Professional Institute: LPIC-1 (LPI000223384 / ltd26ep79p) &nbsp;&middot;&nbsp; CompTIA: Linux&#43; (Powered by LPI), Server&#43;, Security&#43;, Network&#43;, A&#43; (IT Technician)
       </div>
     </div>
     </div>

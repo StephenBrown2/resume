@@ -42,7 +42,7 @@ work:
       - Designed and prototyped a Linux PAM module for direct JumpCloud user and password management on device.
       - Built a Linux tray app bringing UX parity across 30+ supported OS versions spanning Windows, macOS, and Linux.
       - Led a tamper-resistance and uninstall-protection initiative spanning 3 OS families; scoped and simplified research into a manageable deliverable.
-      - Began incorporating AI assistance in 2026, cutting research and PoC development time by an estimated 25–50%.
+      - Began incorporating AI assistance in 2026, cutting research and PoC development time by an estimated 25-50%.
     location: Remote
     keywords:
       - Golang
