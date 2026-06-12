@@ -372,11 +372,11 @@
       margin-bottom: 2px;
     }
 
-    .job            { page-break-inside: avoid; }
-    .project        { page-break-inside: avoid; }
-    .section-intro  { break-inside: avoid; page-break-inside: avoid; }
-    .section-label  { break-after: avoid; page-break-after: avoid; }
-    header          { page-break-after: avoid; }
+    .job                  { page-break-inside: avoid; break-inside: avoid; }
+    .project              { page-break-inside: avoid; break-inside: avoid; }
+    .skills-domains > div { page-break-inside: avoid; break-inside: avoid; }
+    .section-label        { break-after: avoid; page-break-after: avoid; }
+    header                { page-break-after: avoid; }
 
     body { font-feature-settings: normal; }
     .screen-only { display: none; }
@@ -430,7 +430,7 @@
   <section class="summary">
     <div class="section-intro">
       <div class="section-label">Profile</div>
-      <p>15 years&nbsp;in technology:&nbsp;6&nbsp;as&nbsp;a Linux systems administrator,&nbsp;9&nbsp;as&nbsp;a software engineer. Focused&nbsp;on reliability, security,&nbsp;and developer productivity.&nbsp;I&nbsp;own problems end-to-end, write testable code,&nbsp;and improve&nbsp;the workflows around&nbsp;me.&nbsp;Most&nbsp;of&nbsp;my recent&nbsp;work&nbsp;is&nbsp;in&nbsp;Go&nbsp;and TypeScript;&nbsp;my&nbsp;open source&nbsp;time&nbsp;goes&nbsp;into personal finance tooling.&nbsp;I&nbsp;pick&nbsp;up&nbsp;new languages quickly&nbsp;and&nbsp;have&nbsp;a track record&nbsp;of doing&nbsp;so&nbsp;on&nbsp;the&nbsp;job.</p>
+      <p>15 years&nbsp;in technology:&nbsp;6&nbsp;as&nbsp;a Linux systems administrator,&nbsp;9&nbsp;as&nbsp;a software engineer. Focused&nbsp;on reliability, security,&nbsp;and developer productivity.&nbsp;I&nbsp;own problems end-to-end, write testable code,&nbsp;and improve&nbsp;the workflows around&nbsp;me.&nbsp;Deep experience&nbsp;with Python, recent&nbsp;work&nbsp;is&nbsp;in&nbsp;Go&nbsp;and TypeScript;&nbsp;my&nbsp;open source&nbsp;time&nbsp;goes&nbsp;into personal finance tooling.&nbsp;I&nbsp;pick&nbsp;up&nbsp;new languages quickly&nbsp;and&nbsp;have&nbsp;a track record&nbsp;of doing&nbsp;so&nbsp;on&nbsp;the&nbsp;job.</p>
     </div>
   </section>
 
@@ -461,7 +461,7 @@
           <li>Led a tamper-resistance and uninstall-protection initiative spanning 3 OS families; scoped and simplified research into a manageable deliverable.</li>
           <li>Began incorporating AI assistance in 2026, cutting research and PoC development time by an estimated 25-50%.</li>
         </ul>
-        <div class="tags"><span class="tag">Golang</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">Kubernetes</span><span class="tag">LLMs</span><span class="tag">GitHub</span><span class="tag">AI</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span>
+        <div class="tags"><span class="tag">Golang</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">AI</span><span class="tag">PostgreSQL</span><span class="tag">AWS</span><span class="tag">LLMs</span><span class="tag">MongoDB</span><span class="tag">GitHub</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -476,7 +476,7 @@
           <li>Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed.</li>
           <li>Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10&#43; Linux distributions spanning RHEL 7 to Ubuntu 22.04.</li>
         </ul>
-        <div class="tags"><span class="tag">GitHub</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">Golang</span><span class="tag">gRPC</span><span class="tag">Python</span><span class="tag">Linux</span>
+        <div class="tags"><span class="tag">Python</span><span class="tag">gRPC</span><span class="tag">AWS</span><span class="tag">GitHub</span><span class="tag">Golang</span><span class="tag">Docker</span><span class="tag">Linux</span>
         </div>
       </div>
     </div>
@@ -498,10 +498,10 @@
         </div>
         <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>ObjectRocket &middot; Remote</div>
         <ul class="highlights">
-          <li>Maintained Python applications and libraries; contributed to 12&#43; microservices in Go (GoBuffalo).</li>
+          <li>Maintained Python applications and libraries; contributed to 12&#43; microservices in Go.</li>
           <li>Deployed across Docker, OpenShift, and Kubernetes environments.</li>
         </ul>
-        <div class="tags"><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">Golang</span><span class="tag">Python</span><span class="tag">Kubernetes</span>
+        <div class="tags"><span class="tag">Kubernetes</span><span class="tag">Golang</span><span class="tag">AWS</span><span class="tag">Python</span><span class="tag">Docker</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -514,11 +514,11 @@
         <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace Technology &middot; Remote</div>
         <ul class="highlights">
           <li>Worked with UK-based team as sole US member.</li>
-          <li>Maintained and developed Stepladder, a framework for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Librack client library).</li>
+          <li>Maintained framework application for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Python client library).</li>
           <li>Implemented and configured deployment tools using Docker, Ansible, and Jenkins; designed and built Jenkins 2.x Pipeline for PR testing.</li>
           <li>Led team to implement better checks and consistency to improve and maintain code quality.</li>
         </ul>
-        <div class="tags"><span class="tag">Docker</span><span class="tag">Ansible</span><span class="tag">GitHub</span><span class="tag">Jenkins</span><span class="tag">Python</span>
+        <div class="tags"><span class="tag">Ansible</span><span class="tag">Python</span><span class="tag">GitHub</span><span class="tag">Docker</span><span class="tag">Jenkins</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -548,11 +548,11 @@
         <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace US, Inc. &middot; San Antonio, TX</div>
         <ul class="highlights">
           <li>Quickly identified and proposed tools and training to make team process more efficient.</li>
-          <li>Contributed multiple features to team&#39;s jinja2-based templating system (Automaint).</li>
+          <li>Contributed multiple features to team&#39;s jinja2-based templating system.</li>
           <li>Developed an auto-numbering tool for maintenance templates using React.</li>
-          <li>Developed a custom UI accessing the maintenance calendar backend, presenting upcoming services using the fullcalendar.js library.</li>
+          <li>Developed a custom UI accessing the maintenance calendar backend to present upcoming services in an easily accessible manner.</li>
         </ul>
-        <div class="tags"><span class="tag">React</span><span class="tag">Bash</span><span class="tag">Linux</span><span class="tag">Flask</span><span class="tag">Python</span>
+        <div class="tags"><span class="tag">Bash</span><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">React</span><span class="tag">Linux</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -565,9 +565,9 @@
         <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace US, Inc. &middot; San Antonio, TX</div>
         <ul class="highlights">
           <li>Installed, configured, updated, and troubleshot services for customers including OS, web server, database, application server, and mail (Apache, MySQL, PHP, FTP, SSH, DNS).</li>
-          <li>Contributed features and bug fixes to internal Python projects including a password retrieval CLI (intensify) and login automation tools (overtime/hammertime).</li>
+          <li>Contributed features and bug fixes to internal Python projects including a password retrieval CLI and login automation tools.</li>
         </ul>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Bash</span><span class="tag">Linux</span>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">Bash</span>
         </div>
       </div>
     </div>
@@ -593,7 +593,7 @@
           <li>Successfully led team to adoption of git and a development &gt; staging &gt; production deployment workflow.</li>
           <li>Designed Puppet configuration management to maintain and deploy to development and production servers.</li>
         </ul>
-        <div class="tags"><span class="tag">Puppet</span><span class="tag">Git</span><span class="tag">Vagrant</span><span class="tag">Linux</span><span class="tag">Drupal</span>
+        <div class="tags"><span class="tag">Git</span><span class="tag">Vagrant</span><span class="tag">Drupal</span><span class="tag">Puppet</span><span class="tag">Linux</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -606,9 +606,9 @@
         <div class="job-meta"><span class="print-employer">Johns Hopkins Center for Communication Programs &middot; </span>Washington DC / Baltimore, MD</div>
         <ul class="highlights">
           <li>Hired as a contractor; brought on as full-time employee within 6 months.</li>
-          <li>Maintained CentOS 5 servers supporting 30&#43; websites for the K4Health project.</li>
+          <li>Maintained CentOS servers supporting 30&#43; websites for the K4Health project.</li>
         </ul>
-        <div class="tags"><span class="tag">CentOS</span><span class="tag">Linux</span><span class="tag">Drupal</span>
+        <div class="tags"><span class="tag">Linux</span><span class="tag">CentOS</span><span class="tag">Drupal</span>
         </div>
       </div>
     </div>
@@ -626,42 +626,7 @@
         <li>Analyzed and diagnosed the most difficult customer-reported issues.</li>
         <li>Documented issues for developer and QA teams to remedy.</li>
       </ul>
-      <div class="tags"><span class="tag">SQL</span><span class="tag">Troubleshooting</span><span class="tag">Testing</span><span class="tag">Debugging</span>
-      </div>
-    </div>
-
-    <hr class="job-divider">
-    
-    <div class="job">
-      <div class="job-header">
-        <span class="job-title">Counter Operations Agent</span>
-        <span class="job-dates"><time title="October 1, 2010">Oct 2010</time> &#8211; <time title="December 1, 2010">Dec 2010</time></span>
-      </div>
-      <div class="job-meta"><a href="https://geeksquad.com">Geek Squad</a> &middot; Baltimore, MD
-      </div>
-      <ul class="highlights">
-        <li>Diagnosed client issues, checked in computers for service, and maintained customer relationships through the repair process.</li>
-      </ul>
-      <div class="tags"><span class="tag">Customer Service</span><span class="tag">Troubleshooting</span>
-      </div>
-    </div>
-
-    <hr class="job-divider">
-    
-    <div class="job">
-      <div class="job-header">
-        <span class="job-title">Tech Support Specialist</span>
-        <span class="job-dates"><time title="March 1, 2010">Mar 2010</time> &#8211; <time title="October 1, 2010">Oct 2010</time></span>
-      </div>
-      <div class="job-summary">On-site technical support for Windows desktops, servers, and networking infrastructure.</div>
-      <div class="job-meta"><a href="https://solnetweb.com">Solnet Network and Web Services, LLC.</a> &middot; Baltimore, MD
-      </div>
-      <ul class="highlights">
-        <li>Supported desktops and end-node business networking; ran and terminated CAT5 cabling for 12&#43; client accounts.</li>
-        <li>Resolved virus infections, Outlook issues, PC migrations, and network connectivity issues.</li>
-        <li>Wiped and reinstalled Windows XP systems using DBAN, Sysprep, and Clonezilla.</li>
-      </ul>
-      <div class="tags"><span class="tag">Customer Service</span><span class="tag">Windows</span><span class="tag">Networking</span>
+      <div class="tags"><span class="tag">Troubleshooting</span><span class="tag">Debugging</span><span class="tag">SQL</span><span class="tag">Testing</span>
       </div>
     </div>
 
@@ -670,8 +635,37 @@
   <section>
     <div class="section-intro">
       <div class="section-label">Skills</div>
-    </div>
-    <div class="skills-domains">
+      <div class="skills-domains">
+      <div>
+        <div class="skill-group-label">Databases</div>
+        <div class="skill-item">
+          <span class="skill-name">MongoDB</span>
+          <span class="skill-level adv">Advanced</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">PostgreSQL</span>
+          <span class="skill-level adv">Advanced</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">SQLite</span>
+          <span class="skill-level adv">Advanced</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Systems</div>
+        <div class="skill-item">
+          <span class="skill-name">Bash / Shell</span>
+          <span class="skill-level adv">Advanced</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Git / Jujutsu</span>
+          <span class="skill-level adv">Advanced</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Linux</span>
+          <span class="skill-level adv">Advanced</span>
+        </div>
+      </div>
       <div>
         <div class="skill-group-label">Languages</div>
         <div class="skill-item">
@@ -718,35 +712,6 @@
           <span class="skill-level">Beginner</span>
         </div>
       </div>
-      <div>
-        <div class="skill-group-label">Systems</div>
-        <div class="skill-item">
-          <span class="skill-name">Bash / Shell</span>
-          <span class="skill-level adv">Advanced</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-name">Git / Jujutsu</span>
-          <span class="skill-level adv">Advanced</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-name">Linux</span>
-          <span class="skill-level adv">Advanced</span>
-        </div>
-      </div>
-      <div>
-        <div class="skill-group-label">Databases</div>
-        <div class="skill-item">
-          <span class="skill-name">MongoDB</span>
-          <span class="skill-level adv">Advanced</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-name">PostgreSQL</span>
-          <span class="skill-level adv">Advanced</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-name">SQLite</span>
-          <span class="skill-level adv">Advanced</span>
-        </div>
       </div>
     </div>
   </section>
@@ -756,31 +721,157 @@
       <div class="section-label">Open Source &amp; Projects</div>
       <div class="projects-grid">
         <div class="project">
+          <div class="project-name"><a href="https://github.com/home-assistant/core">Home Assistant</a>
+          </div>
+          <div class="project-desc">Home automation platform (87k&#43; stars). Contributed 3 PRs in February 2024.</div>
+          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">Home Automation</span><span class="tag">Python</span>
+          </div>
+        </div>
+        <div class="project">
           <div class="project-name"><a href="https://github.com/actualbudget/actual">Actual Budget</a>
           </div>
-          <div class="project-desc">Contributor to a local-first personal finance app (26k&#43; GitHub stars, TypeScript/React). Features and fixes across the codebase; built multi-account import plugin and custom themes.</div>
-          <div class="project-tags"><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">React</span><span class="tag">Open Source</span>
+          <div class="project-desc">Local-first personal finance app (TypeScript/React, 26k&#43; stars). Active contributor since 2025 with 35&#43; merged PRs.</div>
+          <div class="project-tags"><span class="tag">Node.js</span><span class="tag">Open Source</span><span class="tag">TypeScript</span><span class="tag">React</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/pydantic/pydantic">Pydantic</a>
+          </div>
+          <div class="project-desc">Python data validation library (28k&#43; stars). Contributed 8 PRs from 2019 to 2020.</div>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">Performance</span><span class="tag">Open Source</span>
           </div>
         </div>
         <div class="project">
           <div class="project-name"><a href="https://alpha.lunchmoney.dev/v2/docs">Lunch Money v2 API</a>
           </div>
-          <div class="project-desc">Contributed to the design of the v2 developer API for Lunch Money, a personal finance app. Currently in open alpha.</div>
-          <div class="project-tags"><span class="tag">API Design</span><span class="tag">Personal Finance</span>
+          <div class="project-desc">v2 developer API for Lunch Money (personal finance app), currently in open alpha.</div>
+          <div class="project-tags"><span class="tag">Personal Finance</span><span class="tag">API Design</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/encode/httpx">HTTPX</a>
+          </div>
+          <div class="project-desc">Python async HTTP client (15k&#43; stars). Contributed 2 PRs from 2019 to 2020.</div>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">HTTP</span><span class="tag">Open Source</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/tycrek/degoogle">degoogle</a>
+          </div>
+          <div class="project-desc">Community resource listing privacy-respecting alternatives to Google products. Contributed 4 PRs from 2020 to 2021.</div>
+          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">Privacy</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/TandoorRecipes/recipes">TandoorRecipes</a>
+          </div>
+          <div class="project-desc">Open-source self-hosted recipe manager. Contributed 2 PRs in 2021-2022.</div>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">Open Source</span><span class="tag">Django</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/PyCQA/isort">isort</a>
+          </div>
+          <div class="project-desc">Python import sorter (6k&#43; stars). Contributed 3 PRs from 2019 to 2020.</div>
+          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">CLI</span><span class="tag">Python</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/emersion/mako">mako</a>
+          </div>
+          <div class="project-desc">Wayland notification daemon. Contributed 2 PRs in 2019.</div>
+          <div class="project-tags"><span class="tag">Wayland</span><span class="tag">Linux</span><span class="tag">Open Source</span><span class="tag">C</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/nightscout/cgm-remote-monitor">Nightscout / CGM Tools</a>
+          </div>
+          <div class="project-desc">Open-source CGM monitoring ecosystem (cgm-remote-monitor, AndroidAPS, dexcom_reader, AndroidAPSdocs). Contributed 4 PRs in 2020-2021.</div>
+          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">Python</span><span class="tag">Medical Devices</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/mkdocstrings/mkdocstrings">mkdocstrings</a>
+          </div>
+          <div class="project-desc">Python auto-documentation generator. Early contributor with 3 PRs in December 2019.</div>
+          <div class="project-tags"><span class="tag">Documentation</span><span class="tag">Open Source</span><span class="tag">Python</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/toolkit-for-ynab/toolkit-for-ynab">Toolkit for YNAB</a>
+          </div>
+          <div class="project-desc">Browser extension for the YNAB personal finance app. Long-term contributor with 10 merged PRs from 2016 to 2021.</div>
+          <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">Open Source</span><span class="tag">Personal Finance</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/rockstor/rockstor-core">Rockstor</a>
+          </div>
+          <div class="project-desc">Linux NAS platform built on BTRFS. Contributor across 4 repos (core, plugin registry, validator, dev env) with 9 merged PRs from 2020 to 2023.</div>
+          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">BTRFS</span><span class="tag">NAS</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/StephenBrown2/actual-multi-account-import">actual-multi-account-import</a>
+          </div>
+          <div class="project-desc">TypeScript plugin for Actual Budget that handles importing transactions from multiple bank accounts in a single operation.</div>
+          <div class="project-tags"><span class="tag">TypeScript</span><span class="tag">Actual Budget</span>
           </div>
         </div>
         <div class="project">
           <div class="project-name"><a href="https://github.com/StephenBrown2/fold-budget">fold-budget</a>
           </div>
-          <div class="project-desc">Converts Fold Bitcoin rewards card CSV statements to a standard budget import format, including memos.</div>
-          <div class="project-tags"><span class="tag">Bitcoin</span><span class="tag">Golang</span><span class="tag">Personal Finance</span>
+          <div class="project-desc">Go CLI tool that converts Fold Bitcoin rewards card CSV exports to Actual Budget import format.</div>
+          <div class="project-tags"><span class="tag">Personal Finance</span><span class="tag">Golang</span><span class="tag">Bitcoin</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/StephenBrown2/hi-fold">hi-fold</a>
+          </div>
+          <div class="project-desc">Go CLI that calculates HIFO (highest-in, first-out) cost basis from Fold Bitcoin rewards card transaction history.</div>
+          <div class="project-tags"><span class="tag">Golang</span><span class="tag">Personal Finance</span><span class="tag">Bitcoin</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/StephenBrown2/ynab-export">ynab-export</a>
+          </div>
+          <div class="project-desc">Go CLI that exports YNAB budget data to JSON for local archival or migration (8 stars).</div>
+          <div class="project-tags"><span class="tag">Golang</span><span class="tag">Personal Finance</span>
           </div>
         </div>
         <div class="project">
           <div class="project-name"><a href="https://github.com/StephenBrown2/actual-wallos-import">actual-wallos-import</a>
           </div>
-          <div class="project-desc">Imports Wallos subscription tracker data into Actual Budget as scheduled transactions, via export file or direct API.</div>
+          <div class="project-desc">TypeScript tool that imports Wallos subscription tracker data into Actual Budget as scheduled transactions (5 stars).</div>
           <div class="project-tags"><span class="tag">Actual Budget</span><span class="tag">TypeScript</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/StephenBrown2/podstats">podstats</a>
+          </div>
+          <div class="project-desc">Go tool that parses podcast OPML subscription files and produces a prioritized episode queue.</div>
+          <div class="project-tags"><span class="tag">Golang</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/StephenBrown2/ynab-to-actual-goals">ynab-to-actual-goals</a>
+          </div>
+          <div class="project-desc">Go CLI that migrates YNAB category goal configurations to Actual Budget goal format.</div>
+          <div class="project-tags"><span class="tag">Golang</span><span class="tag">Personal Finance</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/StephenBrown2/jira-deps">jira-deps</a>
+          </div>
+          <div class="project-desc">Go CLI that fetches Jira ticket dependency data and renders it as a Mermaid diagram.</div>
+          <div class="project-tags"><span class="tag">Jira</span><span class="tag">Golang</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-name"><a href="https://github.com/StephenBrown2/pamparser">pamparser</a>
+          </div>
+          <div class="project-desc">Go library for parsing and manipulating PAM (Pluggable Authentication Modules) configuration files.</div>
+          <div class="project-tags"><span class="tag">Linux</span><span class="tag">Security</span><span class="tag">Golang</span>
           </div>
         </div>
       </div>
