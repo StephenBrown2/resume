@@ -232,25 +232,59 @@ work:
       - Windows
       - Networking
       - Customer Service
-
 projects:
-  - name: Actual Budget
-    description: Contributor to a local-first personal finance app (26k+ GitHub stars, TypeScript/React). Features and fixes across the codebase; built multi-account import plugin and custom themes.
+  - name: Home Assistant
+    description: Home automation platform (87k+ stars). Contributed 3 PRs in February 2024.
     highlights:
-      - Features and fixes across TypeScript/React codebase; built multi-account import plugin and custom themes.
+      - Added icon translations to the Teslemetry integration in the core codebase.
+      - Added health category listing and documentation page for the Airthings integration.
+    keywords:
+      - Python
+      - Home Automation
+      - Open Source
+    startDate: "2024-02-07"
+    endDate: "2024-02-15"
+    url: https://github.com/home-assistant/core
+    roles:
+      - Contributor
+    type: open-source
+  - name: Actual Budget
+    description: Local-first personal finance app (TypeScript/React, 26k+ stars). Active contributor since 2025 with 35+ merged PRs.
+    highlights:
+      - Currency-precision helpers and dynamic currency display options for international users.
+      - Added BALANCE_OF() formula function, drag-and-drop transaction reordering, nYNAB scheduled transaction imports, and CSV line-trim option.
+      - Built multi-account import plugin and custom theming support.
     keywords:
       - TypeScript
       - React
       - Node.js
       - Open Source
-    startDate: "2024-01-01"
+    startDate: "2025-09-19"
+    endDate: "2026-06-10"
     url: https://github.com/actualbudget/actual
     roles:
       - Contributor
     type: open-source
+  - name: Pydantic
+    description: Python data validation library (28k+ stars). Contributed 8 PRs from 2019 to 2020.
+    highlights:
+      - 5% parse speed gain by switching from type() calls to __class__ attribute lookup.
+      - Added subclass encoder support so subclasses of known types serialize with their parent's encoder.
+      - Introduced JSON benchmark suite, voluptuous comparison benchmark, and docs example linting.
+    keywords:
+      - Python
+      - Performance
+      - Open Source
+    startDate: "2019-01-24"
+    endDate: "2020-05-31"
+    url: https://github.com/pydantic/pydantic
+    roles:
+      - Contributor
+    type: open-source
   - name: Lunch Money v2 API
-    description: Contributed to the design of the v2 developer API for Lunch Money, a personal finance app. Currently in open alpha.
-    highlights: []
+    description: v2 developer API for Lunch Money (personal finance app), currently in open alpha.
+    highlights:
+      - Participated in API design discussions and provided feedback during the open alpha phase.
     keywords:
       - API Design
       - Personal Finance
@@ -259,31 +293,276 @@ projects:
     roles:
       - Contributor
     type: open-source
+  - name: HTTPX
+    description: Python async HTTP client (15k+ stars). Contributed 2 PRs from 2019 to 2020.
+    highlights:
+      - Added Early Hints (103) and Too Early (425) HTTP status codes to the status code enum.
+      - Fixed incorrect function name in the event hooks documentation.
+    keywords:
+      - Python
+      - HTTP
+      - Open Source
+    startDate: "2019-07-22"
+    endDate: "2020-09-16"
+    url: https://github.com/encode/httpx
+    roles:
+      - Contributor
+    type: open-source
+  - name: degoogle
+    description: Community resource listing privacy-respecting alternatives to Google products. Contributed 4 PRs from 2020 to 2021.
+    highlights:
+      - Fixed conditional Markdown table header rendering when sections are empty.
+      - Converted issue templates to GitHub Forms; added repo key field for open-source project entries.
+    keywords:
+      - Privacy
+      - Open Source
+    startDate: "2020-09-01"
+    endDate: "2021-11-18"
+    url: https://github.com/tycrek/degoogle
+    roles:
+      - Contributor
+    type: open-source
+  - name: TandoorRecipes
+    description: Open-source self-hosted recipe manager. Contributed 2 PRs in 2021-2022.
+    highlights:
+      - Added time unit hint to the recipe edit view for clearer user input.
+      - Fixed Make_Header and Make_Ingredient text and template reference.
+    keywords:
+      - Python
+      - Django
+      - Open Source
+    startDate: "2021-11-04"
+    endDate: "2022-02-01"
+    url: https://github.com/TandoorRecipes/recipes
+    roles:
+      - Contributor
+    type: open-source
+  - name: isort
+    description: Python import sorter (6k+ stars). Contributed 3 PRs from 2019 to 2020.
+    highlights:
+      - "Implemented --ensure-newline-before-comments end-to-end: argument parsing, sorting logic, and Black profile entry."
+      - Fixed list value handling when reading settings from TOML config files.
+    keywords:
+      - Python
+      - CLI
+      - Open Source
+    startDate: "2019-04-15"
+    endDate: "2020-01-16"
+    url: https://github.com/PyCQA/isort
+    roles:
+      - Contributor
+    type: open-source
+  - name: mako
+    description: Wayland notification daemon. Contributed 2 PRs in 2019.
+    highlights:
+      - Added exact-string matching support for notification summary criteria.
+      - Added true center anchor option and reorganized anchor option ordering.
+    keywords:
+      - C
+      - Wayland
+      - Linux
+      - Open Source
+    startDate: "2019-03-07"
+    endDate: "2019-05-13"
+    url: https://github.com/emersion/mako
+    roles:
+      - Contributor
+    type: open-source
+  - name: Nightscout / CGM Tools
+    description: Open-source CGM monitoring ecosystem (cgm-remote-monitor, AndroidAPS, dexcom_reader, AndroidAPSdocs). Contributed 4 PRs in 2020-2021.
+    highlights:
+      - Fixed sign error in bolus wizard timeshift result in AndroidAPS.
+      - Updated dexcom_reader for Python 3 compatibility; added device pairing instructions to AndroidAPSdocs.
+    keywords:
+      - Python
+      - Medical Devices
+      - Open Source
+    startDate: "2020-02-28"
+    endDate: "2021-04-20"
+    url: https://github.com/nightscout/cgm-remote-monitor
+    roles:
+      - Contributor
+    type: open-source
+  - name: mkdocstrings
+    description: Python auto-documentation generator. Early contributor with 3 PRs in December 2019.
+    highlights:
+      - Fixed IndexError in admonitions loop and crash triggered by bare hr HTML elements in docstrings.
+      - Added rendering support for Optional and Default parameter annotations.
+    keywords:
+      - Python
+      - Documentation
+      - Open Source
+    startDate: "2019-12-23"
+    endDate: "2019-12-23"
+    url: https://github.com/mkdocstrings/mkdocstrings
+    roles:
+      - Contributor
+    type: open-source
+  - name: Toolkit for YNAB
+    description: Browser extension for the YNAB personal finance app. Long-term contributor with 10 merged PRs from 2016 to 2021.
+    highlights:
+      - Added Manage Payees for Selected Transactions to the Edit menu.
+      - Added Auto-fill Payee for Split Transactions feature.
+      - Fixed highlight color in new-default theme and contributed Python 3 build tooling fixes.
+    keywords:
+      - JavaScript
+      - Personal Finance
+      - Open Source
+    startDate: "2016-02-05"
+    endDate: "2021-05-28"
+    url: https://github.com/toolkit-for-ynab/toolkit-for-ynab
+    roles:
+      - Contributor
+    type: open-source
+  - name: Rockstor
+    description: Linux NAS platform built on BTRFS. Contributor across 4 repos (core, plugin registry, validator, dev env) with 9 merged PRs from 2020 to 2023.
+    highlights:
+      - Added ZSTD compression option for BTRFS storage pools.
+      - Added Jellyfin and FileBot Node plugins to the RockOn plugin registry.
+      - Made the rockon-validator model externally importable; fixed port value handling on empty values.
+    keywords:
+      - Python
+      - BTRFS
+      - Linux
+      - NAS
+      - Open Source
+    startDate: "2020-02-24"
+    endDate: "2023-08-27"
+    url: https://github.com/rockstor/rockstor-core
+    roles:
+      - Contributor
+    type: open-source
+  - name: actual-multi-account-import
+    description: TypeScript plugin for Actual Budget that handles importing transactions from multiple bank accounts in a single operation.
+    highlights:
+      - Configurable per-account import settings with a unified run command across all linked accounts.
+    keywords:
+      - TypeScript
+      - Actual Budget
+    startDate: "2026-02-23"
+    endDate: "2026-05-27"
+    url: https://github.com/StephenBrown2/actual-multi-account-import
+    roles:
+      - Creator
+    type: side-project
   - name: fold-budget
-    description: Converts Fold Bitcoin rewards card CSV statements to a standard budget import format, including memos.
-    highlights: []
+    description: Go CLI tool that converts Fold Bitcoin rewards card CSV exports to Actual Budget import format.
+    highlights:
+      - Parses Fold CSV statements and maps transaction memos to the standard budget import format.
     keywords:
       - Golang
       - Bitcoin
       - Personal Finance
-    startDate: "2024-01-01"
+    startDate: "2025-03-26"
+    endDate: "2026-02-26"
     url: https://github.com/StephenBrown2/fold-budget
     roles:
       - Creator
     type: side-project
+  - name: hi-fold
+    description: Go CLI that calculates HIFO (highest-in, first-out) cost basis from Fold Bitcoin rewards card transaction history.
+    highlights:
+      - Parses Fold CSV exports and applies the HIFO accounting method for tax-optimized cost basis calculation.
+    keywords:
+      - Golang
+      - Bitcoin
+      - Personal Finance
+    startDate: "2025-09-23"
+    endDate: "2026-02-22"
+    url: https://github.com/StephenBrown2/hi-fold
+    roles:
+      - Creator
+    type: side-project
+  - name: ynab-export
+    description: Go CLI that exports YNAB budget data to JSON for local archival or migration (8 stars).
+    highlights:
+      - Fetches full budget data via the YNAB API and writes structured JSON suitable for downstream processing or import into other tools.
+    keywords:
+      - Golang
+      - Personal Finance
+    startDate: "2025-10-15"
+    endDate: "2026-01-15"
+    url: https://github.com/StephenBrown2/ynab-export
+    roles:
+      - Creator
+    type: side-project
   - name: actual-wallos-import
-    description: Imports Wallos subscription tracker data into Actual Budget as scheduled transactions, via export file or direct API.
-    highlights: []
+    description: TypeScript tool that imports Wallos subscription tracker data into Actual Budget as scheduled transactions (5 stars).
+    highlights:
+      - Supports both file-based CSV export and direct Wallos API integration.
     keywords:
       - TypeScript
       - Actual Budget
-    startDate: "2024-01-01"
+    startDate: "2026-01-06"
+    endDate: "2026-01-06"
     url: https://github.com/StephenBrown2/actual-wallos-import
+    roles:
+      - Creator
+    type: side-project
+  - name: podstats
+    description: Go tool that parses podcast OPML subscription files and produces a prioritized episode queue.
+    highlights:
+      - Vibe-coded with AI assistance; parses OPML exports from apps like Overcast and outputs a ranked listening queue.
+    keywords:
+      - Golang
+    startDate: "2025-07-26"
+    endDate: "2025-11-27"
+    url: https://github.com/StephenBrown2/podstats
+    roles:
+      - Creator
+    type: side-project
+  - name: ynab-to-actual-goals
+    description: Go CLI that migrates YNAB category goal configurations to Actual Budget goal format.
+    highlights:
+      - Maps YNAB goal types to Actual Budget equivalents and applies them via the Actual API.
+    keywords:
+      - Golang
+      - Personal Finance
+    startDate: "2025-09-16"
+    endDate: "2025-09-25"
+    url: https://github.com/StephenBrown2/ynab-to-actual-goals
+    roles:
+      - Creator
+    type: side-project
+  - name: jira-deps
+    description: Go CLI that fetches Jira ticket dependency data and renders it as a Mermaid diagram.
+    highlights:
+      - Queries Jira's REST API and outputs Mermaid flowchart syntax for visualizing issue dependency graphs.
+    keywords:
+      - Golang
+      - Jira
+    startDate: "2025-07-14"
+    endDate: "2025-09-05"
+    url: https://github.com/StephenBrown2/jira-deps
+    roles:
+      - Creator
+    type: side-project
+  - name: pamparser
+    description: Go library for parsing and manipulating PAM (Pluggable Authentication Modules) configuration files.
+    highlights:
+      - Vibe-coded with AI assistance during PAM module research at JumpCloud; parses and modifies /etc/pam.d/ configs programmatically.
+    keywords:
+      - Golang
+      - Linux
+      - Security
+    startDate: "2025-07-26"
+    endDate: "2025-07-28"
+    url: https://github.com/StephenBrown2/pamparser
     roles:
       - Creator
     type: side-project
 skills:
   sets:
+    - name: Databases
+      skills:
+        - PostgreSQL
+        - MongoDB
+        - SQLite
+    - name: Systems
+      skills:
+        - Linux
+        - Bash / Shell
+        - Git / Jujutsu
     - name: Languages
       skills:
         - Golang
@@ -298,16 +577,6 @@ skills:
         - AWS
         - Ansible
         - Terraform
-    - name: Systems
-      skills:
-        - Linux
-        - Bash / Shell
-        - Git / Jujutsu
-    - name: Databases
-      skills:
-        - PostgreSQL
-        - MongoDB
-        - SQLite
   list:
     - name: Bash / Shell
       level: Advanced
@@ -373,7 +642,6 @@ skills:
       level: Beginner
       summary: Infrastructure as code for managing deployments
       years: 2
-
 certificates:
   - name: RHCE
     date: "2014-03-12"
