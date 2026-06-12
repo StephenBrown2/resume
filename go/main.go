@@ -68,15 +68,17 @@ func main() {
 	sortTestimonials(resume.Testimonials)
 
 	work := resume.Work
+	projects := resume.Projects
 	if *since != "" {
 		work = filterWorkSince(work, *since)
+		projects = filterProjectsSince(projects, *since)
 	}
 	groups := groupWork(work)
 
 	tmplData := TemplateData{
 		Basics:          resume.Basics,
 		EmployerGroups:  groups,
-		Projects:        resume.Projects,
+		Projects:        projects,
 		SkillSets:       resume.Skills.Sets,
 		SkillList:       resume.Skills.List,
 		Certificates:    resume.Certificates,

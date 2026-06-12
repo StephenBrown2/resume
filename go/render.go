@@ -46,6 +46,19 @@ func padDate(s string) string {
 	}
 }
 
+// filterProjectsSince returns only projects whose endDate is absent (current)
+// or falls on or after the cutoff. Uses the same padDate logic as filterWorkSince.
+func filterProjectsSince(projects []Project, since string) []Project {
+	cutoff := padDate(since)
+	var out []Project
+	for _, p := range projects {
+		if p.EndDate == "" || padDate(p.EndDate) >= cutoff {
+			out = append(out, p)
+		}
+	}
+	return out
+}
+
 // shuffleKeywords randomises keyword order for work entries and projects.
 func shuffleKeywords(resume *Resume) {
 	for i := range resume.Work {
