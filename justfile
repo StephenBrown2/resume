@@ -23,18 +23,6 @@ go-card: go-build
     ./resume-renderer --input ../{{filename}} --output /dev/null --business-card ../output/business-card.pdf
 
 [working-directory: 'go']
-go-sheet: go-build
-    ./resume-renderer --input ../{{filename}} --output /dev/null --sheet ../output/card-sheet.pdf
-
-# Render business card with each candidate spot color name for print testing.
-# Compare output/business-card-Gold.pdf, -RDG_Gold.pdf, and -PANTONE-871-C.pdf.
-[working-directory: 'go']
-go-card-test-spots: go-build
-    ./resume-renderer --input ../{{filename}} --output /dev/null --business-card ../output/business-card-Gold.pdf --spot-color-name Gold
-    ./resume-renderer --input ../{{filename}} --output /dev/null --business-card ../output/business-card-RDG_Gold.pdf --spot-color-name RDG_Gold
-    ./resume-renderer --input ../{{filename}} --output /dev/null --business-card ../output/business-card-PANTONE-871-C.pdf --spot-color-name "PANTONE 871 C"
-
-[working-directory: 'go']
 go-setup:
     curl -sSfL https://golangci-lint.run/install.sh | sh -s
 
