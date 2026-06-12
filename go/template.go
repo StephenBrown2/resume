@@ -360,11 +360,11 @@ const resumeTemplate = `<!DOCTYPE html>
       margin-bottom: 2px;
     }
 
-    .job            { page-break-inside: avoid; }
-    .project        { page-break-inside: avoid; }
-    .section-intro  { break-inside: avoid; page-break-inside: avoid; }
-    .section-label  { break-after: avoid; page-break-after: avoid; }
-    header          { page-break-after: avoid; }
+    .job                  { page-break-inside: avoid; break-inside: avoid; }
+    .project              { page-break-inside: avoid; break-inside: avoid; }
+    .skills-domains > div { page-break-inside: avoid; break-inside: avoid; }
+    .section-label        { break-after: avoid; page-break-after: avoid; }
+    header                { page-break-after: avoid; }
 
     body { font-feature-settings: normal; }
     .screen-only { display: none; }
@@ -436,8 +436,7 @@ const resumeTemplate = `<!DOCTYPE html>
   <section>
     <div class="section-intro">
       <div class="section-label">Skills</div>
-    </div>
-    <div class="skills-domains">
+      <div class="skills-domains">
       {{- range .SkillSets}}
       <div>
         <div class="skill-group-label">{{.Name}}</div>
@@ -456,6 +455,7 @@ const resumeTemplate = `<!DOCTYPE html>
         {{- end}}
       </div>
       {{- end}}
+      </div>
     </div>
   </section>
 
