@@ -81,7 +81,7 @@ work:
     endDate: "2021-05-01"
     summary: ""
     highlights:
-      - Maintained Python applications and libraries; contributed to 12+ microservices in Go (GoBuffalo).
+      - Maintained Python applications and libraries; contributed to 12+ microservices in Go.
       - Deployed across Docker, OpenShift, and Kubernetes environments.
     location: Remote
     keywords:
@@ -99,7 +99,7 @@ work:
     summary: "Global Linux Automation Engineers"
     highlights:
       - Worked with UK-based team as sole US member.
-      - Maintained and developed Stepladder, a framework for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Librack client library).
+      - Maintained framework application for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Python client library).
       - Implemented and configured deployment tools using Docker, Ansible, and Jenkins; designed and built Jenkins 2.x Pipeline for PR testing.
       - Led team to implement better checks and consistency to improve and maintain code quality.
     location: Remote
@@ -134,9 +134,9 @@ work:
     summary: "Global SysAd Maintenance Team"
     highlights:
       - Quickly identified and proposed tools and training to make team process more efficient.
-      - Contributed multiple features to team's jinja2-based templating system (Automaint).
+      - Contributed multiple features to team's jinja2-based templating system.
       - Developed an auto-numbering tool for maintenance templates using React.
-      - Developed a custom UI accessing the maintenance calendar backend, presenting upcoming services using the fullcalendar.js library.
+      - Developed a custom UI accessing the maintenance calendar backend to present upcoming services in an easily accessible manner.
     location: San Antonio, TX
     keywords:
       - Linux
@@ -153,7 +153,7 @@ work:
     summary: "Global Technical Support - Enterprise (2nd shift)"
     highlights:
       - Installed, configured, updated, and troubleshot services for customers including OS, web server, database, application server, and mail (Apache, MySQL, PHP, FTP, SSH, DNS).
-      - Contributed features and bug fixes to internal Python projects including a password retrieval CLI (intensify) and login automation tools (overtime/hammertime).
+      - Contributed features and bug fixes to internal Python projects including a password retrieval CLI and login automation tools.
     location: San Antonio, TX
     keywords:
       - Linux
@@ -184,7 +184,7 @@ work:
     summary: Bloomberg School Of Public Health, Knowledge for Health Project
     highlights:
       - Hired as a contractor; brought on as full-time employee within 6 months.
-      - Maintained CentOS 5 servers supporting 30+ websites for the K4Health project.
+      - Maintained CentOS servers supporting 30+ websites for the K4Health project.
     location: Washington DC / Baltimore, MD
     keywords:
       - Linux
