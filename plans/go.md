@@ -25,6 +25,8 @@ Replace the two existing schema-type files (`json-resume.go`, `fresh-resume.go`)
 | `github.com/goccy/go-yaml` | latest | YAML parsing (faster than `gopkg.in/yaml.v3`; better error messages; handles anchors and complex tags correctly) |
 | `github.com/santhosh-tekuri/jsonschema/v6` | v6.0.2 | JSON Schema Draft 2020-12 validation |
 | `html/template` | stdlib | HTML rendering with auto-escaping |
+| `github.com/skip2/go-qrcode` | latest | QR code PNG generation for business card |
+| `golang.org/x/image` | latest | OpenType font parsing and advance-width measurement for business card font sizing |
 
 No other external dependencies. `html/template` handles HTML escaping automatically; use it instead of `text/template`.
 
@@ -276,14 +278,161 @@ nameFontCSS := fmt.Sprintf("'%s', Georgia, serif", *nameFont)
 
 Pass both `googleFontsLink` and `nameFontCSS` into the template data struct so the template can inject them in the right places.
 
+## PDF export (`main.go`)
+
+After writing HTML, if `--pdf` is set, call `exportPDF(htmlPath, pdfPath)`. This uses Chromium headless to print to PDF, which applies the `@media print` CSS automatically.
+
+```go
+func exportPDF(htmlPath, pdfPath string) error {
+    chrome, err := findChrome()
+    if err != nil {
+        return err
+    }
+    absHTML, _ := filepath.Abs(htmlPath)
+    absPDF, _  := filepath.Abs(pdfPath)
+    cmd := exec.Command(chrome,
+        "--headless=new",
+        "--disable-gpu",
+        "--no-sandbox",
+        "--print-to-pdf="+absPDF,
+        "--print-to-pdf-no-header",
+        "file://"+absHTML,
+    )
+    if out, err := cmd.CombinedOutput(); err != nil {
+        return fmt.Errorf("%w\n%s", err, out)
+    }
+    return nil
+}
+
+func findChrome() (string, error) {
+    for _, name := range []string{"chromium", "chromium-browser", "google-chrome", "google-chrome-stable"} {
+        if p, err := exec.LookPath(name); err == nil {
+            return p, nil
+        }
+    }
+    return "", fmt.Errorf("no chromium/chrome binary found in PATH; install chromium to use --pdf")
+}
+```
+
+Error if `--pdf` is set with `--output /dev/null` or `--output -` (Chromium needs a real HTML file on disk).
+
+Add a `go-pdf` justfile recipe:
+```just
+[working-directory: 'go']
+go-pdf: go-render
+    ./resume-renderer --input ../{{filename}} --output ../docs/index.html --pdf ../output/resume.pdf
+```
+
+---
+
+## Business card (`businesscardsvg.go`)
+
+The business card pipeline lives entirely in `businesscardsvg.go`. It has no dependency on Chromium; instead it uses Scribus in `--no-gui` mode. See the "Business card output" section in `shared-context.md` for the full specification; this section covers Go-specific implementation details.
+
+### Font measurement
+
+Use `golang.org/x/image/font/opentype` to parse the font file and measure advance widths. Load the face at 72 DPI so 1 unit = 1pt. Advance widths come back as `fixed.Int26_6`; divide by 64 to get float64 pt.
+
+```go
+import (
+    "golang.org/x/image/font/opentype"
+    "golang.org/x/image/math/fixed"
+)
+
+func textAdvancePt(text, fontPath string, ptSize float64) (float64, error) {
+    raw, _ := os.ReadFile(fontPath)
+    f, _   := opentype.Parse(raw)
+    face, _ := opentype.NewFace(f, &opentype.FaceOptions{Size: ptSize, DPI: 72})
+    defer face.Close()
+    var total fixed.Int26_6
+    for _, r := range text {
+        if adv, ok := face.GlyphAdvance(r); ok {
+            total += adv
+        }
+    }
+    return float64(total) / 64.0, nil
+}
+```
+
+### Font file lookup
+
+Use `fc-match` to locate installed fonts. Verify the returned family matches the requested name (case-insensitive) to detect substitutions:
+
+```go
+func findFontFile(family, style string) (string, error) {
+    out, err := exec.Command("fc-match", family+":style="+style, "--format=%{family}\t%{file}").Output()
+    // parse tab-separated output: family\tpath
+    // return error if returned family != requested family (font not installed)
+}
+```
+
+### Key constants
+
+```go
+const (
+    goldSentinel         = "#ffffff"  // white sentinel → replaced by spot color in export
+    cardBackground       = "#F8F8F8"
+    goMetricsAdjust      = 0.93       // Scribus renders ~5-7% wider than Go advance-width sum
+    defaultNameFontSize  = 20.0       // pt, nominal starting size for binary-scale fit
+    defaultLabelFontSize = 9.25       // pt, nominal starting size for binary-scale fit
+    labelFontSizeFloor   = 14.5       // pt minimum for label regardless of computed value
+    serifCapHeightRatio  = 0.65       // Instrument Serif cap-height / em
+    serifDescenderRatio  = 0.30       // Instrument Serif descender depth / em
+    sansCapHeightRatio   = 0.73       // Fira Code cap-height / em
+    textTopPad           = 4.0        // pt above cap-height from safe-area top
+    interTextGap         = 3.0        // pt between name descender and label cap
+    svgContentX          = 32.0       // left edge of safe area
+    svgContentRight      = 256.0      // right edge of safe area
+    svgContentBotY       = 148.0      // bottom edge of safe area
+    svgContactFS         = 6.5        // contact block font size (pt)
+    svgContactLineH      = 11.0       // contact block line height (pt)
+)
+```
+
+### Label text transformation
+
+Apply both transformations in sequence before storing the label in `svgCardData`:
+
+```go
+Label: strings.ReplaceAll(strings.ToUpper(basics.Label), " ", "␣"),
+```
+
+The U+2423 OPEN BOX character (`␣`) is present in Fira Code and renders as a visible underscored space glyph. This gives the label a distinctive monospace-typeset look without requiring manual YAML edits.
+
+### SVG template
+
+Use `text/template` (not `html/template`) to render the SVG; XML escaping is handled via a custom `xmlesc` function that calls `html.EscapeString`. Both `href` and `xlink:href` are emitted on the `<image>` element for broad SVG renderer compatibility.
+
+The SVG uses `text/template` rather than `html/template` because the template emits XML (not HTML), and `html/template`'s CSS/JS context sanitizer would corrupt SVG attribute values.
+
+### Scribus Python script
+
+The script is written to a temp file, passed to `scribus --no-gui --python-script <path>`, then deleted. Scribus writes PDF/X-4 output (`pdf.version = 15`, `pdf.outdst = 1`). The font embedding mode (`pdf.fontEmbedding = 0`) lets Scribus decide; in practice Fira Code glyphs are subset-embedded.
+
+The format string takes 4 `%q`-encoded arguments (all paths and names are Go-quoted so they land safely inside the Python string literals):
+```
+svgPath, nameFontScribusName, labelFontScribusName, pdfPath
+```
+
+The Gold spot color name and CMYK values are hardcoded in the script template; do not make them configurable. Scribus font names follow the pattern `"Family Style"` (e.g. `"Fira Code Bold"`, `"Instrument Serif Regular"`). Build them as `scribusFontName(families, style)` which tries each family in order and returns the first one fontconfig can resolve.
+
+### QR code
+
+Use `github.com/skip2/go-qrcode`. Set `BackgroundColor = color.Transparent` and `DisableBorder = true`, then call `q.PNG(300)` (300px resolution; rendered at display size in the SVG via width/height attributes).
+
+---
+
 ## `main.go`
 
 ```go
 func main() {
-    input    := flag.String("input",    "../resume.yaml",     "path to resume YAML")
-    output   := flag.String("output",   "../docs/index.html", "path to write HTML")
-    nameFont := flag.String("name-font","Instrument Serif",   "Google Fonts family for name heading")
-    skipVal  := flag.Bool("skip-validation", false,           "skip JSON Schema validation")
+    input      := flag.String("input",         "../resume.yaml",     "path to resume YAML")
+    output     := flag.String("output",        "../docs/index.html", "path to write HTML")
+    pdfOutput  := flag.String("pdf",           "",                   "path to write PDF (requires chromium)")
+    cardOutput := flag.String("business-card", "",                   "path to write business card PDF (requires scribus)")
+    debugCard  := flag.Bool("debug-card",      false,                "add red safe-area guide rect to business card SVG output")
+    nameFont   := flag.String("name-font",     "Instrument Serif",   "Google Fonts family for name heading")
+    skipVal    := flag.Bool("skip-validation", false,                "skip JSON Schema validation")
     flag.Parse()
 
     data, err := os.ReadFile(*input)
@@ -401,6 +550,10 @@ go-fmt:
 [working-directory: 'go']
 go-lint:
     golangci-lint run
+
+[working-directory: 'go']
+go-card: go-build
+    ./resume-renderer --input ../{{filename}} --output /dev/null --business-card ../output/business-card.pdf
 ```
 
 The generic `build`, `validate`, and `setup` recipes call their language-specific counterparts. As other languages are implemented, their render recipes are added to `build`.
@@ -412,7 +565,7 @@ When testing, pass `--output ../docs/go-index.html` to avoid overwriting the can
 ## Notes
 
 - The two existing root-level `.go` files (`json-resume.go`, `fresh-resume.go`) were part of a now-deleted tool and should be removed.
-- Do not use `text/template`; always use `html/template` to ensure proper escaping.
+- For HTML output use `html/template` (auto-escaping). For SVG output (business card) use `text/template` with a custom `xmlesc` helper that calls `html.EscapeString`; `html/template`'s CSS/JS context sanitizer corrupts SVG attribute values.
 - The `template.HTML` type in `html/template` is an escape hatch for trusted pre-escaped content - use it only for `nbspSummary` output and `&middot;` / `&amp;` / `&nbsp;` literals in the template itself.
 - CSS comments are stripped by `html/template` when it processes `<style>` blocks. Do not use `/* */` comments in the template; they will be replaced with whitespace.
 - Multi-line CSS selectors: `html/template`'s CSS sanitizer drops lines that contain only a selector fragment (e.g. `.foo,` with no `{`). Keep comma-separated selectors on a single line: `.foo, .bar { ... }`.

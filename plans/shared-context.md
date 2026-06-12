@@ -544,6 +544,115 @@ This applies only to `basics.summary`. Implement as a template function (`nbspSu
 
 ---
 
+## Business card output
+
+The renderer optionally generates a print-ready business card PDF via `--business-card <path>`. This is a separate pipeline from the HTML resume: an SVG is generated programmatically, then exported to PDF via Scribus with a spot color channel.
+
+### Dimensions and bleed
+
+The card uses a 4.0×2.5 in document with 18pt bleed on all sides:
+- SVG size: 4.0×2.5 in (`viewBox="0 0 288 180"`) — includes bleed
+- Safe/live area: x=32, y=32, width=224, height=116 (within the 288×180 viewBox)
+- Content left edge: x=32 (18pt bleed + 14pt padding)
+- Content right edge: x=256
+- Content bottom: y=148
+
+Background fill: `#F8F8F8`.
+
+### Text elements
+
+**Name** (`id="name-text"`):
+- Text: `basics.name`
+- Font family: set via `--name-font` (default: `Instrument Serif`), fallback stack `Liberation Serif, Georgia, serif`
+- Font size: computed to fill the 224pt safe-area width (see font sizing algorithm below)
+- Fill: `#0a0a0a`
+
+**Label** (`id="label-text"`):
+- Text: `basics.label` uppercased, with every ASCII space replaced by U+2423 OPEN BOX (`␣`). Applied programmatically at render time; the YAML source is unchanged.
+- Font family: `Fira Code, Fira Sans, Liberation Sans, Arial, sans-serif` (Fira Code Bold is the production font; fallbacks activate only if Fira Code is not installed)
+- Font weight: 700 (Bold)
+- Font size: computed to fill the 224pt safe-area width; minimum floor of **14.5pt**
+- Fill: gold sentinel (see below)
+
+**Contact block** (below label):
+- Lines in order: email address (linked), phone+city/region combined on one line (not linked), resume URL (linked), each social profile as `"Network: url"` (linked)
+- Font: `Inter, Liberation Sans, Arial, sans-serif`; 6.5pt; fill `#6a6a6a`
+- Line height: 11pt
+- Anchored to content bottom (y=148), stack grows upward
+
+### QR code
+
+Encodes `basics.url`. Size equals the contact block height (number of contact lines × 11pt). Positioned at the bottom-right corner of the safe area: x=256-qrSize, y=148-qrSize. Transparent background, no border.
+
+### Gold spot color sentinel
+
+Elements printed in gold use `fill="#ffffff"` (white) as a sentinel in the SVG source. The export pipeline replaces this with a proper spot color channel. White is the required sentinel because gold toner is applied over the base layer and is tinted by any non-white base.
+
+The Scribus export script:
+1. Defines a CMYK color `Gold` with values C=0, M=20, Y=80, K=10
+2. Sets it as a spot color channel (`setSpotColor`)
+3. Calls `replaceColor("FromSVG#ffffff", spotColorName)` to substitute all white-sentinel elements
+
+The spot color channel name is always `"Gold"`. Do not make this configurable.
+
+### Font sizing algorithm
+
+Both name and label are sized to fill the 224pt safe-area width. Because Scribus renders the same font/text approximately 5-7% wider than a simple advance-width sum (due to GPOS kerning), the target width is pre-multiplied by a correction factor of **0.93** so the Scribus output lands within the safe area.
+
+```
+effectiveWidth = 224 × 0.93
+targetPt = nominalPt × (effectiveWidth / measuredAdvanceAtNominalPt)
+```
+
+Nominal sizes: name 20pt, label 9.25pt. Fonts are located via `fontconfig` (`fc-match "Family:style=Bold" --format=%{family}\t%{file}`); if the returned family name does not match the requested family (case-insensitive), the font is not installed and the next fallback is tried. The expected production font files are `FiraCode-Bold.ttf` (label) and `InstrumentSerif-Regular.ttf` (name).
+
+### Y-position layout
+
+```
+nameY  = 32 + 4 + (namePt × 0.65)
+labelY = nameY + (namePt × 0.30) + 3 + (labelPt × 0.73)
+```
+
+- `0.65`: cap-height ratio for Instrument Serif
+- `0.30`: descender ratio for Instrument Serif
+- `3`: gap between name descender bottom and label cap top (pt)
+- `0.73`: cap-height ratio for Fira Code / sans-serif
+
+### Scribus export pipeline
+
+The SVG is exported to PDF via Scribus in `--no-gui` mode using a generated Python script. Scribus converts all SVG text elements to polygon outlines at import time, so the font used in output is determined by Scribus resolving the SVG `font-family` attribute at import — not by any subsequent `setFont()` call. The `setFont()` calls in the script are a best-effort override in case Scribus ever supports text frames from SVG:
+
+```python
+import scribus
+scribus.openDoc("/path/to/card.svg")
+for obj_id, font_name in (("name-text", "Instrument Serif Regular"), ("label-text", "Fira Code Bold")):
+    try:
+        scribus.selectText(0, scribus.getTextLength(obj_id), obj_id)
+        scribus.setFont(font_name, obj_id)
+    except Exception:
+        pass
+scribus.defineColorCMYKFloat("Gold", 0.0, 20.0, 80.0, 10.0)
+scribus.setSpotColor("Gold", True)
+scribus.replaceColor("FromSVG#ffffff", "Gold")
+pdf = scribus.PDFfile()
+pdf.file = "/path/to/card.pdf"
+pdf.version = 15   # PDF/X-4
+pdf.outdst = 1     # print destination
+pdf.fontEmbedding = 0
+pdf.save()
+scribus.closeDoc()
+```
+
+**Font artifact warning:** Fonts whose Bold/SemiBold glyphs have overlapping path contours (e.g. Inter SemiBold, Outfit Bold) produce transparent holes in label text when Scribus outlines them with even-odd fill. Use fonts with non-overlapping contours. Fira Code Bold has been verified artifact-free.
+
+The SVG intermediate file is written alongside the PDF (same path, `.svg` extension) and retained for inspection.
+
+### Debug mode
+
+`--debug-card` adds a red `stroke` rectangle at the safe-area bounds (x=32 y=32 width=224 height=116) to the SVG for layout verification. Never enable in production output.
+
+---
+
 ## CLI interface
 
 All implementations must accept:
@@ -553,6 +662,8 @@ All implementations must accept:
 | `--input` / `-i` | `../resume.yaml` | Path to input YAML file |
 | `--output` / `-o` | `../docs/index.html` | Path to write HTML output (use `../docs/{lang}-index.html` when testing) |
 | `--pdf` | _(none)_ | Path to write PDF output. When set, renders HTML first (via `--output`), then prints to PDF using Chromium headless. Requires `chromium`, `chromium-browser`, `google-chrome`, or `google-chrome-stable` in PATH. Incompatible with `--output /dev/null`. |
+| `--business-card` | _(none)_ | Path to write business card PDF. Requires `scribus` in PATH. See Business card output section. |
+| `--debug-card` | false | Add a red safe-area guide rect to business card SVG output. Never use in production. |
 | `--name-font` / `-f` | `Instrument Serif` | Google Fonts family name for the name heading |
 | `--schema` | _(derived)_ | Path to JSON Schema file. Resolution order: (1) this flag if set, (2) `$schema` field in the YAML resolved relative to the input file's directory, (3) `schema.json` in the same directory as the input file |
 | `--since` | _(none)_ | Exclude work entries whose `endDate` falls before this date. Accepts `YYYY`, `YYYY-MM`, or `YYYY-MM-DD`. Entries with no `endDate` (current role) are always included. |
