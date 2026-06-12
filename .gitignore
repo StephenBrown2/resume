@@ -6,3 +6,4 @@ out/
 !.vscode/settings.json
 node_modules/
 resume.pdf
+output/
