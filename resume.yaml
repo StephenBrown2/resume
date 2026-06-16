@@ -34,15 +34,14 @@ work:
     endDate: "2026-05-18"
     summary: ""
     highlights:
-      - Moved to an internal developer acceleration team focused on reliability and security.
       - Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%.
       - Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime.
       - Raised code quality across 20+ repositories; improvements paved the path for adoption across 250+ engineers org-wide.
       - Consulted by dozens of engineers on design and implementation; directly mentored 5+ engineers through onboarding.
       - Designed and prototyped a Linux PAM module for direct JumpCloud user and password management on device.
-      - Built a Linux tray app bringing UX parity across 30+ supported OS versions spanning Windows, macOS, and Linux.
-      - Led a tamper-resistance and uninstall-protection initiative spanning 3 OS families; scoped and simplified research into a manageable deliverable.
-      - Began incorporating AI assistance in 2026, cutting research and PoC development time by an estimated 25-50%.
+      - Built a Linux tray app, bringing UX parity with Windows and macOS.
+      - Led a tamper-resistance and uninstall-protection initiative spanning Windows, macOS, and Linux; scoped and simplified research into a manageable deliverable.
+      - Integrated AI assistance into workflow, cutting research and PoC development time by an estimated 25-50%.
     location: Remote
     keywords:
       - Golang
