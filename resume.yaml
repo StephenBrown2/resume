@@ -34,14 +34,14 @@ work:
     endDate: "2026-05-18"
     summary: ""
     highlights:
-      - Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%.
-      - Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime.
-      - Raised code quality across 20+ repositories; improvements paved the path for adoption across 250+ engineers org-wide.
       - Consulted by dozens of engineers on design and implementation; directly mentored 5+ engineers through onboarding.
-      - Designed and prototyped a Linux PAM module for direct JumpCloud user and password management on device.
-      - Built a Linux tray app, bringing UX parity with Windows and macOS.
+      - Raised code quality across 20+ repositories; improvements paved the path for adoption across 250+ engineers org-wide.
       - Led a tamper-resistance and uninstall-protection initiative spanning Windows, macOS, and Linux; scoped and simplified research into a manageable deliverable.
+      - Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime.
+      - Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%.
       - Integrated AI assistance into workflow, cutting research and PoC development time by an estimated 25-50%.
+      - Designed and prototyped a Linux PAM module for direct JumpCloud user and password management on device.
+      - Built a Linux tray app, bringing local password-change sync and portal access UX parity with Windows and macOS.
     location: Remote
     keywords:
       - Golang
@@ -97,10 +97,10 @@ work:
     endDate: "2019-10-01"
     summary: "Global Linux Automation Engineers"
     highlights:
-      - Worked with UK-based team as sole US member.
       - Maintained framework application for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Python client library).
       - Implemented and configured deployment tools using Docker, Ansible, and Jenkins; designed and built Jenkins 2.x Pipeline for PR testing.
       - Led team to implement better checks and consistency to improve and maintain code quality.
+      - Worked with UK-based team as sole US member.
     location: Remote
     keywords:
       - Python
@@ -117,9 +117,9 @@ work:
     summary: "Global SysAd Maintenance Team"
     highlights:
       - Automated migration of scheduled maintenances to consolidate calendars, saving weeks of manual work.
+      - Inverted traditional scheduling process to improve customer experience.
       - Developed reporting and categorization tools for whole team use.
       - Wrote tools which enabled more efficient team workflows not otherwise possible.
-      - Inverted traditional scheduling process to improve customer experience.
     location: San Antonio, TX
     keywords:
       - Python
@@ -132,10 +132,10 @@ work:
     endDate: "2017-06-03"
     summary: "Global SysAd Maintenance Team"
     highlights:
-      - Quickly identified and proposed tools and training to make team process more efficient.
       - Contributed multiple features to team's jinja2-based templating system.
-      - Developed an auto-numbering tool for maintenance templates using React.
       - Developed a custom UI accessing the maintenance calendar backend to present upcoming services in an easily accessible manner.
+      - Developed an auto-numbering tool for maintenance templates using React.
+      - Quickly identified and proposed tools and training to make team process more efficient.
     location: San Antonio, TX
     keywords:
       - Linux
@@ -165,9 +165,9 @@ work:
     endDate: "2013-12-30"
     summary: Bloomberg School Of Public Health, Knowledge for Health Project
     highlights:
-      - Maintained and automated servers supporting Drupal multisite deployments with LAMP stack on physical and virtual hosts, and Apache Solr search indexes.
       - Successfully led team to adoption of git and a development > staging > production deployment workflow.
       - Designed Puppet configuration management to maintain and deploy to development and production servers.
+      - Maintained and automated servers supporting Drupal multisite deployments with LAMP stack on physical and virtual hosts, and Apache Solr search indexes.
     location: Baltimore, MD
     keywords:
       - Linux
@@ -182,8 +182,8 @@ work:
     endDate: "2013-07-01"
     summary: Bloomberg School Of Public Health, Knowledge for Health Project
     highlights:
-      - Hired as a contractor; brought on as full-time employee within 6 months.
       - Maintained CentOS servers supporting 30+ websites for the K4Health project.
+      - Hired as a contractor; brought on as full-time employee within 6 months.
     location: Washington DC / Baltimore, MD
     keywords:
       - Linux
