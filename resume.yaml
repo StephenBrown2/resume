@@ -307,20 +307,6 @@ projects:
     roles:
       - Contributor
     type: open-source
-  - name: degoogle
-    description: Community resource listing privacy-respecting alternatives to Google products. Contributed 4 PRs from 2020 to 2021.
-    highlights:
-      - Fixed conditional Markdown table header rendering when sections are empty.
-      - Converted issue templates to GitHub Forms; added repo key field for open-source project entries.
-    keywords:
-      - Privacy
-      - Open Source
-    startDate: "2020-09-01"
-    endDate: "2021-11-18"
-    url: https://github.com/tycrek/degoogle
-    roles:
-      - Contributor
-    type: open-source
   - name: TandoorRecipes
     description: Open-source self-hosted recipe manager. Contributed 2 PRs in 2021-2022.
     highlights:
@@ -351,22 +337,6 @@ projects:
     roles:
       - Contributor
     type: open-source
-  - name: mako
-    description: Wayland notification daemon. Contributed 2 PRs in 2019.
-    highlights:
-      - Added exact-string matching support for notification summary criteria.
-      - Added true center anchor option and reorganized anchor option ordering.
-    keywords:
-      - C
-      - Wayland
-      - Linux
-      - Open Source
-    startDate: "2019-03-07"
-    endDate: "2019-05-13"
-    url: https://github.com/emersion/mako
-    roles:
-      - Contributor
-    type: open-source
   - name: Nightscout / CGM Tools
     description: Open-source CGM monitoring ecosystem (cgm-remote-monitor, AndroidAPS, dexcom_reader, AndroidAPSdocs). Contributed 4 PRs in 2020-2021.
     highlights:
@@ -379,21 +349,6 @@ projects:
     startDate: "2020-02-28"
     endDate: "2021-04-20"
     url: https://github.com/nightscout/cgm-remote-monitor
-    roles:
-      - Contributor
-    type: open-source
-  - name: mkdocstrings
-    description: Python auto-documentation generator. Early contributor with 3 PRs in December 2019.
-    highlights:
-      - Fixed IndexError in admonitions loop and crash triggered by bare hr HTML elements in docstrings.
-      - Added rendering support for Optional and Default parameter annotations.
-    keywords:
-      - Python
-      - Documentation
-      - Open Source
-    startDate: "2019-12-23"
-    endDate: "2019-12-23"
-    url: https://github.com/mkdocstrings/mkdocstrings
     roles:
       - Contributor
     type: open-source
@@ -472,19 +427,6 @@ projects:
     roles:
       - Creator
     type: side-project
-  - name: ynab-export
-    description: Go CLI that exports YNAB budget data to JSON for local archival or migration (8 stars).
-    highlights:
-      - Fetches full budget data via the YNAB API and writes structured JSON suitable for downstream processing or import into other tools.
-    keywords:
-      - Golang
-      - Personal Finance
-    startDate: "2025-10-15"
-    endDate: "2026-01-15"
-    url: https://github.com/StephenBrown2/ynab-export
-    roles:
-      - Creator
-    type: side-project
   - name: actual-wallos-import
     description: TypeScript tool that imports Wallos subscription tracker data into Actual Budget as scheduled transactions (5 stars).
     highlights:
@@ -507,32 +449,6 @@ projects:
     startDate: "2025-07-26"
     endDate: "2025-11-27"
     url: https://github.com/StephenBrown2/podstats
-    roles:
-      - Creator
-    type: side-project
-  - name: ynab-to-actual-goals
-    description: Go CLI that migrates YNAB category goal configurations to Actual Budget goal format.
-    highlights:
-      - Maps YNAB goal types to Actual Budget equivalents and applies them via the Actual API.
-    keywords:
-      - Golang
-      - Personal Finance
-    startDate: "2025-09-16"
-    endDate: "2025-09-25"
-    url: https://github.com/StephenBrown2/ynab-to-actual-goals
-    roles:
-      - Creator
-    type: side-project
-  - name: jira-deps
-    description: Go CLI that fetches Jira ticket dependency data and renders it as a Mermaid diagram.
-    highlights:
-      - Queries Jira's REST API and outputs Mermaid flowchart syntax for visualizing issue dependency graphs.
-    keywords:
-      - Golang
-      - Jira
-    startDate: "2025-07-14"
-    endDate: "2025-09-05"
-    url: https://github.com/StephenBrown2/jira-deps
     roles:
       - Creator
     type: side-project
@@ -729,15 +645,16 @@ testimonials:
     url: https://www.linkedin.com/in/benjamin-schneider-5a865723/
     email: benjamin.schneider@jumpcloud.com
     quote: Stephen was a joy to work with at JumpCloud. He takes a very thorough and intelligent approach to engineering and brings with him a wealth of experience and knowledge.
+  - name: David Gaffield
+    role: Director, Engineering at JumpCloud
+    category: Manager
+    email: david.gaffield@jumpcloud.com
+    quote: I had the opportunity to work closely with Stephen both as his direct manager and later as his skip-level leader, which gave me a unique perspective on his impact over time. Knowing what I know today, I would absolutely hire him again and fight to keep him on my team. Stephen combines deep technical expertise with a strong sense of ownership, consistently identifying opportunities to improve security, developer productivity, and the overall health of our engineering systems. He's also a collaborative teammate who generously shares his knowledge, mentors others, and elevates those around him. Any organization looking for an engineer with strong technical judgment, initiative, and a team-first mindset would be fortunate to have him.
 references:
   - name: Daniel Judge
     role: Senior Engineering Manager at JumpCloud
     category: Manager
     email: daniel.judge@jumpcloud.com
-  - name: David Gaffield
-    role: Director, Engineering at JumpCloud
-    category: Manager
-    email: david.gaffield@jumpcloud.com
   - name: David Harris
     role: Senior QA Engineer at JumpCloud
     category: Teammate
