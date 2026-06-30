@@ -34,13 +34,13 @@ work:
     endDate: "2026-05-18"
     summary: ""
     highlights:
-      - Served as primary technical resource for dozens of engineers across design and implementation; directly mentored 5+
-      - Raised code quality across 20+ repositories with review standards and shared tooling adopted by teams across the 250+ engineer org
-      - Led a tamper-resistance and uninstall-protection initiative spanning Windows, macOS, and Linux
+      - Served as primary technical resource for dozens of engineers across design and implementation; directly mentored several with specific guidance on Go, Linux, and security best practices
+      - Raised code quality across 20+ repositories with review standards and shared tooling adopted by teams across 250+ engineer org, increasing velocity incrementally while reducing defects and rework
+      - Designed and led a tamper-resistance and uninstall-protection initiative spanning all OSes
       - Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime
       - Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%
       - Integrated AI assistance into workflow, cutting research and PoC development time by an estimated 25-50%
-      - Built a Linux PAM module and tray app for on-device password management, reaching UX parity with Windows and macOS
+      - Used AI to build Linux PAM module and tray app for on-device password management to reach UX parity with Windows and macOS
     location: Remote
     keywords:
       - Golang
@@ -59,7 +59,8 @@ work:
     endDate: "2022-10-03"
     summary: ""
     highlights:
-      - Founded a Linux-focused team (grew from 3 to 6 engineers) supporting client devices across multiple distros
+      - Founded a Linux-focused team (grew from 3 to 6 engineers) implementing features across device agent and backend services
+      - SME for Linux agent behavior, packaging, and PAM internals
       - Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed
       - Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10+ Linux distributions spanning RHEL 7 to Ubuntu 22.04
     location: Longmont, CO
@@ -264,11 +265,11 @@ projects:
       - Contributor
     type: open-source
   - name: Rockstor
-    description: Linux NAS platform built on BTRFS. Contributor across 4 repos (core, plugin registry, validator, dev env) with 9 merged PRs from 2020 to 2023.
+    description: Linux NAS platform built on BTRFS with Python and Django. Contributor across 4 repos (core, plugin registry, validator, dev env) with 9 merged PRs from 2020 to 2023.
     highlights:
       - Added ZSTD compression option for BTRFS storage pools
       - Added Jellyfin and FileBot Node plugins to the RockOn plugin registry
-      - Wrote rockon-validator to standardize formatting and validation of JSON app configuration profiles
+      - Wrote go rockon-validator to standardize formatting and validation of JSON app configuration profiles
     keywords:
       - Python
       - BTRFS
