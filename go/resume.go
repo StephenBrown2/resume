@@ -54,6 +54,9 @@ type WorkEntry struct {
 	Employer      string   `yaml:"employer"`
 	EmployerGroup string   `yaml:"employerGroup"`
 	Position      string   `yaml:"position"`
+	CondensePrint bool     `yaml:"condensePrint"`
+	MergePrintPrev bool    `yaml:"mergePrintPrev"`
+	PrintDates    string   `yaml:"printDates"`
 	URL           string   `yaml:"url"`
 	StartDate     string   `yaml:"startDate"`
 	EndDate       string   `yaml:"endDate"`

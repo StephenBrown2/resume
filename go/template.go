@@ -302,6 +302,24 @@ const resumeTemplate = `<!DOCTYPE html>
     letter-spacing: 0.02em;
   }
 
+  .skill-cat {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    padding-bottom: 4px;
+  }
+  .skill-cat-label { font-weight: 600; color: var(--black); }
+  .skill-cat-list { color: var(--ink); }
+
+  .project-highlights { margin-top: 4px; }
+  .project-highlights li { font-size: 0.78rem; }
+
+  .oss-fold {
+    display: none;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
   time { font: inherit; }
   time[title] { cursor: help; }
   .print-only { display: none; }
@@ -314,33 +332,26 @@ const resumeTemplate = `<!DOCTYPE html>
   }
 
   @media print {
-    html { font-size: 12pt; }
+    html { font-size: 11.5pt; }
     body { background: white; }
     .page { max-width: 100%; padding: 0; }
+    section { margin-bottom: 8px; }
+    .job { margin-bottom: 8px; }
+    .job-divider { margin: 7px 0; }
+    .highlights li { line-height: 1.4; margin-bottom: 1px; }
+    .cert-list { line-height: 1.5; }
+    .summary p { line-height: 1.5; }
+    .skill-cat { padding-bottom: 0; line-height: 1.35; }
+    .project { margin-bottom: 2px; }
+    .project-highlights { margin-top: 2px; }
+    .oss-fold { margin-top: 5px; }
 
     .print-only { display: inline; }
     a { color: inherit !important; text-decoration: none !important; }
 
-    header {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .header-right {
-      display: contents;
-    }
-
-    .contact {
-      grid-column: 2;
-      text-align: center;
-      margin-bottom: 0;
-    }
-
-    .profiles {
-      grid-column: 3;
-      display: block;
-      text-align: right;
-      justify-content: flex-end;
-    }
+    /* Two columns: name left, email above profile links right. */
+    .contact { margin-bottom: 3px; }
+    .profiles { display: block; }
 
     .profile-link {
       display: block;
@@ -368,12 +379,40 @@ const resumeTemplate = `<!DOCTYPE html>
 
     body { font-feature-settings: normal; }
     .screen-only { display: none; }
-    .footer-grid { grid-template-columns: 1fr 2fr; gap: 17px; }
+
+    /* Strict single column for ATS linear parsing. */
+    .skills-domains { grid-template-columns: 1fr; gap: 3px; }
+    .projects-grid  { grid-template-columns: 1fr; gap: 2px; }
+    .footer-grid    { grid-template-columns: 1fr; gap: 10px 0; }
 
     .employer-header { display: none; }
     .employer-group .job { padding-left: 0; border-left: none; }
     .position-divider { border-top: 1px solid var(--rule); margin: 10px 0; }
     .print-employer { display: inline; }
+
+    /* Contact: plain-text URLs, no network-name labels. */
+    .profile-name { display: none; }
+
+    /* Drop all keyword/tag chips: non-standard for print/ATS. */
+    .tags { display: none; }
+    .project { border: none; border-radius: 0; padding: 0; margin-bottom: 8px; }
+    .project-tags { display: none; }
+    .oss-fold { display: block; }
+
+    /* Consolidated entries: header line only, no bullets/summary. */
+    .print-condense .highlights,
+    .print-condense .job-summary,
+    .print-condense .tags { display: none; }
+
+    /* Merged entries: fold bullets under the previous role, drop own header. */
+    .print-merge-divider { display: none; }
+    .print-merge .job-header,
+    .print-merge .job-summary,
+    .print-merge .job-meta { display: none; }
+    .print-merge .highlights { margin-top: 2px; }
+
+    .references { display: none; }
+    .print-hidden { display: none; }
   }
 
   @media (max-width: 600px) {
@@ -399,13 +438,13 @@ const resumeTemplate = `<!DOCTYPE html>
     <div class="header-right">
       <div class="contact">
         <a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a><br>
-        {{.Basics.Phone}} &middot; {{.Basics.Location.City}}, {{.Basics.Location.Region}}<br>
+        <span class="screen-only">{{.Basics.Phone}} &middot; {{.Basics.Location.City}}, {{.Basics.Location.Region}}<br></span>
       </div>
       <div class="profiles">
         {{- range .Basics.Profiles}}
         <a href="{{.URL}}" class="profile-link" title="{{.Network}}">
           <span class="profile-name">{{.Network}}</span>
-          <span class="profile-url">: {{stripScheme .URL}}</span>
+          <span class="profile-url">{{stripScheme .URL}}</span>
         </a>
         {{- end}}
         <span class="print-only"><a href="{{.Basics.URL}}">{{stripScheme .Basics.URL}}</a></span>
@@ -413,12 +452,14 @@ const resumeTemplate = `<!DOCTYPE html>
     </div>
   </header>
 
+  {{- if .ShowProfile}}
   <section class="summary">
     <div class="section-intro">
       <div class="section-label">Profile</div>
       <p>{{nbspSummary .Basics.Summary}}</p>
     </div>
   </section>
+  {{- end}}
 
   <section>
     <div class="section-intro">
@@ -438,21 +479,9 @@ const resumeTemplate = `<!DOCTYPE html>
       <div class="section-label">Skills</div>
       <div class="skills-domains">
       {{- range .SkillSets}}
-      <div>
-        <div class="skill-group-label">{{.Name}}</div>
-        {{- $list := $.SkillList}}
-        {{- range .Skills}}
-        {{- $skill := skillByName $list .}}
-        <div class="skill-item">
-          <span class="skill-name">{{$skill.Name}}</span>
-          {{- $cls := levelClass $skill.Level}}
-          {{- if $cls}}
-          <span class="skill-level {{$cls}}">{{$skill.Level}}</span>
-          {{- else}}
-          <span class="skill-level">{{$skill.Level}}</span>
-          {{- end}}
-        </div>
-        {{- end}}
+      <div class="skill-cat">
+        <span class="skill-cat-label">{{.Name}}:</span>
+        <span class="skill-cat-list">{{range $i, $s := .Skills}}{{if $i}}, {{end}}{{$s}}{{end}}</span>
       </div>
       {{- end}}
       </div>
@@ -461,14 +490,19 @@ const resumeTemplate = `<!DOCTYPE html>
 
   <section>
     <div class="section-intro">
-      <div class="section-label">Open Source &amp; Projects</div>
+      <div class="section-label">Projects</div>
       <div class="projects-grid">
-        {{- range .Projects}}
-        <div class="project">
+        {{- range $i, $p := .Projects}}
+        <div class="project{{if ge $i 3}} print-hidden{{end}}">
           <div class="project-name">
             {{- if .URL}}<a href="{{.URL}}">{{.Name}}</a>{{else}}{{.Name}}{{end}}
           </div>
           <div class="project-desc">{{.Description}}</div>
+          {{- if .Highlights}}
+          <ul class="highlights project-highlights">
+            {{- range .Highlights}}<li>{{.}}</li>{{end}}
+          </ul>
+          {{- end}}
           {{- if .Keywords}}
           <div class="project-tags">
             {{- range .Keywords}}<span class="tag">{{.}}</span>{{end}}
@@ -477,12 +511,13 @@ const resumeTemplate = `<!DOCTYPE html>
         </div>
         {{- end}}
       </div>
+      <p class="oss-fold">Additional open-source contributions: Home Assistant, HTTPX, isort, TandoorRecipes, Nightscout, and Toolkit for YNAB.</p>
     </div>
   </section>
 
   <section>
     <div class="section-intro">
-      <div class="section-label">Education &amp; Certifications</div>
+      <div class="section-label">Education</div>
       <div class="footer-grid">
       <div>
         {{- range .Education}}
@@ -583,16 +618,19 @@ const resumeTemplate = `<!DOCTYPE html>
           <span class="employer-former">(formerly {{.}})</span>
           {{- end}}
         </div>
-        <span class="job-dates"><time{{if fullDate .StartDate}} title="{{fullDate .StartDate}}"{{end}}>{{formatDate .StartDate}}</time> &#8211; <time{{if fullDate .EndDate}} title="{{fullDate .EndDate}}"{{end}}>{{formatDate .EndDate}}</time></span>
+        <span class="job-dates"><time{{if fullDate .StartDate}} title="{{fullDate .StartDate}}"{{end}}>{{formatDate .StartDate}}</time> - <time{{if fullDate .EndDate}} title="{{fullDate .EndDate}}"{{end}}>{{formatDate .EndDate}}</time></span>
       </div>
       {{- range $j, $pos := .Positions}}
       {{- if gt $j 0}}
-      <div class="position-divider"></div>
+      <div class="position-divider{{if $pos.MergePrintPrev}} print-merge-divider{{end}}"></div>
       {{- end}}
-      <div class="job">
+      <div class="job{{if $pos.CondensePrint}} print-condense{{end}}{{if $pos.MergePrintPrev}} print-merge{{end}}">
         <div class="job-header">
           <span class="job-title">{{$pos.Position}}</span>
-          <span class="job-dates"><time{{if fullDate $pos.StartDate}} title="{{fullDate $pos.StartDate}}"{{end}}>{{formatDate $pos.StartDate}}</time> &#8211; <time{{if fullDate $pos.EndDate}} title="{{fullDate $pos.EndDate}}"{{end}}>{{formatDate $pos.EndDate}}</time></span>
+          <span class="job-dates">
+          {{- if $pos.PrintDates}}<span class="screen-only"><time{{if fullDate $pos.StartDate}} title="{{fullDate $pos.StartDate}}"{{end}}>{{formatDate $pos.StartDate}}</time> - <time{{if fullDate $pos.EndDate}} title="{{fullDate $pos.EndDate}}"{{end}}>{{formatDate $pos.EndDate}}</time></span><span class="print-only">{{$pos.PrintDates}}</span>
+          {{- else}}<time{{if fullDate $pos.StartDate}} title="{{fullDate $pos.StartDate}}"{{end}}>{{formatDate $pos.StartDate}}</time> - <time{{if fullDate $pos.EndDate}} title="{{fullDate $pos.EndDate}}"{{end}}>{{formatDate $pos.EndDate}}</time>{{end}}
+          </span>
         </div>
         {{- if $pos.Summary}}
         <div class="job-summary">{{$pos.Summary}}</div>
@@ -615,10 +653,10 @@ const resumeTemplate = `<!DOCTYPE html>
     </div>
 {{- else}}
     {{- with index .Positions 0}}
-    <div class="job">
+    <div class="job{{if .CondensePrint}} print-condense{{end}}">
       <div class="job-header">
         <span class="job-title">{{.Position}}</span>
-        <span class="job-dates"><time{{if fullDate .StartDate}} title="{{fullDate .StartDate}}"{{end}}>{{formatDate .StartDate}}</time> &#8211; <time{{if fullDate .EndDate}} title="{{fullDate .EndDate}}"{{end}}>{{formatDate .EndDate}}</time></span>
+        <span class="job-dates"><time{{if fullDate .StartDate}} title="{{fullDate .StartDate}}"{{end}}>{{formatDate .StartDate}}</time> - <time{{if fullDate .EndDate}} title="{{fullDate .EndDate}}"{{end}}>{{formatDate .EndDate}}</time></span>
       </div>
       {{- if .Summary}}
       <div class="job-summary">{{.Summary}}</div>

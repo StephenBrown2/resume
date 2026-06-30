@@ -165,6 +165,28 @@ func groupWork(entries []WorkEntry) []EmployerGroup {
 	return groups
 }
 
+// computePrintDates fills PrintDates on each lead position that absorbs one or
+// more following mergePrintPrev positions, spanning from the oldest merged
+// start to the lead's own end. A PrintDates value already set in the source is
+// left untouched, so manual overrides still win.
+func computePrintDates(groups []EmployerGroup) {
+	for gi := range groups {
+		pos := groups[gi].Positions
+		for j := 0; j < len(pos); j++ {
+			if pos[j].MergePrintPrev {
+				continue // absorbed into an earlier lead's chain
+			}
+			k := j + 1
+			for k < len(pos) && pos[k].MergePrintPrev {
+				k++
+			}
+			if last := k - 1; last > j && pos[j].PrintDates == "" {
+				pos[j].PrintDates = formatDate(pos[last].StartDate) + " - " + formatDate(pos[j].EndDate)
+			}
+		}
+	}
+}
+
 // key returns the group key (employerGroup if set, else employer of first position).
 func (g EmployerGroup) key() string {
 	if len(g.Positions) == 0 {
@@ -384,6 +406,7 @@ type TemplateData struct {
 	Languages       []Language
 	Interests       []Interest
 	Testimonials    []Testimonial
+	ShowProfile     bool
 	GoogleFontsLink template.HTML
 	NameFontCSS     template.CSS
 }

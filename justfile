@@ -18,6 +18,11 @@ go-validate: go-build
 go-pdf: go-render
     ./resume-renderer --input ../{{filename}} --output ../docs/index.html --pdf ../output/resume.pdf
 
+# Two-page print PDF: drops pre-2011-05 roles (MICROS) and merges flagged entries.
+[working-directory: 'go']
+go-print: go-build
+    ./resume-renderer --input ../{{filename}} --output ../output/resume-print.html --pdf ../output/resume.pdf --since 2011-05-01
+
 [working-directory: 'go']
 go-card: go-build
     ./resume-renderer --input ../{{filename}} --output /dev/null --business-card ../output/business-card.pdf

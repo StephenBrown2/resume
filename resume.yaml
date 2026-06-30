@@ -5,7 +5,7 @@ basics:
   email: hire@stephen.brownii.email
   phone: (443) 219-4559
   url: https://stephenbrown2.github.io/resume
-  summary: "15 years in technology: 6 as a Linux systems administrator, 9 as a software engineer. Focused on reliability, security, and developer productivity. I own problems end-to-end, write testable code, and improve the workflows around me. Deep experience with Python, recent work is in Go and TypeScript; my open source time goes into personal finance tooling. I pick up new languages quickly and have a track record of doing so on the job. Currently picking up Rust and exploring Elixir."
+  summary: "Owns problems end-to-end across Python, Go, and TypeScript, with a focus on reliability, security, and developer productivity. Scopes ambiguous research into shippable deliverables. Picks up new languages quickly; currently learning Rust and exploring Elixir."
   location:
     city: Delaware
     region: OH
@@ -34,14 +34,13 @@ work:
     endDate: "2026-05-18"
     summary: ""
     highlights:
-      - Consulted by dozens of engineers on design and implementation; directly mentored 5+ engineers through onboarding.
-      - Raised code quality across 20+ repositories; improvements paved the path for adoption across 250+ engineers org-wide.
-      - Led a tamper-resistance and uninstall-protection initiative spanning Windows, macOS, and Linux; scoped and simplified research into a manageable deliverable.
-      - Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime.
-      - Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%.
-      - Integrated AI assistance into workflow, cutting research and PoC development time by an estimated 25-50%.
-      - Designed and prototyped a Linux PAM module for direct JumpCloud user and password management on device.
-      - Built a Linux tray app, bringing local password-change sync and portal access UX parity with Windows and macOS.
+      - Served as primary technical resource for dozens of engineers across design and implementation; directly mentored 5+
+      - Raised code quality across 20+ repositories with review standards and shared tooling adopted by teams across the 250+ engineer org
+      - Led a tamper-resistance and uninstall-protection initiative spanning Windows, macOS, and Linux
+      - Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime
+      - Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%
+      - Integrated AI assistance into workflow, cutting research and PoC development time by an estimated 25-50%
+      - Built a Linux PAM module and tray app for on-device password management, reaching UX parity with Windows and macOS
     location: Remote
     keywords:
       - Golang
@@ -60,9 +59,9 @@ work:
     endDate: "2022-10-03"
     summary: ""
     highlights:
-      - Founded a Linux-focused team (grew from 3 to 6 engineers) supporting client devices across multiple distros.
-      - Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed.
-      - Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10+ Linux distributions spanning RHEL 7 to Ubuntu 22.04.
+      - Founded a Linux-focused team (grew from 3 to 6 engineers) supporting client devices across multiple distros
+      - Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed
+      - Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10+ Linux distributions spanning RHEL 7 to Ubuntu 22.04
     location: Longmont, CO
     keywords:
       - Golang
@@ -80,8 +79,7 @@ work:
     endDate: "2021-05-01"
     summary: ""
     highlights:
-      - Maintained Python applications and libraries; contributed to 12+ microservices in Go.
-      - Deployed across Docker, OpenShift, and Kubernetes environments.
+      - Built and maintained Python services and libraries; shipped features across 12+ Go microservices deployed on Docker, OpenShift, and Kubernetes
     location: Remote
     keywords:
       - Golang
@@ -97,10 +95,10 @@ work:
     endDate: "2019-10-01"
     summary: "Global Linux Automation Engineers"
     highlights:
-      - Maintained framework application for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Python client library).
-      - Implemented and configured deployment tools using Docker, Ansible, and Jenkins; designed and built Jenkins 2.x Pipeline for PR testing.
-      - Led team to implement better checks and consistency to improve and maintain code quality.
-      - Worked with UK-based team as sole US member.
+      - Maintained framework application for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Python client library)
+      - Implemented and configured deployment tools using Docker, Ansible, and Jenkins; designed and built Jenkins 2.x Pipeline for PR testing
+      - Led team to implement better checks and consistency to improve and maintain code quality
+      - Worked with UK-based team as sole US member
     location: Remote
     keywords:
       - Python
@@ -111,15 +109,14 @@ work:
   - employer: Rackspace Hosting
     employerGroup: Rackspace
     position: Automation Engineer I
+    mergePrintPrev: true
     url: https://rackspace.com
     startDate: "2017-06-03"
     endDate: "2018-09-10"
     summary: "Global SysAd Maintenance Team"
     highlights:
-      - Automated migration of scheduled maintenances to consolidate calendars, saving weeks of manual work.
-      - Inverted traditional scheduling process to improve customer experience.
-      - Developed reporting and categorization tools for whole team use.
-      - Wrote tools which enabled more efficient team workflows not otherwise possible.
+      - Automated migration of scheduled maintenances to consolidate calendars, saving weeks of manual work
+      - Inverted traditional scheduling process to improve customer experience
     location: San Antonio, TX
     keywords:
       - Python
@@ -132,10 +129,9 @@ work:
     endDate: "2017-06-03"
     summary: "Global SysAd Maintenance Team"
     highlights:
-      - Contributed multiple features to team's jinja2-based templating system.
-      - Developed a custom UI accessing the maintenance calendar backend to present upcoming services in an easily accessible manner.
-      - Developed an auto-numbering tool for maintenance templates using React.
-      - Quickly identified and proposed tools and training to make team process more efficient.
+      - Contributed multiple features to team's jinja2-based templating system
+      - Built a custom UI surfacing upcoming services from the maintenance calendar backend
+      - Developed an auto-numbering tool for maintenance templates using React
     location: San Antonio, TX
     keywords:
       - Linux
@@ -146,13 +142,14 @@ work:
   - employer: Rackspace US, Inc.
     employerGroup: Rackspace
     position: Linux System Administrator I
+    mergePrintPrev: true
     url: https://rackspace.com
     startDate: "2014-01-06"
     endDate: "2015-05-15"
     summary: "Global Technical Support - Enterprise (2nd shift)"
     highlights:
-      - Installed, configured, updated, and troubleshot services for customers including OS, web server, database, application server, and mail (Apache, MySQL, PHP, FTP, SSH, DNS).
-      - Contributed features and bug fixes to internal Python projects including a password retrieval CLI and login automation tools.
+      - Installed, configured, updated, and troubleshot services for customers including OS, web server, database, application server, and mail (Apache, MySQL, PHP, FTP, SSH, DNS)
+      - Contributed features and bug fixes to internal Python projects including a password retrieval CLI and login automation tools
     location: San Antonio, TX
     keywords:
       - Linux
@@ -165,9 +162,9 @@ work:
     endDate: "2013-12-30"
     summary: Bloomberg School Of Public Health, Knowledge for Health Project
     highlights:
-      - Successfully led team to adoption of git and a development > staging > production deployment workflow.
-      - Designed Puppet configuration management to maintain and deploy to development and production servers.
-      - Maintained and automated servers supporting Drupal multisite deployments with LAMP stack on physical and virtual hosts, and Apache Solr search indexes.
+      - Successfully led team to adoption of git and a development > staging > production deployment workflow
+      - Designed Puppet configuration management to maintain and deploy to development and production servers
+      - Maintained and automated servers supporting Drupal multisite deployments with LAMP stack on physical and virtual hosts, and Apache Solr search indexes
     location: Baltimore, MD
     keywords:
       - Linux
@@ -177,14 +174,15 @@ work:
       - Vagrant
   - employer: "Johns Hopkins Center for Communication Programs"
     position: Junior Linux Systems Administrator
+    mergePrintPrev: true
     url: https://ccp.jhu.edu
     startDate: "2011-04-01"
     endDate: "2013-07-01"
     summary: Bloomberg School Of Public Health, Knowledge for Health Project
     highlights:
-      - Maintained CentOS servers supporting 30+ websites for the K4Health project.
-      - Hired as a contractor; brought on as full-time employee within 6 months.
-    location: Washington DC / Baltimore, MD
+      - Maintained CentOS servers supporting 30+ websites for the K4Health project
+      - Hired as a contractor; brought on as full-time employee within 6 months
+    location: Baltimore, MD
     keywords:
       - Linux
       - CentOS
@@ -196,8 +194,8 @@ work:
     endDate: "2011-04-01"
     summary: ""
     highlights:
-      - Analyzed and diagnosed the most difficult customer-reported issues.
-      - Documented issues for developer and QA teams to remedy.
+      - Analyzed and diagnosed the most difficult customer-reported issues
+      - Documented issues for developer and QA teams to remedy
     location: Columbia, MD
     keywords:
       - Troubleshooting
@@ -211,7 +209,7 @@ work:
     endDate: "2010-12-01"
     summary: ""
     highlights:
-      - Diagnosed client issues, checked in computers for service, and maintained customer relationships through the repair process.
+      - Diagnosed client issues, checked in computers for service, and maintained customer relationships through the repair process
     location: Baltimore, MD
     keywords:
       - Troubleshooting
@@ -223,36 +221,21 @@ work:
     endDate: "2010-10-01"
     summary: On-site technical support for Windows desktops, servers, and networking infrastructure.
     highlights:
-      - Supported desktops and end-node business networking; ran and terminated CAT5 cabling for 12+ client accounts.
-      - Resolved virus infections, Outlook issues, PC migrations, and network connectivity issues.
-      - Wiped and reinstalled Windows XP systems using DBAN, Sysprep, and Clonezilla.
+      - Supported desktops and end-node business networking; ran and terminated CAT5 cabling for 12+ client accounts
+      - Resolved virus infections, Outlook issues, PC migrations, and network connectivity issues
+      - Wiped and reinstalled Windows XP systems using DBAN, Sysprep, and Clonezilla
     location: Baltimore, MD
     keywords:
       - Windows
       - Networking
       - Customer Service
 projects:
-  - name: Home Assistant
-    description: Home automation platform (87k+ stars). Contributed 3 PRs in February 2024.
-    highlights:
-      - Added icon translations to the Teslemetry integration in the core codebase.
-      - Added health category listing and documentation page for the Airthings integration.
-    keywords:
-      - Python
-      - Home Automation
-      - Open Source
-    startDate: "2024-02-07"
-    endDate: "2024-02-15"
-    url: https://github.com/home-assistant/core
-    roles:
-      - Contributor
-    type: open-source
   - name: Actual Budget
     description: Local-first personal finance app (TypeScript/React, 26k+ stars). Active contributor since 2025 with 35+ merged PRs.
     highlights:
-      - Currency-precision helpers and dynamic currency display options for international users.
-      - Added BALANCE_OF() formula function, drag-and-drop transaction reordering, nYNAB scheduled transaction imports, and CSV line-trim option.
-      - Built multi-account import plugin and custom theming support.
+      - Currency-precision helpers and dynamic currency display options for international users
+      - Added BALANCE_OF() formula, drag-and-drop reordering, nYNAB scheduled imports, and CSV line-trim
+      - Built multi-account import plugin and custom theming support
     keywords:
       - TypeScript
       - React
@@ -267,9 +250,9 @@ projects:
   - name: Pydantic
     description: Python data validation library (28k+ stars). Contributed 8 PRs from 2019 to 2020.
     highlights:
-      - 5% parse speed gain by switching from type() calls to __class__ attribute lookup.
-      - Added subclass encoder support so subclasses of known types serialize with their parent's encoder.
-      - Introduced JSON benchmark suite, voluptuous comparison benchmark, and docs example linting.
+      - 5% parse speed gain by switching from type() calls to __class__ attribute lookup
+      - Added subclass encoder support so subclasses of known types serialize with their parent's encoder
+      - Introduced JSON benchmark suite, voluptuous comparison benchmark, and docs example linting
     keywords:
       - Python
       - Performance
@@ -280,10 +263,43 @@ projects:
     roles:
       - Contributor
     type: open-source
+  - name: Rockstor
+    description: Linux NAS platform built on BTRFS. Contributor across 4 repos (core, plugin registry, validator, dev env) with 9 merged PRs from 2020 to 2023.
+    highlights:
+      - Added ZSTD compression option for BTRFS storage pools
+      - Added Jellyfin and FileBot Node plugins to the RockOn plugin registry
+      - Wrote rockon-validator to standardize formatting and validation of JSON app configuration profiles
+    keywords:
+      - Python
+      - BTRFS
+      - Linux
+      - NAS
+      - Open Source
+    startDate: "2020-02-24"
+    endDate: "2023-08-27"
+    url: https://github.com/rockstor/rockstor-core
+    roles:
+      - Contributor
+    type: open-source
+  - name: Home Assistant
+    description: Home automation platform (87k+ stars). Contributed 3 PRs in February 2024.
+    highlights:
+      - Added icon translations to the Teslemetry integration in the core codebase
+      - Added health category listing and documentation page for the Airthings integration
+    keywords:
+      - Python
+      - Home Automation
+      - Open Source
+    startDate: "2024-02-07"
+    endDate: "2024-02-15"
+    url: https://github.com/home-assistant/core
+    roles:
+      - Contributor
+    type: open-source
   - name: Lunch Money v2 API
     description: v2 developer API for Lunch Money (personal finance app), currently in open alpha.
     highlights:
-      - Participated in API design discussions and provided feedback during the open alpha phase.
+      - Participated in API design discussions and provided feedback during the open alpha phase
     keywords:
       - API Design
       - Personal Finance
@@ -295,8 +311,8 @@ projects:
   - name: HTTPX
     description: Python async HTTP client (15k+ stars). Contributed 2 PRs from 2019 to 2020.
     highlights:
-      - Added Early Hints (103) and Too Early (425) HTTP status codes to the status code enum.
-      - Fixed incorrect function name in the event hooks documentation.
+      - Added Early Hints (103) and Too Early (425) HTTP status codes to the status code enum
+      - Fixed incorrect function name in the event hooks documentation
     keywords:
       - Python
       - HTTP
@@ -310,8 +326,8 @@ projects:
   - name: TandoorRecipes
     description: Open-source self-hosted recipe manager. Contributed 2 PRs in 2021-2022.
     highlights:
-      - Added time unit hint to the recipe edit view for clearer user input.
-      - Fixed Make_Header and Make_Ingredient text and template reference.
+      - Added time unit hint to the recipe edit view for clearer user input
+      - Fixed Make_Header and Make_Ingredient text and template reference
     keywords:
       - Python
       - Django
@@ -326,7 +342,7 @@ projects:
     description: Python import sorter (6k+ stars). Contributed 3 PRs from 2019 to 2020.
     highlights:
       - "Implemented --ensure-newline-before-comments end-to-end: argument parsing, sorting logic, and Black profile entry."
-      - Fixed list value handling when reading settings from TOML config files.
+      - Fixed list value handling when reading settings from TOML config files
     keywords:
       - Python
       - CLI
@@ -340,8 +356,8 @@ projects:
   - name: Nightscout / CGM Tools
     description: Open-source CGM monitoring ecosystem (cgm-remote-monitor, AndroidAPS, dexcom_reader, AndroidAPSdocs). Contributed 4 PRs in 2020-2021.
     highlights:
-      - Fixed sign error in bolus wizard timeshift result in AndroidAPS.
-      - Updated dexcom_reader for Python 3 compatibility; added device pairing instructions to AndroidAPSdocs.
+      - Fixed sign error in bolus wizard timeshift result in AndroidAPS
+      - Updated dexcom_reader for Python 3 compatibility; added device pairing instructions to AndroidAPSdocs
     keywords:
       - Python
       - Medical Devices
@@ -355,9 +371,9 @@ projects:
   - name: Toolkit for YNAB
     description: Browser extension for the YNAB personal finance app. Long-term contributor with 10 merged PRs from 2016 to 2021.
     highlights:
-      - Added Manage Payees for Selected Transactions to the Edit menu.
-      - Added Auto-fill Payee for Split Transactions feature.
-      - Fixed highlight color in new-default theme and contributed Python 3 build tooling fixes.
+      - Added Manage Payees for Selected Transactions to the Edit menu
+      - Added Auto-fill Payee for Split Transactions feature
+      - Fixed highlight color in new-default theme and contributed Python 3 build tooling fixes
     keywords:
       - JavaScript
       - Personal Finance
@@ -368,28 +384,10 @@ projects:
     roles:
       - Contributor
     type: open-source
-  - name: Rockstor
-    description: Linux NAS platform built on BTRFS. Contributor across 4 repos (core, plugin registry, validator, dev env) with 9 merged PRs from 2020 to 2023.
-    highlights:
-      - Added ZSTD compression option for BTRFS storage pools.
-      - Added Jellyfin and FileBot Node plugins to the RockOn plugin registry.
-      - Made the rockon-validator model externally importable; fixed port value handling on empty values.
-    keywords:
-      - Python
-      - BTRFS
-      - Linux
-      - NAS
-      - Open Source
-    startDate: "2020-02-24"
-    endDate: "2023-08-27"
-    url: https://github.com/rockstor/rockstor-core
-    roles:
-      - Contributor
-    type: open-source
   - name: actual-multi-account-import
     description: TypeScript plugin for Actual Budget that handles importing transactions from multiple bank accounts in a single operation.
     highlights:
-      - Configurable per-account import settings with a unified run command across all linked accounts.
+      - Configurable per-account import settings with a unified run command across all linked accounts
     keywords:
       - TypeScript
       - Actual Budget
@@ -402,7 +400,7 @@ projects:
   - name: fold-budget
     description: Go CLI tool that converts Fold Bitcoin rewards card CSV exports to Actual Budget import format.
     highlights:
-      - Parses Fold CSV statements and maps transaction memos to the standard budget import format.
+      - Parses Fold CSV statements and maps transaction memos to the standard budget import format
     keywords:
       - Golang
       - Bitcoin
@@ -416,7 +414,7 @@ projects:
   - name: hi-fold
     description: Go CLI that calculates HIFO (highest-in, first-out) cost basis from Fold Bitcoin rewards card transaction history.
     highlights:
-      - Parses Fold CSV exports and applies the HIFO accounting method for tax-optimized cost basis calculation.
+      - Parses Fold CSV exports and applies the HIFO accounting method for tax-optimized cost basis calculation
     keywords:
       - Golang
       - Bitcoin
@@ -430,7 +428,7 @@ projects:
   - name: actual-wallos-import
     description: TypeScript tool that imports Wallos subscription tracker data into Actual Budget as scheduled transactions (5 stars).
     highlights:
-      - Supports both file-based CSV export and direct Wallos API integration.
+      - Supports both file-based CSV export and direct Wallos API integration
     keywords:
       - TypeScript
       - Actual Budget
@@ -443,7 +441,7 @@ projects:
   - name: podstats
     description: Go tool that parses podcast OPML subscription files and produces a prioritized episode queue.
     highlights:
-      - Vibe-coded with AI assistance; parses OPML exports from apps like Overcast and outputs a ranked listening queue.
+      - Parses OPML exports from apps like Overcast and outputs a ranked listening queue
     keywords:
       - Golang
     startDate: "2025-07-26"
@@ -455,7 +453,7 @@ projects:
   - name: pamparser
     description: Go library for parsing and manipulating PAM (Pluggable Authentication Modules) configuration files.
     highlights:
-      - Vibe-coded with AI assistance during PAM module research at JumpCloud; parses and modifies /etc/pam.d/ configs programmatically.
+      - Part of PAM module research at JumpCloud; parses and modifies /etc/pam.d/ configs programmatically
     keywords:
       - Golang
       - Linux
@@ -476,24 +474,22 @@ skills:
     - name: Systems
       skills:
         - Linux
-        - Bash / Shell
-        - Git / Jujutsu
+        - Bash
+        - Git
     - name: Languages
       skills:
         - Golang
         - Python
         - TypeScript
         - React
-        - Perl
     - name: Infrastructure & Cloud
       skills:
         - Docker
         - Kubernetes
         - AWS
         - Ansible
-        - Terraform
   list:
-    - name: Bash / Shell
+    - name: Bash
       level: Advanced
       summary: Write reliable shell scripts for automation and operational tasks
       years: 15
@@ -513,10 +509,6 @@ skills:
       level: Intermediate
       summary: Modern React with hooks and TypeScript; active open source contributor (Actual Budget)
       years: 5
-    - name: Perl
-      level: Familiar
-      summary: Fluent as a Linux admin; syntax still familiar, not actively used in the last decade
-      years: 3
     - name: Docker
       level: Advanced
       summary: Portable development and deployment workflows
@@ -525,7 +517,7 @@ skills:
       level: Advanced
       summary: Extensive production and development experience across distributions
       years: 16
-    - name: Git / Jujutsu
+    - name: Git
       level: Advanced
       summary: Daily use for source control, branching, and code review
       years: 15
@@ -553,10 +545,6 @@ skills:
       level: Advanced
       summary: Infrastructure configuration management
       years: 7
-    - name: Terraform
-      level: Beginner
-      summary: Infrastructure as code for managing deployments
-      years: 2
 certificates:
   - name: RHCE
     date: "2014-03-12"

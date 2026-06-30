@@ -23,6 +23,7 @@ func main() {
 	nameFont := flag.String("name-font", "Instrument Serif", "Google Fonts family for name heading")
 	schema := flag.String("schema", "", "path to JSON Schema file (default: schema.json next to --input)")
 	since := flag.String("since", "", "exclude jobs whose end date is before this date (YYYY, YYYY-MM, or YYYY-MM-DD)")
+	noProfile := flag.Bool("no-profile", false, "omit the Profile/summary section")
 	skipVal := flag.Bool("skip-validation", false, "skip JSON Schema validation")
 	flag.Parse()
 
@@ -74,6 +75,7 @@ func main() {
 		projects = filterProjectsSince(projects, *since)
 	}
 	groups := groupWork(work)
+	computePrintDates(groups)
 
 	tmplData := TemplateData{
 		Basics:          resume.Basics,
@@ -87,6 +89,7 @@ func main() {
 		Languages:       resume.Languages,
 		Interests:       resume.Interests,
 		Testimonials:    resume.Testimonials,
+		ShowProfile:     !*noProfile,
 		GoogleFontsLink: googleFontsLink,
 		NameFontCSS:     nameFontCSS,
 	}

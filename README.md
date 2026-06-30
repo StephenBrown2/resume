@@ -57,6 +57,37 @@ just watch
 
 ---
 
+## Two-page print PDF
+
+The web version at `docs/index.html` stays long and detailed. The printed,
+ATS-oriented PDF is constrained to two pages: single-column layout, no tag
+chips, plain-text contact URLs, the Profile hidden behind a flag, and several
+roles consolidated in print via the `printDates` / `mergePrintPrev` /
+`condensePrint` fields in `resume.yaml`. The `--since` filter drops roles that
+ended before the given date (here the three-month MICROS role).
+
+Requires a Chromium/Chrome binary on `PATH` (used headless for PDF export).
+
+```shell
+just go-print
+```
+
+Or run the full command directly:
+
+```shell
+cd go
+go build -o resume-renderer .
+./resume-renderer \
+  --input ../resume.yaml \
+  --output ../output/resume-print.html \
+  --pdf ../output/resume.pdf \
+  --since 2011-05-01
+```
+
+Add `--no-profile` to omit the Profile/summary section.
+
+---
+
 ## Themes
 
 The `themes/` directory contains alternate HTML layouts ported from
