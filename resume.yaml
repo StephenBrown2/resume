@@ -644,11 +644,13 @@ testimonials:
   - name: David Gaffield
     role: Director, Engineering at JumpCloud
     category: Manager
+    url: https://www.linkedin.com/in/davidgaffield/
     email: david.gaffield@jumpcloud.com
     quote: I had the opportunity to work closely with Stephen both as his direct manager and later as his skip-level leader, which gave me a unique perspective on his impact over time. Knowing what I know today, I would absolutely hire him again and fight to keep him on my team. Stephen combines deep technical expertise with a strong sense of ownership, consistently identifying opportunities to improve security, developer productivity, and the overall health of our engineering systems. He's also a collaborative teammate who generously shares his knowledge, mentors others, and elevates those around him. Any organization looking for an engineer with strong technical judgment, initiative, and a team-first mindset would be fortunate to have him.
   - name: Daniel Judge
     role: Senior Engineering Manager at JumpCloud
     category: Manager
+    url: https://www.linkedin.com/in/danielwjudge/
     email: daniel.judge@jumpcloud.com
     quote: |-
       Stephen is a rare engineer who's invested in making his team better.
@@ -664,6 +666,7 @@ references:
   - name: Daniel Judge
     role: Senior Engineering Manager at JumpCloud
     category: Manager
+    url: https://www.linkedin.com/in/danielwjudge/
     email: daniel.judge@jumpcloud.com
   - name: David Harris
     role: Senior QA Engineer at JumpCloud
