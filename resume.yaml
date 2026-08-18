@@ -5,7 +5,14 @@ basics:
   email: hire@stephen.brownii.email
   phone: (443) 219-4559
   url: https://stephenbrown2.github.io/resume
-  summary: "Owns problems end-to-end across Python, Go, and TypeScript, with a focus on reliability, security, and developer productivity. Scopes ambiguous research into shippable deliverables. Picks up new languages quickly; currently learning Rust and exploring Elixir."
+  summary: >-
+    15 years in technology: 9 as a software engineer and 6 as a Linux systems
+    administrator. Extensive experience in Go and Python, with recent TypeScript
+    work; I own problems end-to-end, write testable code, and focus on
+    reliability, security, and developer productivity. I pick up new languages
+    quickly and have a track record of doing so on the job; currently picking
+    up Rust and exploring Elixir. My open source time goes into personal
+    finance tooling.
   location:
     city: Delaware
     region: OH
@@ -639,6 +646,20 @@ testimonials:
     category: Manager
     email: david.gaffield@jumpcloud.com
     quote: I had the opportunity to work closely with Stephen both as his direct manager and later as his skip-level leader, which gave me a unique perspective on his impact over time. Knowing what I know today, I would absolutely hire him again and fight to keep him on my team. Stephen combines deep technical expertise with a strong sense of ownership, consistently identifying opportunities to improve security, developer productivity, and the overall health of our engineering systems. He's also a collaborative teammate who generously shares his knowledge, mentors others, and elevates those around him. Any organization looking for an engineer with strong technical judgment, initiative, and a team-first mindset would be fortunate to have him.
+  - name: Daniel Judge
+    role: Senior Engineering Manager at JumpCloud
+    category: Manager
+    email: daniel.judge@jumpcloud.com
+    quote: |-
+      Stephen is a rare engineer who's invested in making his team better.
+
+      I managed Stephen directly for a year at JumpCloud, after working alongside him for several years before that on the Devices engineering team.
+
+      When we needed to improve the security posture of the JumpCloud Agent, one of the most sensitive and widely deployed pieces of software we ship, Stephen designed and drove the project. It's on track for a successful release because of the thought and effort he brought.
+
+      What I appreciated most about Stephen was his push to improve his own skills, the product, the infrastructure, and the day-to-day experience of his fellow engineers.
+
+      Any team would be lucky to have him.
 references:
   - name: Daniel Judge
     role: Senior Engineering Manager at JumpCloud

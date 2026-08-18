@@ -24,6 +24,7 @@ func main() {
 	schema := flag.String("schema", "", "path to JSON Schema file (default: schema.json next to --input)")
 	since := flag.String("since", "", "exclude jobs whose end date is before this date (YYYY, YYYY-MM, or YYYY-MM-DD)")
 	noProfile := flag.Bool("no-profile", false, "omit the Profile/summary section")
+	noTestimonials := flag.Bool("no-testimonials", false, "omit the References/testimonials section")
 	skipVal := flag.Bool("skip-validation", false, "skip JSON Schema validation")
 	flag.Parse()
 
@@ -78,34 +79,37 @@ func main() {
 	computePrintDates(groups)
 
 	tmplData := TemplateData{
-		Basics:          resume.Basics,
-		EmployerGroups:  groups,
-		Projects:        projects,
-		SkillSets:       resume.Skills.Sets,
-		SkillList:       resume.Skills.List,
-		Certificates:    resume.Certificates,
-		CertGroups:      groupCerts(resume.Certificates),
-		Education:       resume.Education,
-		Languages:       resume.Languages,
-		Interests:       resume.Interests,
-		Testimonials:    resume.Testimonials,
-		ShowProfile:     !*noProfile,
-		GoogleFontsLink: googleFontsLink,
-		NameFontCSS:     nameFontCSS,
+		Basics:           resume.Basics,
+		EmployerGroups:   groups,
+		Projects:         projects,
+		SkillSets:        resume.Skills.Sets,
+		SkillList:        resume.Skills.List,
+		Certificates:     resume.Certificates,
+		CertGroups:       groupCerts(resume.Certificates),
+		Education:        resume.Education,
+		Languages:        resume.Languages,
+		Interests:        resume.Interests,
+		Testimonials:     resume.Testimonials,
+		ShowProfile:      !*noProfile,
+		ShowTestimonials: !*noTestimonials,
+		GoogleFontsLink:  googleFontsLink,
+		NameFontCSS:      nameFontCSS,
 	}
 
 	funcMap := template.FuncMap{
-		"formatDate":  formatDate,
-		"fullDate":      fullDate,
-		"fullDateRange": fullDateRange,
-		"nbspSummary": nbspShortWords,
-		"levelClass":  levelClass,
-		"skillByName": skillByName,
-		"stripScheme": stripScheme,
-		"certTitle":      certTitle,
-		"certPrintID":    certPrintID,
-		"certGroupNames": certGroupNames,
-		"certGroupID":    certGroupID,
+		"formatDate":      formatDate,
+		"fullDate":        fullDate,
+		"fullDateRange":   fullDateRange,
+		"nbspSummary":     nbspShortWords,
+		"levelClass":      levelClass,
+		"skillByName":     skillByName,
+		"stripScheme":     stripScheme,
+		"certTitle":       certTitle,
+		"certPrintID":     certPrintID,
+		"certGroupNames":  certGroupNames,
+		"certGroupID":     certGroupID,
+		"quoteParagraphs": quoteParagraphs,
+		"sub":             func(a, b int) int { return a - b },
 	}
 
 	tmpl, err := template.New("resume").Funcs(funcMap).Parse(resumeTemplate)

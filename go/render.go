@@ -271,6 +271,12 @@ func nbspShortWords(s string) template.HTML {
 	return template.HTML(strings.Join(parts, ""))
 }
 
+// quoteParagraphs splits a testimonial quote on blank lines, preserving the
+// author's original paragraph breaks.
+func quoteParagraphs(s string) []string {
+	return strings.Split(strings.TrimSpace(s), "\n\n")
+}
+
 // levelClass returns the CSS modifier class for a skill level string.
 func levelClass(level string) string {
 	switch level {
@@ -395,18 +401,19 @@ func certGroupID(g CertGroup) string {
 
 // TemplateData is the top-level data passed to the HTML template.
 type TemplateData struct {
-	Basics          Basics
-	EmployerGroups  []EmployerGroup
-	Projects        []Project
-	SkillSets       []SkillSet
-	SkillList       []SkillItem
-	Certificates    []Certificate
-	CertGroups      []CertGroup
-	Education       []Education
-	Languages       []Language
-	Interests       []Interest
-	Testimonials    []Testimonial
-	ShowProfile     bool
-	GoogleFontsLink template.HTML
-	NameFontCSS     template.CSS
+	Basics           Basics
+	EmployerGroups   []EmployerGroup
+	Projects         []Project
+	SkillSets        []SkillSet
+	SkillList        []SkillItem
+	Certificates     []Certificate
+	CertGroups       []CertGroup
+	Education        []Education
+	Languages        []Language
+	Interests        []Interest
+	Testimonials     []Testimonial
+	ShowProfile      bool
+	ShowTestimonials bool
+	GoogleFontsLink  template.HTML
+	NameFontCSS      template.CSS
 }

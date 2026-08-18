@@ -544,6 +544,7 @@ const resumeTemplate = `<!DOCTYPE html>
     </div>
   </section>
 
+  {{- if .ShowTestimonials}}
   <section class="references">
     <div class="section-intro">
       <div class="section-label">References</div>
@@ -555,6 +556,7 @@ const resumeTemplate = `<!DOCTYPE html>
     {{- end}}
     {{- end}}
   </section>
+  {{- end}}
 
 </div>
 <script>
@@ -684,7 +686,13 @@ const resumeTemplate = `<!DOCTYPE html>
 
 {{define "testimonial"}}
     <div class="testimonial">
-      <blockquote>&#8220;{{.Quote}}&#8221;</blockquote>
+      <blockquote>
+        {{- $paras := quoteParagraphs .Quote}}
+        {{- range $i, $p := $paras}}
+        {{- if gt $i 0}}<br>{{end}}
+        {{- if eq $i 0}}&#8220;{{end}}{{$p}}{{- if eq $i (sub (len $paras) 1)}}&#8221;{{end}}
+        {{- end}}
+      </blockquote>
       <cite>
         {{- if .URL}}<a href="{{.URL}}">{{.Name}} &middot; {{.Role}}</a>
         {{- else}}{{.Name}} &middot; {{.Role}}
