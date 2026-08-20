@@ -70,6 +70,7 @@ work:
       - SME for Linux agent behavior, packaging, and PAM internals
       - Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed
       - Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10+ Linux distributions spanning RHEL 7 to Ubuntu 22.04
+      - Maintained the NodeJS legacy monolith most services still routed through as functionality was spun off into Go microservices
     location: Longmont, CO
     keywords:
       - Golang
@@ -79,6 +80,7 @@ work:
       - Docker
       - GitHub
       - AWS
+      - NodeJS
   - employer: ObjectRocket
     employerGroup: Rackspace
     position: Software Developer
@@ -490,6 +492,7 @@ skills:
         - Python
         - TypeScript
         - React
+        - NodeJS
     - name: Infrastructure & Cloud
       skills:
         - Docker
