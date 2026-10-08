@@ -242,8 +242,8 @@
 
   .skills-domains {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px 40px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 20px;
   }
 
   .skill-group-label {
@@ -320,7 +320,7 @@
     padding-bottom: 4px;
   }
   .skill-cat-label { font-weight: 600; color: var(--black); }
-  .skill-cat-list { color: var(--ink); }
+  .skill-cat-list { color: var(--ink); margin: 2px 0 0 12px; }
 
   .project-highlights { margin-top: 4px; }
   .project-highlights li { font-size: 0.78rem; }
@@ -389,11 +389,10 @@
     .section-label        { break-after: avoid; page-break-after: avoid; }
     header                { page-break-after: avoid; }
 
-    body { font-feature-settings: normal; }
+    body { font-feature-settings: 'dlig' 0, 'calt' 0, 'ss01' 0, 'ss04' 0, 'ss07' 0; font-variant-ligatures: none; }
     .screen-only { display: none; }
 
-     
-    .skills-domains { grid-template-columns: 1fr; gap: 3px; }
+    .skills-domains { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 20px; }
     .projects-grid  { grid-template-columns: 1fr; gap: 2px; }
     .footer-grid    { grid-template-columns: 1fr; gap: 10px 0; }
 
@@ -423,7 +422,6 @@
     .print-merge .job-meta { display: none; }
     .print-merge .highlights { margin-top: 2px; }
 
-    .references { display: none; }
     .print-hidden { display: none; }
   }
 
@@ -468,7 +466,28 @@
   <section class="summary">
     <div class="section-intro">
       <div class="section-label">Profile</div>
-      <p>15 years&nbsp;in technology:&nbsp;9&nbsp;as&nbsp;a software engineer&nbsp;and&nbsp;6&nbsp;as&nbsp;a Linux systems administrator. Extensive experience&nbsp;in&nbsp;Go&nbsp;and Python,&nbsp;with recent TypeScript work;&nbsp;I&nbsp;own problems end-to-end, write testable code,&nbsp;and focus&nbsp;on reliability, security,&nbsp;and developer productivity.&nbsp;I&nbsp;pick&nbsp;up&nbsp;new languages quickly&nbsp;and&nbsp;have&nbsp;a track record&nbsp;of doing&nbsp;so&nbsp;on&nbsp;the&nbsp;job; currently picking&nbsp;up&nbsp;Rust&nbsp;and exploring Elixir.&nbsp;My&nbsp;open source&nbsp;time&nbsp;goes&nbsp;into personal finance tooling.</p>
+      <p>Senior software engineer&nbsp;with&nbsp;15 years&nbsp;in technology, including&nbsp;9&nbsp;in software engineering. Extensive&nbsp;Go&nbsp;and Python experience&nbsp;with shipped React&nbsp;and TypeScript contributions&nbsp;to Actual Budget.&nbsp;Uses Claude&nbsp;Code&nbsp;and Codex&nbsp;for implementation, debugging,&nbsp;and&nbsp;test development; coordinates multiple&nbsp;AI agents&nbsp;and models while retaining ownership&nbsp;of architecture&nbsp;and validation.</p>
+    </div>
+  </section>
+  <section>
+    <div class="section-intro">
+      <div class="section-label">Open-source development</div>
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title"><a href="https://github.com/actualbudget/actual">Actual Budget</a></div>
+          <div class="job-dates"><time title="September 19, 2025">Sep 2025 - Present</time></div>
+        </div>
+        <div class="job-meta">Contributor &middot; Open source</div>
+        <div class="job-summary">Local-first personal finance app built with React and TypeScript. 34 merged pull requests. Current currency-system work is in progress and unpublished.</div>
+        <ul class="highlights">
+          <li>Shipped 14 merged pull requests since May 2026 with Claude Code and Codex, reviewing and testing generated code</li>
+          <li>Improved budgeting and transaction workflows by building user-facing features in React and TypeScript</li>
+          <li>Expanded financial-data handling through currency utilities, import integrations, and supporting automation tools</li>
+          <li>Improved frontend verification through Playwright coverage and parallel local end-to-end testing</li>
+          <li>Developing decimal-precision support to address currency-display bugs and enable account-level currencies and multicurrency budgeting</li>
+          <li>Coordinating multiple AI agents and models across design, implementation, review, and verification while owning architecture and validation</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -498,7 +517,7 @@
           <li>Integrated AI assistance into workflow, cutting research and PoC development time by an estimated 25-50%</li>
           <li>Used AI to build Linux PAM module and tray app for on-device password management to reach UX parity with Windows and macOS</li>
         </ul>
-        <div class="tags"><span class="tag">MongoDB</span><span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">AI</span><span class="tag">AWS</span><span class="tag">PostgreSQL</span><span class="tag">LLMs</span><span class="tag">Golang</span><span class="tag">GitHub</span>
+        <div class="tags"><span class="tag">GitHub</span><span class="tag">LLMs</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">AI</span><span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">Golang</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -516,7 +535,7 @@
           <li>Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10&#43; Linux distributions spanning RHEL 7 to Ubuntu 22.04</li>
           <li>Maintained the NodeJS legacy monolith most services still routed through as functionality was spun off into Go microservices</li>
         </ul>
-        <div class="tags"><span class="tag">Linux</span><span class="tag">GitHub</span><span class="tag">AWS</span><span class="tag">gRPC</span><span class="tag">Golang</span><span class="tag">Docker</span><span class="tag">NodeJS</span><span class="tag">Python</span>
+        <div class="tags"><span class="tag">Linux</span><span class="tag">GitHub</span><span class="tag">Docker</span><span class="tag">Python</span><span class="tag">gRPC</span><span class="tag">NodeJS</span><span class="tag">Golang</span><span class="tag">AWS</span>
         </div>
       </div>
     </div>
@@ -541,7 +560,7 @@
         <ul class="highlights">
           <li>Built and maintained Python services and libraries; shipped features across 12&#43; Go microservices deployed on Docker, OpenShift, and Kubernetes</li>
         </ul>
-        <div class="tags"><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Golang</span><span class="tag">Kubernetes</span><span class="tag">Python</span>
+        <div class="tags"><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">Python</span><span class="tag">Golang</span><span class="tag">Kubernetes</span>
         </div>
       </div>
       <div class="position-divider"></div>
@@ -559,7 +578,7 @@
           <li>Led team to implement better checks and consistency to improve and maintain code quality</li>
           <li>Worked with UK-based team as sole US member</li>
         </ul>
-        <div class="tags"><span class="tag">Docker</span><span class="tag">Ansible</span><span class="tag">Python</span><span class="tag">GitHub</span><span class="tag">Jenkins</span>
+        <div class="tags"><span class="tag">Jenkins</span><span class="tag">Python</span><span class="tag">GitHub</span><span class="tag">Ansible</span><span class="tag">Docker</span>
         </div>
       </div>
       <div class="position-divider print-merge-divider"></div>
@@ -579,7 +598,7 @@
         </div>
       </div>
       <div class="position-divider"></div>
-      <div class="job">
+      <div class="job print-condense">
         <div class="job-header">
           <span class="job-title">Linux System Administrator I</span>
           <span class="job-dates"><span class="screen-only"><time title="May 16, 2015">May 2015</time> - <time title="June 3, 2017">Jun 2017</time></span><span class="print-only">Jan 2014 - Jun 2017</span>
@@ -592,11 +611,11 @@
           <li>Built a custom UI surfacing upcoming services from the maintenance calendar backend</li>
           <li>Developed an auto-numbering tool for maintenance templates using React</li>
         </ul>
-        <div class="tags"><span class="tag">Flask</span><span class="tag">Linux</span><span class="tag">Python</span><span class="tag">React</span><span class="tag">Bash</span>
+        <div class="tags"><span class="tag">Flask</span><span class="tag">React</span><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">Bash</span>
         </div>
       </div>
       <div class="position-divider print-merge-divider"></div>
-      <div class="job print-merge">
+      <div class="job print-condense print-merge">
         <div class="job-header">
           <span class="job-title">Linux System Administrator I</span>
           <span class="job-dates"><time title="January 6, 2014">Jan 2014</time> - <time title="May 15, 2015">May 2015</time>
@@ -622,7 +641,7 @@
         </div>
         <span class="job-dates"><time title="April 1, 2011">Apr 2011</time> - <time title="December 30, 2013">Dec 2013</time></span>
       </div>
-      <div class="job">
+      <div class="job print-condense">
         <div class="job-header">
           <span class="job-title">Linux System Administrator</span>
           <span class="job-dates"><span class="screen-only"><time title="July 1, 2013">Jul 2013</time> - <time title="December 30, 2013">Dec 2013</time></span><span class="print-only">Apr 2011 - Dec 2013</span>
@@ -635,11 +654,11 @@
           <li>Designed Puppet configuration management to maintain and deploy to development and production servers</li>
           <li>Maintained and automated servers supporting Drupal multisite deployments with LAMP stack on physical and virtual hosts, and Apache Solr search indexes</li>
         </ul>
-        <div class="tags"><span class="tag">Linux</span><span class="tag">Git</span><span class="tag">Drupal</span><span class="tag">Vagrant</span><span class="tag">Puppet</span>
+        <div class="tags"><span class="tag">Puppet</span><span class="tag">Vagrant</span><span class="tag">Linux</span><span class="tag">Drupal</span><span class="tag">Git</span>
         </div>
       </div>
       <div class="position-divider print-merge-divider"></div>
-      <div class="job print-merge">
+      <div class="job print-condense print-merge">
         <div class="job-header">
           <span class="job-title">Junior Linux Systems Administrator</span>
           <span class="job-dates"><time title="April 1, 2011">Apr 2011</time> - <time title="July 1, 2013">Jul 2013</time>
@@ -651,7 +670,7 @@
           <li>Maintained CentOS servers supporting 30&#43; websites for the K4Health project</li>
           <li>Hired as a contractor; brought on as full-time employee within 6 months</li>
         </ul>
-        <div class="tags"><span class="tag">Linux</span><span class="tag">CentOS</span><span class="tag">Drupal</span>
+        <div class="tags"><span class="tag">CentOS</span><span class="tag">Linux</span><span class="tag">Drupal</span>
         </div>
       </div>
     </div>
@@ -661,24 +680,28 @@
   <section>
     <div class="section-intro">
       <div class="section-label">Skills</div>
-      <div class="skills-domains">
+      <dl class="skills-domains">
       <div class="skill-cat">
-        <span class="skill-cat-label">Databases:</span>
-        <span class="skill-cat-list">MongoDB, PostgreSQL, SQLite</span>
-      </div>
-      <div class="skill-cat">
-        <span class="skill-cat-label">Systems:</span>
-        <span class="skill-cat-list">Bash, Git, Linux</span>
+        <dt class="skill-cat-label">AI development</dt>
+        <dd class="skill-cat-list">AI-assisted development, Claude Code, Codex</dd>
       </div>
       <div class="skill-cat">
-        <span class="skill-cat-label">Languages:</span>
-        <span class="skill-cat-list">Golang, Python, React, TypeScript, NodeJS</span>
+        <dt class="skill-cat-label">Databases</dt>
+        <dd class="skill-cat-list">MongoDB, PostgreSQL, SQLite</dd>
       </div>
       <div class="skill-cat">
-        <span class="skill-cat-label">Infrastructure &amp; Cloud:</span>
-        <span class="skill-cat-list">Ansible, Docker, AWS, Kubernetes</span>
+        <dt class="skill-cat-label">Systems</dt>
+        <dd class="skill-cat-list">Bash, Git, Linux</dd>
       </div>
+      <div class="skill-cat">
+        <dt class="skill-cat-label">Languages</dt>
+        <dd class="skill-cat-list">Golang, Python, React, TypeScript, NodeJS</dd>
       </div>
+      <div class="skill-cat">
+        <dt class="skill-cat-label">Infrastructure &amp; Cloud</dt>
+        <dd class="skill-cat-list">Ansible, Docker, AWS, Kubernetes</dd>
+      </div>
+      </dl>
     </div>
   </section>
 
@@ -687,21 +710,12 @@
       <div class="section-label">Projects</div>
       <div class="projects-grid">
         <div class="project">
-          <div class="project-name"><a href="https://github.com/actualbudget/actual">Actual Budget</a>
-          </div>
-          <div class="project-desc">Local-first personal finance app (TypeScript/React, 26k&#43; stars). Active contributor since 2025 with 35&#43; merged PRs.</div>
-          <ul class="highlights project-highlights"><li>Currency-precision helpers and dynamic currency display options for international users</li><li>Added BALANCE_OF() formula, drag-and-drop reordering, nYNAB scheduled imports, and CSV line-trim</li><li>Built multi-account import plugin and custom theming support</li>
-          </ul>
-          <div class="project-tags"><span class="tag">Node.js</span><span class="tag">Open Source</span><span class="tag">React</span><span class="tag">TypeScript</span>
-          </div>
-        </div>
-        <div class="project">
           <div class="project-name"><a href="https://github.com/pydantic/pydantic">Pydantic</a>
           </div>
           <div class="project-desc">Python data validation library (28k&#43; stars). Contributed 8 PRs from 2019 to 2020.</div>
           <ul class="highlights project-highlights"><li>5% parse speed gain by switching from type() calls to __class__ attribute lookup</li><li>Added subclass encoder support so subclasses of known types serialize with their parent&#39;s encoder</li><li>Introduced JSON benchmark suite, voluptuous comparison benchmark, and docs example linting</li>
           </ul>
-          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">Python</span><span class="tag">Performance</span>
+          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">Performance</span><span class="tag">Python</span>
           </div>
         </div>
         <div class="project">
@@ -710,7 +724,7 @@
           <div class="project-desc">Linux NAS platform built on BTRFS with Python and Django. Contributor across 4 repos (core, plugin registry, validator, dev env) with 9 merged PRs from 2020 to 2023.</div>
           <ul class="highlights project-highlights"><li>Added ZSTD compression option for BTRFS storage pools</li><li>Added Jellyfin and FileBot Node plugins to the RockOn plugin registry</li><li>Wrote go rockon-validator to standardize formatting and validation of JSON app configuration profiles</li>
           </ul>
-          <div class="project-tags"><span class="tag">BTRFS</span><span class="tag">Open Source</span><span class="tag">Linux</span><span class="tag">Python</span><span class="tag">NAS</span>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">BTRFS</span><span class="tag">Open Source</span><span class="tag">Linux</span><span class="tag">NAS</span>
           </div>
         </div>
         <div class="project print-hidden">
@@ -719,7 +733,7 @@
           <div class="project-desc">Home automation platform (87k&#43; stars). Contributed 3 PRs in February 2024.</div>
           <ul class="highlights project-highlights"><li>Added icon translations to the Teslemetry integration in the core codebase</li><li>Added health category listing and documentation page for the Airthings integration</li>
           </ul>
-          <div class="project-tags"><span class="tag">Home Automation</span><span class="tag">Open Source</span><span class="tag">Python</span>
+          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">Python</span><span class="tag">Home Automation</span>
           </div>
         </div>
         <div class="project print-hidden">
@@ -746,7 +760,7 @@
           <div class="project-desc">Open-source self-hosted recipe manager. Contributed 2 PRs in 2021-2022.</div>
           <ul class="highlights project-highlights"><li>Added time unit hint to the recipe edit view for clearer user input</li><li>Fixed Make_Header and Make_Ingredient text and template reference</li>
           </ul>
-          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">Django</span><span class="tag">Python</span>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">Django</span><span class="tag">Open Source</span>
           </div>
         </div>
         <div class="project print-hidden">
@@ -755,7 +769,7 @@
           <div class="project-desc">Python import sorter (6k&#43; stars). Contributed 3 PRs from 2019 to 2020.</div>
           <ul class="highlights project-highlights"><li>Implemented --ensure-newline-before-comments end-to-end: argument parsing, sorting logic, and Black profile entry.</li><li>Fixed list value handling when reading settings from TOML config files</li>
           </ul>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">Open Source</span><span class="tag">CLI</span>
+          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">CLI</span><span class="tag">Python</span>
           </div>
         </div>
         <div class="project print-hidden">
@@ -764,7 +778,7 @@
           <div class="project-desc">Open-source CGM monitoring ecosystem (cgm-remote-monitor, AndroidAPS, dexcom_reader, AndroidAPSdocs). Contributed 4 PRs in 2020-2021.</div>
           <ul class="highlights project-highlights"><li>Fixed sign error in bolus wizard timeshift result in AndroidAPS</li><li>Updated dexcom_reader for Python 3 compatibility; added device pairing instructions to AndroidAPSdocs</li>
           </ul>
-          <div class="project-tags"><span class="tag">Medical Devices</span><span class="tag">Python</span><span class="tag">Open Source</span>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">Open Source</span><span class="tag">Medical Devices</span>
           </div>
         </div>
         <div class="project print-hidden">
@@ -800,7 +814,7 @@
           <div class="project-desc">Go CLI that calculates HIFO (highest-in, first-out) cost basis from Fold Bitcoin rewards card transaction history.</div>
           <ul class="highlights project-highlights"><li>Parses Fold CSV exports and applies the HIFO accounting method for tax-optimized cost basis calculation</li>
           </ul>
-          <div class="project-tags"><span class="tag">Personal Finance</span><span class="tag">Bitcoin</span><span class="tag">Golang</span>
+          <div class="project-tags"><span class="tag">Bitcoin</span><span class="tag">Golang</span><span class="tag">Personal Finance</span>
           </div>
         </div>
         <div class="project print-hidden">
@@ -827,7 +841,7 @@
           <div class="project-desc">Go library for parsing and manipulating PAM (Pluggable Authentication Modules) configuration files.</div>
           <ul class="highlights project-highlights"><li>Part of PAM module research at JumpCloud; parses and modifies /etc/pam.d/ configs programmatically</li>
           </ul>
-          <div class="project-tags"><span class="tag">Golang</span><span class="tag">Linux</span><span class="tag">Security</span>
+          <div class="project-tags"><span class="tag">Linux</span><span class="tag">Golang</span><span class="tag">Security</span>
           </div>
         </div>
       </div>

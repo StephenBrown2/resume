@@ -59,6 +59,18 @@ func filterProjectsSince(projects []Project, since string) []Project {
 	return out
 }
 
+// partitionProjects promotes current work without duplicating it in Projects.
+func partitionProjects(projects []Project) (featured, other []Project) {
+	for _, project := range projects {
+		if project.Featured {
+			featured = append(featured, project)
+		} else {
+			other = append(other, project)
+		}
+	}
+	return featured, other
+}
+
 // shuffleKeywords randomises keyword order for work entries and projects.
 func shuffleKeywords(resume *Resume) {
 	for i := range resume.Work {
@@ -403,6 +415,7 @@ func certGroupID(g CertGroup) string {
 type TemplateData struct {
 	Basics           Basics
 	EmployerGroups   []EmployerGroup
+	FeaturedProjects []Project
 	Projects         []Project
 	SkillSets        []SkillSet
 	SkillList        []SkillItem

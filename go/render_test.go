@@ -2,8 +2,51 @@ package main
 
 import (
 	"html/template"
+	"reflect"
 	"testing"
 )
+
+func TestPartitionProjects(t *testing.T) {
+	tests := []struct {
+		name     string
+		projects []Project
+		featured []string
+		other    []string
+	}{
+		{name: "empty"},
+		{
+			name:     "unfeatured projects stay in order",
+			projects: []Project{{Name: "First"}, {Name: "Second"}},
+			other:    []string{"First", "Second"},
+		},
+		{
+			name: "featured projects appear once in their own section",
+			projects: []Project{
+				{Name: "Older"},
+				{Name: "Current", Featured: true},
+				{Name: "Another current", Featured: true},
+				{Name: "Other"},
+			},
+			featured: []string{"Current", "Another current"},
+			other:    []string{"Older", "Other"},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			featured, other := partitionProjects(tt.projects)
+			var featuredNames, otherNames []string
+			for _, p := range featured {
+				featuredNames = append(featuredNames, p.Name)
+			}
+			for _, p := range other {
+				otherNames = append(otherNames, p.Name)
+			}
+			if !reflect.DeepEqual(featuredNames, tt.featured) || !reflect.DeepEqual(otherNames, tt.other) {
+				t.Fatalf("got featured %v, other %v; want featured %v, other %v", featuredNames, otherNames, tt.featured, tt.other)
+			}
+		})
+	}
+}
 
 // ── groupWork ────────────────────────────────────────────────────────────────
 

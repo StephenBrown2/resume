@@ -51,23 +51,24 @@ type Relocation struct {
 }
 
 type WorkEntry struct {
-	Employer      string   `yaml:"employer"`
-	EmployerGroup string   `yaml:"employerGroup"`
-	Position      string   `yaml:"position"`
-	CondensePrint bool     `yaml:"condensePrint"`
-	MergePrintPrev bool    `yaml:"mergePrintPrev"`
-	PrintDates    string   `yaml:"printDates"`
-	URL           string   `yaml:"url"`
-	StartDate     string   `yaml:"startDate"`
-	EndDate       string   `yaml:"endDate"`
-	Summary       string   `yaml:"summary"`
-	Location      string   `yaml:"location"`
-	Highlights    []string `yaml:"highlights"`
-	Keywords      []string `yaml:"keywords"`
+	Employer       string   `yaml:"employer"`
+	EmployerGroup  string   `yaml:"employerGroup"`
+	Position       string   `yaml:"position"`
+	CondensePrint  bool     `yaml:"condensePrint"`
+	MergePrintPrev bool     `yaml:"mergePrintPrev"`
+	PrintDates     string   `yaml:"printDates"`
+	URL            string   `yaml:"url"`
+	StartDate      string   `yaml:"startDate"`
+	EndDate        string   `yaml:"endDate"`
+	Summary        string   `yaml:"summary"`
+	Location       string   `yaml:"location"`
+	Highlights     []string `yaml:"highlights"`
+	Keywords       []string `yaml:"keywords"`
 }
 
 type Project struct {
 	Name        string   `yaml:"name"`
+	Featured    bool     `yaml:"featured"`
 	Description string   `yaml:"description"`
 	URL         string   `yaml:"url"`
 	Type        string   `yaml:"type"`

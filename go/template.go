@@ -230,8 +230,8 @@ const resumeTemplate = `<!DOCTYPE html>
 
   .skills-domains {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px 40px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 20px;
   }
 
   .skill-group-label {
@@ -308,7 +308,7 @@ const resumeTemplate = `<!DOCTYPE html>
     padding-bottom: 4px;
   }
   .skill-cat-label { font-weight: 600; color: var(--black); }
-  .skill-cat-list { color: var(--ink); }
+  .skill-cat-list { color: var(--ink); margin: 2px 0 0 12px; }
 
   .project-highlights { margin-top: 4px; }
   .project-highlights li { font-size: 0.78rem; }
@@ -377,11 +377,10 @@ const resumeTemplate = `<!DOCTYPE html>
     .section-label        { break-after: avoid; page-break-after: avoid; }
     header                { page-break-after: avoid; }
 
-    body { font-feature-settings: normal; }
+    body { font-feature-settings: 'dlig' 0, 'calt' 0, 'ss01' 0, 'ss04' 0, 'ss07' 0; font-variant-ligatures: none; }
     .screen-only { display: none; }
 
-    /* Strict single column for ATS linear parsing. */
-    .skills-domains { grid-template-columns: 1fr; gap: 3px; }
+    .skills-domains { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 20px; }
     .projects-grid  { grid-template-columns: 1fr; gap: 2px; }
     .footer-grid    { grid-template-columns: 1fr; gap: 10px 0; }
 
@@ -411,7 +410,6 @@ const resumeTemplate = `<!DOCTYPE html>
     .print-merge .job-meta { display: none; }
     .print-merge .highlights { margin-top: 2px; }
 
-    .references { display: none; }
     .print-hidden { display: none; }
   }
 
@@ -461,6 +459,29 @@ const resumeTemplate = `<!DOCTYPE html>
   </section>
   {{- end}}
 
+  {{- if .FeaturedProjects}}
+  <section>
+    <div class="section-intro">
+      <div class="section-label">Open-source development</div>
+      {{- range .FeaturedProjects}}
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">{{if .URL}}<a href="{{.URL}}">{{.Name}}</a>{{else}}{{.Name}}{{end}}</div>
+          <div class="job-dates"><time{{if fullDateRange .StartDate .EndDate}} title="{{fullDateRange .StartDate .EndDate}}"{{end}}>{{formatDate .StartDate}} - {{formatDate .EndDate}}</time></div>
+        </div>
+        <div class="job-meta">{{range $i, $role := .Roles}}{{if $i}}, {{end}}{{$role}}{{end}} &middot; Open source</div>
+        <div class="job-summary">{{.Description}}</div>
+        <ul class="highlights">
+          {{- range $i, $highlight := .Highlights}}
+          <li{{if ge $i 6}} class="screen-only"{{end}}>{{$highlight}}</li>
+          {{- end}}
+        </ul>
+      </div>
+      {{- end}}
+    </div>
+  </section>
+  {{- end}}
+
   <section>
     <div class="section-intro">
       <div class="section-label">Experience</div>
@@ -477,14 +498,14 @@ const resumeTemplate = `<!DOCTYPE html>
   <section>
     <div class="section-intro">
       <div class="section-label">Skills</div>
-      <div class="skills-domains">
+      <dl class="skills-domains">
       {{- range .SkillSets}}
       <div class="skill-cat">
-        <span class="skill-cat-label">{{.Name}}:</span>
-        <span class="skill-cat-list">{{range $i, $s := .Skills}}{{if $i}}, {{end}}{{$s}}{{end}}</span>
+        <dt class="skill-cat-label">{{.Name}}</dt>
+        <dd class="skill-cat-list">{{range $i, $s := .Skills}}{{if $i}}, {{end}}{{$s}}{{end}}</dd>
       </div>
       {{- end}}
-      </div>
+      </dl>
     </div>
   </section>
 
@@ -493,7 +514,7 @@ const resumeTemplate = `<!DOCTYPE html>
       <div class="section-label">Projects</div>
       <div class="projects-grid">
         {{- range $i, $p := .Projects}}
-        <div class="project{{if ge $i 3}} print-hidden{{end}}">
+        <div class="project{{if or (ge $i 3) (and $.FeaturedProjects (ge $i 2))}} print-hidden{{end}}">
           <div class="project-name">
             {{- if .URL}}<a href="{{.URL}}">{{.Name}}</a>{{else}}{{.Name}}{{end}}
           </div>

@@ -6,13 +6,11 @@ basics:
   phone: (443) 219-4559
   url: https://stephenbrown2.github.io/resume
   summary: >-
-    15 years in technology: 9 as a software engineer and 6 as a Linux systems
-    administrator. Extensive experience in Go and Python, with recent TypeScript
-    work; I own problems end-to-end, write testable code, and focus on
-    reliability, security, and developer productivity. I pick up new languages
-    quickly and have a track record of doing so on the job; currently picking
-    up Rust and exploring Elixir. My open source time goes into personal
-    finance tooling.
+    Senior software engineer with 15 years in technology, including 9 in software
+    engineering. Extensive Go and Python experience with shipped React and
+    TypeScript contributions to Actual Budget. Uses Claude Code and Codex for
+    implementation, debugging, and test development; coordinates multiple AI
+    agents and models while retaining ownership of architecture and validation.
   location:
     city: Delaware
     region: OH
@@ -134,6 +132,7 @@ work:
   - employer: Rackspace US, Inc.
     employerGroup: Rackspace
     position: Linux System Administrator I
+    condensePrint: true
     url: https://rackspace.com
     startDate: "2015-05-16"
     endDate: "2017-06-03"
@@ -153,6 +152,7 @@ work:
     employerGroup: Rackspace
     position: Linux System Administrator I
     mergePrintPrev: true
+    condensePrint: true
     url: https://rackspace.com
     startDate: "2014-01-06"
     endDate: "2015-05-15"
@@ -167,6 +167,7 @@ work:
       - Python
   - employer: "Johns Hopkins Center for Communication Programs"
     position: Linux System Administrator
+    condensePrint: true
     url: https://ccp.jhu.edu
     startDate: "2013-07-01"
     endDate: "2013-12-30"
@@ -185,6 +186,7 @@ work:
   - employer: "Johns Hopkins Center for Communication Programs"
     position: Junior Linux Systems Administrator
     mergePrintPrev: true
+    condensePrint: true
     url: https://ccp.jhu.edu
     startDate: "2011-04-01"
     endDate: "2013-07-01"
@@ -241,18 +243,24 @@ work:
       - Customer Service
 projects:
   - name: Actual Budget
-    description: Local-first personal finance app (TypeScript/React, 26k+ stars). Active contributor since 2025 with 35+ merged PRs.
+    featured: true
+    description: Local-first personal finance app built with React and TypeScript. 34 merged pull requests. Current currency-system work is in progress and unpublished.
     highlights:
-      - Currency-precision helpers and dynamic currency display options for international users
-      - Added BALANCE_OF() formula, drag-and-drop reordering, nYNAB scheduled imports, and CSV line-trim
-      - Built multi-account import plugin and custom theming support
+      - Shipped 14 merged pull requests since May 2026 with Claude Code and Codex, reviewing and testing generated code
+      - Improved budgeting and transaction workflows by building user-facing features in React and TypeScript
+      - Expanded financial-data handling through currency utilities, import integrations, and supporting automation tools
+      - Improved frontend verification through Playwright coverage and parallel local end-to-end testing
+      - Developing decimal-precision support to address currency-display bugs and enable account-level currencies and multicurrency budgeting
+      - Coordinating multiple AI agents and models across design, implementation, review, and verification while owning architecture and validation
     keywords:
       - TypeScript
       - React
       - Node.js
+      - Claude Code
+      - Codex
+      - Playwright
       - Open Source
     startDate: "2025-09-19"
-    endDate: "2026-06-10"
     url: https://github.com/actualbudget/actual
     roles:
       - Contributor
@@ -476,6 +484,11 @@ projects:
     type: side-project
 skills:
   sets:
+    - name: AI development
+      skills:
+        - AI-assisted development
+        - Claude Code
+        - Codex
     - name: Databases
       skills:
         - PostgreSQL
@@ -500,6 +513,12 @@ skills:
         - AWS
         - Ansible
   list:
+    - name: AI-assisted development
+      summary: Direct multiple AI agents and models through design, implementation, code review, and verification
+    - name: Claude Code
+      summary: Use coding agents for implementation, debugging, and test development with human review and validation
+    - name: Codex
+      summary: Use coding agents for implementation, review, and verification of React and TypeScript contributions
     - name: Bash
       level: Advanced
       summary: Write reliable shell scripts for automation and operational tasks

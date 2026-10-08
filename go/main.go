@@ -77,11 +77,13 @@ func main() {
 	}
 	groups := groupWork(work)
 	computePrintDates(groups)
+	featuredProjects, otherProjects := partitionProjects(projects)
 
 	tmplData := TemplateData{
 		Basics:           resume.Basics,
 		EmployerGroups:   groups,
-		Projects:         projects,
+		FeaturedProjects: featuredProjects,
+		Projects:         otherProjects,
 		SkillSets:        resume.Skills.Sets,
 		SkillList:        resume.Skills.List,
 		Certificates:     resume.Certificates,
