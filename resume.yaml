@@ -6,11 +6,11 @@ basics:
   phone: (443) 219-4559
   url: https://stephenbrown2.github.io/resume
   summary: >-
-    Senior software engineer with 15 years in technology, including 9 in software
-    engineering. Extensive Go and Python experience with shipped React and
-    TypeScript contributions to Actual Budget. Uses Claude Code and Codex for
-    implementation, debugging, and test development; coordinates multiple AI
-    agents and models while retaining ownership of architecture and validation.
+    Software engineer and Linux systems administrator with 15 years of experience,
+    specializing in Go, Python, and TypeScript. Delivers secure, reliable, and
+    testable code with end-to-end ownership and a focus on developer productivity.
+    Uses Claude Code and Codex for implementation, review, and verification,
+    including multi-agent coordination and shipped React features for Actual Budget.
   location:
     city: Delaware
     region: OH
@@ -39,13 +39,14 @@ work:
     endDate: "2026-05-18"
     summary: ""
     highlights:
-      - Served as primary technical resource for dozens of engineers across design and implementation; directly mentored several with specific guidance on Go, Linux, and security best practices
-      - Raised code quality across 20+ repositories with review standards and shared tooling adopted by teams across 250+ engineer org, increasing velocity incrementally while reducing defects and rework
-      - Designed and led a tamper-resistance and uninstall-protection initiative spanning all OSes
-      - Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime
-      - Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%
-      - Integrated AI assistance into workflow, cutting research and PoC development time by an estimated 25-50%
-      - Used AI to build Linux PAM module and tray app for on-device password management to reach UX parity with Windows and macOS
+      - Hardened agent security for approximately 800,000 managed devices by encrypting sensitive fields without migration downtime
+      - Designed and led a tamper-resistance and uninstall-protection initiative across all operating systems
+      - Raised code quality across 20+ repositories through review standards and shared tooling adopted within a 250+ engineer organization, reducing defects and rework
+      - Served as the primary Linux technical resource during design and implementation
+      - Mentored junior developers on code quality, version control, and security best practices
+      - Developed a Linux PAM module and tray application using AI for on-device password management, achieving user experience parity with Windows and macOS
+      - Integrated AI assistance into workflows, reducing research and proof-of-concept development time by an estimated 25-50%
+      - Modernized CI/CD with self-hosted runners, eliminating VPN dependency and reducing build wait time by up to 30%
     location: Remote
     keywords:
       - Golang
@@ -64,11 +65,11 @@ work:
     endDate: "2022-10-03"
     summary: ""
     highlights:
-      - Founded a Linux-focused team (grew from 3 to 6 engineers) implementing features across device agent and backend services
-      - SME for Linux agent behavior, packaging, and PAM internals
-      - Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed
-      - Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10+ Linux distributions spanning RHEL 7 to Ubuntu 22.04
-      - Maintained the NodeJS legacy monolith most services still routed through as functionality was spun off into Go microservices
+      - Founded a Linux-focused team, expanding from 3 to 6 engineers to implement features across device agent and backend services
+      - Served as subject matter expert on Linux agent behavior, packaging, and PAM internals
+      - Developed and maintained a Go on-device agent using gRPC and Protobuf, serving approximately 75,000 Linux devices within a fleet of 750,000 managed devices
+      - Introduced Zig-based static compilation to enable amd64 and arm64 support across 10+ Linux distributions
+      - Maintained the Node.js legacy monolith, preserving service routing while functionality transitioned to Go microservices
     location: Longmont, CO
     keywords:
       - Golang
@@ -87,7 +88,8 @@ work:
     endDate: "2021-05-01"
     summary: ""
     highlights:
-      - Built and maintained Python services and libraries; shipped features across 12+ Go microservices deployed on Docker, OpenShift, and Kubernetes
+      - Created and maintained Python services and libraries, delivering features across 12+ Go microservices deployed on Docker, OpenShift, and Kubernetes
+      - Improved software reliability through code reviews, coding standards, and static analysis tools
     location: Remote
     keywords:
       - Golang
@@ -103,10 +105,10 @@ work:
     endDate: "2019-10-01"
     summary: "Global Linux Automation Engineers"
     highlights:
-      - Maintained framework application for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Python client library)
-      - Implemented and configured deployment tools using Docker, Ansible, and Jenkins; designed and built Jenkins 2.x Pipeline for PR testing
-      - Led team to implement better checks and consistency to improve and maintain code quality
-      - Worked with UK-based team as sole US member
+      - Maintained a framework for employee-contributed tools with a unified UI and deployment system using JavaScript, HTML, CSS, Python, Flask, and MySQL
+      - Configured deployment tools using Docker, Ansible, and Jenkins, and designed Jenkins 2.x Pipeline for pull request testing
+      - Conducted code reviews and provided feedback to establish best practices and maintain code quality
+      - Collaborated with a UK-based team as the sole US member
     location: Remote
     keywords:
       - Python
@@ -123,8 +125,9 @@ work:
     endDate: "2018-09-10"
     summary: "Global SysAd Maintenance Team"
     highlights:
-      - Automated migration of scheduled maintenances to consolidate calendars, saving weeks of manual work
-      - Inverted traditional scheduling process to improve customer experience
+      - Implemented an automated migration of scheduled maintenances to consolidate calendars, saving weeks of manual work
+      - Reversed the traditional scheduling process to improve customer experience
+      - Built reusable Python automation scripts to streamline routine infrastructure tasks and reduce manual intervention
     location: San Antonio, TX
     keywords:
       - Python
@@ -138,9 +141,9 @@ work:
     endDate: "2017-06-03"
     summary: "Global SysAd Maintenance Team"
     highlights:
-      - Contributed multiple features to team's jinja2-based templating system
-      - Built a custom UI surfacing upcoming services from the maintenance calendar backend
-      - Developed an auto-numbering tool for maintenance templates using React
+      - Automated VM migration and restoration with custom shell scripts, reducing downtime and simplifying maintenance
+      - Developed a custom UI to display upcoming services from the maintenance calendar backend
+      - Implemented maintenance-template features with Jinja2 and a React tool for automatic numbering
     location: San Antonio, TX
     keywords:
       - Linux
@@ -158,8 +161,8 @@ work:
     endDate: "2015-05-15"
     summary: "Global Technical Support - Enterprise (2nd shift)"
     highlights:
-      - Installed, configured, updated, and troubleshot services for customers including OS, web server, database, application server, and mail (Apache, MySQL, PHP, FTP, SSH, DNS)
-      - Contributed features and bug fixes to internal Python projects including a password retrieval CLI and login automation tools
+      - Installed, configured, updated, and troubleshot customer services including operating systems, web servers, databases, application servers, and mail
+      - Implemented features and resolved bugs in internal Python projects, including a password retrieval CLI and login automation tools
     location: San Antonio, TX
     keywords:
       - Linux
@@ -173,9 +176,9 @@ work:
     endDate: "2013-12-30"
     summary: Bloomberg School Of Public Health, Knowledge for Health Project
     highlights:
-      - Successfully led team to adoption of git and a development > staging > production deployment workflow
-      - Designed Puppet configuration management to maintain and deploy to development and production servers
-      - Maintained and automated servers supporting Drupal multisite deployments with LAMP stack on physical and virtual hosts, and Apache Solr search indexes
+      - Maintained and automated CentOS servers supporting Drupal multisite deployments on physical and virtual hosts, with LAMP stack and Apache Solr search indexes
+      - Designed Puppet configuration management to maintain and deploy applications on development and production servers
+      - Led team adoption of Git and a development > staging > production deployment workflow
     location: Baltimore, MD
     keywords:
       - Linux
@@ -192,7 +195,7 @@ work:
     endDate: "2013-07-01"
     summary: Bloomberg School Of Public Health, Knowledge for Health Project
     highlights:
-      - Maintained CentOS servers supporting 30+ websites for the K4Health project
+      - Maintained and automated CentOS servers hosting 30+ websites for the K4Health project
       - Hired as a contractor; brought on as full-time employee within 6 months
     location: Baltimore, MD
     keywords:
@@ -266,7 +269,7 @@ projects:
       - Contributor
     type: open-source
   - name: Pydantic
-    description: Python data validation library (28k+ stars). Contributed 8 PRs from 2019 to 2020.
+    description: Python data validation library. 8 pull requests from 2019 to 2020.
     highlights:
       - 5% parse speed gain by switching from type() calls to __class__ attribute lookup
       - Added subclass encoder support so subclasses of known types serialize with their parent's encoder
@@ -282,7 +285,7 @@ projects:
       - Contributor
     type: open-source
   - name: Rockstor
-    description: Linux NAS platform built on BTRFS with Python and Django. Contributor across 4 repos (core, plugin registry, validator, dev env) with 9 merged PRs from 2020 to 2023.
+    description: Linux NAS platform built on BTRFS, Python, and Django. 9 merged pull requests across 4 repositories.
     highlights:
       - Added ZSTD compression option for BTRFS storage pools
       - Added Jellyfin and FileBot Node plugins to the RockOn plugin registry
@@ -489,29 +492,48 @@ skills:
         - AI-assisted development
         - Claude Code
         - Codex
+        - T3 Code
     - name: Databases
       skills:
         - PostgreSQL
         - MongoDB
         - SQLite
-    - name: Systems
+        - MySQL
+    - name: Languages & frameworks
+      skills:
+        - Go
+        - Python
+        - TypeScript
+        - JavaScript
+        - React
+        - Node.js
+        - HTML
+        - CSS
+        - Flask
+    - name: Systems & cloud
       skills:
         - Linux
         - Bash
         - Git
-    - name: Languages
-      skills:
-        - Golang
-        - Python
-        - TypeScript
-        - React
-        - NodeJS
-    - name: Infrastructure & Cloud
-      skills:
         - Docker
         - Kubernetes
         - AWS
         - Ansible
+        - OpenShift
+        - Jenkins
+    - name: Architecture
+      skills:
+        - Software architecture
+        - Distributed systems
+        - API design
+        - gRPC
+        - Protobuf
+    - name: Quality
+      skills:
+        - Code review
+        - Automated testing
+        - Playwright
+        - Static analysis
   list:
     - name: AI-assisted development
       summary: Direct multiple AI agents and models through design, implementation, code review, and verification
@@ -519,11 +541,13 @@ skills:
       summary: Use coding agents for implementation, debugging, and test development with human review and validation
     - name: Codex
       summary: Use coding agents for implementation, review, and verification of React and TypeScript contributions
+    - name: T3 Code
+      summary: Coordinate AI development workflows with coding agents
     - name: Bash
       level: Advanced
       summary: Write reliable shell scripts for automation and operational tasks
       years: 15
-    - name: Golang
+    - name: Go
       level: Advanced
       summary: On-device agents and backend services; comfortable with concurrency, gRPC, and code review
       years: 6
@@ -575,6 +599,40 @@ skills:
       level: Advanced
       summary: Infrastructure configuration management
       years: 7
+    - name: JavaScript
+      summary: Build frontend workflows and maintain Node.js services
+    - name: Node.js
+      summary: Maintain service routing and develop personal-finance tooling
+    - name: HTML
+      summary: Build web interfaces and resume layouts
+    - name: CSS
+      summary: Style responsive interfaces and custom themes
+    - name: Flask
+      summary: Develop Python backends for internal tooling
+    - name: MySQL
+      summary: Maintain databases for internal web applications
+    - name: OpenShift
+      summary: Deploy services in container environments
+    - name: Jenkins
+      summary: Configure deployment pipelines and pull request testing
+    - name: Software architecture
+      summary: Own system design and implementation across device agents and backend services
+    - name: Distributed systems
+      summary: Develop device agents, backend services, and synchronization workflows
+    - name: API design
+      summary: Design interfaces for backend services and financial-data tooling
+    - name: gRPC
+      summary: Implement communication between Go device agents and backend services
+    - name: Protobuf
+      summary: Define message types for device-agent communication
+    - name: Code review
+      summary: Establish coding standards and review implementation changes
+    - name: Automated testing
+      summary: Develop regression coverage and end-to-end verification
+    - name: Playwright
+      summary: Develop frontend end-to-end tests and configure parallel local test shards
+    - name: Static analysis
+      summary: Apply static analysis tools to enforce coding standards
 certificates:
   - name: RHCE
     date: "2014-03-12"

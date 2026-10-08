@@ -151,16 +151,6 @@ const resumeTemplate = `<!DOCTYPE html>
     color: var(--muted);
   }
 
-  .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
-  .tag {
-    font-size: 0.65rem;
-    font-weight: 500;
-    color: var(--muted);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 1px 6px;
-  }
-
   .job-divider {
     border: none;
     border-top: 1px solid var(--rule);
@@ -225,8 +215,6 @@ const resumeTemplate = `<!DOCTYPE html>
   .project-name { font-size: 0.81rem; font-weight: 600; color: var(--black); margin-bottom: 3px; }
 
   .project-desc { font-size: 0.75rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
-
-  .project-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; }
 
   .skills-domains {
     display: grid;
@@ -392,16 +380,12 @@ const resumeTemplate = `<!DOCTYPE html>
     /* Contact: plain-text URLs, no network-name labels. */
     .profile-name { display: none; }
 
-    /* Drop all keyword/tag chips: non-standard for print/ATS. */
-    .tags { display: none; }
     .project { border: none; border-radius: 0; padding: 0; margin-bottom: 8px; }
-    .project-tags { display: none; }
     .oss-fold { display: block; }
 
     /* Consolidated entries: header line only, no bullets/summary. */
     .print-condense .highlights,
-    .print-condense .job-summary,
-    .print-condense .tags { display: none; }
+    .print-condense .job-summary { display: none; }
 
     /* Merged entries: fold bullets under the previous role, drop own header. */
     .print-merge-divider { display: none; }
@@ -459,29 +443,6 @@ const resumeTemplate = `<!DOCTYPE html>
   </section>
   {{- end}}
 
-  {{- if .FeaturedProjects}}
-  <section>
-    <div class="section-intro">
-      <div class="section-label">Open-source development</div>
-      {{- range .FeaturedProjects}}
-      <div class="job">
-        <div class="job-header">
-          <div class="job-title">{{if .URL}}<a href="{{.URL}}">{{.Name}}</a>{{else}}{{.Name}}{{end}}</div>
-          <div class="job-dates"><time{{if fullDateRange .StartDate .EndDate}} title="{{fullDateRange .StartDate .EndDate}}"{{end}}>{{formatDate .StartDate}} - {{formatDate .EndDate}}</time></div>
-        </div>
-        <div class="job-meta">{{range $i, $role := .Roles}}{{if $i}}, {{end}}{{$role}}{{end}} &middot; Open source</div>
-        <div class="job-summary">{{.Description}}</div>
-        <ul class="highlights">
-          {{- range $i, $highlight := .Highlights}}
-          <li{{if ge $i 6}} class="screen-only"{{end}}>{{$highlight}}</li>
-          {{- end}}
-        </ul>
-      </div>
-      {{- end}}
-    </div>
-  </section>
-  {{- end}}
-
   <section>
     <div class="section-intro">
       <div class="section-label">Experience</div>
@@ -494,6 +455,29 @@ const resumeTemplate = `<!DOCTYPE html>
     {{- end}}
     {{- end}}
   </section>
+
+  {{- if .FeaturedProjects}}
+  <section>
+    <div class="section-intro">
+      <div class="section-label">Open-source development</div>
+      {{- range .FeaturedProjects}}
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">{{if .URL}}<a href="{{.URL}}">{{.Name}}</a>{{else}}{{.Name}}{{end}}</div>
+          <div class="job-dates"><time{{if fullDateRange .StartDate .EndDate}} title="{{fullDateRange .StartDate .EndDate}}"{{end}}>{{formatDate .StartDate}} - {{formatDate .EndDate}}</time></div>
+        </div>
+        <div class="job-meta">{{range $i, $role := .Roles}}{{if $i}}, {{end}}{{$role}}{{end}}</div>
+        <div class="job-summary">{{.Description}}</div>
+        <ul class="highlights">
+          {{- range $i, $highlight := .Highlights}}
+          <li{{if ge $i 6}} class="screen-only"{{end}}>{{$highlight}}</li>
+          {{- end}}
+        </ul>
+      </div>
+      {{- end}}
+    </div>
+  </section>
+  {{- end}}
 
   <section>
     <div class="section-intro">
@@ -523,11 +507,6 @@ const resumeTemplate = `<!DOCTYPE html>
           <ul class="highlights project-highlights">
             {{- range .Highlights}}<li>{{.}}</li>{{end}}
           </ul>
-          {{- end}}
-          {{- if .Keywords}}
-          <div class="project-tags">
-            {{- range .Keywords}}<span class="tag">{{.}}</span>{{end}}
-          </div>
           {{- end}}
         </div>
         {{- end}}
@@ -666,11 +645,6 @@ const resumeTemplate = `<!DOCTYPE html>
           {{- end}}
         </ul>
         {{- end}}
-        {{- if $pos.Keywords}}
-        <div class="tags">
-          {{- range $pos.Keywords}}<span class="tag">{{.}}</span>{{end}}
-        </div>
-        {{- end}}
       </div>
       {{- end}}
     </div>
@@ -694,11 +668,6 @@ const resumeTemplate = `<!DOCTYPE html>
         <li>{{.}}</li>
         {{- end}}
       </ul>
-      {{- end}}
-      {{- if .Keywords}}
-      <div class="tags">
-        {{- range .Keywords}}<span class="tag">{{.}}</span>{{end}}
-      </div>
       {{- end}}
     </div>
     {{- end}}

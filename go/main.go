@@ -65,7 +65,6 @@ func main() {
 	sort.Slice(resume.Certificates, func(i, j int) bool {
 		return resume.Certificates[i].Date > resume.Certificates[j].Date
 	})
-	shuffleKeywords(&resume)
 	sortSkillSets(resume.Skills.Sets, resume.Skills.List)
 	sortTestimonials(resume.Testimonials)
 

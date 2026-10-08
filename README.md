@@ -87,7 +87,7 @@ go build -o resume-renderer .
 Add `--no-profile` to omit the Profile/summary section.
 
 Actual Budget is marked `featured: true` in `resume.yaml`. Featured projects
-appear in an Open-source development section before paid Experience, with
+appear in an Open-source development section after paid Experience, with
 their role and date range, and are omitted from the later Projects section.
 The printed version includes their first six highlights; the web version
 retains all highlights. Older systems-administration roles use `condensePrint`

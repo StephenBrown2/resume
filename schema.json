@@ -145,7 +145,7 @@
         "properties": {
           "name": { "type": "string", "description": "Project name. (JSON Resume: name; FRESH equivalent: title)" },
           "description": { "type": "string", "description": "Short project summary." },
-          "featured": { "type": "boolean", "description": "Show this project in Open-source development before paid Experience." },
+          "featured": { "type": "boolean", "description": "Show this project in Open-source development after paid Experience." },
           "highlights": {
             "type": "array",
             "additionalItems": false,

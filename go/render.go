@@ -2,7 +2,6 @@ package main
 
 import (
 	"html/template"
-	"math/rand/v2"
 	"slices"
 	"sort"
 	"strings"
@@ -69,20 +68,6 @@ func partitionProjects(projects []Project) (featured, other []Project) {
 		}
 	}
 	return featured, other
-}
-
-// shuffleKeywords randomises keyword order for work entries and projects.
-func shuffleKeywords(resume *Resume) {
-	for i := range resume.Work {
-		rand.Shuffle(len(resume.Work[i].Keywords), func(a, b int) {
-			resume.Work[i].Keywords[a], resume.Work[i].Keywords[b] = resume.Work[i].Keywords[b], resume.Work[i].Keywords[a]
-		})
-	}
-	for i := range resume.Projects {
-		rand.Shuffle(len(resume.Projects[i].Keywords), func(a, b int) {
-			resume.Projects[i].Keywords[a], resume.Projects[i].Keywords[b] = resume.Projects[i].Keywords[b], resume.Projects[i].Keywords[a]
-		})
-	}
 }
 
 // sortSkillSets sorts each domain's skill names by proficiency descending,

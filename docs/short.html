@@ -163,16 +163,6 @@
     color: var(--muted);
   }
 
-  .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
-  .tag {
-    font-size: 0.65rem;
-    font-weight: 500;
-    color: var(--muted);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 1px 6px;
-  }
-
   .job-divider {
     border: none;
     border-top: 1px solid var(--rule);
@@ -237,8 +227,6 @@
   .project-name { font-size: 0.81rem; font-weight: 600; color: var(--black); margin-bottom: 3px; }
 
   .project-desc { font-size: 0.75rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
-
-  .project-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; }
 
   .skills-domains {
     display: grid;
@@ -404,16 +392,12 @@
      
     .profile-name { display: none; }
 
-     
-    .tags { display: none; }
     .project { border: none; border-radius: 0; padding: 0; margin-bottom: 8px; }
-    .project-tags { display: none; }
     .oss-fold { display: block; }
 
      
     .print-condense .highlights,
-    .print-condense .job-summary,
-    .print-condense .tags { display: none; }
+    .print-condense .job-summary { display: none; }
 
      
     .print-merge-divider { display: none; }
@@ -466,28 +450,7 @@
   <section class="summary">
     <div class="section-intro">
       <div class="section-label">Profile</div>
-      <p>Senior software engineer&nbsp;with&nbsp;15 years&nbsp;in technology, including&nbsp;9&nbsp;in software engineering. Extensive&nbsp;Go&nbsp;and Python experience&nbsp;with shipped React&nbsp;and TypeScript contributions&nbsp;to Actual Budget.&nbsp;Uses Claude&nbsp;Code&nbsp;and Codex&nbsp;for implementation, debugging,&nbsp;and&nbsp;test development; coordinates multiple&nbsp;AI agents&nbsp;and models while retaining ownership&nbsp;of architecture&nbsp;and validation.</p>
-    </div>
-  </section>
-  <section>
-    <div class="section-intro">
-      <div class="section-label">Open-source development</div>
-      <div class="job">
-        <div class="job-header">
-          <div class="job-title"><a href="https://github.com/actualbudget/actual">Actual Budget</a></div>
-          <div class="job-dates"><time title="September 19, 2025">Sep 2025 - Present</time></div>
-        </div>
-        <div class="job-meta">Contributor &middot; Open source</div>
-        <div class="job-summary">Local-first personal finance app built with React and TypeScript. 34 merged pull requests. Current currency-system work is in progress and unpublished.</div>
-        <ul class="highlights">
-          <li>Shipped 14 merged pull requests since May 2026 with Claude Code and Codex, reviewing and testing generated code</li>
-          <li>Improved budgeting and transaction workflows by building user-facing features in React and TypeScript</li>
-          <li>Expanded financial-data handling through currency utilities, import integrations, and supporting automation tools</li>
-          <li>Improved frontend verification through Playwright coverage and parallel local end-to-end testing</li>
-          <li>Developing decimal-precision support to address currency-display bugs and enable account-level currencies and multicurrency budgeting</li>
-          <li>Coordinating multiple AI agents and models across design, implementation, review, and verification while owning architecture and validation</li>
-        </ul>
-      </div>
+      <p>Software engineer&nbsp;and Linux systems administrator&nbsp;with&nbsp;15 years&nbsp;of experience, specializing&nbsp;in&nbsp;Go, Python,&nbsp;and TypeScript. Delivers secure, reliable,&nbsp;and testable&nbsp;code&nbsp;with end-to-end ownership&nbsp;and&nbsp;a focus&nbsp;on developer productivity.&nbsp;Uses Claude&nbsp;Code&nbsp;and Codex&nbsp;for implementation, review,&nbsp;and verification, including multi-agent coordination&nbsp;and shipped React features&nbsp;for Actual Budget.</p>
     </div>
   </section>
 
@@ -509,16 +472,15 @@
         </div>
         <div class="job-meta"><span class="print-employer">JumpCloud &middot; </span>Remote</div>
         <ul class="highlights">
-          <li>Served as primary technical resource for dozens of engineers across design and implementation; directly mentored several with specific guidance on Go, Linux, and security best practices</li>
-          <li>Raised code quality across 20&#43; repositories with review standards and shared tooling adopted by teams across 250&#43; engineer org, increasing velocity incrementally while reducing defects and rework</li>
-          <li>Designed and led a tamper-resistance and uninstall-protection initiative spanning all OSes</li>
-          <li>Hardened agent security across ~800K managed devices; encrypted sensitive fields while avoiding migration downtime</li>
-          <li>Owned CI/CD modernization; self-hosted runners, eliminated VPN dependency, cut build wait time by 30%</li>
-          <li>Integrated AI assistance into workflow, cutting research and PoC development time by an estimated 25-50%</li>
-          <li>Used AI to build Linux PAM module and tray app for on-device password management to reach UX parity with Windows and macOS</li>
+          <li>Hardened agent security for approximately 800,000 managed devices by encrypting sensitive fields without migration downtime</li>
+          <li>Designed and led a tamper-resistance and uninstall-protection initiative across all operating systems</li>
+          <li>Raised code quality across 20&#43; repositories through review standards and shared tooling adopted within a 250&#43; engineer organization, reducing defects and rework</li>
+          <li>Served as the primary Linux technical resource during design and implementation</li>
+          <li>Mentored junior developers on code quality, version control, and security best practices</li>
+          <li>Developed a Linux PAM module and tray application using AI for on-device password management, achieving user experience parity with Windows and macOS</li>
+          <li>Integrated AI assistance into workflows, reducing research and proof-of-concept development time by an estimated 25-50%</li>
+          <li>Modernized CI/CD with self-hosted runners, eliminating VPN dependency and reducing build wait time by up to 30%</li>
         </ul>
-        <div class="tags"><span class="tag">GitHub</span><span class="tag">LLMs</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">AI</span><span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">Golang</span>
-        </div>
       </div>
       <div class="position-divider"></div>
       <div class="job">
@@ -529,14 +491,12 @@
         </div>
         <div class="job-meta"><span class="print-employer">JumpCloud &middot; </span>Longmont, CO</div>
         <ul class="highlights">
-          <li>Founded a Linux-focused team (grew from 3 to 6 engineers) implementing features across device agent and backend services</li>
-          <li>SME for Linux agent behavior, packaging, and PAM internals</li>
-          <li>Built and maintained Go on-device agent (gRPC/protobuf) serving ~75K Linux devices across a fleet of ~750K managed</li>
-          <li>Introduced Zig-based static compilation, enabling amd64 and arm64 support across 10&#43; Linux distributions spanning RHEL 7 to Ubuntu 22.04</li>
-          <li>Maintained the NodeJS legacy monolith most services still routed through as functionality was spun off into Go microservices</li>
+          <li>Founded a Linux-focused team, expanding from 3 to 6 engineers to implement features across device agent and backend services</li>
+          <li>Served as subject matter expert on Linux agent behavior, packaging, and PAM internals</li>
+          <li>Developed and maintained a Go on-device agent using gRPC and Protobuf, serving approximately 75,000 Linux devices within a fleet of 750,000 managed devices</li>
+          <li>Introduced Zig-based static compilation to enable amd64 and arm64 support across 10&#43; Linux distributions</li>
+          <li>Maintained the Node.js legacy monolith, preserving service routing while functionality transitioned to Go microservices</li>
         </ul>
-        <div class="tags"><span class="tag">Linux</span><span class="tag">GitHub</span><span class="tag">Docker</span><span class="tag">Python</span><span class="tag">gRPC</span><span class="tag">NodeJS</span><span class="tag">Golang</span><span class="tag">AWS</span>
-        </div>
       </div>
     </div>
 
@@ -558,10 +518,9 @@
         </div>
         <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>ObjectRocket &middot; Remote</div>
         <ul class="highlights">
-          <li>Built and maintained Python services and libraries; shipped features across 12&#43; Go microservices deployed on Docker, OpenShift, and Kubernetes</li>
+          <li>Created and maintained Python services and libraries, delivering features across 12&#43; Go microservices deployed on Docker, OpenShift, and Kubernetes</li>
+          <li>Improved software reliability through code reviews, coding standards, and static analysis tools</li>
         </ul>
-        <div class="tags"><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">Python</span><span class="tag">Golang</span><span class="tag">Kubernetes</span>
-        </div>
       </div>
       <div class="position-divider"></div>
       <div class="job">
@@ -573,13 +532,11 @@
         <div class="job-summary">Global Linux Automation Engineers</div>
         <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace Technology &middot; Remote</div>
         <ul class="highlights">
-          <li>Maintained framework application for employees to contribute tools with a common UI and deployment system (JS/HTML/CSS frontend, Python/Flask/MySQL backend, Python client library)</li>
-          <li>Implemented and configured deployment tools using Docker, Ansible, and Jenkins; designed and built Jenkins 2.x Pipeline for PR testing</li>
-          <li>Led team to implement better checks and consistency to improve and maintain code quality</li>
-          <li>Worked with UK-based team as sole US member</li>
+          <li>Maintained a framework for employee-contributed tools with a unified UI and deployment system using JavaScript, HTML, CSS, Python, Flask, and MySQL</li>
+          <li>Configured deployment tools using Docker, Ansible, and Jenkins, and designed Jenkins 2.x Pipeline for pull request testing</li>
+          <li>Conducted code reviews and provided feedback to establish best practices and maintain code quality</li>
+          <li>Collaborated with a UK-based team as the sole US member</li>
         </ul>
-        <div class="tags"><span class="tag">Jenkins</span><span class="tag">Python</span><span class="tag">GitHub</span><span class="tag">Ansible</span><span class="tag">Docker</span>
-        </div>
       </div>
       <div class="position-divider print-merge-divider"></div>
       <div class="job print-merge">
@@ -591,11 +548,10 @@
         <div class="job-summary">Global SysAd Maintenance Team</div>
         <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace Hosting &middot; San Antonio, TX</div>
         <ul class="highlights">
-          <li>Automated migration of scheduled maintenances to consolidate calendars, saving weeks of manual work</li>
-          <li>Inverted traditional scheduling process to improve customer experience</li>
+          <li>Implemented an automated migration of scheduled maintenances to consolidate calendars, saving weeks of manual work</li>
+          <li>Reversed the traditional scheduling process to improve customer experience</li>
+          <li>Built reusable Python automation scripts to streamline routine infrastructure tasks and reduce manual intervention</li>
         </ul>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Linux</span>
-        </div>
       </div>
       <div class="position-divider"></div>
       <div class="job print-condense">
@@ -607,12 +563,10 @@
         <div class="job-summary">Global SysAd Maintenance Team</div>
         <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace US, Inc. &middot; San Antonio, TX</div>
         <ul class="highlights">
-          <li>Contributed multiple features to team&#39;s jinja2-based templating system</li>
-          <li>Built a custom UI surfacing upcoming services from the maintenance calendar backend</li>
-          <li>Developed an auto-numbering tool for maintenance templates using React</li>
+          <li>Automated VM migration and restoration with custom shell scripts, reducing downtime and simplifying maintenance</li>
+          <li>Developed a custom UI to display upcoming services from the maintenance calendar backend</li>
+          <li>Implemented maintenance-template features with Jinja2 and a React tool for automatic numbering</li>
         </ul>
-        <div class="tags"><span class="tag">Flask</span><span class="tag">React</span><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">Bash</span>
-        </div>
       </div>
       <div class="position-divider print-merge-divider"></div>
       <div class="job print-condense print-merge">
@@ -624,11 +578,9 @@
         <div class="job-summary">Global Technical Support - Enterprise (2nd shift)</div>
         <div class="job-meta"><span class="print-employer">Rackspace &middot; </span>Rackspace US, Inc. &middot; San Antonio, TX</div>
         <ul class="highlights">
-          <li>Installed, configured, updated, and troubleshot services for customers including OS, web server, database, application server, and mail (Apache, MySQL, PHP, FTP, SSH, DNS)</li>
-          <li>Contributed features and bug fixes to internal Python projects including a password retrieval CLI and login automation tools</li>
+          <li>Installed, configured, updated, and troubleshot customer services including operating systems, web servers, databases, application servers, and mail</li>
+          <li>Implemented features and resolved bugs in internal Python projects, including a password retrieval CLI and login automation tools</li>
         </ul>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">Bash</span>
-        </div>
       </div>
     </div>
 
@@ -650,12 +602,10 @@
         <div class="job-summary">Bloomberg School Of Public Health, Knowledge for Health Project</div>
         <div class="job-meta"><span class="print-employer">Johns Hopkins Center for Communication Programs &middot; </span>Baltimore, MD</div>
         <ul class="highlights">
-          <li>Successfully led team to adoption of git and a development &gt; staging &gt; production deployment workflow</li>
-          <li>Designed Puppet configuration management to maintain and deploy to development and production servers</li>
-          <li>Maintained and automated servers supporting Drupal multisite deployments with LAMP stack on physical and virtual hosts, and Apache Solr search indexes</li>
+          <li>Maintained and automated CentOS servers supporting Drupal multisite deployments on physical and virtual hosts, with LAMP stack and Apache Solr search indexes</li>
+          <li>Designed Puppet configuration management to maintain and deploy applications on development and production servers</li>
+          <li>Led team adoption of Git and a development &gt; staging &gt; production deployment workflow</li>
         </ul>
-        <div class="tags"><span class="tag">Puppet</span><span class="tag">Vagrant</span><span class="tag">Linux</span><span class="tag">Drupal</span><span class="tag">Git</span>
-        </div>
       </div>
       <div class="position-divider print-merge-divider"></div>
       <div class="job print-condense print-merge">
@@ -667,14 +617,33 @@
         <div class="job-summary">Bloomberg School Of Public Health, Knowledge for Health Project</div>
         <div class="job-meta"><span class="print-employer">Johns Hopkins Center for Communication Programs &middot; </span>Baltimore, MD</div>
         <ul class="highlights">
-          <li>Maintained CentOS servers supporting 30&#43; websites for the K4Health project</li>
+          <li>Maintained and automated CentOS servers hosting 30&#43; websites for the K4Health project</li>
           <li>Hired as a contractor; brought on as full-time employee within 6 months</li>
         </ul>
-        <div class="tags"><span class="tag">CentOS</span><span class="tag">Linux</span><span class="tag">Drupal</span>
-        </div>
       </div>
     </div>
 
+  </section>
+  <section>
+    <div class="section-intro">
+      <div class="section-label">Open-source development</div>
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title"><a href="https://github.com/actualbudget/actual">Actual Budget</a></div>
+          <div class="job-dates"><time title="September 19, 2025">Sep 2025 - Present</time></div>
+        </div>
+        <div class="job-meta">Contributor</div>
+        <div class="job-summary">Local-first personal finance app built with React and TypeScript. 34 merged pull requests. Current currency-system work is in progress and unpublished.</div>
+        <ul class="highlights">
+          <li>Shipped 14 merged pull requests since May 2026 with Claude Code and Codex, reviewing and testing generated code</li>
+          <li>Improved budgeting and transaction workflows by building user-facing features in React and TypeScript</li>
+          <li>Expanded financial-data handling through currency utilities, import integrations, and supporting automation tools</li>
+          <li>Improved frontend verification through Playwright coverage and parallel local end-to-end testing</li>
+          <li>Developing decimal-precision support to address currency-display bugs and enable account-level currencies and multicurrency budgeting</li>
+          <li>Coordinating multiple AI agents and models across design, implementation, review, and verification while owning architecture and validation</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <section>
@@ -683,23 +652,27 @@
       <dl class="skills-domains">
       <div class="skill-cat">
         <dt class="skill-cat-label">AI development</dt>
-        <dd class="skill-cat-list">AI-assisted development, Claude Code, Codex</dd>
+        <dd class="skill-cat-list">AI-assisted development, Claude Code, Codex, T3 Code</dd>
       </div>
       <div class="skill-cat">
         <dt class="skill-cat-label">Databases</dt>
-        <dd class="skill-cat-list">MongoDB, PostgreSQL, SQLite</dd>
+        <dd class="skill-cat-list">MongoDB, PostgreSQL, SQLite, MySQL</dd>
       </div>
       <div class="skill-cat">
-        <dt class="skill-cat-label">Systems</dt>
-        <dd class="skill-cat-list">Bash, Git, Linux</dd>
+        <dt class="skill-cat-label">Languages &amp; frameworks</dt>
+        <dd class="skill-cat-list">Go, Python, React, TypeScript, CSS, Flask, HTML, JavaScript, Node.js</dd>
       </div>
       <div class="skill-cat">
-        <dt class="skill-cat-label">Languages</dt>
-        <dd class="skill-cat-list">Golang, Python, React, TypeScript, NodeJS</dd>
+        <dt class="skill-cat-label">Systems &amp; cloud</dt>
+        <dd class="skill-cat-list">Ansible, Bash, Docker, Git, Linux, AWS, Kubernetes, Jenkins, OpenShift</dd>
       </div>
       <div class="skill-cat">
-        <dt class="skill-cat-label">Infrastructure &amp; Cloud</dt>
-        <dd class="skill-cat-list">Ansible, Docker, AWS, Kubernetes</dd>
+        <dt class="skill-cat-label">Architecture</dt>
+        <dd class="skill-cat-list">API design, Distributed systems, Protobuf, Software architecture, gRPC</dd>
+      </div>
+      <div class="skill-cat">
+        <dt class="skill-cat-label">Quality</dt>
+        <dd class="skill-cat-list">Automated testing, Code review, Playwright, Static analysis</dd>
       </div>
       </dl>
     </div>
@@ -712,20 +685,16 @@
         <div class="project">
           <div class="project-name"><a href="https://github.com/pydantic/pydantic">Pydantic</a>
           </div>
-          <div class="project-desc">Python data validation library (28k&#43; stars). Contributed 8 PRs from 2019 to 2020.</div>
+          <div class="project-desc">Python data validation library. 8 pull requests from 2019 to 2020.</div>
           <ul class="highlights project-highlights"><li>5% parse speed gain by switching from type() calls to __class__ attribute lookup</li><li>Added subclass encoder support so subclasses of known types serialize with their parent&#39;s encoder</li><li>Introduced JSON benchmark suite, voluptuous comparison benchmark, and docs example linting</li>
           </ul>
-          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">Performance</span><span class="tag">Python</span>
-          </div>
         </div>
         <div class="project">
           <div class="project-name"><a href="https://github.com/rockstor/rockstor-core">Rockstor</a>
           </div>
-          <div class="project-desc">Linux NAS platform built on BTRFS with Python and Django. Contributor across 4 repos (core, plugin registry, validator, dev env) with 9 merged PRs from 2020 to 2023.</div>
+          <div class="project-desc">Linux NAS platform built on BTRFS, Python, and Django. 9 merged pull requests across 4 repositories.</div>
           <ul class="highlights project-highlights"><li>Added ZSTD compression option for BTRFS storage pools</li><li>Added Jellyfin and FileBot Node plugins to the RockOn plugin registry</li><li>Wrote go rockon-validator to standardize formatting and validation of JSON app configuration profiles</li>
           </ul>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">BTRFS</span><span class="tag">Open Source</span><span class="tag">Linux</span><span class="tag">NAS</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/home-assistant/core">Home Assistant</a>
@@ -733,8 +702,6 @@
           <div class="project-desc">Home automation platform (87k&#43; stars). Contributed 3 PRs in February 2024.</div>
           <ul class="highlights project-highlights"><li>Added icon translations to the Teslemetry integration in the core codebase</li><li>Added health category listing and documentation page for the Airthings integration</li>
           </ul>
-          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">Python</span><span class="tag">Home Automation</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://alpha.lunchmoney.dev/v2/docs">Lunch Money v2 API</a>
@@ -742,8 +709,6 @@
           <div class="project-desc">v2 developer API for Lunch Money (personal finance app), currently in open alpha.</div>
           <ul class="highlights project-highlights"><li>Participated in API design discussions and provided feedback during the open alpha phase</li>
           </ul>
-          <div class="project-tags"><span class="tag">API Design</span><span class="tag">Personal Finance</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/encode/httpx">HTTPX</a>
@@ -751,8 +716,6 @@
           <div class="project-desc">Python async HTTP client (15k&#43; stars). Contributed 2 PRs from 2019 to 2020.</div>
           <ul class="highlights project-highlights"><li>Added Early Hints (103) and Too Early (425) HTTP status codes to the status code enum</li><li>Fixed incorrect function name in the event hooks documentation</li>
           </ul>
-          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">HTTP</span><span class="tag">Python</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/TandoorRecipes/recipes">TandoorRecipes</a>
@@ -760,8 +723,6 @@
           <div class="project-desc">Open-source self-hosted recipe manager. Contributed 2 PRs in 2021-2022.</div>
           <ul class="highlights project-highlights"><li>Added time unit hint to the recipe edit view for clearer user input</li><li>Fixed Make_Header and Make_Ingredient text and template reference</li>
           </ul>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">Django</span><span class="tag">Open Source</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/PyCQA/isort">isort</a>
@@ -769,8 +730,6 @@
           <div class="project-desc">Python import sorter (6k&#43; stars). Contributed 3 PRs from 2019 to 2020.</div>
           <ul class="highlights project-highlights"><li>Implemented --ensure-newline-before-comments end-to-end: argument parsing, sorting logic, and Black profile entry.</li><li>Fixed list value handling when reading settings from TOML config files</li>
           </ul>
-          <div class="project-tags"><span class="tag">Open Source</span><span class="tag">CLI</span><span class="tag">Python</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/nightscout/cgm-remote-monitor">Nightscout / CGM Tools</a>
@@ -778,8 +737,6 @@
           <div class="project-desc">Open-source CGM monitoring ecosystem (cgm-remote-monitor, AndroidAPS, dexcom_reader, AndroidAPSdocs). Contributed 4 PRs in 2020-2021.</div>
           <ul class="highlights project-highlights"><li>Fixed sign error in bolus wizard timeshift result in AndroidAPS</li><li>Updated dexcom_reader for Python 3 compatibility; added device pairing instructions to AndroidAPSdocs</li>
           </ul>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">Open Source</span><span class="tag">Medical Devices</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/toolkit-for-ynab/toolkit-for-ynab">Toolkit for YNAB</a>
@@ -787,8 +744,6 @@
           <div class="project-desc">Browser extension for the YNAB personal finance app. Long-term contributor with 10 merged PRs from 2016 to 2021.</div>
           <ul class="highlights project-highlights"><li>Added Manage Payees for Selected Transactions to the Edit menu</li><li>Added Auto-fill Payee for Split Transactions feature</li><li>Fixed highlight color in new-default theme and contributed Python 3 build tooling fixes</li>
           </ul>
-          <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">Personal Finance</span><span class="tag">Open Source</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/StephenBrown2/actual-multi-account-import">actual-multi-account-import</a>
@@ -796,8 +751,6 @@
           <div class="project-desc">TypeScript plugin for Actual Budget that handles importing transactions from multiple bank accounts in a single operation.</div>
           <ul class="highlights project-highlights"><li>Configurable per-account import settings with a unified run command across all linked accounts</li>
           </ul>
-          <div class="project-tags"><span class="tag">Actual Budget</span><span class="tag">TypeScript</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/StephenBrown2/fold-budget">fold-budget</a>
@@ -805,8 +758,6 @@
           <div class="project-desc">Go CLI tool that converts Fold Bitcoin rewards card CSV exports to Actual Budget import format.</div>
           <ul class="highlights project-highlights"><li>Parses Fold CSV statements and maps transaction memos to the standard budget import format</li>
           </ul>
-          <div class="project-tags"><span class="tag">Bitcoin</span><span class="tag">Golang</span><span class="tag">Personal Finance</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/StephenBrown2/hi-fold">hi-fold</a>
@@ -814,8 +765,6 @@
           <div class="project-desc">Go CLI that calculates HIFO (highest-in, first-out) cost basis from Fold Bitcoin rewards card transaction history.</div>
           <ul class="highlights project-highlights"><li>Parses Fold CSV exports and applies the HIFO accounting method for tax-optimized cost basis calculation</li>
           </ul>
-          <div class="project-tags"><span class="tag">Bitcoin</span><span class="tag">Golang</span><span class="tag">Personal Finance</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/StephenBrown2/actual-wallos-import">actual-wallos-import</a>
@@ -823,8 +772,6 @@
           <div class="project-desc">TypeScript tool that imports Wallos subscription tracker data into Actual Budget as scheduled transactions (5 stars).</div>
           <ul class="highlights project-highlights"><li>Supports both file-based CSV export and direct Wallos API integration</li>
           </ul>
-          <div class="project-tags"><span class="tag">TypeScript</span><span class="tag">Actual Budget</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/StephenBrown2/podstats">podstats</a>
@@ -832,8 +779,6 @@
           <div class="project-desc">Go tool that parses podcast OPML subscription files and produces a prioritized episode queue.</div>
           <ul class="highlights project-highlights"><li>Parses OPML exports from apps like Overcast and outputs a ranked listening queue</li>
           </ul>
-          <div class="project-tags"><span class="tag">Golang</span>
-          </div>
         </div>
         <div class="project print-hidden">
           <div class="project-name"><a href="https://github.com/StephenBrown2/pamparser">pamparser</a>
@@ -841,8 +786,6 @@
           <div class="project-desc">Go library for parsing and manipulating PAM (Pluggable Authentication Modules) configuration files.</div>
           <ul class="highlights project-highlights"><li>Part of PAM module research at JumpCloud; parses and modifies /etc/pam.d/ configs programmatically</li>
           </ul>
-          <div class="project-tags"><span class="tag">Linux</span><span class="tag">Golang</span><span class="tag">Security</span>
-          </div>
         </div>
       </div>
       <p class="oss-fold">Additional open-source contributions: Home Assistant, HTTPX, isort, TandoorRecipes, Nightscout, and Toolkit for YNAB.</p>
