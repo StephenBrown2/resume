@@ -3,7 +3,11 @@
 Source repository for my resume. The canonical data lives in `resume.yaml`
 (validated against `schema.json`); a renderer reads it and writes a
 self-contained `docs/index.html`, which GitHub Pages serves at
-<https://stephenbrown2.github.io/resume/>.
+<https://resume.brownii.co/>.
+
+The Pages custom domain is stored in `docs/CNAME`. At Porkbun, the `resume`
+host under `brownii.co` uses a CNAME record pointing to
+`StephenBrown2.github.io` (without a URL scheme or repository path).
 
 ---
 
