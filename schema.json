@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://stephenbrown2.github.io/resume/schema.json",
+  "$id": "https://resume.brownii.co/schema.json",
   "title": "Stephen Brown II — Resume Schema",
   "description": "Hybrid JSON Resume / FRESH schema describing the resume.yaml format. Inherits JSON Resume's top-level structure and date conventions; borrows FRESH's disposition, employer field, skills sets/list, testimonials/references split, and leaf-level enrichments (summary, years, quote, role, category). additionalProperties is true throughout, matching both parent schemas.",
   "type": "object",
