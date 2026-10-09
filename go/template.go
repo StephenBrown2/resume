@@ -37,17 +37,6 @@ const resumeTemplate = `<!DOCTYPE html>
     margin-bottom: 13px;
   }
 
-  .title-label {
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 5px;
-    width: fit-content;
-    white-space: nowrap;
-  }
-
   .name {
     font-family: var(--name-font);
     font-size: 2.5rem;
@@ -414,7 +403,6 @@ const resumeTemplate = `<!DOCTYPE html>
 
   <header>
     <div>
-      <p class="title-label">{{.Basics.Label}}</p>
       <h1 class="name">{{.Basics.Name}}</h1>
     </div>
     <div class="header-right">
@@ -562,13 +550,11 @@ const resumeTemplate = `<!DOCTYPE html>
 <script>
 (function() {
   var nameEl  = document.querySelector('h1.name');
-  var labelEl = document.querySelector('p.title-label');
   var colEl   = document.querySelector('header > div:first-child');
 
   function fitHeader() {
-    if (!nameEl || !labelEl || !colEl) return;
+    if (!nameEl || !colEl) return;
     nameEl.style.fontSize   = '';
-    labelEl.style.fontSize  = '';
     nameEl.style.whiteSpace = 'nowrap';
 
     var colW   = colEl.getBoundingClientRect().width;
@@ -584,17 +570,10 @@ const resumeTemplate = `<!DOCTYPE html>
     // clear nowrap only after font-size is applied so the scaled text never re-wraps
     nameEl.style.whiteSpace = '';
 
-    var lr = document.createRange();
-    lr.selectNodeContents(labelEl);
-    var lw = lr.getBoundingClientRect().width;
-    if (lw > 0 && isFinite(colW / lw)) {
-      labelEl.style.fontSize = ((parseFloat(getComputedStyle(labelEl).fontSize) * colW / lw) / htmlFs).toFixed(4) + 'rem';
-    }
   }
 
   function resetFit() {
     if (nameEl)  { nameEl.style.fontSize = ''; nameEl.style.whiteSpace = ''; }
-    if (labelEl) labelEl.style.fontSize = '';
   }
 
   document.fonts.ready.then(fitHeader);

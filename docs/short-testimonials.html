@@ -49,17 +49,6 @@
     margin-bottom: 13px;
   }
 
-  .title-label {
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 5px;
-    width: fit-content;
-    white-space: nowrap;
-  }
-
   .name {
     font-family: var(--name-font);
     font-size: 2.5rem;
@@ -426,7 +415,6 @@
 
   <header>
     <div>
-      <p class="title-label">Senior Software Engineer</p>
       <h1 class="name">Stephen Brown II</h1>
     </div>
     <div class="header-right">
@@ -865,13 +853,11 @@
 <script>
 (function() {
   var nameEl  = document.querySelector('h1.name');
-  var labelEl = document.querySelector('p.title-label');
   var colEl   = document.querySelector('header > div:first-child');
 
   function fitHeader() {
-    if (!nameEl || !labelEl || !colEl) return;
+    if (!nameEl || !colEl) return;
     nameEl.style.fontSize   = '';
-    labelEl.style.fontSize  = '';
     nameEl.style.whiteSpace = 'nowrap';
 
     var colW   = colEl.getBoundingClientRect().width;
@@ -887,17 +873,10 @@
     
     nameEl.style.whiteSpace = '';
 
-    var lr = document.createRange();
-    lr.selectNodeContents(labelEl);
-    var lw = lr.getBoundingClientRect().width;
-    if (lw > 0 && isFinite(colW / lw)) {
-      labelEl.style.fontSize = ((parseFloat(getComputedStyle(labelEl).fontSize) * colW / lw) / htmlFs).toFixed(4) + 'rem';
-    }
   }
 
   function resetFit() {
     if (nameEl)  { nameEl.style.fontSize = ''; nameEl.style.whiteSpace = ''; }
-    if (labelEl) labelEl.style.fontSize = '';
   }
 
   document.fonts.ready.then(fitHeader);
